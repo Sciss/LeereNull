@@ -35,57 +35,10 @@ import de.sciss.kontur.session.{SessionElement, SessionElementSeq, MatrixDiffusi
 import de.sciss.kontur.util.Matrix2D
 import collection.{breakOut, JavaConversions}
 import de.sciss.app.{Application => SApp, AbstractApplication, AbstractCompoundEdit}
+import de.sciss.strugatzki.{Span => SSpan}
 
 trait KonturGoodies {
    def app: SApp = AbstractApplication.getApplication
-
-//      def audioRegionsOverlapping( span: Span )( implicit tl: BasicTimeline ) : IndexedSeq[ AudioRegion ] = {
-//         tl.tracks.getStakes( span, true )({
-//            case ar: AudioRegion => true
-//            case _ => false
-//         }).collect({ case ar: AudioRegion => ar })( breakOut ) // ouch
-//      }
-
-   def selectedAudioRegions( implicit tl: BasicTimeline, tlv: TimelineView, trl: BasicTrackList ) : IndexedSeq[ AudioRegion ] = {
-      val tr   = selTracks
-      val span = selSpan
-      val ars  = tr.flatMap { t =>
-         t.trail.getRange( span ).toIndexedSeq
-      }
-      ars.sortBy( _.span.start )
-   }
-
-   def selSpan( implicit tlv: TimelineView ) = tlv.selection.span
-   def selTracks( implicit tl: BasicTimeline, trl: BasicTrackList ) : IndexedSeq[ AudioTrack ] =
-      tl.tracks.toList.collect({
-         case at: AudioTrack if( trl.getElement( at ).map( _.selected ).getOrElse( false )) => at
-      })( breakOut )
-
-   def currentDoc : Option[ Session ] = Option( app.getDocumentHandler.getActiveDocument.asInstanceOf[ Session ])
-
-   def withTimeline( fun: (BasicTimeline, BasicTimelineView, BasicTrackList) => Unit )( implicit doc: Session ) {
-      doc.timelines.toList.filterNot( _.name.startsWith( "$" )).headOption.foreach {
-         case tl: BasicTimeline =>
-            JavaConversions.asScalaIterator( app.getWindowHandler.getWindows ).collect({
-               case tlf: TimelineFrame if( tlf.timelineView.timeline == tl ) => tlf
-            }).toList.headOption.foreach { tlf =>
-               fun( tl, tlf.timelineView, tlf.tracksPanel )
-            }
-         case _ =>
-      }
-   }
-
-   def cutTheCheese( ars: IndexedSeq[ AudioRegion ], span: Span ) : IndexedSeq[ AudioRegion ] = {
-      ars.flatMap { ar =>
-         if( ar.span.overlaps( span )) {
-            IndexedSeq( if( ar.span.contains( span.start )) {
-               ar.split( span.start )._2
-            } else {
-               ar.split( span.stop )._1
-            })
-         } else IndexedSeq.empty[ AudioRegion ]
-      }
-   }
 
    implicit def editorCanTry( editor: Editor ) = new EditorHasTry( editor )
    final class EditorHasTry( editor: Editor ) {
@@ -109,6 +62,75 @@ trait KonturGoodies {
             case Some( ce ) => fun( ce )
             case None => tryEdit( name )( fun )
          }
+      }
+   }
+
+
+//      def audioRegionsOverlapping( span: Span )( implicit tl: BasicTimeline ) : IndexedSeq[ AudioRegion ] = {
+//         tl.tracks.getStakes( span, true )({
+//            case ar: AudioRegion => true
+//            case _ => false
+//         }).collect({ case ar: AudioRegion => ar })( breakOut ) // ouch
+//      }
+
+   def dbamp( d: Double ) = math.pow( 10, d / 20 )
+   def ampdb( d: Double ) = math.log10( d ) * 20
+
+   def secsToFrames( d: Double )( implicit tl: BasicTimeline ) = (d * tl.rate + 0.5).toLong
+   def framesToSecs( n: Long )( implicit tl: BasicTimeline ) = n / tl.rate
+
+   def selectedAudioRegions( implicit tl: BasicTimeline, tlv: TimelineView, trl: BasicTrackList ) : IndexedSeq[ AudioRegion ] = {
+      val tr   = selTracks
+      val span = selSpan
+      val ars  = tr.flatMap { t =>
+         t.trail.getRange( span ).toIndexedSeq
+      }
+      ars.sortBy( _.span.start )
+   }
+
+   def selSpan( implicit tlv: TimelineView ) : Span = {
+      val res = tlv.selection.span
+      res
+   }
+   def selSpan_=( sp: Span )( implicit tlv: TimelineView, ce: Maybe[ AbstractCompoundEdit ]) {
+      tlv.editor.foreach { ed =>
+         ed.joinEdit( "Select span" ) { implicit ce =>
+            ed.editSelect( ce, sp )
+         }
+      }
+   }
+
+   def selTracks( implicit tl: BasicTimeline, trl: BasicTrackList ) : IndexedSeq[ AudioTrack ] =
+      tl.tracks.toList.collect({
+         case at: AudioTrack if( trl.getElement( at ).map( _.selected ).getOrElse( false )) => at
+      })( breakOut )
+
+   def currentDoc : Option[ Session ] = Option( app.getDocumentHandler.getActiveDocument.asInstanceOf[ Session ])
+
+   def withTimeline( fun: (BasicTimeline, BasicTimelineView, BasicTrackList) => Unit )( implicit doc: Session ) {
+      doc.timelines.toList.filterNot( _.name.startsWith( "$" )).headOption.foreach {
+         case tl: BasicTimeline =>
+            JavaConversions.asScalaIterator( app.getWindowHandler.getWindows ).collect({
+               case tlf: TimelineFrame if( tlf.timelineView.timeline == tl ) => tlf
+            }).toList.headOption.foreach { tlf =>
+               fun( tl, tlf.timelineView, tlf.tracksPanel )
+            }
+         case _ =>
+      }
+   }
+
+   implicit def convertSpan1( sp:  Span ) : SSpan = SSpan( sp.start, sp.stop )
+   implicit def convertSpan2( sp: SSpan ) :  Span = new Span( sp.start, sp.stop )
+
+   def cutTheCheese( ars: IndexedSeq[ AudioRegion ], span: Span ) : IndexedSeq[ AudioRegion ] = {
+      ars.flatMap { ar =>
+         if( ar.span.overlaps( span )) {
+            IndexedSeq( if( ar.span.contains( span.start )) {
+               ar.split( span.start )._2
+            } else {
+               ar.split( span.stop )._1
+            })
+         } else IndexedSeq.empty[ AudioRegion ]
       }
    }
 
