@@ -6,16 +6,25 @@ import java.awt.event.ActionEvent
 import collection.JavaConversions
 import collection.breakOut
 import de.sciss.kontur.gui.{BasicTrackList, TrackListEditor, TrackList, TimelineView, BasicTimelineView, TimelineFrame}
-import de.sciss.kontur.session.{AudioTrack, AudioRegion, BasicTimeline, Session}
 import de.sciss.kontur.edit.Editor
 import de.sciss.app.{AbstractWindow, AbstractCompoundEdit}
 import java.awt.{BorderLayout, EventQueue}
 import javax.swing.{JLabel, JPanel, WindowConstants, JOptionPane, Action, KeyStroke, AbstractAction}
+import de.sciss.io.Span
+import de.sciss.kontur.util.Matrix2D
+import de.sciss.kontur.session.{SessionElement, MatrixDiffusion, SessionElementSeq, AudioTrack, AudioRegion, BasicTimeline, Session}
 
 object LeereNull extends Runnable {
    def main( args: Array[ String ]) {
       EventQueue.invokeLater( this )
    }
+
+   trait MaybeNot { implicit def none[ A ] : Maybe[ A ] = Maybe( None )}
+   object Maybe extends MaybeNot {
+      implicit def some[ A ]( implicit a: A ) : Maybe[ A ] = Maybe( Some( a ))
+      implicit def unwind[ A ]( mb: Maybe[ A ]) : Option[ A ] = mb.option
+   }
+   final case class Maybe[ A ]( option: Option[ A ])
 
    def run() {
       val app  = new Kontur( Array() )
@@ -82,7 +91,7 @@ object LeereNull extends Runnable {
             implicit val tlv0 = tlv
             implicit val trl0 = trl
 
-            selectedAudioRegions match {
+            cutTheCheese( selectedAudioRegions, selSpan ) match {
                case IndexedSeq( ar ) => makeExtractor( ar )
                case _ => message( "Must have exactly one audio region selected" )
             }
@@ -90,6 +99,18 @@ object LeereNull extends Runnable {
       })
       mf.add( mg )
       mg.add( miExtractor )
+   }
+
+   def cutTheCheese( ars: IndexedSeq[ AudioRegion ], span: Span ) : IndexedSeq[ AudioRegion ] = {
+      ars.flatMap { ar =>
+         if( ar.span.overlaps( span )) {
+            IndexedSeq( if( ar.span.contains( span.start )) {
+               ar.split( span.start )._2
+            } else {
+               ar.split( span.stop )._1
+            })
+         } else IndexedSeq.empty[ AudioRegion ]
+      }
    }
 
    implicit def editorCanTry( editor: Editor ) = new EditorHasTry( editor )
@@ -106,14 +127,131 @@ object LeereNull extends Runnable {
             if( cancel ) editor.editCancel( ce )
          }
       }
+
+      def joinEdit[ A ]( name: String )
+                       ( fun: AbstractCompoundEdit => A )
+                       ( implicit ceo: Maybe[ AbstractCompoundEdit ]) : A = {
+         ceo.option match {
+            case Some( ce ) => fun( ce )
+            case None => tryEdit( name )( fun )
+         }
+      }
+   }
+
+   val acceptAll : AudioTrack => Boolean = _ => true
+
+   def findAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll )
+                          ( implicit tl: BasicTimeline ) : Option[ AudioTrack ] = {
+      tl.tracks.toList.collect({ case at: AudioTrack if( accept( at )) => at })
+         .find( _.trail.getRange( span ).isEmpty )
+   }
+
+   def provideAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll )
+                             ( implicit doc: Session, tl: BasicTimeline, ceo: Maybe[ AbstractCompoundEdit ]) : AudioTrack =
+      findAudioTrackSpace( span, accept ).getOrElse {
+         val ts = tl.tracks
+         val ed = ts.editor.get
+         ed.joinEdit( "Add track" ) { ce =>
+            val at = new AudioTrack( doc )
+//         at.diffusion = Some( stereoDiffusion )
+            at.name = {
+               val set = ts.map( _.name ).toSet
+               var i = 0
+               var n = ""
+               do {
+                  i += 1
+                  n = "Tr" + i
+               } while( set.contains( n ))
+               n
+            }
+            ed.editInsert( ce, ts.size, at )
+            at
+         }
+      }
+
+   def place( ar: AudioRegion, accept: AudioTrack => Boolean = acceptAll )
+            ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
+
+      tl.joinEdit( "Place audio region" ) { implicit ce =>
+         val at = provideAudioTrackSpace( ar.span, accept )
+         at.trail.editAdd( ce, ar )
+         at
+      }
+   }
+
+   def placeStereo( ar: AudioRegion )
+                  ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
+      doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
+         val d    = provideDiffusion( ar.audioFile.numChannels, 2 )
+         val sq   = d.matrix.toSeq
+         val at   = place( ar, { at =>
+            at.diffusion match {
+               case Some( df: MatrixDiffusion ) if( df.matrix.toSeq == sq ) => true
+               case _ => false
+            }
+         })
+         if( at.diffusion.isEmpty ) {
+            at.diffusion = Some( d )
+         }
+         at
+      }
+   }
+
+   def uniqueName( sq: SessionElementSeq[ _ <: SessionElement ], template: String ) : String = {
+      var name    = template
+      var i       = 0
+
+      while( sq.find( _.name == name ).isDefined ) {
+         i    += 1
+         name  = template + "[" + i + "]"
+      }
+      name
+   }
+
+   def mixMatrix( inChans: Int, outChans: Int ) : Matrix2D[ Float ] = {
+      // ( row, cols ) = (input, output) = InSeq[OutSeq]
+      val sq = Seq.tabulate( inChans ) { in =>
+//         val inw = if( inChans < 2 ) 1f else (in.toFloat / (inChans - 1))
+         Seq.tabulate( outChans ) { out =>
+            val outw = if( outChans < 2 ) 1f else (out.toFloat / (outChans - 1))
+            val w    = outw * (inChans - 1) // (if( inChans < 2 ) 1 else (inChans - 1))
+            math.sqrt( 1f - math.min( 1f, math.abs( w - in ))).toFloat
+         }
+      }
+      Matrix2D.fromSeq( sq )
+   }
+
+   def findDiffusion( matrix: Matrix2D[ Float ])( implicit doc: Session ) : Option[ MatrixDiffusion ] = {
+      val sq = matrix.toSeq
+      doc.diffusions.toList.collect({
+         case md: MatrixDiffusion if( md.matrix.toSeq == sq ) => md
+      }).headOption
+   }
+
+   def provideDiffusion( inChans: Int, outChans: Int )
+                       ( implicit doc: Session, ceo: Maybe[ AbstractCompoundEdit ]) : MatrixDiffusion = {
+      val m = mixMatrix( inChans, outChans )
+      findDiffusion( m ).getOrElse {
+         val dfs = doc.diffusions
+         dfs.joinEdit( "Add diffusion" ) { ce =>
+            val d = new MatrixDiffusion( doc )
+            d.matrix = m
+            d.name   = inChans + "->" + outChans
+            dfs.editInsert( ce, dfs.size, d )
+            d
+         }
+      }
    }
 
    def makeExtractor( ar: AudioRegion )( implicit doc: Session ) {
       val tls  = doc.timelines
-      val tl   = tls.tryEdit( "Add Extractor Timeline" ) { ce =>
-         val tl   = BasicTimeline.newEmpty( doc )
-         tl.name  = "$Extractor"
+      val ar0  = ar.move( -ar.span.start )
+      val tl   = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>
+         implicit val tl = BasicTimeline.newEmpty( doc )
+         tl.span  = ar0.span
+         tl.name  = uniqueName( tls, "$Extractor" )
          tls.editInsert( ce, tls.size, tl )
+         placeStereo( ar0 )
          tl
       }
 
