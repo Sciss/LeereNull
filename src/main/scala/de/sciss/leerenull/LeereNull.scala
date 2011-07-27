@@ -34,12 +34,12 @@ import de.sciss.kontur.gui.{TimelineFrame}
 import de.sciss.app.AbstractWindow
 import java.awt.{BorderLayout, EventQueue}
 import de.sciss.kontur.session.{AudioRegion, BasicTimeline, Session}
-import de.sciss.strugatzki.{Span => SSpan, FeatureCorrelation}
 import eu.flierl.grouppanel.GroupPanel
 import javax.swing.{JDialog, JOptionPane, JFrame, JLabel, JPanel, WindowConstants}
 import java.util.Properties
 import java.io.{File, FileInputStream}
-import swing.{Dialog, FlowPanel, ProgressBar, Label}
+import de.sciss.strugatzki.{FeatureExtraction, Span => SSpan, FeatureCorrelation}
+import swing.{Swing, Dialog, FlowPanel, ProgressBar, Label}
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
    var databaseFolder: File = null
@@ -68,7 +68,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
                implicit val trl0 = trl
 
                cutTheCheese( selectedAudioRegions, selSpan ) match {
-                  case IndexedSeq( ar ) => prepareExtractor( ar )
+                  case IndexedSeq( ar ) => prepareCorrelator( ar )
                   case _ => message( "Must have exactly one audio region selected" )
                }
             }
@@ -78,28 +78,61 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
       mg.add( miExtractor )
    }
 
-   def prepareExtractor( ar: AudioRegion )( implicit doc: Session ) {
-      val afPath = ar.audioFile.path
-      val afName  = {
-         val n = afPath.getName
-         val i = n.lastIndexOf( '.' )
-         if( i >= 0 ) n.substring( 0, i ) else n
-      }
-      val meta = new File( databaseFolder, afName + "_feat.xml" )
+   def prepareCorrelator( ar: AudioRegion )( implicit doc: Session ) {
+      val afPath  = ar.audioFile.path
+      val afName  = afPath.getName
+      val plain   = plainName( afPath )
+      val meta    = metaFile( plain )
       if( meta.isFile ) {
-         makeExtractor( ar, meta )
+         makeCorrelator( ar, meta )
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
-            "(" + afPath + ")<br>is not in the feature database.<br>" +
+            "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
             "<B>Extract features now?</B></html>"
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
-            println( "LALALALA TODO" )
+            extract( afPath ) { success =>
+               if( success ) Swing.onEDT( makeCorrelator( ar, meta ))
+            }
          }
       }
    }
 
-   def makeExtractor( ar: AudioRegion, meta: File )( implicit doc: Session ) {
+   def plainName( f: File ) : String = {
+      val n  = f.getName
+      val i  = n.lastIndexOf( '.' )
+      val n1 = if( i >= 0 ) n.substring( 0, i ) else n
+      if( n1.endsWith( "_feat" )) n1.dropRight( 5 ) else n1
+   }
+
+   def metaFile( plain: String )    : File = new File( databaseFolder, plain + "_feat.xml" )
+   def featureFile( plain: String ) : File = new File( databaseFolder, plain + "_feat.aif" )
+
+   def extract( afPath: File )( whenDone: Boolean => Unit ) {
+      val settings            = new FeatureExtraction.SettingsBuilder
+      settings.audioInput     = afPath
+      val plain               = plainName( afPath )
+      settings.featureOutput  = featureFile( plain )
+      settings.metaOutput     = Some( metaFile( plain ))
+
+      val dlg = progressDialog( "Extracting features..." )
+      val fe = FeatureExtraction( settings ) {
+         case FeatureExtraction.Success =>
+            dlg.stop()
+            whenDone( true )
+         case FeatureExtraction.Failure( e ) =>
+            dlg.stop()
+            e.printStackTrace()
+            whenDone( false )
+         case FeatureExtraction.Aborted =>
+            dlg.stop()
+            whenDone( false )
+         case FeatureExtraction.Progress( i ) => dlg.progress = i
+      }
+      dlg.start( fe )
+   }
+
+   def makeCorrelator( ar: AudioRegion, meta: File )( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
       implicit val tl = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>
@@ -259,49 +292,31 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
    def beginSearch( settings: FeatureCorrelation.Settings ) {
       println( settings )
 
-      val pb = new ProgressBar {
-//         indeterminate = true
-      }
-
-      val progressPane = new FlowPanel {
-         contents += label( "Processing database..." )
-         contents += pb
-      }
-
-      var dlg: JDialog = null
-      var fc: FeatureCorrelation = null
-      val optionAbort = button( "Abort" ) { b =>
-//         println( "kuukuu" )
-//         dlg.dispose()
-         fc.abort()
-      }
-
-//      Dialog.showOptions( parent, message, title, optionType, messType, icon, entries, initial)
-
-      val op = new JOptionPane( progressPane.peer, JOptionPane.INFORMATION_MESSAGE,
-         JOptionPane.OK_CANCEL_OPTION, null, Array[ AnyRef ]( optionAbort ), null )
-      dlg = op.createDialog( null, "Searching..." )
-      dlg.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE )
-      fc = FeatureCorrelation( settings ) {
+      val dlg  = progressDialog( "Correlating with database" )
+      val fc   = FeatureCorrelation( settings ) {
          case FeatureCorrelation.Success( res ) =>
-            dlg.dispose()
-         case FeatureCorrelation.Failure( e ) =>
-            e.printStackTrace()
-            dlg.dispose()
-         case FeatureCorrelation.Aborted =>
-            dlg.dispose()
-         case FeatureCorrelation.Progress( i ) =>
-            pb.value = i
-      }
-      dlg.setVisible( true )
-//      op.getValue match {
-//         case `optionAbort` =>
-//         case _ =>
-//      }
+            dlg.stop()
+            println( "Done. " + res.size + " entries:" )
+            res.foreach { m =>
+               println(  "\nFile      : " + m.file.getAbsolutePath +
+                         "\nSimilarity: " + (m.sim * 100) +
+                         "\nSpan start: " + m.punch.start +
+                         "\nBoost in  : " + ampdb( m.boostIn ))
+               if( settings.punchOut.isDefined ) {
+                  println( "Span stop : " + m.punch.stop +
+                         "\nBoost out : " + ampdb( m.boostOut ))
+               }
+            }
 
-//
-//      val res = JOptionPane.showConfirmDialog( null, progressPane.peer, "Searching...",
-//         JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE )
-//      println( res )
+         case FeatureCorrelation.Failure( e ) =>
+            dlg.stop()
+            e.printStackTrace()
+
+         case FeatureCorrelation.Aborted =>
+            dlg.stop()
+
+         case FeatureCorrelation.Progress( i ) => dlg.progress = i
+      }
+      dlg.start( fc )
    }
 }

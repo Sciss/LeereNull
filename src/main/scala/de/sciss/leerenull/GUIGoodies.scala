@@ -28,7 +28,6 @@
 
 package de.sciss.leerenull
 
-import de.sciss.strugatzki.Span
 import java.util.Locale
 import de.sciss.kontur.session.{BasicTimeline, Session}
 import swing.event.{ValueChanged, ButtonClicked}
@@ -36,9 +35,11 @@ import java.text.NumberFormat
 import de.sciss.util.NumberSpace
 import annotation.switch
 import de.sciss.gui.{NumberEvent, NumberListener, NumberField, TimeFormat}
-import swing.{Action, FlowPanel, Slider, Label, Component, Button}
-import javax.swing.{JComponent, InputMap, JOptionPane, AbstractAction, Action => JAction, KeyStroke}
 import java.awt.event.{InputEvent, KeyEvent, KeyAdapter, ActionEvent}
+import de.sciss.strugatzki.{FeatureCorrelation, Span}
+import javax.swing.event.{AncestorEvent, AncestorListener}
+import swing.{Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
+import javax.swing.{JOptionPane, WindowConstants, JDialog, JComponent, InputMap, AbstractAction, Action => JAction, KeyStroke}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -72,6 +73,61 @@ trait GUIGoodies {
       text = if( txt != "" || fixedWidth.isEmpty ) txt else " " // sucky bug ??!!!
       peer.putClientProperty( "JComponent.sizeVariant", "small" )
       fixedWidth.foreach( i => constrainWidth( this, i ))
+   }
+
+   trait ProgressDialog {
+      type Process = { def start() : Unit; def abort() : Unit }
+
+      def start( p: Process ) : Unit
+      def progress : Int
+      def progress_=( i: Int ) : Unit
+      def stop() : Unit
+   }
+
+   def progressDialog( title: String ) = new ProgressDialog {
+      var process : Process = null
+
+      val pb = new ProgressBar {
+         peer.addAncestorListener( new AncestorListener {
+            def ancestorAdded( e: AncestorEvent ) {
+               process.start()
+            }
+
+            def ancestorMoved( e: AncestorEvent ) {}
+            def ancestorRemoved( e: AncestorEvent ) {}
+         })
+      }
+
+      def progress = pb.value
+      def progress_=( i: Int ) { pb.value = i }
+
+      val progressPane = new FlowPanel {
+         contents += label( "Processing..." )
+         contents += pb
+      }
+
+      var dlg: JDialog = null
+      val optionAbort = button( "Abort" ) { b =>
+         val p = process; if( p != null ) p.abort()
+      }
+
+      new JOptionPane()
+      val op = new JOptionPane( progressPane.peer, JOptionPane.INFORMATION_MESSAGE,
+         JOptionPane.OK_CANCEL_OPTION, null, Array[ AnyRef ]( optionAbort.peer ), null )
+      dlg = op.createDialog( null, title )
+      dlg.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE )
+
+      def start( p: Process ) {
+         Swing.onEDT {
+            process = p
+            dlg.setVisible( true )
+         }
+      }
+
+      def stop() {
+//         Thread.sleep( 4000 )
+         Swing.onEDT( dlg.dispose() )
+      }
    }
 
    trait IntegerWidget {
