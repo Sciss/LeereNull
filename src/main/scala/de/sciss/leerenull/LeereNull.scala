@@ -35,12 +35,24 @@ import de.sciss.app.AbstractWindow
 import java.awt.{BorderLayout, EventQueue}
 import de.sciss.kontur.session.{AudioRegion, BasicTimeline, Session}
 import de.sciss.strugatzki.{Span => SSpan, FeatureCorrelation}
-import swing.Label
 import eu.flierl.grouppanel.GroupPanel
-import javax.swing.{JFrame, JLabel, JPanel, WindowConstants}
+import javax.swing.{JDialog, JOptionPane, JFrame, JLabel, JPanel, WindowConstants}
+import java.util.Properties
+import java.io.{File, FileInputStream}
+import swing.{Dialog, FlowPanel, ProgressBar, Label}
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
+   var databaseFolder: File = null
+
    def main( args: Array[ String ]) {
+      val file = new File( "leerenull-settings.xml" )
+      databaseFolder = if( file.isFile ) {
+         val prop = new Properties()
+         val is = new FileInputStream( file )
+         prop.loadFromXML( is )
+         is.close()
+         new File( prop.getProperty( "database" ))
+      } else new File( sys.props( "user.home" ), "leerenullen" )
       EventQueue.invokeLater( this )
    }
 
@@ -56,7 +68,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
                implicit val trl0 = trl
 
                cutTheCheese( selectedAudioRegions, selSpan ) match {
-                  case IndexedSeq( ar ) => makeExtractor( ar )
+                  case IndexedSeq( ar ) => prepareExtractor( ar )
                   case _ => message( "Must have exactly one audio region selected" )
                }
             }
@@ -66,7 +78,28 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
       mg.add( miExtractor )
    }
 
-   def makeExtractor( ar: AudioRegion )( implicit doc: Session ) {
+   def prepareExtractor( ar: AudioRegion )( implicit doc: Session ) {
+      val afPath = ar.audioFile.path
+      val afName  = {
+         val n = afPath.getName
+         val i = n.lastIndexOf( '.' )
+         if( i >= 0 ) n.substring( 0, i ) else n
+      }
+      val meta = new File( databaseFolder, afName + "_feat.xml" )
+      if( meta.isFile ) {
+         makeExtractor( ar, meta )
+      } else {
+         val message = "<html>The audio file associated with the selected region<br>" +
+            "(" + afPath + ")<br>is not in the feature database.<br>" +
+            "<B>Extract features now?</B></html>"
+         val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
+         if( res == Dialog.Result.Ok ) {
+            println( "LALALALA TODO" )
+         }
+      }
+   }
+
+   def makeExtractor( ar: AudioRegion, meta: File )( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
       implicit val tl = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>
@@ -78,8 +111,10 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
          tl
       }
 
-      val settings      = new FeatureCorrelation.SettingsBuilder
-      settings.punchIn  = FeatureCorrelation.Punch( SSpan( 0L, 0L ))
+      val settings            = new FeatureCorrelation.SettingsBuilder
+      settings.punchIn        = FeatureCorrelation.Punch( SSpan( 0L, 0L ))    // our indicator that punchIn hasn't been set yet
+      settings.databaseFolder = databaseFolder
+      settings.metaInput      = meta
 
       val tlf = new TimelineFrame( doc, tl )
       tlf.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE )
@@ -99,8 +134,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
 
       implicit val tlv = tlf.timelineView
 
-      val lbPunchIn  = label( "", Some( 160 ))
-      val lbPunchOut = label( "", Some( 160 ))
+      val lbPunchIn  = label( "<not set>", Some( 160 ))
+      val lbPunchOut = label( "<not set>", Some( 160 ))
       val lbWeightIn = label( "50%", Some( 32 ))
       val lbWeightOut= label( "50%", Some( 32 ))
       val ggWeightIn = decimalSlider( "spect", "temp", initial = 0.5 ) { value =>
@@ -132,8 +167,10 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
 //         res
 //      }
 
+      val arDelta = ar.offset
+
       val butToIn = button( "→ In" ) { b =>
-         val sp = selSpan
+         val sp = selSpan.shift( arDelta )
          if( !sp.isEmpty ) {
             settings.punchIn  = settings.punchIn.copy( span = sp )
 //println( "aqui" )
@@ -143,7 +180,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
          }
       }
       val butToOut = button( "→ Out" ) { b =>
-         val sp = selSpan
+         val sp = selSpan.shift( arDelta )
          if( !sp.isEmpty ) {
             settings.punchOut  = Some( FeatureCorrelation.Punch(
                sp, settings.punchOut.map( _.temporalWeight ).getOrElse( ggWeightOut.decimal.toFloat )))
@@ -175,12 +212,14 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
       val ggMinPunch = timeField( "Min dur:", 0.0, 60.0, 2.0 ) { secs =>
          settings.minPunch = secsToFrames( secs )
       }
-      val ggMaxPunch = timeField( "Max dur:", 0.0, 60.0, 2.0 ) { secs =>
+      val ggMaxPunch = timeField( "Max dur:", 0.0, 60.0, 3.0 ) { secs =>
          settings.maxPunch = secsToFrames( secs )
       }
 
       val butSearch = button( "Start searching..." ) { b =>
-         println( "TODO" )
+         if( !settings.punchIn.span.isEmpty && settings.punchOut.isDefined ) {
+            beginSearch( settings )
+         }
       }
 
       val panel = new GroupPanel {
@@ -215,5 +254,54 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
       tlf.getWindow match {
          case f: JFrame => f.setMinimumSize( f.getSize )
       }
+   }
+
+   def beginSearch( settings: FeatureCorrelation.Settings ) {
+      println( settings )
+
+      val pb = new ProgressBar {
+//         indeterminate = true
+      }
+
+      val progressPane = new FlowPanel {
+         contents += label( "Processing database..." )
+         contents += pb
+      }
+
+      var dlg: JDialog = null
+      var fc: FeatureCorrelation = null
+      val optionAbort = button( "Abort" ) { b =>
+//         println( "kuukuu" )
+//         dlg.dispose()
+         fc.abort()
+      }
+
+//      Dialog.showOptions( parent, message, title, optionType, messType, icon, entries, initial)
+
+      val op = new JOptionPane( progressPane.peer, JOptionPane.INFORMATION_MESSAGE,
+         JOptionPane.OK_CANCEL_OPTION, null, Array[ AnyRef ]( optionAbort ), null )
+      dlg = op.createDialog( null, "Searching..." )
+      dlg.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE )
+      fc = FeatureCorrelation( settings ) {
+         case FeatureCorrelation.Success( res ) =>
+            dlg.dispose()
+         case FeatureCorrelation.Failure( e ) =>
+            e.printStackTrace()
+            dlg.dispose()
+         case FeatureCorrelation.Aborted =>
+            dlg.dispose()
+         case FeatureCorrelation.Progress( i ) =>
+            pb.value = i
+      }
+      dlg.setVisible( true )
+//      op.getValue match {
+//         case `optionAbort` =>
+//         case _ =>
+//      }
+
+//
+//      val res = JOptionPane.showConfirmDialog( null, progressPane.peer, "Searching...",
+//         JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE )
+//      println( res )
    }
 }
