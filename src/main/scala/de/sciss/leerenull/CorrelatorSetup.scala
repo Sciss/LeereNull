@@ -34,7 +34,7 @@ import java.io.File
 import de.sciss.kontur.session.{BasicTimeline, Session, AudioRegion}
 import swing.{Swing, Dialog}
 
-object CorrelatorSetup extends GUIGoodies with KonturGoodies {
+object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    def prepareCorrelator( ar: AudioRegion )( implicit doc: Session ) {
       val afPath  = ar.audioFile.path
       val afName  = afPath.getName
@@ -54,16 +54,6 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies {
          }
       }
    }
-
-   def plainName( f: File ) : String = {
-      val n  = f.getName
-      val i  = n.lastIndexOf( '.' )
-      val n1 = if( i >= 0 ) n.substring( 0, i ) else n
-      if( n1.endsWith( "_feat" )) n1.dropRight( 5 ) else n1
-   }
-
-   def metaFile( plain: String )    : File = new File( LeereNull.databaseFolder, plain + "_feat.xml" )
-   def featureFile( plain: String ) : File = new File( LeereNull.databaseFolder, plain + "_feat.aif" )
 
    def extract( afPath: File )( whenDone: Boolean => Unit ) {
       val settings            = new FeatureExtraction.SettingsBuilder
