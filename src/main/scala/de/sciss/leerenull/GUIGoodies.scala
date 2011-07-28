@@ -29,17 +29,18 @@
 package de.sciss.leerenull
 
 import java.util.Locale
-import de.sciss.kontur.session.{BasicTimeline, Session}
-import swing.event.{ValueChanged, ButtonClicked}
+import de.sciss.kontur.session.BasicTimeline
+import swing.event.ValueChanged
 import java.text.NumberFormat
 import de.sciss.util.NumberSpace
-import annotation.switch
 import de.sciss.gui.{NumberEvent, NumberListener, NumberField, TimeFormat}
-import java.awt.event.{InputEvent, KeyEvent, KeyAdapter, ActionEvent}
-import de.sciss.strugatzki.{FeatureCorrelation, Span}
+import java.awt.event.{InputEvent, KeyEvent, ActionEvent}
+import de.sciss.strugatzki.Span
 import javax.swing.event.{AncestorEvent, AncestorListener}
 import swing.{Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
-import javax.swing.{JPanel, JOptionPane, WindowConstants, JDialog, JComponent, InputMap, AbstractAction, Action => JAction, KeyStroke}
+import javax.swing.{SwingUtilities, JPanel, JOptionPane, WindowConstants, JDialog, JComponent, AbstractAction, Action => JAction, KeyStroke}
+import java.awt.{FileDialog, Component => AWTComponent, Frame => AWTFrame}
+import java.io.{FilenameFilter, File}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -67,6 +68,31 @@ trait GUIGoodies {
 //         case ButtonClicked( _ ) => act( but )
 //      }
       action = Action( label ) { act( but )}
+   }
+
+   def openFileDialog( title: String = "Open File", init: File = new File( "" ),
+                       filter: File => Boolean = _ => true, parent: AWTComponent = null ) : Option[ File ] = {
+      val f = if( parent != null ) {
+         SwingUtilities.getWindowAncestor( parent ) match {
+            case fr: AWTFrame => fr
+            case _ => null
+         }
+      } else null
+
+      val dlg = new FileDialog( f, title, FileDialog.LOAD )
+      if( init.isFile ) {
+         dlg.setDirectory( init.getParent )
+         dlg.setFile( init.getName )
+      } else {
+         dlg.setDirectory( init.getPath )
+      }
+      dlg.setFilenameFilter( new FilenameFilter {
+         def accept( dir: File, name: String ) = filter( new File( dir, name ))
+      })
+      dlg.setVisible( true )
+      val dirName    = dlg.getDirectory
+      val fileName   = dlg.getFile
+      if( dirName != null && fileName != null ) Some( new File( dirName, fileName )) else None
    }
 
    def label( txt: String, fixedWidth: Option[ Int ] = None ) = new Label {

@@ -31,44 +31,82 @@ package de.sciss.leerenull
 import de.sciss.strugatzki.FeatureCorrelation
 import de.sciss.kontur.session.{BasicTimeline, Session}
 import collection.breakOut
-import javax.swing.table.{DefaultTableModel, TableModel}
-import swing.{GridPanel, BorderPanel, ScrollPane, Table, Swing}
+import javax.swing.table.DefaultTableModel
+import swing.{BorderPanel, ScrollPane, Table, Swing}
 import eu.flierl.grouppanel.GroupPanel
+import java.util.{Locale, Date}
+import java.io.File
+import FeatureCorrelation._
+import xml.{NodeSeq, XML}
+import java.text.{DateFormat, SimpleDateFormat}
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
-   def beginSearch( settings: FeatureCorrelation.Settings )( implicit doc: Session ) {
-      println( settings )
+   var verbose    = false
+   var autosave   = true
+
+   object Search {
+      private val dateFormat = DateFormat.getDateTimeInstance( DateFormat.SHORT, DateFormat.FULL, Locale.US )
+      def fromXMLFile( file: File ) : Search = fromXML( XML.loadFile( file ))
+      def fromXML( xml: NodeSeq ) : Search = {
+         val date       = dateFormat.parse( (xml \ "date").text )
+         val settings   = Settings.fromXML( xml \ "settings" )
+         val matches: IndexedSeq[ Match ] = ((xml \ "matches") \ "match").map( Match.fromXML( _ ))( breakOut )
+         Search( date, settings, matches )
+      }
+   }
+   final case class Search( creation: Date, settings: Settings, matches: IndexedSeq[ Match ]) {
+      def toXML = <search>
+  <date>{Search.dateFormat.format( creation )}</date>
+  <settings>{settings.toXML.child}</settings>
+  <matches>{matches.map(_.toXML)}</matches>
+</search>
+   }
+
+   def beginSearch( settings: Settings )( implicit doc: Session ) {
+      if( verbose ) println( settings )
 
       val dlg  = progressDialog( "Correlating with database" )
+      val tim  = new Date()
       val fc   = FeatureCorrelation( settings ) {
-         case FeatureCorrelation.Success( res ) =>
+         case Success( res ) =>
             dlg.stop()
-            println( "Done. " + res.size + " entries:" )
-            res.foreach { m =>
-               println(  "\nFile      : " + m.file.getAbsolutePath +
-                         "\nSimilarity: " + (m.sim * 100) +
-                         "\nSpan start: " + m.punch.start +
-                         "\nBoost in  : " + ampdb( m.boostIn ))
-               if( settings.punchOut.isDefined ) {
-                  println( "Span stop : " + m.punch.stop +
-                         "\nBoost out : " + ampdb( m.boostOut ))
+            if( verbose ) {
+               println( "Done. " + res.size + " entries:" )
+               res.foreach { m =>
+                  println(  "\nFile      : " + m.file.getAbsolutePath +
+                            "\nSimilarity: " + (m.sim * 100) +
+                            "\nSpan start: " + m.punch.start +
+                            "\nBoost in  : " + ampdb( m.boostIn ))
+                  if( settings.punchOut.isDefined ) {
+                     println( "Span stop : " + m.punch.stop +
+                            "\nBoost out : " + ampdb( m.boostOut ))
+                  }
                }
             }
-            Swing.onEDT( makeCorrelator( res ))
+            val search = Search( tim, settings, res )
+            if( autosave ) saveSearch( search )
+            Swing.onEDT( makeCorrelator( search ))
 
-         case FeatureCorrelation.Failure( e ) =>
+         case Failure( e ) =>
             dlg.stop()
             e.printStackTrace()
 
-         case FeatureCorrelation.Aborted =>
+         case Aborted =>
             dlg.stop()
 
-         case FeatureCorrelation.Progress( i ) => dlg.progress = i
+         case Progress( i ) => dlg.progress = i
       }
       dlg.start( fc )
    }
 
-   def makeCorrelator( matches: IndexedSeq[ FeatureCorrelation.Match ])( implicit doc: Session ) {
+   def saveSearch( search: Search ) {
+      val id   = plainName( search.settings.metaInput ).filter( _.isLetterOrDigit ).take( 16 )
+      val df   = new SimpleDateFormat( "yyMMdd'_'HHmmss'_" + id + ".xml'", Locale.US )
+      val f    = new File( LeereNull.searchFolder, df.format( search.creation ))
+      XML.save( f.getAbsolutePath, search.toXML, "UTF-8", true, null )
+   }
+
+   def makeCorrelator( search: Search )( implicit doc: Session ) {
       val tls  = doc.timelines
       implicit val tl = tls.tryEdit( "Add Correlator Timeline" ) { implicit ce =>
          implicit val tl = BasicTimeline.newEmpty( doc )
@@ -79,7 +117,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          tl
       }
 
-      val rowData: Array[ Array[ AnyRef ]] = matches.map( m => {
+      val rowData: Array[ Array[ AnyRef ]] = search.matches.map( m => {
          Array[ AnyRef ]( percentString( m.sim ), plainName( m.file ), timeString( m.punch ),
             decibelString( ampdb( m.boostIn )), decibelString( ampdb( m.boostOut )))
       })( breakOut )
@@ -112,7 +150,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val butSelectMatch = button( "Select match" ) { b =>
          table.selection.rows.headOption.foreach { row =>
-            println( matches( row ))
+            println( search.matches( row ))
          }
       }
 

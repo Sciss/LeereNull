@@ -35,17 +35,20 @@ import java.io.{File, FileInputStream}
 import swing.Swing
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
-   var databaseFolder: File = null
+   lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder) = {
+      val file = new File( "leerenull-settings.xml" )
+      val prop = new Properties()
+      val is = new FileInputStream( file )
+      prop.loadFromXML( is )
+      is.close()
+      val base       = new File( prop.getProperty( "base" ))
+      val database   = new File( base, "feature" )
+      val extractor  = new File( base, "extract" )
+      val search     = new File( base, "search" )
+      (base, database, extractor, search)
+   }
 
    def main( args: Array[ String ]) {
-      val file = new File( "leerenull-settings.xml" )
-      databaseFolder = if( file.isFile ) {
-         val prop = new Properties()
-         val is = new FileInputStream( file )
-         prop.loadFromXML( is )
-         is.close()
-         new File( prop.getProperty( "database" ))
-      } else new File( sys.props( "user.home" ), "leerenullen" )
       Swing.onEDT( run() )
    }
 
@@ -67,7 +70,16 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
             }
          }
       })
-      mf.add( mg )
+      val miLoadSearch = new MenuItem( "leerenull.loadsearch", action( "Load Search...", "control O" ) {
+         currentDoc.foreach { implicit doc =>
+            openFileDialog( "Load Search", searchFolder, filter = _.getName.endsWith( ".xml" )).foreach { file =>
+               val search = CorrelatorCore.Search.fromXMLFile( file )
+               CorrelatorCore.makeCorrelator( search )
+            }
+         }
+      })
       mg.add( miExtractor )
+      mg.add( miLoadSearch )
+      mf.add( mg )
    }
 }

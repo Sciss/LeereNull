@@ -39,41 +39,45 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val afPath  = ar.audioFile.path
       val afName  = afPath.getName
       val plain   = plainName( afPath )
-      val meta    = metaFile( plain )
-      if( meta.isFile ) {
-         makeCorrelator( ar, meta )
+      val dbMeta  = dbMetaFile( plain )
+      val exMeta  = extrMetaFile( plain )
+      if( dbMeta.isFile ) {
+         makeCorrelator( ar, dbMeta )
+      } else if( exMeta.isFile ) {
+         makeCorrelator( ar, exMeta )
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
             "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
             "<B>Extract features now?</B></html>"
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
-            extract( afPath ) { success =>
+            extract( afPath ) { (meta, success) =>
                if( success ) Swing.onEDT( makeCorrelator( ar, meta ))
             }
          }
       }
    }
 
-   def extract( afPath: File )( whenDone: Boolean => Unit ) {
+   def extract( afPath: File )( whenDone: (File, Boolean) => Unit ) {
       val settings            = new FeatureExtraction.SettingsBuilder
       settings.audioInput     = afPath
       val plain               = plainName( afPath )
       settings.featureOutput  = featureFile( plain )
-      settings.metaOutput     = Some( metaFile( plain ))
+      val meta                = extrMetaFile( plain )
+      settings.metaOutput     = Some( meta )
 
       val dlg = progressDialog( "Extracting features..." )
       val fe = FeatureExtraction( settings ) {
          case FeatureExtraction.Success =>
             dlg.stop()
-            whenDone( true )
+            whenDone( meta, true )
          case FeatureExtraction.Failure( e ) =>
             dlg.stop()
             e.printStackTrace()
-            whenDone( false )
+            whenDone( meta, false )
          case FeatureExtraction.Aborted =>
             dlg.stop()
-            whenDone( false )
+            whenDone( meta, false )
          case FeatureExtraction.Progress( i ) => dlg.progress = i
       }
       dlg.start( fe )

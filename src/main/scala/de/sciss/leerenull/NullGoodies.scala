@@ -10,6 +10,7 @@ trait NullGoodies {
       if( n1.endsWith( "_feat" )) n1.dropRight( 5 ) else n1
    }
 
-   def metaFile( plain: String )    : File = new File( LeereNull.databaseFolder, plain + "_feat.xml" )
-   def featureFile( plain: String ) : File = new File( LeereNull.databaseFolder, plain + "_feat.aif" )
+   def dbMetaFile( plain: String )   : File  = new File( LeereNull.databaseFolder,  plain + "_feat.xml" )
+   def extrMetaFile( plain: String ) : File  = new File( LeereNull.extractorFolder, plain + "_feat.xml" )
+   def featureFile( plain: String )  : File  = new File( LeereNull.databaseFolder,  plain + "_feat.aif" )
 }
