@@ -31,11 +31,12 @@ package de.sciss.leerenull
 import de.sciss.kontur.gui.{TimelineFrame, BasicTimelineView, TimelineView, BasicTrackList}
 import de.sciss.io.Span
 import de.sciss.kontur.edit.Editor
-import de.sciss.kontur.session.{SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
 import de.sciss.kontur.util.Matrix2D
 import collection.{breakOut, JavaConversions}
 import de.sciss.app.{Application => SApp, AbstractApplication, AbstractCompoundEdit}
 import de.sciss.strugatzki.{Span => SSpan}
+import java.io.File
+import de.sciss.kontur.session.{AudioFileElement, SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
 
 trait KonturGoodies {
    def app: SApp = AbstractApplication.getApplication
@@ -99,6 +100,19 @@ trait KonturGoodies {
          }
       }
    }
+
+   def findAudioFile( file: File )( implicit doc: Session ) : Option[ AudioFileElement ] =
+      doc.audioFiles.find( _.path == file )
+
+   def provideAudioFile( file: File )( implicit doc: Session, ce: Maybe[ AbstractCompoundEdit ]) : AudioFileElement =
+      findAudioFile( file ).getOrElse {
+         val afe = AudioFileElement.fromPath( doc, file )
+         val afs = doc.audioFiles
+         afs.joinEdit( "Add audio file" ) { implicit ce =>
+            afs.editInsert( ce, afs.size, afe )
+         }
+         afe
+      }
 
    def selTracks( implicit tl: BasicTimeline, trl: BasicTrackList ) : IndexedSeq[ AudioTrack ] =
       tl.tracks.toList.collect({

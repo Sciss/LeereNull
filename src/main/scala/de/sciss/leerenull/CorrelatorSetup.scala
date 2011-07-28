@@ -42,9 +42,9 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val dbMeta  = dbMetaFile( plain )
       val exMeta  = extrMetaFile( plain )
       if( dbMeta.isFile ) {
-         makeCorrelator( ar, dbMeta )
+         makeSetup( ar, dbMeta )
       } else if( exMeta.isFile ) {
-         makeCorrelator( ar, exMeta )
+         makeSetup( ar, exMeta )
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
             "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
@@ -52,7 +52,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
             extract( afPath ) { (meta, success) =>
-               if( success ) Swing.onEDT( makeCorrelator( ar, meta ))
+               if( success ) Swing.onEDT( makeSetup( ar, meta ))
             }
          }
       }
@@ -83,7 +83,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       dlg.start( fe )
    }
 
-   def makeCorrelator( ar: AudioRegion, meta: File )( implicit doc: Session ) {
+   def makeSetup( ar: AudioRegion, meta: File )( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
       implicit val tl = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>

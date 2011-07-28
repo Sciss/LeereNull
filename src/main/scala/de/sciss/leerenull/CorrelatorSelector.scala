@@ -90,7 +90,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
             }
             val search = Search( tim, settings, res )
             if( autosave ) saveSearch( search )
-            Swing.onEDT( makeCorrelator( search ))
+            Swing.onEDT( makeSelector( search ))
 
          case Failure( e ) =>
             dlg.stop()
@@ -111,7 +111,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
       XML.save( f.getAbsolutePath, search.toXML, "UTF-8", true, null )
    }
 
-   def makeCorrelator( search: Search )( implicit doc: Session ) {
+   def makeSelector( search: Search )( implicit doc: Session ) {
 //      val tls  = doc.timelines
 //      implicit val tl = tls.tryEdit( "Add Correlator Timeline" ) { implicit ce =>
 //         implicit val tl = BasicTimeline.newEmpty( doc )
@@ -154,17 +154,22 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
 //      }
 
       val a = new AppWindow( AbstractWindow.REGULAR ) {
+         setTitle( "Search results" )
+         setLocationRelativeTo( null )
       }
+
+      val lbInfo = label( "Search conducted for " + plainName( search.settings.metaInput ) + " at " + search.creation )
 
       val butSelectMatch = button( "Select match" ) { b =>
          table.selection.rows.headOption.foreach { row =>
-            println( search.matches( row ))
+//            println( search.matches( row ))
+            CorrelatorCore.makeMatchEditor( search, row )
          }
       }
 
       val panel = new GroupPanel {
-         theHorizontalLayout is Sequential( butSelectMatch )
-         theVerticalLayout is Parallel( Baseline )( butSelectMatch )
+         theHorizontalLayout is Sequential( lbInfo, butSelectMatch )
+         theVerticalLayout is Parallel( Baseline )( lbInfo, butSelectMatch )
       }
 
       val bp = new BorderPanel {
