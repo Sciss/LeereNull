@@ -335,8 +335,8 @@ trait GUIGoodies {
 
    private val timeFormat = new TimeFormat( 0, "", "", 3, Locale.US )
 
-   def timeString( sp: Span )( implicit tl: BasicTimeline ) : String = {
-      val sr = tl.rate
+   def timeString( sp: Span )/*( implicit tl: BasicTimeline )*/ : String = {
+      val sr = 44100.0 // tl.rate
       val startSecs = sp.start / sr
       val stopSecs   = sp.stop / sr
       timeFormat.formatTime( startSecs ) + " - " + timeFormat.formatTime( stopSecs )

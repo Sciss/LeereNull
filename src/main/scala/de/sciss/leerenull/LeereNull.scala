@@ -73,8 +73,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
       val miLoadSearch = new MenuItem( "leerenull.loadsearch", action( "Load Search...", "control O" ) {
          currentDoc.foreach { implicit doc =>
             openFileDialog( "Load Search", searchFolder, filter = _.getName.endsWith( ".xml" )).foreach { file =>
-               val search = CorrelatorCore.Search.fromXMLFile( file )
-               CorrelatorCore.makeCorrelator( search )
+               val search = CorrelatorSelector.Search.fromXMLFile( file )
+               CorrelatorSelector.makeCorrelator( search )
             }
          }
       })

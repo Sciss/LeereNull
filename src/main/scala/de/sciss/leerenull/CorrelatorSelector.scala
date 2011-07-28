@@ -39,8 +39,13 @@ import java.io.File
 import FeatureCorrelation._
 import xml.{NodeSeq, XML}
 import java.text.{DateFormat, SimpleDateFormat}
+import de.sciss.app.AbstractWindow
+import javax.swing.JMenuBar
+import de.sciss.app.AbstractWindow.Listener
+import de.sciss.kontur.gui.AppWindow
+import java.awt.{BorderLayout, Point, Dimension, Rectangle, Container, Component}
 
-object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
+object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies {
    var verbose    = false
    var autosave   = true
 
@@ -107,15 +112,15 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    }
 
    def makeCorrelator( search: Search )( implicit doc: Session ) {
-      val tls  = doc.timelines
-      implicit val tl = tls.tryEdit( "Add Correlator Timeline" ) { implicit ce =>
-         implicit val tl = BasicTimeline.newEmpty( doc )
-//         tl.span  = ar0.span
-         tl.name  = uniqueName( tls, "$Correlator" )
-         tls.editInsert( ce, tls.size, tl )
-//         placeStereo( ar0, "$" )
-         tl
-      }
+//      val tls  = doc.timelines
+//      implicit val tl = tls.tryEdit( "Add Correlator Timeline" ) { implicit ce =>
+//         implicit val tl = BasicTimeline.newEmpty( doc )
+////         tl.span  = ar0.span
+//         tl.name  = uniqueName( tls, "$Correlator" )
+//         tls.editInsert( ce, tls.size, tl )
+////         placeStereo( ar0, "$" )
+//         tl
+//      }
 
       val rowData: Array[ Array[ AnyRef ]] = search.matches.map( m => {
          Array[ AnyRef ]( percentString( m.sim ), plainName( m.file ), timeString( m.punch ),
@@ -143,9 +148,12 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          verticalScrollBarPolicy    = ScrollPane.BarPolicy.Always
       }
 
-      val tlf = TimelineFrame2 { f =>
-         println( "Bye..." )
-         f.dispose()
+//      val tlf = TimelineFrame2 { f =>
+//         println( "Bye..." )
+//         f.dispose()
+//      }
+
+      val a = new AppWindow( AbstractWindow.REGULAR ) {
       }
 
       val butSelectMatch = button( "Select match" ) { b =>
@@ -164,7 +172,11 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          add( scroll, BorderPanel.Position.South )
       }
 
-      tlf.bottomPanel = Some( bp )
-      tlf.pack() // AndSetMinimum()
+      val cp = a.getContentPane
+      cp.add( bp.peer, BorderLayout.CENTER )
+      a.pack()
+      a.setVisible( true )
+//      tlf.bottomPanel = Some( bp )
+//      tlf.pack() // AndSetMinimum()
    }
 }

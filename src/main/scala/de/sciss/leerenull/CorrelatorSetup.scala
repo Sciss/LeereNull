@@ -181,7 +181,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val butSearch = button( "Start searching..." ) { b =>
          if( !settings.punchIn.span.isEmpty && settings.punchOut.isDefined ) {
-            CorrelatorCore.beginSearch( settings )
+            CorrelatorSelector.beginSearch( settings )
          }
       }
 
