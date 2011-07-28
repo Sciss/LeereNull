@@ -39,7 +39,7 @@ import java.awt.event.{InputEvent, KeyEvent, KeyAdapter, ActionEvent}
 import de.sciss.strugatzki.{FeatureCorrelation, Span}
 import javax.swing.event.{AncestorEvent, AncestorListener}
 import swing.{Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
-import javax.swing.{JOptionPane, WindowConstants, JDialog, JComponent, InputMap, AbstractAction, Action => JAction, KeyStroke}
+import javax.swing.{JPanel, JOptionPane, WindowConstants, JDialog, JComponent, InputMap, AbstractAction, Action => JAction, KeyStroke}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -142,12 +142,18 @@ trait GUIGoodies {
 
    def integerField( lb: String, min: Int = 0, max: Int = 10, initial: Int = 0 )
                    ( act: Int => Unit ) = new FlowPanel with IntegerWidget {
-      vGap = 0
 
       val lab  = label( lb )
       val j    = new NumberField( NumberSpace.createIntSpace( min, max ))
       val amap = j.getActionMap
       val imap = j.getInputMap( JComponent.WHEN_FOCUSED )
+
+      override lazy val peer: JPanel =
+         new JPanel( new java.awt.FlowLayout( FlowPanel.Alignment.Center.id )) with SuperMixin {
+            override def getBaseline( w: Int, h: Int ) : Int = lab.peer.getBaseline( w, h )
+         }
+
+      vGap = 0
 
       def inc( amount: Int ) = new AbstractAction {
          def actionPerformed( e: ActionEvent ) {
@@ -187,13 +193,19 @@ trait GUIGoodies {
 
    def timeField( lb: String, min: Double = 0.0, max: Double = 60.0, initial: Double = 1.0 )
                 ( act: Double => Unit ) = new FlowPanel with DecimalWidget {
-      vGap = 0
 
       val lab  = label( lb )
       val j    = new NumberField( new NumberSpace( min, max, 0.0 ))
       j.setFlags( NumberField.HHMMSS )
       val amap = j.getActionMap
       val imap = j.getInputMap( JComponent.WHEN_FOCUSED )
+
+      override lazy val peer: JPanel =
+         new JPanel( new java.awt.FlowLayout( FlowPanel.Alignment.Center.id )) with SuperMixin {
+            override def getBaseline( w: Int, h: Int ) : Int = lab.peer.getBaseline( w, h )
+         }
+
+      vGap = 0
 
       def inc( amount: Double ) = new AbstractAction {
          def actionPerformed( e: ActionEvent ) {
