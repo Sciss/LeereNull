@@ -28,11 +28,7 @@
 
 package de.sciss.leerenull
 
-import java.awt.BorderLayout
 import eu.flierl.grouppanel.GroupPanel
-import de.sciss.app.AbstractWindow
-import javax.swing.{WindowConstants, JFrame}
-import de.sciss.kontur.gui.TimelineFrame
 import de.sciss.strugatzki.{FeatureExtraction, FeatureCorrelation, Span => SSpan}
 import java.io.File
 import de.sciss.kontur.session.{BasicTimeline, Session, AudioRegion}
@@ -110,21 +106,10 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies {
       settings.databaseFolder = LeereNull.databaseFolder
       settings.metaInput      = meta
 
-      val tlf = new TimelineFrame( doc, tl )
-      tlf.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE )
-      tlf.addListener( new AbstractWindow.Listener {
-         def windowClosing( e: AbstractWindow.Event ) {
-            println( "Wooha" )
-            tlf.dispose()
-         }
-
-         def windowClosed(p1: AbstractWindow.Event) {}
-         def windowDeactivated(p1: AbstractWindow.Event) {}
-         def windowDeiconified(p1: AbstractWindow.Event) {}
-         def windowOpened(p1: AbstractWindow.Event) {}
-         def windowActivated(p1: AbstractWindow.Event) {}
-         def windowIconified(p1: AbstractWindow.Event) {}
-      })
+      val tlf = TimelineFrame2 { f =>
+         println( "Wooha" )
+         f.dispose()
+      }
 
       implicit val tlv = tlf.timelineView
 
@@ -226,12 +211,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies {
          )
       }
 
-      val cp = tlf.getContentPane
-      cp.add( panel.peer, BorderLayout.SOUTH )
-
-      tlf.pack()
-      tlf.getWindow match {
-         case f: JFrame => f.setMinimumSize( f.getSize )
-      }
+      tlf.bottomPanel = Some( panel )
+      tlf.packAndSetMinimum()
    }
 }
