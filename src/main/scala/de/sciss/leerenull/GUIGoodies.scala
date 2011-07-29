@@ -335,11 +335,14 @@ trait GUIGoodies {
 
    private val timeFormat = new TimeFormat( 0, "", "", 3, Locale.US )
 
-   def timeString( sp: Span )/*( implicit tl: BasicTimeline )*/ : String = {
+   def timeString( frames: Long )/*( implicit tl: BasicTimeline )*/ : String = {
       val sr = 44100.0 // tl.rate
-      val startSecs = sp.start / sr
-      val stopSecs   = sp.stop / sr
-      timeFormat.formatTime( startSecs ) + " - " + timeFormat.formatTime( stopSecs )
+      val secs = frames / sr
+      timeFormat.formatTime( secs )
+   }
+
+   def timeString( sp: Span )/*( implicit tl: BasicTimeline )*/ : String = {
+      timeString( sp.start ) + " - " + timeString( sp.stop )
    }
 
    def percentString( d: Double, numDecimals: Int = 1 ) : String = {

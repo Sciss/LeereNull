@@ -101,8 +101,8 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       settings.metaInput      = meta
 
       val tlf = TimelineFrame2 { f =>
-         println( "Wooha" )
-         f.dispose()
+//         println( "Wooha" )
+//         f.dispose()
       }
 
       implicit val tlv = tlf.timelineView
@@ -181,7 +181,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val butSearch = button( "Start searching..." ) { b =>
          if( !settings.punchIn.span.isEmpty && settings.punchOut.isDefined ) {
-            CorrelatorSelector.beginSearch( settings )
+            CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings )
          }
       }
 

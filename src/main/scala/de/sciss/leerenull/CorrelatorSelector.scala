@@ -29,7 +29,7 @@
 package de.sciss.leerenull
 
 import de.sciss.strugatzki.FeatureCorrelation
-import de.sciss.kontur.session.{BasicTimeline, Session}
+import de.sciss.kontur.session.Session
 import collection.breakOut
 import javax.swing.table.DefaultTableModel
 import swing.{BorderPanel, ScrollPane, Table, Swing}
@@ -40,10 +40,8 @@ import FeatureCorrelation._
 import xml.{NodeSeq, XML}
 import java.text.{DateFormat, SimpleDateFormat}
 import de.sciss.app.AbstractWindow
-import javax.swing.JMenuBar
-import de.sciss.app.AbstractWindow.Listener
 import de.sciss.kontur.gui.AppWindow
-import java.awt.{BorderLayout, Point, Dimension, Rectangle, Container, Component}
+import java.awt.BorderLayout
 
 object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies {
    var verbose    = false
@@ -54,20 +52,26 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
       def fromXMLFile( file: File ) : Search = fromXML( XML.loadFile( file ))
       def fromXML( xml: NodeSeq ) : Search = {
          val date       = dateFormat.parse( (xml \ "date").text )
+         val offset     = {xml \ "offset"}.text.toLong
          val settings   = Settings.fromXML( xml \ "settings" )
          val matches: IndexedSeq[ Match ] = ((xml \ "matches") \ "match").map( Match.fromXML( _ ))( breakOut )
-         Search( date, settings, matches )
+         Search( date, offset, settings, matches )
       }
    }
-   final case class Search( creation: Date, settings: Settings, matches: IndexedSeq[ Match ]) {
+   final case class Search( creation: Date, offset: Long, settings: Settings, matches: IndexedSeq[ Match ]) {
       def toXML = <search>
   <date>{Search.dateFormat.format( creation )}</date>
+  <offset>{offset}</offset>
   <settings>{settings.toXML.child}</settings>
   <matches>{matches.map(_.toXML)}</matches>
 </search>
    }
 
-   def beginSearch( settings: Settings )( implicit doc: Session ) {
+   /**
+    * @param   offset   the offset of the search input with respect to its
+    *                   appearance in the main timeline
+    */
+   def beginSearch( offset: Long, settings: Settings )( implicit doc: Session ) {
       if( verbose ) println( settings )
 
       val dlg  = progressDialog( "Correlating with database" )
@@ -88,7 +92,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
                   }
                }
             }
-            val search = Search( tim, settings, res )
+            val search = Search( tim, offset, settings, res )
             if( autosave ) saveSearch( search )
             Swing.onEDT( makeSelector( search ))
 

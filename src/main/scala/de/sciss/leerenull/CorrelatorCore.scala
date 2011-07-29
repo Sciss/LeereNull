@@ -31,6 +31,7 @@ package de.sciss.leerenull
 import de.sciss.leerenull.CorrelatorSelector.Search
 import de.sciss.strugatzki.{Span, FeatureExtraction}
 import de.sciss.kontur.session.{AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
+import eu.flierl.grouppanel.GroupPanel
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ) {
@@ -41,6 +42,8 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val m       = search.matches( idx )
       val meta    = FeatureExtraction.Settings.fromXMLFile( set.metaInput )
+
+      var ar1 : AudioRegion = null
 
       implicit val tl = tls.tryEdit( "Add Matcher Timeline" ) { implicit ce =>
          val afe1    = provideAudioFile( meta.audioInput )
@@ -54,7 +57,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          val stop1   = start1 + len1
          val fadeIn1 = FadeSpec( math.min( pre1, frames( afe1, 1 )))
          val fadeOut1= FadeSpec( math.min( len1 - pre1, frames( afe1, 1 )))
-         val ar1     = AudioRegion( Span( start1, stop1 ), "pre_roll", afe1, fOff1,
+         /* val */ ar1     = AudioRegion( Span( start1, stop1 ), "pre_roll", afe1, fOff1,
             fadeIn = Some( fadeIn1 ), fadeOut = Some( fadeOut1 ))
 
          val ar2O    = set.punchOut.map { po =>
@@ -97,22 +100,27 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          tl
       }
 
-      /* val tlf = */ TimelineFrame2 { f =>
-         println( "Bye..." )
+      val tlf = TimelineFrame2 { f =>
+//         println( "Bye..." )
 //         f.dispose()
       }
 
-//      val panel = new GroupPanel {
-//         theHorizontalLayout is Sequential( butSelectMatch )
-//         theVerticalLayout is Parallel( Baseline )( butSelectMatch )
-//      }
-//
+      val butIncorporate = button( "Incorporate" ) { b =>
+         println( "Dang!" )
+      }
+      val lbIncorporate = label( "Regions will be offset by " + timeString( search.offset - (ar1.span.start - ar1.offset) ))
+
+      val panel = new GroupPanel {
+         theHorizontalLayout is Sequential( butIncorporate, lbIncorporate )
+         theVerticalLayout is Parallel( Baseline )( butIncorporate, lbIncorporate )
+      }
+
 //      val bp = new BorderPanel {
 //         add( panel, BorderPanel.Position.North )
 //         add( scroll, BorderPanel.Position.South )
 //      }
-//
-//      tlf.bottomPanel = Some( bp )
-//      tlf.pack() // AndSetMinimum()
+
+      tlf.bottomPanel = Some( panel )
+      tlf.pack() // AndSetMinimum()
    }
 }

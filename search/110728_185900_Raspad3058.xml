@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>7/28/11 7:41:03 PM BST</date>
+  <offset>0</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/Raspad_30'58_feat.xml</input>
+   <punchIn>
+   <start>313744</start>
+   <stop>344686</stop>
+   <weight>0.5</weight>
+</punchIn>
+   <punchOut>
+   <start>353321</start>
+   <stop>400095</stop>
+   <weight>0.5</weight>
+</punchOut>
+   <minPunch>88200</minPunch>
+   <maxPunch>132300</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>7.943282</maxBoost>
+   <numMatches>10</numMatches>
+   <numPerFile>2</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>0.7252997</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/Phono_071212_002828Cut.aif</file>
+   <start>13276672</start>
+   <stop>13404672</stop>
+   <boostIn>1.966122</boostIn>
+   <boostOut>0.12249088</boostOut>
+</match><match>
+   <sim>0.70430094</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080311_130102_ParaguanaMeer2AT.aif</file>
+   <start>12049920</start>
+   <stop>12182016</stop>
+   <boostIn>0.39528927</boostIn>
+   <boostOut>0.067319356</boostOut>
+</match><match>
+   <sim>0.6989294</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080227_WeimarRegenFensterAT.aif</file>
+   <start>25074176</start>
+   <stop>25189888</stop>
+   <boostIn>0.42359677</boostIn>
+   <boostOut>0.24097434</boostOut>
+</match><match>
+   <sim>0.6843338</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/AT_TremBnc3H'prAmpConBnc3H'kRsmpRsmpEd.aif</file>
+   <start>22491136</start>
+   <stop>22614528</stop>
+   <boostIn>1.3392197</boostIn>
+   <boostOut>0.39487115</boostOut>
+</match><match>
+   <sim>0.6841177</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080227_WeimarRegenFensterAT.aif</file>
+   <start>7571456</start>
+   <stop>7667712</stop>
+   <boostIn>0.38472334</boostIn>
+   <boostOut>0.2026975</boostOut>
+</match><match>
+   <sim>0.6815726</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/Phono_071212_002828Cut.aif</file>
+   <start>4528640</start>
+   <stop>4619776</stop>
+   <boostIn>1.2256362</boostIn>
+   <boostOut>1.286461</boostOut>
+</match><match>
+   <sim>0.6787191</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/testCC1cHlb-1kCut.aif</file>
+   <start>3001344</start>
+   <stop>3118592</stop>
+   <boostIn>1.492056</boostIn>
+   <boostOut>0.7593169</boostOut>
+</match><match>
+   <sim>0.6744971</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/MiscZeven_Fahrrad.aif</file>
+   <start>11662336</start>
+   <stop>11794432</stop>
+   <boostIn>6.9156303</boostIn>
+   <boostOut>4.5064616</boostOut>
+</match><match>
+   <sim>0.6603216</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/London100304_205400OKM_WhiteChapelGalleryFd.aif</file>
+   <start>12519424</start>
+   <stop>12642816</stop>
+   <boostIn>7.876826</boostIn>
+   <boostOut>2.5554175</boostOut>
+</match><match>
+   <sim>0.66026795</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_dincise_hennig_sciss_fscin5.aif</file>
+   <start>4069376</start>
+   <stop>4194304</stop>
+   <boostIn>0.5001187</boostIn>
+   <boostOut>0.112377636</boostOut>
+</match></matches>
+</search>
