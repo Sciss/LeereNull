@@ -44,20 +44,20 @@ extends TimelineFrame( doc, tl ) {
    frame =>
 
    setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE )
-   addListener( new AbstractWindow.Listener {
-      def windowClosing( e: AbstractWindow.Event ) {
-//         println( "Wooha" )
-//         tlf.dispose()
-         closeFun( frame )
-      }
-
-      def windowClosed(p1: AbstractWindow.Event) {}
-      def windowDeactivated(p1: AbstractWindow.Event) {}
-      def windowDeiconified(p1: AbstractWindow.Event) {}
-      def windowOpened(p1: AbstractWindow.Event) {}
-      def windowActivated(p1: AbstractWindow.Event) {}
-      def windowIconified(p1: AbstractWindow.Event) {}
-   })
+//   addListener( new AbstractWindow.Listener {
+//      def windowClosing( e: AbstractWindow.Event ) {
+////         println( "Wooha" )
+////         tlf.dispose()
+//         closeFun( frame )
+//      }
+//
+//      def windowClosed(p1: AbstractWindow.Event) {}
+//      def windowDeactivated(p1: AbstractWindow.Event) {}
+//      def windowDeiconified(p1: AbstractWindow.Event) {}
+//      def windowOpened(p1: AbstractWindow.Event) {}
+//      def windowActivated(p1: AbstractWindow.Event) {}
+//      def windowIconified(p1: AbstractWindow.Event) {}
+//   })
 
    private var bottomPanelVar = Option.empty[ Component ]
 
@@ -70,6 +70,13 @@ extends TimelineFrame( doc, tl ) {
       p.foreach { newp =>
          getContentPane.add( newp.peer, BorderLayout.SOUTH )
       }
+   }
+
+   override protected def windowClosing() {
+//      println( "DISPOSA!" )
+      closeFun( frame )
+//      app.getMenuFactory.removeFromWindowMenu( actionShowWindow )
+      super.windowClosing()
    }
 
    def packAndSetMinimum() {
