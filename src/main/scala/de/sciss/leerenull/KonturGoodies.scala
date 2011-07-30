@@ -28,7 +28,6 @@
 
 package de.sciss.leerenull
 
-import de.sciss.kontur.gui.{TimelineFrame, BasicTimelineView, TimelineView, BasicTrackList}
 import de.sciss.io.Span
 import de.sciss.kontur.edit.Editor
 import de.sciss.kontur.util.Matrix2D
@@ -36,7 +35,8 @@ import collection.{breakOut, JavaConversions}
 import de.sciss.app.{Application => SApp, AbstractApplication, AbstractCompoundEdit}
 import de.sciss.strugatzki.{Span => SSpan}
 import java.io.File
-import de.sciss.kontur.session.{AudioFileElement, SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
+import de.sciss.kontur.gui.{TrailView, TimelineFrame, BasicTimelineView, TimelineView, BasicTrackList}
+import de.sciss.kontur.session.{Diffusion, ResizableStake, AudioFileElement, SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
 
 trait KonturGoodies {
    def app: SApp = AbstractApplication.getApplication
@@ -88,6 +88,18 @@ trait KonturGoodies {
       }
       ars.sortBy( _.span.start )
    }
+
+   def collectAudioRegions[ A ]( fun: PartialFunction[ (AudioTrack, AudioRegion), A ])( implicit tl: BasicTimeline ) : IndexedSeq[ A ] = {
+      val trs = tl.tracks.toList.collect { case atr: AudioTrack => atr }
+      val b = IndexedSeq.newBuilder[ A ]
+      trs.foreach { tr =>
+         tr.trail.visitAll()(  ar => { val tup = (tr, ar); if( fun.isDefinedAt( tup )) b += fun( tup )})
+      }
+      b.result()
+   }
+
+   def nonSyntheticTimelines( implicit doc: Session ) : IndexedSeq[ BasicTimeline ] =
+      doc.timelines.toList.collect({ case tl: BasicTimeline if( !tl.name.startsWith( "$" )) => tl })( breakOut )
 
    def selSpan( implicit tlv: TimelineView ) : Span = {
       val res = tlv.selection.span
@@ -156,7 +168,7 @@ trait KonturGoodies {
          .find( _.trail.getRange( span ).isEmpty )
    }
 
-   def provideAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll )
+   def provideAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll, more: Seq[ AudioTrack ] = Seq.empty )
                              ( implicit doc: Session, tl: BasicTimeline, ceo: Maybe[ AbstractCompoundEdit ]) : AudioTrack =
       findAudioTrackSpace( span, accept ).getOrElse {
          val ts = tl.tracks
@@ -165,12 +177,12 @@ trait KonturGoodies {
             val at = new AudioTrack( doc )
 //         at.diffusion = Some( stereoDiffusion )
             at.name = {
-               val set = ts.map( _.name ).toSet
+               val set = (ts.toList ++ more).map( _.name ).toSet
                var i = 0
                var n = ""
                do {
                   i += 1
-                  n = "Tr" + i
+                  n = "T" + i
                } while( set.contains( n ))
                n
             }
@@ -179,31 +191,67 @@ trait KonturGoodies {
          }
       }
 
-   def place( ar: AudioRegion, accept: AudioTrack => Boolean = acceptAll )
+   def place( ar: AudioRegion, accept: AudioTrack => Boolean = acceptAll, more: Seq[ AudioTrack ] = Seq.empty )
             ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
 
       tl.joinEdit( "Place audio region" ) { implicit ce =>
-         val at = provideAudioTrackSpace( ar.span, accept )
+         val at = provideAudioTrackSpace( ar.span, accept, more )
          at.trail.editAdd( ce, ar )
          at
       }
    }
 
-   def placeStereo( ar: AudioRegion, prefix: String = "" )
+   def placeStereo( ar: AudioRegion, prefix: String = "", more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty )
                   ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
-         val d    = provideDiffusion( ar.audioFile.numChannels, 2, prefix )
+         val d    = provideDiffusion( ar.audioFile.numChannels, 2, prefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
          val sq   = d.matrix.toSeq
          val at   = place( ar, { at =>
             at.diffusion match {
                case Some( df: MatrixDiffusion ) if( df.matrix.toSeq == sq ) => true
                case _ => false
             }
-         })
+         }, more )
          if( at.diffusion.isEmpty ) {
             at.diffusion = Some( d )
          }
          at
+      }
+   }
+
+   def insertTimelineSpan( pos: Long, delta: Long )
+                         ( decider: (AudioTrack, AudioRegion) => InsertSpan.Action = (t, ar) => {
+                            if( pos <= ar.span.start ) InsertSpan.Ignore
+                            else if( pos >= ar.span.stop ) InsertSpan.Move
+                            else InsertSpan.Split
+                         })
+                         ( implicit tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) {
+      require( (pos >= tl.span.start) && (pos <= tl.span.stop), pos.toString )
+      require( delta >= 0, delta.toString )
+
+//      val affectedSpan = new Span( pos, tl.span.stop )
+
+      tl.joinEdit[ Unit ]( "Insert timeline span" ) { implicit ce: AbstractCompoundEdit =>
+         tl.editSpan( ce, tl.span.replaceStop( tl.span.stop + delta ))
+         val map = collectAudioRegions({ case (tr, ar) => (tr.trail, ar, decider( tr, ar ))}).groupBy( _._3 )
+
+         map.getOrElse( InsertSpan.Move, IndexedSeq.empty ).groupBy( _._1 ).foreach {
+            case (trail, seq) =>
+               val ars = seq.map( _._2 )
+               trail.editRemove( ce, ars: _* )
+               val arsm = ars.map( _.move( delta ))
+               trail.editAdd( ce, arsm: _* )
+         }
+         map.getOrElse( InsertSpan.Split, IndexedSeq.empty ).groupBy( _._1 ).foreach {
+            case (trail, seq) =>
+               val ars = seq.map( _._2 )
+               trail.editRemove( ce, ars: _* )
+               val arss = ars.flatMap { ar =>
+                  val (nomove, move) = ar.split( pos )
+                  Seq( nomove, move.move( delta ))
+               }
+               trail.editAdd( ce, arss: _* )
+         }
       }
    }
 
@@ -231,17 +279,18 @@ trait KonturGoodies {
       Matrix2D.fromSeq( sq )
    }
 
-   def findDiffusion( matrix: Matrix2D[ Float ])( implicit doc: Session ) : Option[ MatrixDiffusion ] = {
+   def findDiffusion( matrix: Matrix2D[ Float ], more: IndexedSeq[ Diffusion ] = IndexedSeq.empty )
+                    ( implicit doc: Session ) : Option[ MatrixDiffusion ] = {
       val sq = matrix.toSeq
-      doc.diffusions.toList.collect({
+      (doc.diffusions.toList ++ more).collect({
          case md: MatrixDiffusion if( md.matrix.toSeq == sq ) => md
       }).headOption
    }
 
-   def provideDiffusion( inChans: Int, outChans: Int, prefix: String = "" )
+   def provideDiffusion( inChans: Int, outChans: Int, prefix: String = "", more: IndexedSeq[ Diffusion ] = IndexedSeq.empty )
                        ( implicit doc: Session, ceo: Maybe[ AbstractCompoundEdit ]) : MatrixDiffusion = {
       val m = mixMatrix( inChans, outChans )
-      findDiffusion( m ).getOrElse {
+      findDiffusion( m, more ).getOrElse {
          val dfs = doc.diffusions
          dfs.joinEdit( "Add diffusion" ) { ce =>
             val d = new MatrixDiffusion( doc )

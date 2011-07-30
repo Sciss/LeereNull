@@ -1,0 +1,1401 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<konturSession>
+    <audioFiles>
+  <coll>
+  <audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/audio_work/Raspad_30'58.aif</path>
+  <numFrames>662029</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="1">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_FlageoMitKnopfT.aif</path>
+  <numFrames>36741354</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="2">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_Pedale.aif</path>
+  <numFrames>32574643</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="3">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/Phono_071212_002828Cut.aif</path>
+  <numFrames>18546688</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="4">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_LeereTastenVorneT.aif</path>
+  <numFrames>28557126</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="5">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/MiscZeven_Bach.aif</path>
+  <numFrames>23134593</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="6">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_SaitenMitPapierT.aif</path>
+  <numFrames>16867937</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile>
+</coll>
+</audioFiles>
+    <diffusions>
+  <coll>
+  <diffusion class="matrix" id="7">
+          <name>1-&gt;2</name>
+          <numInputChannels>1</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 1.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="8">
+          <name>$2-&gt;2</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 0.0</row><row>0.0 1.0</row></matrix>
+       </diffusion>
+</coll>
+</diffusions>
+    <timelines>
+       <coll>
+  <timeline id="9">
+  <name>Timeline</name>
+  <span stop="14152067" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="10">
+      <coll>
+  <audioTrack id="11">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1613367" start="1488602"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>362868</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1440243" start="1333195"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1332897" start="1195055"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>350473</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1083463" start="988810"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="986891" start="855269"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="755182" start="658400"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="662029" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="12">
+      <name>T2</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>_SaitenMitPapierT_pin</name>
+      <span stop="1464410" start="1391834"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8582656</offset>
+      <gain>0.5431355</gain>
+      <fadeIn><fade>
+  <numFrames>1012</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_pout</name>
+      <span stop="1615876" start="1440218"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8631040</offset>
+      <gain>5.8101687</gain>
+      <fadeIn><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_Pedale_pin</name>
+      <span stop="1154607" start="1033263"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>25679360</offset>
+      <gain>1.4238697</gain>
+      <fadeIn><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_Pedale_pout</name>
+      <span stop="1308944" start="1114159"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>25760256</offset>
+      <gain>2.2395327</gain>
+      <fadeIn><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>83510</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="899369" start="713445"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="13">
+      <name>T3</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="1553143" start="1392819"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="14">
+  <name>$Matcher</name>
+  <span stop="707246" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="15">
+      <coll>
+  <audioTrack id="16">
+      <name>T4</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_FlageoMitKnopfT_pout</name>
+      <span stop="618220" start="507560"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13947392</offset>
+      <gain>0.988019</gain>
+      <fadeIn><fade>
+  <numFrames>33280</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>33280</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="17">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_FlageoMitKnopfT_pin</name>
+      <span stop="540840" start="441000"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13880832</offset>
+      <gain>5.258998</gain>
+      <fadeIn><fade>
+  <numFrames>33280</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>33280</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="18">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="707246" start="574120"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>528903</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="19">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="486334" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>42569</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="20">
+  <name>$Matcher[1]</name>
+  <span stop="721156" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="21">
+      <coll>
+  <audioTrack id="22">
+      <name>T4</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_Pedale_pout</name>
+      <span stop="455829" start="361297"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>7722752</offset>
+      <gain>1.255315</gain>
+      <fadeIn><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="23">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_Pedale_pin</name>
+      <span stop="386513" start="310865"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>7672320</offset>
+      <gain>4.22574</gain>
+      <fadeIn><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="24">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="721156" start="411729"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="25">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="352602" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>41737</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="26">
+  <name>$Matcher[2]</name>
+  <span stop="721156" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="27">
+      <coll>
+  <audioTrack id="28">
+      <name>T4</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_Pedale_pout</name>
+      <span stop="455829" start="361297"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>7722752</offset>
+      <gain>1.255315</gain>
+      <fadeIn><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="29">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_Pedale_pin</name>
+      <span stop="386513" start="310865"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>7672320</offset>
+      <gain>4.22574</gain>
+      <fadeIn><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>25216</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="30">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="721156" start="411729"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="31">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="352602" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>41737</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="32">
+  <name>$Matcher[3]</name>
+  <span stop="800004" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="33">
+      <coll>
+  <audioTrack id="34">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$Phn_071212_002828Cut_punch</name>
+      <span stop="534677" start="310865"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>11175424</offset>
+      <gain>1.0916055</gain>
+      <fadeIn><fade>
+  <numFrames>44928</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44928</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="35">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="800004" start="490577"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="36">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="352602" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>41737</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="37">
+  <name>$Matcher[4]</name>
+  <span stop="762116" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="38">
+      <coll>
+  <audioTrack id="39">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_FlageoMitKnopfT_punch</name>
+      <span stop="496789" start="310865"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="40">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="762116" start="452689"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="41">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="352602" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>41737</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="42">
+  <name>$Extractor</name>
+  <span stop="278215" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="43">
+      <coll>
+  <audioTrack id="44">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="278215" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="45">
+  <name>$Matcher[5]</name>
+  <span stop="730101" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="46">
+      <coll>
+  <audioTrack id="47">
+      <name>T4</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_LeereTastenVorneT_pout</name>
+      <span stop="462645" start="359409"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>24518912</offset>
+      <gain>1.3273473</gain>
+      <fadeIn><fade>
+  <numFrames>29568</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>29568</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="48">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_LeereTastenVorneT_pin</name>
+      <span stop="388977" start="300273"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>24459776</offset>
+      <gain>3.2950995</gain>
+      <fadeIn><fade>
+  <numFrames>29568</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>29568</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="49">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="730101" start="418545"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>350473</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="50">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="350473" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="51">
+  <name>$Matcher[6]</name>
+  <span stop="773621" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="52">
+      <coll>
+  <audioTrack id="53">
+      <name>T4</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_Pedale_pout</name>
+      <span stop="575954" start="381169"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>25760256</offset>
+      <gain>2.2395327</gain>
+      <fadeIn><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>83510</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="54">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_Pedale_pin</name>
+      <span stop="421617" start="300273"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>25679360</offset>
+      <gain>1.4238697</gain>
+      <fadeIn><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="55">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="773621" start="462065"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>350473</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="56">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="350473" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="57">
+  <name>$Matcher[7]</name>
+  <span stop="742389" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="58">
+      <coll>
+  <audioTrack id="59">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_Pedale_punch</name>
+      <span stop="474933" start="300273"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>16731136</offset>
+      <gain>4.843189</gain>
+      <fadeIn><fade>
+  <numFrames>32640</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>32640</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="60">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="675416" start="363860"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>350473</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="61">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="350473" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="62">
+  <name>$Extractor[1]</name>
+  <span stop="231813" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="63">
+      <coll>
+  <audioTrack id="64">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="231813" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="65">
+  <name>$Matcher[8]</name>
+  <span stop="701684" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="66">
+      <coll>
+  <audioTrack id="67">
+      <name>T4</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$MiscZeven_Bach_pout</name>
+      <span stop="446623" start="358491"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>211456</offset>
+      <gain>0.7465245</gain>
+      <fadeIn><fade>
+  <numFrames>22016</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>22016</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="68">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$MiscZeven_Bach_pin</name>
+      <span stop="380507" start="314459"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>167424</offset>
+      <gain>1.6580471</gain>
+      <fadeIn><fade>
+  <numFrames>22016</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>22016</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="69">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="701684" start="402523"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>362868</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="70">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="362868" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="71">
+  <name>$Matcher[9]</name>
+  <span stop="710388" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="72">
+      <coll>
+  <audioTrack id="73">
+      <name>T4</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_SaitenMitPapierT_pout</name>
+      <span stop="538501" start="362843"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8631040</offset>
+      <gain>5.8101687</gain>
+      <fadeIn><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="74">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_SaitenMitPapierT_pin</name>
+      <span stop="387035" start="314459"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8582656</offset>
+      <gain>0.5431355</gain>
+      <fadeIn><fade>
+  <numFrames>1012</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="75">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="710388" start="411227"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>362868</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="76">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="362868" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="77">
+  <name>$Matcher[10]</name>
+  <span stop="712436" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="78">
+      <coll>
+  <audioTrack id="79">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_SaitenMitPapierT_punch</name>
+      <span stop="517542" start="314459"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>7150592</offset>
+      <gain>1.1264569</gain>
+      <fadeIn><fade>
+  <numFrames>4193</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>24704</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="80">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="712436" start="413275"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>362868</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="81">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="362868" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline><timeline id="82">
+  <name>$Matcher[11]</name>
+  <span stop="729844" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="83">
+      <coll>
+  <audioTrack id="84">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>$_LeereTastenVorneT_punch</name>
+      <span stop="474783" start="314459"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.3674808</gain>
+      <fadeIn><fade>
+  <numFrames>29056</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>29056</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="85">
+      <name>T2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_post</name>
+      <span stop="729844" start="430683"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>362868</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="86">
+      <name>T1</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_pre</name>
+      <span stop="362868" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>44100</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline>
+</coll>
+    </timelines>
+</konturSession>

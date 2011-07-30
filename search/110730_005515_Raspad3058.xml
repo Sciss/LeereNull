@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>7/30/11 12:55:15 AM BST</date>
+  <offset>732990</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/Raspad_30'58_feat.xml</input>
+   <punchIn>
+   <start>300273</start>
+   <stop>350473</stop>
+   <weight>0.5</weight>
+</punchIn>
+   <punchOut>
+   <start>350473</start>
+   <stop>403092</stop>
+   <weight>0.5</weight>
+</punchOut>
+   <minPunch>44100</minPunch>
+   <maxPunch>176400</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>7.943282</maxBoost>
+   <numMatches>20</numMatches>
+   <numPerFile>3</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>0.7346193</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_FlageoMitKnopfT.aif</file>
+   <start>13646848</start>
+   <stop>13742080</stop>
+   <boostIn>4.9989166</boostIn>
+   <boostOut>2.3877037</boostOut>
+</match><match>
+   <sim>0.72341365</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/Phono_071212_002828Cut.aif</file>
+   <start>5948928</start>
+   <stop>5995520</stop>
+   <boostIn>0.50478524</boostIn>
+   <boostOut>0.42341918</boostOut>
+</match><match>
+   <sim>0.7224747</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/testCC1cHlb-1kCut.aif</file>
+   <start>3071488</start>
+   <stop>3204096</stop>
+   <boostIn>1.1019764</boostIn>
+   <boostOut>0.72075254</boostOut>
+</match><match>
+   <sim>0.72076935</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_FlageoMitKnopfT.aif</file>
+   <start>2983936</start>
+   <stop>3134464</stop>
+   <boostIn>4.2195716</boostIn>
+   <boostOut>4.4360676</boostOut>
+</match><match>
+   <sim>0.7136795</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_FlageoMitKnopfT.aif</file>
+   <start>8099328</start>
+   <stop>8163328</stop>
+   <boostIn>5.1215935</boostIn>
+   <boostOut>7.300521</boostOut>
+</match><match>
+   <sim>0.711571</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080227_WeimarRegenFensterAT.aif</file>
+   <start>17451520</start>
+   <stop>17539584</stop>
+   <boostIn>0.38910928</boostIn>
+   <boostOut>0.23300456</boostOut>
+</match><match>
+   <sim>0.70829314</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_LeereTastenVorneT.aif</file>
+   <start>24459776</start>
+   <stop>24578048</stop>
+   <boostIn>3.2950995</boostIn>
+   <boostOut>1.3273473</boostOut>
+</match><match>
+   <sim>0.70683175</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080227_WeimarRegenFensterAT.aif</file>
+   <start>25316864</start>
+   <stop>25457152</stop>
+   <boostIn>0.4160059</boostIn>
+   <boostOut>0.24987496</boostOut>
+</match><match>
+   <sim>0.7064163</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_Pedale.aif</file>
+   <start>25679360</start>
+   <stop>25841152</stop>
+   <boostIn>1.4238697</boostIn>
+   <boostOut>0.7082024</boostOut>
+</match><match>
+   <sim>0.7044558</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_Pedale.aif</file>
+   <start>16731136</start>
+   <stop>16861696</stop>
+   <boostIn>6.824911</boostIn>
+   <boostOut>3.436891</boostOut>
+</match><match>
+   <sim>0.7042354</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/MiscZeven_Fahrrad.aif</file>
+   <start>13711360</start>
+   <stop>13762048</stop>
+   <boostIn>6.656341</boostIn>
+   <boostOut>3.7769332</boostOut>
+</match><match>
+   <sim>0.7038669</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_SaitenMitPapierT.aif</file>
+   <start>7136256</start>
+   <stop>7237632</stop>
+   <boostIn>1.2028922</boostIn>
+   <boostOut>0.80849844</boostOut>
+</match><match>
+   <sim>0.70022273</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/London100304_205400OKM_WhiteChapelGalleryFd.aif</file>
+   <start>44308992</start>
+   <stop>44356608</stop>
+   <boostIn>4.5888405</boostIn>
+   <boostOut>2.8171387</boostOut>
+</match><match>
+   <sim>0.69892824</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080227_WeimarRegenFensterAT.aif</file>
+   <start>24611328</start>
+   <stop>24722432</stop>
+   <boostIn>0.35228565</boostIn>
+   <boostOut>0.21947339</boostOut>
+</match><match>
+   <sim>0.69815487</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_Pedale.aif</file>
+   <start>21668352</start>
+   <stop>21720576</stop>
+   <boostIn>1.0529155</boostIn>
+   <boostOut>0.66547865</boostOut>
+</match><match>
+   <sim>0.6975304</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080311_130102_ParaguanaMeer2AT.aif</file>
+   <start>12104192</start>
+   <stop>12268032</stop>
+   <boostIn>0.13091892</boostIn>
+   <boostOut>0.06207679</boostOut>
+</match><match>
+   <sim>0.69591886</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_SaitenMitPapierT.aif</file>
+   <start>3441664</start>
+   <stop>3575296</stop>
+   <boostIn>1.8552865</boostIn>
+   <boostOut>0.78998226</boostOut>
+</match><match>
+   <sim>0.69546664</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_FeuchtT1.aif</file>
+   <start>84499968</start>
+   <stop>84554240</stop>
+   <boostIn>3.962329</boostIn>
+   <boostOut>3.324197</boostOut>
+</match><match>
+   <sim>0.69506496</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/PhyletischesMuseumSkelette080929Fd.aif</file>
+   <start>4504064</start>
+   <stop>4663808</stop>
+   <boostIn>3.8258824</boostIn>
+   <boostOut>4.6911664</boostOut>
+</match><match>
+   <sim>0.6908985</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_LeereTastenVorneT.aif</file>
+   <start>23532032</start>
+   <stop>23604224</stop>
+   <boostIn>2.3192234</boostIn>
+   <boostOut>3.149205</boostOut>
+</match></matches>
+</search>

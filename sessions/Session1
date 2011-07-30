@@ -12,20 +12,25 @@
 </audioFiles>
     <diffusions>
   <coll>
-  
+  <diffusion class="matrix" id="1">
+          <name>1-&gt;2</name>
+          <numInputChannels>1</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 1.0</row></matrix>
+       </diffusion>
 </coll>
 </diffusions>
     <timelines>
        <coll>
-  <timeline id="1">
+  <timeline id="2">
   <name>Timeline</name>
   <span stop="13230000" start="0"></span>
   <rate>44100.0</rate>
-  <tracks id="2">
+  <tracks id="3">
       <coll>
-  <audioTrack id="3">
+  <audioTrack id="4">
       <name>T1</name>
-      
+      <diffusion idref="1"></diffusion>
       <trail>
   <stake>
       <name>Raspad_30'58.aif</name>
