@@ -31,10 +31,60 @@ package de.sciss.leerenull
 import eu.flierl.grouppanel.GroupPanel
 import de.sciss.strugatzki.{FeatureExtraction, FeatureCorrelation, Span => SSpan}
 import java.io.File
-import de.sciss.kontur.session.{BasicTimeline, Session, AudioRegion}
-import swing.{Swing, Dialog}
+import de.sciss.synth.io.{SampleFormat, AudioFileType, AudioFileSpec}
+import de.sciss.io.Span
+import de.sciss.kontur.session.{AudioTrack, Track, SessionUtil, BasicTimeline, Session, AudioRegion}
+import swing.{ProgressBar, Swing, Dialog}
+import javax.swing.{JOptionPane, SwingUtilities}
+import de.sciss.common.BasicWindowHandler
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
+   def bounceAndExtract( tracks: List[ Track ], span: Span )( implicit doc: Session, timeline: BasicTimeline ) {
+      val numChannels = tracks.collect({ case at: AudioTrack if( at.diffusion.isDefined ) => at.diffusion.get })
+         .foldLeft( 0 )( (maxi, diff) => math.max( maxi, diff.numOutputChannels ))
+
+      val id         = "bnc" + span.start
+      val f          = stampedFile( LeereNull.bounceFolder, id, ".aif" )
+      val spec       = AudioFileSpec( AudioFileType.AIFF, SampleFormat.Float, numChannels, timeline.rate )
+      var canCancel : { def cancel() : Unit } = null
+
+      val ggProgress = new ProgressBar
+      val ggCancel = button( "cancel" ) { b =>
+         canCancel.cancel()
+      }
+      val options = Array[ AnyRef]( ggCancel.peer )
+      val op = new JOptionPane( ggProgress.peer, JOptionPane.INFORMATION_MESSAGE, 0, null, options )
+
+      def fDispose() {
+         val w = SwingUtilities.getWindowAncestor( op )
+         if( w != null ) w.dispose()
+      }
+
+      var done = false
+      try {
+         canCancel  = SessionUtil.bounce( doc, timeline, tracks, span, f, spec, {
+            case "done" => { done = true; fDispose() }
+            case ("progress", i: Int) => ggProgress.value = i
+         })
+         BasicWindowHandler.showDialog( op, null, "Bounce" )
+         if( done ) {
+            // now extract
+            extract( f ) { (meta, success) =>
+               if( success ) Swing.onEDT {
+                  val afe  = provideAudioFile( f ) // let it create the ce
+                  val ar   = AudioRegion( span, plainName( f ), afe, 0L )
+                  makeSetup( ar, meta )
+               }
+            }
+         } else {
+            canCancel.cancel()
+         }
+      }
+      catch { case e: Exception =>
+         fDispose()
+      }
+   }
+
    def prepareCorrelator( ar: AudioRegion )( implicit doc: Session ) {
       val afPath  = ar.audioFile.path
       val afName  = afPath.getName

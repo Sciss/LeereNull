@@ -32,10 +32,10 @@ import de.sciss.kontur.{Main => Kontur}
 import de.sciss.gui.{MenuItem, MenuGroup}
 import java.util.Properties
 import java.io.{File, FileInputStream}
-import swing.Swing
+import swing.{Dialog, Swing}
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
-   lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder) = {
+   lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder) = {
       val file = new File( "leerenull-settings.xml" )
       val prop = new Properties()
       val is = new FileInputStream( file )
@@ -45,7 +45,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
       val database   = new File( base, "feature" )
       val extractor  = new File( base, "extract" )
       val search     = new File( base, "search" )
-      (base, database, extractor, search)
+      val bounce     = new File( base, "bounce" )
+      (base, database, extractor, search, bounce)
    }
 
    def main( args: Array[ String ]) {
@@ -63,9 +64,18 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
                implicit val tlv0 = tlv
                implicit val trl0 = trl
 
-               cutTheCheese( selectedAudioRegions, selSpan ) match {
+               val span = selSpan
+               cutTheCheese( selectedAudioRegions, span ) match {
                   case IndexedSeq( ar ) => CorrelatorSetup.prepareCorrelator( ar )
-                  case _ => message( "Must have exactly one audio region selected" )
+                  case _ =>
+                     val message = "<html>Multiple regions are selected. To proceed,<br>" +
+                        "an intermediate bounced representation is needed.<br>" +
+                        "<B>Go ahead and bounce?</B></html>"
+                     val res = Dialog.showConfirmation( null, message, "Extract", Dialog.Options.OkCancel, Dialog.Message.Question )
+                     if( res == Dialog.Result.Ok ) {
+                        val tracks = trl.toList.filter( _.selected ).map( _.track )
+                        CorrelatorSetup.bounceAndExtract( tracks, span )
+                     }
                }
             }
          }

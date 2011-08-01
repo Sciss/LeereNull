@@ -110,8 +110,9 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
 
    def saveSearch( search: Search ) {
       val id   = plainName( search.settings.metaInput ).filter( _.isLetterOrDigit ).take( 16 )
-      val df   = new SimpleDateFormat( "yyMMdd'_'HHmmss'_" + id + ".xml'", Locale.US )
-      val f    = new File( LeereNull.searchFolder, df.format( search.creation ))
+//      val df   = new SimpleDateFormat( "yyMMdd'_'HHmmss'_" + id + ".xml'", Locale.US )
+//      val f    = new File( LeereNull.searchFolder, df.format( search.creation ))
+      val f = stampedFile( LeereNull.searchFolder, id, ".xml", search.creation )
       XML.save( f.getAbsolutePath, search.toXML, "UTF-8", true, null )
    }
 
