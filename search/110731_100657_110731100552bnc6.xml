@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>7/31/11 10:06:57 AM BST</date>
+  <offset>658400</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/110731_100552_bnc658400_feat.xml</input>
+   <punchIn>
+   <start>118542</start>
+   <stop>164245</stop>
+   <weight>0.5</weight>
+</punchIn>
+   <punchOut>
+   <start>164245</start>
+   <stop>235299</stop>
+   <weight>0.5</weight>
+</punchOut>
+   <minPunch>44100</minPunch>
+   <maxPunch>198450</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>7.943282</maxBoost>
+   <numMatches>10</numMatches>
+   <numPerFile>2</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>NaN</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/MiscZeven_Bach.aif</file>
+   <start>231424</start>
+   <stop>275456</stop>
+   <boostIn>3.5187714</boostIn>
+   <boostOut>1.7857196</boostOut>
+</match><match>
+   <sim>0.7899531</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_FlageoMitKnopfT.aif</file>
+   <start>14438400</start>
+   <stop>14513152</stop>
+   <boostIn>5.790939</boostIn>
+   <boostOut>5.3012114</boostOut>
+</match><match>
+   <sim>0.78662395</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_FlageoMitKnopfT.aif</file>
+   <start>1328640</start>
+   <stop>1488896</stop>
+   <boostIn>5.7831755</boostIn>
+   <boostOut>6.929958</boostOut>
+</match><match>
+   <sim>0.7502368</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/testCC1cHlb-1kCut.aif</file>
+   <start>5159936</start>
+   <stop>5351424</stop>
+   <boostIn>1.4802746</boostIn>
+   <boostOut>0.93020344</boostOut>
+</match><match>
+   <sim>0.7499863</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/testCC1cHlb-1kCut.aif</file>
+   <start>10727936</start>
+   <stop>10880000</stop>
+   <boostIn>1.76084</boostIn>
+   <boostOut>1.0336348</boostOut>
+</match><match>
+   <sim>0.74635804</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_LeereTastenVorneT.aif</file>
+   <start>20435456</start>
+   <stop>20608512</stop>
+   <boostIn>4.37916</boostIn>
+   <boostOut>7.585166</boostOut>
+</match><match>
+   <sim>0.7458243</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_SaitenMitPapierT.aif</file>
+   <start>7147008</start>
+   <stop>7219200</stop>
+   <boostIn>1.9391112</boostIn>
+   <boostOut>1.6870354</boostOut>
+</match><match>
+   <sim>0.73997456</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_LeereTastenVorneT.aif</file>
+   <start>27450368</start>
+   <stop>27640320</stop>
+   <boostIn>2.806905</boostIn>
+   <boostOut>3.0186846</boostOut>
+</match><match>
+   <sim>0.73972714</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_SaitenMitPapierT.aif</file>
+   <start>6986752</start>
+   <stop>7112192</stop>
+   <boostIn>2.6756375</boostIn>
+   <boostOut>1.4074847</boostOut>
+</match><match>
+   <sim>0.7387592</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_Pedale.aif</file>
+   <start>25611264</start>
+   <stop>25762304</stop>
+   <boostIn>5.6601706</boostIn>
+   <boostOut>3.525247</boostOut>
+</match></matches>
+</search>

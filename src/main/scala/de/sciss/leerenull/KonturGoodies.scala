@@ -227,12 +227,12 @@ trait KonturGoodies {
                          })
                          ( implicit tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) {
       require( (pos >= tl.span.start) && (pos <= tl.span.stop), pos.toString )
-      require( delta >= 0, delta.toString )
+//      require( delta >= 0, delta.toString )
 
 //      val affectedSpan = new Span( pos, tl.span.stop )
 
       tl.joinEdit[ Unit ]( "Insert timeline span" ) { implicit ce: AbstractCompoundEdit =>
-         tl.editSpan( ce, tl.span.replaceStop( tl.span.stop + delta ))
+         if( delta > 0L ) tl.editSpan( ce, tl.span.replaceStop( tl.span.stop + delta ))
          val map = collectAudioRegions({ case (tr, ar) => (tr.trail, ar, decider( tr, ar ))}).groupBy( _._3 )
 
          map.getOrElse( InsertSpan.Move, IndexedSeq.empty ).groupBy( _._1 ).foreach {
