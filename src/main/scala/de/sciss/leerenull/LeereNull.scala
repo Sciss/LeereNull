@@ -88,8 +88,28 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
             }
          }
       })
+      val miSelStartToRegionEnd = new MenuItem( "leerenull.selstarttoregionend", action( "Set Selection Start to Selected Region's Stop" ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               implicit val tl0  = tl
+               implicit val tlv0 = tlv
+               implicit val trl0 = trl
+               val span = selSpan
+               selectedAudioRegions.headOption.foreach { ar =>
+                  val pos = ar.span.stop
+                  if( span.contains( pos )) {
+println( "span = " + span + " ; ar.span = " + ar.span )
+                     tlv.joinEdit( "Set span" ) { implicit ce =>
+                        tlv.editSelect( ce, span.replaceStart( pos ))
+                     }
+                  }
+               }
+            }
+         }
+      })
       mg.add( miExtractor )
       mg.add( miLoadSearch )
+      mg.add( miSelStartToRegionEnd )
       mf.add( mg )
    }
 }

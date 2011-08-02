@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<konturSession>
+    <audioFiles>
+  <coll>
+  <audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/audio_work/Raspad_30'58.aif</path>
+  <numFrames>662029</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile>
+</coll>
+</audioFiles>
+    <diffusions>
+  <coll>
+  
+</coll>
+</diffusions>
+    <timelines>
+       <coll>
+  <timeline id="1">
+  <name>Timeline</name>
+  <span stop="13230000" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="2">
+      <coll>
+  <audioTrack id="3">
+      <name>T1</name>
+      
+      <trail>
+  <stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="662029" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="4">
+      <name>Audio</name>
+      
+      <trail>
+  
+</trail>
+      </audioTrack><audioTrack id="5">
+      <name>Audio</name>
+      
+      <trail>
+  
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline>
+</coll>
+    </timelines>
+</konturSession>

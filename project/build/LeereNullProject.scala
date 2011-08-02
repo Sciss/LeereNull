@@ -15,7 +15,7 @@ class LeereNullProject( info: ProjectInfo ) extends DefaultProject( info ) {
    private val jarExt                 = ".jar"
    private val jarFilter: FileFilter  = "*" + jarExt
 
-   private def allJarsPath = (publicClasspath +++ buildLibraryJar +++ jarPath) ** jarFilter
+   private def allJarsPath = (publicClasspath +++ buildLibraryJar +++ buildCompilerJar +++ jarPath) ** jarFilter
 
    def packageAppTask = task {
       val jarsPath               = allJarsPath
