@@ -103,7 +103,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
             arsStereo :+= ar2
          }
 
-         def matchRegions( m: Match ) : IndexedSeq[ AudioRegion ] = {
+         def matchRegions( m: Match, pre: String ) : IndexedSeq[ AudioRegion ] = {
             val afe2    = provideAudioFile( m.file )
             val fOff3   = m.punch.start
             val start3  = start1 + pre1
@@ -115,7 +115,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
             val len3    = if( split3 ) (m.punch.length / 2) + fdt3 else math.min( maxLen3, m.punch.length + frames( afe2, 1 ))
             val stop3   = start3 + len3
             val fade3   = FadeSpec( fdt3 )
-            val arStart = AudioRegion( Span( start3, stop3 ), regionName( if( split3 ) "pin" else "punch", afe2 ),
+            val arStart = AudioRegion( Span( start3, stop3 ), regionName( if( split3 ) "pin" else "punch", afe2, pre = pre ),
                afe2, fOff3,
                gain = boost3, fadeIn = Some( fade3 ), fadeOut = Some( fade3 ))
 //println( "ar3 : " + ar3 + " ; OFFSET = " + fOff3 + " ; m.punch = " + m.punch )
@@ -128,7 +128,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                   val stop4   = start4 + len4
                   val fade4   = FadeSpec( fdt3 )
                   val boost4  = m.boostOut
-                  val arStop  = AudioRegion( Span( start4, stop4 ), regionName( "pout", afe2 ), afe2, fOff4,
+                  val arStop  = AudioRegion( Span( start4, stop4 ), regionName( "pout", afe2, pre = pre ), afe2, fOff4,
                      gain = boost4, fadeIn = Some( fade4 ), fadeOut = Some( fade4 ))
                   IndexedSeq( arStart, arStop )
 
@@ -138,11 +138,11 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
 
          search.master match {
             case Some( m2 ) =>
-               arsLeft  ++= matchRegions( m )
-               arsRight ++= matchRegions( m2 )
+               arsLeft  ++= matchRegions( m,  "$L_" )
+               arsRight ++= matchRegions( m2, "$R_" )
 
             case None =>
-               arsStereo ++= matchRegions( m )
+               arsStereo ++= matchRegions( m, "$_" )
          }
 
          implicit val tl = BasicTimeline.newEmpty( doc )
@@ -150,9 +150,9 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          tl.name  = uniqueName( tls, "$Matcher" )
          tls.editInsert( ce, tls.size, tl )
          var trackSet = IndexedSeq.empty[ AudioTrack ]
-         arsStereo.foreach { ar => trackSet :+= placeStereo( ar, "$", more = trackSet )}
-         arsLeft.foreach {   ar => trackSet :+= placeLeft(   ar, "$", more = trackSet )}
-         arsRight.foreach {  ar => trackSet :+= placeRight(  ar, "$", more = trackSet )}
+         arsStereo.foreach { ar => trackSet :+= placeStereo( ar, diffPrefix = "$", more = trackSet )}
+         arsLeft.foreach {   ar => trackSet :+= placeLeft(   ar, diffPrefix = "$", more = trackSet )}
+         arsRight.foreach {  ar => trackSet :+= placeRight(  ar, diffPrefix = "$", more = trackSet )}
          tl
       }
 
@@ -165,13 +165,17 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          nonSyntheticTimelines.headOption.foreach { tl0 =>
             // that is, collect all regions beginning with "$", remove this prefix,
             // apply offset, and paste them to the main timeline
-            val ars = collectAudioRegions {
+            val arsMap = collectAudioRegions({
                case (_, ar) if( ar.name.startsWith( "$" )) =>
-                  ar.copy( name = ar.name.substring( 1 ), span = ar.span.shift( incorpOff ))
-            }
-            if( ars.nonEmpty ) {
+                  val i = ar.name.indexOf( '_' )
+                  val diff  = ar.name.substring( 1, i )
+                  val arNew = ar.copy( name = ar.name.substring( i + 1 ), span = ar.span.shift( incorpOff ))
+                  (diff, arNew)
+            }).groupBy( _._1 ).mapValues( _.map( _._2 )) // hell, can this be more messy?
+            if( arsMap.nonEmpty ) {
                implicit val tl   = tl0
-               tl.joinEdit( "Incorporate" ) { implicit ce =>
+               tl.joinEdit[ Unit ]( "Incorporate" ) { ce0: AbstractCompoundEdit =>
+                  implicit val ce = ce0   // sucky IDEA
                   set.punchOut.foreach { po =>
                      val splitDelta    = m.punch.length - (po.span.start - set.punchIn.span.start)   // korrekt?
                      val splitThresh   = secsToFrames( 0.3 )
@@ -191,7 +195,11 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                      }
                   }
                   var trackSet = IndexedSeq.empty[ AudioTrack ]
-                  ars.foreach( r => trackSet :+= placeStereo( r, more = trackSet ))
+                  arsMap.foreach {
+                     case ("", ars)  => ars.foreach( r => trackSet :+= placeStereo( r, more = trackSet ))
+                     case ("L", ars) => ars.foreach( r => trackSet :+= placeLeft(   r, more = trackSet ))
+                     case ("R", ars) => ars.foreach( r => trackSet :+= placeRight(  r, more = trackSet ))
+                  }
                }
             }
          }

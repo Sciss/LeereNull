@@ -163,7 +163,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          tl.span  = ar0.span
          tl.name  = uniqueName( tls, "$Extractor" )
          tls.editInsert( ce, tls.size, tl )
-         placeStereo( ar0, "$" )
+         placeStereo( ar0, diffPrefix = "$" )
          tl
       }
 
