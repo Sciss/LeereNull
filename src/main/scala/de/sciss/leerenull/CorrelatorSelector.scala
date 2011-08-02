@@ -55,15 +55,21 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
          val offset     = {xml \ "offset"}.text.toLong
          val settings   = Settings.fromXML( xml \ "settings" )
          val matches: IndexedSeq[ Match ] = ((xml \ "matches") \ "match").map( Match.fromXML( _ ))( breakOut )
-         Search( date, offset, settings, matches )
+         val master     = {
+            val e = xml \ "master"
+            if( e.isEmpty ) None else Some( Match.fromXML( e ))
+         }
+         Search( date, offset, settings, matches, master )
       }
    }
-   final case class Search( creation: Date, offset: Long, settings: Settings, matches: IndexedSeq[ Match ]) {
+   final case class Search( creation: Date, offset: Long, settings: Settings, matches: IndexedSeq[ Match ],
+                            master: Option[ Match ]) {
       def toXML = <search>
   <date>{Search.dateFormat.format( creation )}</date>
   <offset>{offset}</offset>
   <settings>{settings.toXML.child}</settings>
   <matches>{matches.map(_.toXML)}</matches>
+ {master match { case Some( m ) => <master>{m.toXML.child}</master>; case None => Nil }}
 </search>
    }
 
@@ -71,7 +77,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
     * @param   offset   the offset of the search input with respect to its
     *                   appearance in the main timeline
     */
-   def beginSearch( offset: Long, settings: Settings )( implicit doc: Session ) {
+   def beginSearch( offset: Long, settings: Settings, master: Option[ Match ])( implicit doc: Session ) {
       if( verbose ) println( settings )
 
       val dlg  = progressDialog( "Correlating with database" )
@@ -92,7 +98,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
                   }
                }
             }
-            val search = Search( tim, offset, settings, res )
+            val search = Search( tim, offset, settings, res, master )
             if( autosave ) saveSearch( search )
             Swing.onEDT( makeSelector( search ))
 
@@ -127,9 +133,13 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
 //         tl
 //      }
 
+      def rowStrings( m: Match ) : Seq[ String ] = Seq(
+         percentString( m.sim ), plainName( m.file ), timeString( m.punch ),
+         decibelString( ampdb( m.boostIn )), decibelString( ampdb( m.boostOut ))
+      )
+
       val rowData: Array[ Array[ AnyRef ]] = search.matches.map( m => {
-         Array[ AnyRef ]( percentString( m.sim ), plainName( m.file ), timeString( m.punch ),
-            decibelString( ampdb( m.boostIn )), decibelString( ampdb( m.boostOut )))
+         Array[ AnyRef ]( rowStrings( m ): _* )
       })( breakOut )
       val columnNames   = Array[ AnyRef ]( "Sim", "File", "Span", "Gain In", "Gain Out" )
       val table         = new Table {
@@ -163,7 +173,11 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
          setLocationRelativeTo( null )
       }
 
-      val lbInfo = label( "Search conducted for " + plainName( search.settings.metaInput ) + " at " + search.creation )
+      val lbInfo = label( "<html>Search conducted for " + plainName( search.settings.metaInput ) + " at " +
+         search.creation + (search.master match {
+         case Some( m ) => rowStrings( m ).mkString( "<br>Master: ", " ", "" )
+         case None => ""
+      }) + "</html>" )
 
       val butSelectMatch = button( "Select match" ) { b =>
          table.selection.rows.headOption.foreach { row =>
@@ -179,7 +193,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
 
       val bp = new BorderPanel {
          add( panel, BorderPanel.Position.North )
-         add( scroll, BorderPanel.Position.South )
+         add( scroll, BorderPanel.Position.Center )
       }
 
       val cp = a.getContentPane

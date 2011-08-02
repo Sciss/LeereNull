@@ -37,7 +37,8 @@ import de.sciss.kontur.session.{AudioTrack, Track, SessionUtil, BasicTimeline, S
 import swing.{ProgressBar, Swing, Dialog}
 import javax.swing.{JOptionPane, SwingUtilities}
 import de.sciss.common.BasicWindowHandler
-import de.sciss.strugatzki.FeatureCorrelation.SettingsBuilder
+import FeatureCorrelation.{Match, Punch, SettingsBuilder => CSettingsBuilder}
+import FeatureExtraction.{SettingsBuilder => ESettingsBuilder}
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    def bounceAndExtract( tracks: List[ Track ], span: Span )( implicit doc: Session, timeline: BasicTimeline ) {
@@ -74,7 +75,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
                if( success ) Swing.onEDT {
                   val afe  = provideAudioFile( f ) // let it create the ce
                   val ar   = AudioRegion( span, plainName( f ), afe, 0L )
-                  makeSetup( ar, defaultSettings( meta ))
+                  makeSetup( ar, defaultSettings( meta ), None )
                }
             }
          } else {
@@ -93,9 +94,9 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val dbMeta  = dbMetaFile( plain )
       val exMeta  = extrMetaFile( plain )
       if( dbMeta.isFile ) {
-         makeSetup( ar, defaultSettings( dbMeta ))
+         makeSetup( ar, defaultSettings( dbMeta ), None )
       } else if( exMeta.isFile ) {
-         makeSetup( ar, defaultSettings( exMeta ))
+         makeSetup( ar, defaultSettings( exMeta ), None )
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
             "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
@@ -103,14 +104,14 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
             extract( afPath ) { (meta, success) =>
-               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings( meta )))
+               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings( meta ), None ))
             }
          }
       }
    }
 
    def extract( afPath: File )( whenDone: (File, Boolean) => Unit ) {
-      val settings            = new FeatureExtraction.SettingsBuilder
+      val settings            = new ESettingsBuilder
       settings.audioInput     = afPath
       val plain               = plainName( afPath )
       settings.featureOutput  = featureFile( plain )
@@ -134,13 +135,13 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       dlg.start( fe )
    }
 
-   def defaultSettings( meta: File ) : SettingsBuilder = {
+   def defaultSettings( meta: File ) : CSettingsBuilder = {
 
       // grmphfffffff
       def secsToFrames( d: Double ) = (d * 44100.0 + 0.5).toLong
 
-      val sb            = new FeatureCorrelation.SettingsBuilder
-      sb.punchIn        = FeatureCorrelation.Punch( SSpan( 0L, 0L ), 0.5f )    // our indicator that punchIn hasn't been set yet
+      val sb            = new CSettingsBuilder
+      sb.punchIn        = Punch( SSpan( 0L, 0L ), 0.5f )    // our indicator that punchIn hasn't been set yet
       sb.databaseFolder = LeereNull.databaseFolder
       sb.metaInput      = meta
 
@@ -154,7 +155,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       sb
    }
 
-   def makeSetup( ar: AudioRegion, settings: SettingsBuilder  )( implicit doc: Session ) {
+   def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, master: Option[ Match ])( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
       implicit val tl = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>
@@ -178,11 +179,11 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       implicit val tlv = tlf.timelineView
 
-      def punchInText( p: FeatureCorrelation.Punch ) = {
+      def punchInText( p: Punch ) = {
          if( p.span.isEmpty ) "<not set>" else timeString( p.span )
       }
 
-      def punchOutText( p: Option[ FeatureCorrelation.Punch ]) = {
+      def punchOutText( p: Option[ Punch ]) = {
          p match {
             case Some( po ) => timeString( po.span )
             case None       => "<not set>"
@@ -226,7 +227,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val butToOut = button( "→ Out" ) { b =>
          val sp = selSpan.shift( arDelta )
          if( !sp.isEmpty ) {
-            settings.punchOut  = Some( FeatureCorrelation.Punch(
+            settings.punchOut  = Some( Punch(
                sp, settings.punchOut.map( _.temporalWeight ).getOrElse( ggWeightOut.decimal.toFloat )))
             lbPunchOut.text    = punchOutText( settings.punchOut ) // timeString( sp )
          }
@@ -258,7 +259,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val butSearch = button( "Start searching..." ) { b =>
          if( !settings.punchIn.span.isEmpty && settings.punchOut.isDefined ) {
-            CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings )
+            CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings, master )
          }
       }
 

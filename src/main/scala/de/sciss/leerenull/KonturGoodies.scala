@@ -37,6 +37,7 @@ import de.sciss.strugatzki.{Span => SSpan}
 import java.io.File
 import de.sciss.kontur.gui.{TrailView, TimelineFrame, BasicTimelineView, TimelineView, BasicTrackList}
 import de.sciss.kontur.session.{Diffusion, ResizableStake, AudioFileElement, SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
+import annotation.switch
 
 trait KonturGoodies {
    def app: SApp = AbstractApplication.getApplication
@@ -201,21 +202,52 @@ trait KonturGoodies {
       }
    }
 
+   def placeWithDiff( d: MatrixDiffusion, ar: AudioRegion, prefix: String = "", more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty )
+                  ( implicit doc: Session, tl: BasicTimeline, ce: AbstractCompoundEdit ) : AudioTrack = {
+      val sq   = d.matrix.toSeq
+      val at   = place( ar, { at =>
+         at.diffusion match {
+            case Some( df: MatrixDiffusion ) if( df.matrix.toSeq == sq ) => true
+            case _ => false
+         }
+      }, more )
+      if( at.diffusion.isEmpty ) {
+         at.diffusion = Some( d )
+      }
+      at
+   }
+
    def placeStereo( ar: AudioRegion, prefix: String = "", more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty )
                   ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
-         val d    = provideDiffusion( ar.audioFile.numChannels, 2, prefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
-         val sq   = d.matrix.toSeq
-         val at   = place( ar, { at =>
-            at.diffusion match {
-               case Some( df: MatrixDiffusion ) if( df.matrix.toSeq == sq ) => true
-               case _ => false
-            }
-         }, more )
-         if( at.diffusion.isEmpty ) {
-            at.diffusion = Some( d )
+         val d = provideStereoDiffusion( ar.audioFile.numChannels, 2, prefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
+         placeWithDiff( d, ar, prefix, more )
+      }
+   }
+
+   def placeLeft( ar: AudioRegion, prefix: String = "", more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty )
+                ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
+      doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
+         val numCh = ar.audioFile.numChannels
+         val m = (numCh: @switch) match {
+            case 1 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 1f, 0f )))
+            case 2 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 1f, 0f ), Seq( 0f, 0f )))
          }
-         at
+         val d = provideDiffusion( m, prefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
+         placeWithDiff( d, ar, prefix, more )
+      }
+   }
+
+   def placeRight( ar: AudioRegion, prefix: String = "", more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty )
+                ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
+      doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
+         val numCh = ar.audioFile.numChannels
+         val m = (numCh: @switch) match {
+            case 1 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 0f, 1f )))
+            case 2 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 0f, 0f ), Seq( 0f, 1f )))
+         }
+         val d = provideDiffusion( m, prefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
+         placeWithDiff( d, ar, prefix, more )
       }
    }
 
@@ -287,15 +319,19 @@ trait KonturGoodies {
       }).headOption
    }
 
-   def provideDiffusion( inChans: Int, outChans: Int, prefix: String = "", more: IndexedSeq[ Diffusion ] = IndexedSeq.empty )
+   def provideStereoDiffusion( inChans: Int, outChans: Int, prefix: String = "", more: IndexedSeq[ Diffusion ] = IndexedSeq.empty )
                        ( implicit doc: Session, ceo: Maybe[ AbstractCompoundEdit ]) : MatrixDiffusion = {
-      val m = mixMatrix( inChans, outChans )
+      provideDiffusion( mixMatrix( inChans, outChans ), prefix, more )
+   }
+
+   def provideDiffusion( m: Matrix2D[ Float ], prefix: String = "", more: IndexedSeq[ Diffusion ] = IndexedSeq.empty )
+                       ( implicit doc: Session, ceo: Maybe[ AbstractCompoundEdit ]) : MatrixDiffusion = {
       findDiffusion( m, more ).getOrElse {
          val dfs = doc.diffusions
          dfs.joinEdit( "Add diffusion" ) { ce =>
             val d = new MatrixDiffusion( doc )
             d.matrix = m
-            d.name   = prefix + inChans + "->" + outChans
+            d.name   = prefix + m.numRows + "->" + m.numColumns
             dfs.editInsert( ce, dfs.size, d )
             d
          }
