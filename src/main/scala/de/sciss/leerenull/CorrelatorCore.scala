@@ -29,9 +29,9 @@
 package de.sciss.leerenull
 
 import de.sciss.leerenull.CorrelatorSelector.Search
-import de.sciss.strugatzki.{Span, FeatureExtraction}
 import eu.flierl.grouppanel.GroupPanel
 import de.sciss.kontur.session.{AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
+import de.sciss.strugatzki.{FeatureCorrelation, Span, FeatureExtraction}
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ) {
@@ -46,6 +46,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       var ar1Off     = -1L
       var incorpOff  = -1L
       var splitPos   = -1L
+      var afe1 : AudioFileElement = null
 
       val vowels  = "aeiouAEIOU".toSet
       def regionName( id: String, afe: AudioFileElement, pre: String = "$" ) = {
@@ -59,7 +60,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       }
 
       implicit val tl = tls.tryEdit( "Add Matcher Timeline" ) { implicit ce =>
-         val afe1    = provideAudioFile( meta.audioInput )
+         afe1    = provideAudioFile( meta.audioInput )
 
          val pi      = set.punchIn
          val fOff1   = math.max( 0L, pi.span.start - frames( afe1, 10 ))
@@ -177,9 +178,22 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       }
       val lbIncorporate = label( "Regions will be offset by " + timeString( incorpOff ))
 
+      val butSearchSplit = button( "New search for this punch length" ) { b =>
+         // Match( sim: Float, file: File, punch: Span, boostIn: Float, boostOut: Float )
+         // Search: offset
+         // Settings( databaseFolder: File, metaInput: File, punchIn: Punch, punchOut: Option[Punch],
+         //           minPunch: Long, maxPunch: Long, normalize: Boolean, maxBoost: Float, numMatches: Int,
+         //           numPerFile: Int, minSpacing: Long )
+         val arIn       = AudioRegion( Span( search.offset, search.offset + afe1.numFrames ), afe1.name, afe1, 0L )
+         val copy       = FeatureCorrelation.SettingsBuilder( search.settings )
+         copy.minPunch  = m.punch.length
+         copy.maxPunch  = m.punch.length
+         CorrelatorSetup.makeSetup( arIn, copy )
+      }
+
       val panel = new GroupPanel {
-         theHorizontalLayout is Sequential( butIncorporate, lbIncorporate )
-         theVerticalLayout is Parallel( Baseline )( butIncorporate, lbIncorporate )
+         theHorizontalLayout is Sequential( butIncorporate, lbIncorporate, butSearchSplit )
+         theVerticalLayout is Parallel( Baseline )( butIncorporate, lbIncorporate, butSearchSplit )
       }
 
 //      val bp = new BorderPanel {

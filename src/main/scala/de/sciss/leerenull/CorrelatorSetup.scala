@@ -37,6 +37,7 @@ import de.sciss.kontur.session.{AudioTrack, Track, SessionUtil, BasicTimeline, S
 import swing.{ProgressBar, Swing, Dialog}
 import javax.swing.{JOptionPane, SwingUtilities}
 import de.sciss.common.BasicWindowHandler
+import de.sciss.strugatzki.FeatureCorrelation.SettingsBuilder
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    def bounceAndExtract( tracks: List[ Track ], span: Span )( implicit doc: Session, timeline: BasicTimeline ) {
@@ -73,7 +74,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
                if( success ) Swing.onEDT {
                   val afe  = provideAudioFile( f ) // let it create the ce
                   val ar   = AudioRegion( span, plainName( f ), afe, 0L )
-                  makeSetup( ar, meta )
+                  makeSetup( ar, defaultSettings( meta ))
                }
             }
          } else {
@@ -92,9 +93,9 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val dbMeta  = dbMetaFile( plain )
       val exMeta  = extrMetaFile( plain )
       if( dbMeta.isFile ) {
-         makeSetup( ar, dbMeta )
+         makeSetup( ar, defaultSettings( dbMeta ))
       } else if( exMeta.isFile ) {
-         makeSetup( ar, exMeta )
+         makeSetup( ar, defaultSettings( exMeta ))
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
             "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
@@ -102,7 +103,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
             extract( afPath ) { (meta, success) =>
-               if( success ) Swing.onEDT( makeSetup( ar, meta ))
+               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings( meta )))
             }
          }
       }
@@ -133,7 +134,27 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       dlg.start( fe )
    }
 
-   def makeSetup( ar: AudioRegion, meta: File )( implicit doc: Session ) {
+   def defaultSettings( meta: File ) : SettingsBuilder = {
+
+      // grmphfffffff
+      def secsToFrames( d: Double ) = (d * 44100.0 + 0.5).toLong
+
+      val sb            = new FeatureCorrelation.SettingsBuilder
+      sb.punchIn        = FeatureCorrelation.Punch( SSpan( 0L, 0L ), 0.5f )    // our indicator that punchIn hasn't been set yet
+      sb.databaseFolder = LeereNull.databaseFolder
+      sb.metaInput      = meta
+
+      sb.numMatches     = 10
+      sb.numPerFile     = 2
+      sb.maxBoost       = dbamp( 18 ).toFloat
+
+      sb.minPunch       = secsToFrames( 2.0 )
+      sb.maxPunch       = secsToFrames( 3.0 )
+
+      sb
+   }
+
+   def makeSetup( ar: AudioRegion, settings: SettingsBuilder  )( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
       implicit val tl = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>
@@ -145,10 +166,10 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          tl
       }
 
-      val settings            = new FeatureCorrelation.SettingsBuilder
-      settings.punchIn        = FeatureCorrelation.Punch( SSpan( 0L, 0L ))    // our indicator that punchIn hasn't been set yet
-      settings.databaseFolder = LeereNull.databaseFolder
-      settings.metaInput      = meta
+//      val settings            = new FeatureCorrelation.SettingsBuilder
+//      settings.punchIn        = FeatureCorrelation.Punch( SSpan( 0L, 0L ))    // our indicator that punchIn hasn't been set yet
+//      settings.databaseFolder = LeereNull.databaseFolder
+//      settings.metaInput      = meta
 
       val tlf = TimelineFrame2 { f =>
 //         println( "Wooha" )
@@ -157,25 +178,36 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       implicit val tlv = tlf.timelineView
 
-      val lbPunchIn  = label( "<not set>", Some( 160 ))
-      val lbPunchOut = label( "<not set>", Some( 160 ))
-      val lbWeightIn = label( "50%", Some( 32 ))
-      val lbWeightOut= label( "50%", Some( 32 ))
-      val ggWeightIn = decimalSlider( "spect", "temp", initial = 0.5 ) { value =>
+      def punchInText( p: FeatureCorrelation.Punch ) = {
+         if( p.span.isEmpty ) "<not set>" else timeString( p.span )
+      }
+
+      def punchOutText( p: Option[ FeatureCorrelation.Punch ]) = {
+         p match {
+            case Some( po ) => timeString( po.span )
+            case None       => "<not set>"
+         }
+      }
+
+      val lbPunchIn  = label( punchInText(  settings.punchIn  ), Some( 160 ))
+      val lbPunchOut = label( punchOutText( settings.punchOut ), Some( 160 ))
+      val lbWeightIn = label( percentString( settings.punchIn.temporalWeight ), Some( 32 ))
+      val initOutWeight = settings.punchOut.map( _.temporalWeight ).getOrElse( 0.5f )
+      val lbWeightOut= label( percentString( initOutWeight ), Some( 32 ))
+      val ggWeightIn = decimalSlider( "spect", "temp", initial = settings.punchIn.temporalWeight ) { value =>
          settings.punchIn = settings.punchIn.copy( temporalWeight = value.toFloat )
          lbWeightIn.text = percentString( value )
       }
-      ggWeightIn.decimal = 0.5
-      val ggWeightOut = decimalSlider( "spect", "temp", initial = 0.5 ) { value =>
+//      ggWeightIn.decimal = settings.punchIn.temporalWeight
+      val ggWeightOut = decimalSlider( "spect", "temp", initial = initOutWeight ) { value =>
          settings.punchOut.foreach { po =>
             settings.punchOut = Some( po.copy( temporalWeight = value.toFloat ))
             lbWeightOut.text = percentString( value )
          }
       }
-      ggWeightOut.decimal = 0.5
-      settings.maxBoost = dbamp( 18 ).toFloat
-      val lbMaxBoost  = label( "18 dB", Some( 40 ))
-      val ggMaxBoost = decimalSlider( "Max boost:", "", initial = 18.0/32 ) { value =>
+//      ggWeightOut.decimal = initOutWeight
+      val lbMaxBoost  = label( decibelString( ampdb( settings.maxBoost )), Some( 40 ))
+      val ggMaxBoost = decimalSlider( "Max boost:", "", initial = ampdb( settings.maxBoost ) * 32 ) { value =>
          val db  = value * 32
          val amp = ampdb( db )
          settings.maxBoost = amp.toFloat
@@ -188,8 +220,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          val sp = selSpan.shift( arDelta )
          if( !sp.isEmpty ) {
             settings.punchIn  = settings.punchIn.copy( span = sp )
-            val str = timeString( sp )
-            lbPunchIn.text    = str
+            lbPunchIn.text    = punchInText( settings.punchIn ) // str
          }
       }
       val butToOut = button( "→ Out" ) { b =>
@@ -197,7 +228,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          if( !sp.isEmpty ) {
             settings.punchOut  = Some( FeatureCorrelation.Punch(
                sp, settings.punchOut.map( _.temporalWeight ).getOrElse( ggWeightOut.decimal.toFloat )))
-            lbPunchOut.text    = timeString( sp )
+            lbPunchOut.text    = punchOutText( settings.punchOut ) // timeString( sp )
          }
       }
       val butFromIn = button( "⬅ In" ) { b =>
@@ -211,21 +242,17 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          }
       }
 
-      settings.numMatches = 10
-      val ggNumMatches = integerField( "# Matches:", 1, 1000, initial = 10 ) { i =>
+      val ggNumMatches = integerField( "# Matches:", 1, 1000, initial = settings.numMatches ) { i =>
          settings.numMatches = i
       }
-      settings.numPerFile = 2
-      val ggNumPerFile = integerField( "# Per File:", 1, 1000, initial = 2 ) { i =>
+      val ggNumPerFile = integerField( "# Per File:", 1, 1000, initial = settings.numPerFile ) { i =>
          settings.numPerFile = i
       }
 
-      settings.minPunch = secsToFrames( 2.0 )
-      settings.maxPunch = secsToFrames( 3.0 )
-      val ggMinPunch = timeField( "Min dur:", 0.0, 60.0, 2.0 ) { secs =>
+      val ggMinPunch = timeField( "Min dur:", 0.0, 60.0, framesToSecs( settings.minPunch )) { secs =>
          settings.minPunch = secsToFrames( secs )
       }
-      val ggMaxPunch = timeField( "Max dur:", 0.0, 60.0, 3.0 ) { secs =>
+      val ggMaxPunch = timeField( "Max dur:", 0.0, 60.0, framesToSecs( settings.maxPunch )) { secs =>
          settings.maxPunch = secsToFrames( secs )
       }
 
