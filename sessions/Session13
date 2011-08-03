@@ -1,0 +1,2032 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<konturSession>
+    <audioFiles>
+  <coll>
+  <audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/audio_work/Raspad_30'58.aif</path>
+  <numFrames>662029</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="1">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_FlageoMitKnopfT.aif</path>
+  <numFrames>36741354</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="2">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_Pedale.aif</path>
+  <numFrames>32574643</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="3">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_LeereTastenVorneT.aif</path>
+  <numFrames>28557126</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="4">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/_SaitenMitPapierT.aif</path>
+  <numFrames>16867937</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="5">
+  <path>/Users/hhrutz/Desktop/from_mnemo/LangeNachtKling-L.aif</path>
+  <numFrames>21983862</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="6">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/Phono_071212_002828Cut.aif</path>
+  <numFrames>18546688</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="7">
+  <path>/Users/hhrutz/Desktop/from_mnemo/BiblioStempeln.aif</path>
+  <numFrames>6803263</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>96000.0</sampleRate>
+</audioFile><audioFile id="8">
+  <path>/Users/hhrutz/Desktop/from_mnemo/ZahnradGong1.aif</path>
+  <numFrames>16004933</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="9">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Raubtier-13.aif</path>
+  <numFrames>4964458</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="10">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Kukident2000Stereo.aif</path>
+  <numFrames>50140178</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="11">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Bnce8 SelfMod_R.aif</path>
+  <numFrames>15908864</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="12">
+  <path>/Users/hhrutz/Desktop/from_mnemo/SC_060524_184358-R.aif</path>
+  <numFrames>11829248</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="13">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Int'Backological.aif</path>
+  <numFrames>19822576</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="14">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Ens_KlakKlak_Sciss.aif</path>
+  <numFrames>49657359</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="15">
+  <path>/Users/hhrutz/Desktop/from_mnemo/ObjetTrouve.aif</path>
+  <numFrames>6528499</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="16">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/110802_202138_bnc4843731.aif</path>
+  <numFrames>352838</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="17">
+  <path>/Users/hhrutz/Desktop/from_mnemo/CFt'0FTVcdCFt'1FTFTB2Amp.aif</path>
+  <numFrames>8388608</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="18">
+  <path>/Users/hhrutz/Desktop/from_mnemo/SiedenderTee.aif</path>
+  <numFrames>3412462</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="19">
+  <path>/Users/hhrutz/Desktop/from_mnemo/MystiqueAtmo8.aif</path>
+  <numFrames>10127435</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="20">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Alphaville.aif</path>
+  <numFrames>89649710</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="21">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Tst1'HlbRsmp.aif</path>
+  <numFrames>15663770</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="22">
+  <path>/Users/hhrutz/Desktop/from_mnemo/MarkusLisaBruit5AM.aif</path>
+  <numFrames>14183380</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="23">
+  <path>/Users/hhrutz/Desktop/from_mnemo/KinderDesSturms.aif</path>
+  <numFrames>64248204</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="24">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/02StC'Rsmp2Op02StC'bRsmp.aif</path>
+  <numFrames>56305722</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="25">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Trk5FTHlbWrpAmpCtRsmpCtRsmp.aif</path>
+  <numFrames>4361039</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="26">
+  <path>/Users/hhrutz/Desktop/from_mnemo/BlchM'BlssiConBlchR'mp2EQ3.aif</path>
+  <numFrames>20614815</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="27">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Amplifikation090914_SchoepsMK2S_EdHPF.aif</path>
+  <numFrames>40735833</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="28">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Ghrn12T1SnaRMoszs.aif</path>
+  <numFrames>13246820</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="29">
+  <path>/Users/hhrutz/Desktop/from_mnemo/DL4FeedbackExcess</path>
+  <numFrames>15902896</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="30">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Bnc3HlbRsmpOpBnc3H'kRsmpRsmp.aif</path>
+  <numFrames>51124098</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="31">
+  <path>/Users/hhrutz/Desktop/from_mnemo/B15h54m24s29sep2008.wav</path>
+  <numFrames>81522456</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>96000.0</sampleRate>
+</audioFile><audioFile id="32">
+  <path>/Users/hhrutz/Desktop/from_mnemo/inject01286.aif</path>
+  <numFrames>4150204</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="33">
+  <path>/Users/hhrutz/Desktop/from_mnemo/ExNihilo.aif</path>
+  <numFrames>28400400</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="34">
+  <path>/Users/hhrutz/Desktop/from_mnemo/NuklearerWinter#01.aif</path>
+  <numFrames>3087000</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="35">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Bnd'mp2-12.aif</path>
+  <numFrames>2910464</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="36">
+  <path>/Users/hhrutz/Desktop/SP_demo/tapes/ApflssnConAtemAmp.aif</path>
+  <numFrames>23053207</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="37">
+  <path>/Users/hhrutz/Desktop/from_mnemo/wald3-1lcCtRsmpBlossAmp.aif</path>
+  <numFrames>10584000</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="38">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Ttl09RsmpHlbOpTtl10RsmpHlbAmpRsmpExcBloss.aif</path>
+  <numFrames>2746385</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="39">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Ttl35RsmpHlbOpTtl36RsmpHlbAmp.aif</path>
+  <numFrames>3860056</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="40">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Scs'HlbOpPrb'HlbAmpSel.aif</path>
+  <numFrames>8122996</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="41">
+  <path>/Users/hhrutz/Desktop/from_mnemo/AbsenceLoop.aif</path>
+  <numFrames>6703200</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="42">
+  <path>/Users/hhrutz/Desktop/from_mnemo/Schlie5AMBarRadio.aif</path>
+  <numFrames>52822926</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile>
+</coll>
+</audioFiles>
+    <diffusions>
+  <coll>
+  <diffusion class="matrix" id="43">
+          <name>1-&gt;2</name>
+          <numInputChannels>1</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 1.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="44">
+          <name>$2-&gt;2</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 0.0</row><row>0.0 1.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="45">
+          <name>$2-&gt;2</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>0.0 0.0</row><row>0.0 1.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="46">
+          <name>$2-&gt;2</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 0.0</row><row>0.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="47">
+          <name>$1-&gt;2</name>
+          <numInputChannels>1</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 0.0</row></matrix>
+       </diffusion>
+</coll>
+</diffusions>
+    <timelines>
+       <coll>
+  <timeline id="48">
+  <name>Timeline</name>
+  <span stop="15465479" start="0"></span>
+  <rate>44100.0</rate>
+  <tracks id="49">
+      <coll>
+  <audioTrack id="50">
+      <name>T1</name>
+      <diffusion idref="43"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="662029" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1113600" start="1006552"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1386447" start="1289665"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1006254" start="868412"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>350473</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="756820" start="662167"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="3359932" start="3310419"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>303089</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>14665</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1618156" start="1486534"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="2650948" start="2601435"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>303089</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>14665</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1926227" start="1794605"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1833</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="2386924" start="2273611"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1833</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="2388485" start="2388070"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>483809</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="2084242" start="1987460"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>14665</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="2496987" start="2449718"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>13444</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1714938" start="1618156"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>255820</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>14665</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="3097469" start="3097054"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>483809</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="1286724" start="1161959"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>362868</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>SC_060524_184358-R_pin</name>
+      <span stop="3818989" start="3590893"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>11494912</offset>
+      <gain>0.686837</gain>
+      <fadeIn><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="6106076" start="5992763"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1833</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>SC_060524_184358-R_pin</name>
+      <span stop="5423724" start="5195628"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>11494912</offset>
+      <gain>0.686837</gain>
+      <fadeIn><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="4502902" start="4502487"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>483809</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="4501341" start="4388028"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1833</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="3095908" start="2982595"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>352602</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1833</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Raspad_30'58.aif</name>
+      <span stop="4853398" start="4803885"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>303089</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>14665</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="51">
+      <name>T2</name>
+      <diffusion idref="44"></diffusion>
+      <trail>
+  <stake>
+      <name>_Pedale_pout</name>
+      <span stop="982301" start="787516"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>25760256</offset>
+      <gain>2.2395327</gain>
+      <fadeIn><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>83510</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_pout</name>
+      <span stop="1289233" start="1113575"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>8631040</offset>
+      <gain>5.8101687</gain>
+      <fadeIn><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_pin</name>
+      <span stop="1137767" start="1065191"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>8582656</offset>
+      <gain>0.5431355</gain>
+      <fadeIn><fade>
+  <numFrames>1012</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>24192</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_Pedale_pin</name>
+      <span stop="827964" start="706620"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>25679360</offset>
+      <gain>1.4238697</gain>
+      <fadeIn><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>40448</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="3026695" start="2960326"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13935875</offset>
+      <gain>5.1006107</gain>
+      
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="1792756" start="1673201"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="1838705" start="1772336"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13935875</offset>
+      <gain>5.1006107</gain>
+      
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="1530634" start="1344710"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="2271762" start="2217579"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13881692</offset>
+      <gain>5.1006107</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="2107877" start="2042505"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="2317711" start="2251342"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13935875</offset>
+      <gain>5.1006107</gain>
+      
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="2674583" start="2609211"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="5623701" start="5569518"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13881692</offset>
+      <gain>5.1006107</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="6036863" start="5970494"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13935875</offset>
+      <gain>5.1006107</gain>
+      
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="4432128" start="4365759"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13935875</offset>
+      <gain>5.1006107</gain>
+      
+      <fadeOut><fade>
+  <numFrames>35456</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="4018966" start="3964783"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13881692</offset>
+      <gain>5.1006107</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="4877033" start="4811661"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="2980746" start="2926563"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13881692</offset>
+      <gain>5.1006107</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_punch</name>
+      <span stop="3383567" start="3318195"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13816320</offset>
+      <gain>5.1006107</gain>
+      <fadeIn><fade>
+  <numFrames>4737</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="52">
+      <name>T3</name>
+      <diffusion idref="43"></diffusion>
+      <trail>
+  <stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="6059372" start="5970494"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24545558</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="5623701" start="5569518"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24491375</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="4454637" start="4365759"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24545558</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="4018966" start="3964783"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24491375</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="2980746" start="2926563"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24491375</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="2674583" start="2657320"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="3049204" start="2960326"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24545558</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="3383567" start="3366304"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="4877033" start="4859770"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="2271762" start="2217579"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24491375</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="1792756" start="1721310"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="2340220" start="2251342"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24545558</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="1861214" start="1772336"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24545558</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="2107877" start="2090614"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_LeereTastenVorneT.aif</name>
+      <span stop="1553143" start="1392819"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>24474112</offset>
+      <gain>2.2387211</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="53">
+      <name>T4</name>
+      <diffusion idref="43"></diffusion>
+      <trail>
+  <stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="4409859" start="4374668"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19464909</offset>
+      <gain>0.5935569</gain>
+      
+      <fadeOut><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="4879357" start="4847308"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19392512</offset>
+      <gain>0.29748312</gain>
+      <fadeIn><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="5020920" start="4976862"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19424561</offset>
+      <gain>0.29748312</gain>
+      
+      <fadeOut><fade>
+  <numFrames>57515</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="6014594" start="5979403"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19464909</offset>
+      <gain>0.5935569</gain>
+      
+      <fadeOut><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="3527454" start="3483396"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19424561</offset>
+      <gain>0.29748312</gain>
+      
+      <fadeOut><fade>
+  <numFrames>57515</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="3385891" start="3353842"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19392512</offset>
+      <gain>0.29748312</gain>
+      <fadeIn><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="2154259" start="2078152"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19392512</offset>
+      <gain>0.29748312</gain>
+      <fadeIn><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>57515</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="2295442" start="2260251"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19464909</offset>
+      <gain>0.5935569</gain>
+      
+      <fadeOut><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="2720965" start="2644858"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19392512</offset>
+      <gain>0.29748312</gain>
+      <fadeIn><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>57515</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="3004426" start="2969235"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19464909</offset>
+      <gain>0.5935569</gain>
+      
+      <fadeOut><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LangeNachtKling-L_punch</name>
+      <span stop="1816436" start="1708848"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>19392512</offset>
+      <gain>0.5935569</gain>
+      <fadeIn><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>15872</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="54">
+      <name>T5</name>
+      <diffusion idref="44"></diffusion>
+      <trail>
+  <stake>
+      <name>_SaitenMitPapierT_punch</name>
+      <span stop="6106076" start="6088792"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>7223658</offset>
+      <gain>2.3810143</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_punch</name>
+      <span stop="4501341" start="4484057"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>7223658</offset>
+      <gain>2.3810143</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Raubtier-13.aif</name>
+      <span stop="3404415" start="3247154"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>558681</offset>
+      <gain>3.9810717</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_punch</name>
+      <span stop="2484546" start="2369640"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>7223658</offset>
+      <gain>2.3810143</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>36736</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_punch</name>
+      <span stop="2022824" start="1831780"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>7147520</offset>
+      <gain>2.3810143</gain>
+      <fadeIn><fade>
+  <numFrames>36736</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>36736</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_punch</name>
+      <span stop="3193530" start="3078624"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>7223658</offset>
+      <gain>2.3810143</gain>
+      <fadeIn><fade>
+  <numFrames>0</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>36736</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Raubtier-13.aif</name>
+      <span stop="4897881" start="4740620"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>558681</offset>
+      <gain>3.9810717</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_punch</name>
+      <span stop="4555637" start="4501341"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>7240942</offset>
+      <gain>2.3810143</gain>
+      
+      
+      
+   </stake><stake>
+      <name>_SaitenMitPapierT_punch</name>
+      <span stop="4686996" start="4643670"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>7295238</offset>
+      <gain>2.3810143</gain>
+      
+      <fadeOut><fade>
+  <numFrames>36736</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="55">
+      <name>T7</name>
+      <diffusion idref="44"></diffusion>
+      <trail>
+  <stake>
+      <name>Phn_071212_002828Cut_punch</name>
+      <span stop="4501341" start="4365759"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8039424</offset>
+      <gain>2.189374</gain>
+      <fadeIn><fade>
+  <numFrames>31616</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pin</name>
+      <span stop="4699437" start="4645382"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33445888</offset>
+      <gain>7.8865023</gain>
+      <fadeIn><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Phn_071212_002828Cut_punch</name>
+      <span stop="4555637" start="4501341"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8174999</offset>
+      <gain>2.189374</gain>
+      
+      
+      
+   </stake><stake>
+      <name>Phn_071212_002828Cut_punch</name>
+      <span stop="4686995" start="4643670"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8229295</offset>
+      <gain>2.189374</gain>
+      
+      <fadeOut><fade>
+  <numFrames>31616</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Phn_071212_002828Cut_punch</name>
+      <span stop="6106076" start="5970494"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8039424</offset>
+      <gain>2.189374</gain>
+      <fadeIn><fade>
+  <numFrames>31616</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Phn_071212_002828Cut_punch</name>
+      <span stop="3193529" start="2960333"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8039424</offset>
+      <gain>2.189374</gain>
+      <fadeIn><fade>
+  <numFrames>31616</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>31616</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pin</name>
+      <span stop="3205971" start="3151916"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33445888</offset>
+      <gain>7.8865023</gain>
+      <fadeIn><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>Phn_071212_002828Cut_punch</name>
+      <span stop="2484538" start="2251342"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>8039424</offset>
+      <gain>2.189374</gain>
+      <fadeIn><fade>
+  <numFrames>31616</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>31616</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pin</name>
+      <span stop="2496987" start="2442932"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33445888</offset>
+      <gain>7.8865023</gain>
+      <fadeIn><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pin</name>
+      <span stop="2727476" start="2601435"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33499943</offset>
+      <gain>7.8865023</gain>
+      
+      <fadeOut><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pin</name>
+      <span stop="2160770" start="1980674"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33445888</offset>
+      <gain>7.8865023</gain>
+      <fadeIn><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="56">
+      <name>T6</name>
+      <diffusion idref="44"></diffusion>
+      <trail>
+  <stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="5616841" start="5562316"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33675591</offset>
+      <gain>3.1952024</gain>
+      
+      <fadeOut><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="5228445" start="5163465"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33610611</offset>
+      <gain>3.1952024</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="3518592" start="3473933"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33565952</offset>
+      <gain>3.1952024</gain>
+      <fadeIn><fade>
+  <numFrames>21453</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>20004</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="3623710" start="3558730"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33610611</offset>
+      <gain>3.1952024</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="4012106" start="3957581"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33675591</offset>
+      <gain>3.1952024</gain>
+      
+      <fadeOut><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BiblioStempeln_pin</name>
+      <span stop="4555637" start="4501348"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2072593</offset>
+      <gain>1.8923986</gain>
+      
+      
+      
+   </stake><stake>
+      <name>BiblioStempeln_pin</name>
+      <span stop="4744756" start="4643670"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2126882</offset>
+      <gain>1.8923986</gain>
+      
+      <fadeOut><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="5012058" start="4967399"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33565952</offset>
+      <gain>3.1952024</gain>
+      <fadeIn><fade>
+  <numFrames>21453</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>20004</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>BiblioStempeln_pin</name>
+      <span stop="3251290" start="3095915"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2072593</offset>
+      <gain>1.8923986</gain>
+      
+      <fadeOut><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="2777083" start="2667444"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33565952</offset>
+      <gain>3.1952024</gain>
+      <fadeIn><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="2973886" start="2919361"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33675591</offset>
+      <gain>3.1952024</gain>
+      
+      <fadeOut><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BiblioStempeln_pin</name>
+      <span stop="2542299" start="2364891"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2050560</offset>
+      <gain>1.8923986</gain>
+      <fadeIn><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_FlageoMitKnopfT_pout</name>
+      <span stop="2264902" start="2100738"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>33565952</offset>
+      <gain>3.1952024</gain>
+      <fadeIn><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>60032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="57">
+      <name>T8</name>
+      <diffusion idref="44"></diffusion>
+      <trail>
+  <stake>
+      <name>Ens_KlakKlak_Sciss_punch</name>
+      <span stop="6071619" start="5452031"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>48070144</offset>
+      <gain>0.9757625</gain>
+      <fadeIn><fade>
+  <numFrames>143872</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>143872</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Ens_KlakKlak_Sciss_punch</name>
+      <span stop="4466884" start="3847296"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>48070144</offset>
+      <gain>0.9757625</gain>
+      <fadeIn><fade>
+  <numFrames>143872</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>143872</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BiblioStempeln_pout</name>
+      <span stop="3503924" start="3483396"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2362576</offset>
+      <gain>5.0581145</gain>
+      
+      <fadeOut><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BiblioStempeln_pout</name>
+      <span stop="3385891" start="3192147"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2168832</offset>
+      <gain>5.0581145</gain>
+      <fadeIn><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>BiblioStempeln_pout</name>
+      <span stop="2697435" start="2483163"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2168832</offset>
+      <gain>5.0581145</gain>
+      <fadeIn><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BiblioStempeln_pout</name>
+      <span stop="4997390" start="4976862"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2362576</offset>
+      <gain>5.0581145</gain>
+      
+      <fadeOut><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BiblioStempeln_pout</name>
+      <span stop="4879357" start="4685613"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2168832</offset>
+      <gain>5.0581145</gain>
+      <fadeIn><fade>
+  <numFrames>59136</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="58">
+      <name>T9</name>
+      <diffusion idref="44"></diffusion>
+      <trail>
+  <stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="5308163" start="5260629"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2306034</offset>
+      <gain>2.6104715</gain>
+      
+      
+      
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="5606416" start="5499756"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2353568</offset>
+      <gain>2.6104715</gain>
+      
+      <fadeOut><fade>
+  <numFrames>64128</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="4001681" start="3895021"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2353568</offset>
+      <gain>2.6104715</gain>
+      
+      <fadeOut><fade>
+  <numFrames>64128</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="3703428" start="3655894"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2306034</offset>
+      <gain>2.6104715</gain>
+      
+      
+      
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="3518592" start="3480546"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2170824</offset>
+      <gain>2.6104715</gain>
+      
+      <fadeOut><fade>
+  <numFrames>38046</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="3482789" start="3310477"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2098260</offset>
+      <gain>2.6104715</gain>
+      <fadeIn><fade>
+  <numFrames>64128</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="2963461" start="2601493"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2098260</offset>
+      <gain>2.6104715</gain>
+      <fadeIn><fade>
+  <numFrames>64128</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>64128</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="5012058" start="4974012"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2170824</offset>
+      <gain>2.6104715</gain>
+      
+      <fadeOut><fade>
+  <numFrames>38046</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ZahnradGong1_punch</name>
+      <span stop="4976255" start="4803943"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>2098260</offset>
+      <gain>2.6104715</gain>
+      <fadeIn><fade>
+  <numFrames>64128</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="59">
+      <name>T10</name>
+      <diffusion idref="44"></diffusion>
+      <trail>
+  <stake>
+      <name>Kukident2000Stereo_punch</name>
+      <span stop="3527496" start="3229956"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>1216000</offset>
+      <gain>1.949738</gain>
+      <fadeIn><fade>
+  <numFrames>63360</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>63360</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Kukident2000Stereo_punch</name>
+      <span stop="5020962" start="4723422"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>1216000</offset>
+      <gain>1.949738</gain>
+      <fadeIn><fade>
+  <numFrames>63360</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>63360</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="60">
+      <name>T11</name>
+      <diffusion idref="43"></diffusion>
+      <trail>
+  <stake>
+      <name>Bnce8 SelfMod_R_punch</name>
+      <span stop="5307836" start="5121891"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>1352171</offset>
+      <gain>1.7640041</gain>
+      
+      <fadeOut><fade>
+  <numFrames>77184</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Bnce8 SelfMod_R_punch</name>
+      <span stop="5010622" start="4843731"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>1185280</offset>
+      <gain>1.7640041</gain>
+      <fadeIn><fade>
+  <numFrames>77184</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>SC_060524_184358-R_pout</name>
+      <span stop="5529964" start="5347692"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>11646976</offset>
+      <gain>6.944574</gain>
+      <fadeIn><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>SC_060524_184358-R_pout</name>
+      <span stop="3925229" start="3742957"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>11646976</offset>
+      <gain>6.944574</gain>
+      <fadeIn><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>76032</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Bnce8 SelfMod_R_punch</name>
+      <span stop="3703101" start="3350265"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>1185280</offset>
+      <gain>1.7640041</gain>
+      <fadeIn><fade>
+  <numFrames>77184</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>77184</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="61">
+      <name>T-L1</name>
+      <diffusion idref="46"></diffusion>
+      <trail>
+  <stake>
+      <name>Schlie5AMBarRadio_pin</name>
+      <span stop="5067502" start="4851310"></span>
+      <audioFile idref="42"></audioFile>
+      <offset>37340672</offset>
+      <gain>2.550401</gain>
+      <fadeIn><fade>
+  <numFrames>144128</numFrames>
+  <shape curve="5.8" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>72064</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Schlie5AMBarRadio_pout</name>
+      <span stop="5188120" start="4995438"></span>
+      <audioFile idref="42"></audioFile>
+      <offset>37484800</offset>
+      <gain>0.26454106</gain>
+      <fadeIn><fade>
+  <numFrames>72064</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>13271</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Int'Backological_punch</name>
+      <span stop="4758195" start="4425558"></span>
+      <audioFile idref="13"></audioFile>
+      <offset>7521280</offset>
+      <gain>5.2374854</gain>
+      <fadeIn><fade>
+  <numFrames>10513</numFrames>
+  <shape curve="8.900001" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>124954</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="62">
+      <name>T-R1</name>
+      <diffusion idref="45"></diffusion>
+      <trail>
+  <stake>
+      <name>Bnc3HlbRsmppBnc3H'kR_pin</name>
+      <span stop="5067502" start="4851310"></span>
+      <audioFile idref="30"></audioFile>
+      <offset>34683392</offset>
+      <gain>14.660298</gain>
+      <fadeIn><fade>
+  <numFrames>72064</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>72064</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Bnc3HlbRsmppBnc3H'kR_pout</name>
+      <span stop="5183666" start="4995438"></span>
+      <audioFile idref="30"></audioFile>
+      <offset>34827520</offset>
+      <gain>6.9794745</gain>
+      <fadeIn><fade>
+  <numFrames>72064</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>16834</numFrames>
+  <shape curve="-2.9" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ObjetTrouve_punch</name>
+      <span stop="4687770" start="4425558"></span>
+      <audioFile idref="15"></audioFile>
+      <offset>6091264</offset>
+      <gain>0.9084617</gain>
+      <fadeIn><fade>
+  <numFrames>54528</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>54528</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline>
+</coll>
+    </timelines>
+</konturSession>

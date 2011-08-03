@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>8/2/11 8:23:36 PM BST</date>
+  <offset>4843731</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/110802_202138_bnc4843731_feat.xml</input>
+   <punchIn>
+   <start>7579</start>
+   <stop>122791</stop>
+   <weight>0.54</weight>
+</punchIn>
+   <punchOut>
+   <start>184566</start>
+   <stop>327064</stop>
+   <weight>0.46</weight>
+</punchOut>
+   <minPunch>132300</minPunch>
+   <maxPunch>396900</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>7.943282</maxBoost>
+   <numMatches>50</numMatches>
+   <numPerFile>2</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>NaN</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/CFt'0FTVcdCFt'1FTFTB2Amp.aif</file>
+   <start>0</start>
+   <stop>132096</stop>
+   <boostIn>1.6362184</boostIn>
+   <boostOut>3.4219475</boostOut>
+</match></matches>
+ 
+</search>
