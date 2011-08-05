@@ -61,7 +61,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
             if( e.isEmpty ) None else Some( Match.fromXML( e ))
          }
          val metas      = {
-            val res: IndexedSeq[ ESettings ] = (xml \ "metas").map( ESettings.fromXML( _ ))( breakOut )
+            val res: IndexedSeq[ ESettings ] = (xml \ "metas" \ "feature").map( ESettings.fromXML( _ ))( breakOut )
             if( res.nonEmpty ) res else {
                IndexedSeq( ESettings.fromXMLFile( settings.metaInput ))
             }

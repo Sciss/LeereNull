@@ -30,12 +30,12 @@ package de.sciss.leerenull
 
 import de.sciss.leerenull.CorrelatorSelector.Search
 import eu.flierl.grouppanel.GroupPanel
-import de.sciss.kontur.session.{AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
 import de.sciss.strugatzki.{FeatureCorrelation, Span, FeatureExtraction}
 import FeatureCorrelation.{Match, Settings => CSettings, SettingsBuilder => CSettingsBuilder}
 import FeatureExtraction.{Settings => ESettings}
 import swing.Component
 import de.sciss.app.AbstractCompoundEdit
+import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ) {
@@ -161,6 +161,33 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
 //         f.dispose()
       }
 
+      val butFlipChans = button( "Flip left/right" ) { b =>
+         val (trL, trR) = tl.tracks.toList.collect({
+            case at: AudioTrack if( at.name.contains( "-L" ) || at.name.contains( "-R" )) => (at, at.diffusion)
+         }).collect({
+            case (at, Some( m: MatrixDiffusion )) => (at, m)
+         }).partition( _._1.name.contains( "-L" ))
+
+         if( trL.nonEmpty || trR.nonEmpty ) tls.joinEdit( "Flip chans" ) { implicit ce =>
+            def gugu( at: AudioTrack, m: MatrixDiffusion, in: String, out: String, diff: Int => MatrixDiffusion ) {
+               val nameOld = at.name
+               val i       = nameOld.indexOf( "-" + in )
+               val nameNew = nameOld.substring( 0, i + 1 ) + out + nameOld.substring( i + 2 )
+               at.editRename( ce, nameNew )
+               val d       = diff( m.numInputChannels )
+               at.editDiffusion( ce, Some( d ))
+            }
+
+            trL.foreach {
+               case (at, m) => gugu( at, m, "L", "R", provideRightDiffusion( diffPrefix = "$" ) _ )
+            }
+            trR.foreach {
+               case (at, m) => gugu( at, m, "R", "L", provideLeftDiffusion( diffPrefix = "$" ) _ )
+            }
+         }
+      }
+      butFlipChans.visible = search.master.isDefined
+
       val butIncorporate = button( "Incorporate" ) { b =>
          nonSyntheticTimelines.headOption.foreach { tl0 =>
             // that is, collect all regions beginning with "$", remove this prefix,
@@ -223,8 +250,8 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       butSearchSplit.visible = search.master.isEmpty
 
       val panel = new GroupPanel {
-         theHorizontalLayout is Sequential( butIncorporate, lbIncorporate, butSearchSplit )
-         theVerticalLayout is Parallel( Baseline )( butIncorporate, lbIncorporate, butSearchSplit )
+         theHorizontalLayout is Sequential( butIncorporate, lbIncorporate, butSearchSplit, butFlipChans )
+         theVerticalLayout is Parallel( Baseline )( butIncorporate, lbIncorporate, butSearchSplit, butFlipChans )
       }
 
 //      val bp = new BorderPanel {

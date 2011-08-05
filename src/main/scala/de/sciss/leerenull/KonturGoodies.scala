@@ -234,13 +234,18 @@ trait KonturGoodies {
                 ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
          val numCh = ar.audioFile.numChannels
-         val m = (numCh: @switch) match {
-            case 1 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 1f, 0f )))
-            case 2 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 1f, 0f ), Seq( 0f, 0f )))
-         }
-         val d = provideDiffusion( m, diffPrefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
+         val d = provideLeftDiffusion( diffPrefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))( numCh )
          placeWithDiff( d, ar, more, trackPrefix )
       }
+   }
+
+   def provideLeftDiffusion( diffPrefix: String = "", more: IndexedSeq[ Diffusion ] = IndexedSeq.empty )( numInChans: Int )
+                           ( implicit doc: Session, ce: Maybe[ AbstractCompoundEdit ]) : MatrixDiffusion = {
+      val m = (numInChans: @switch) match {
+         case 1 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 1f, 0f )))
+         case 2 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 1f, 0f ), Seq( 0f, 0f )))
+      }
+      provideDiffusion( m, diffPrefix, more )
    }
 
    def placeRight( ar: AudioRegion, more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty,
@@ -248,13 +253,18 @@ trait KonturGoodies {
                 ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
          val numCh = ar.audioFile.numChannels
-         val m = (numCh: @switch) match {
-            case 1 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 0f, 1f )))
-            case 2 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 0f, 0f ), Seq( 0f, 1f )))
-         }
-         val d = provideDiffusion( m, diffPrefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
+         val d = provideRightDiffusion( diffPrefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))( numCh )
          placeWithDiff( d, ar, more, trackPrefix )
       }
+   }
+
+   def provideRightDiffusion( diffPrefix: String = "", more: IndexedSeq[ Diffusion ] = IndexedSeq.empty )( numInChans: Int )
+                           ( implicit doc: Session, ce: Maybe[ AbstractCompoundEdit ]) : MatrixDiffusion = {
+      val m = (numInChans: @switch) match {
+         case 1 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 0f, 1f )))
+         case 2 => Matrix2D.fromSeq[ Float ]( Seq( Seq( 0f, 0f ), Seq( 0f, 1f )))
+      }
+      provideDiffusion( m, diffPrefix, more )
    }
 
    def insertTimelineSpan( pos: Long, delta: Long )

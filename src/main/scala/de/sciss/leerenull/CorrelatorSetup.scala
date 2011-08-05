@@ -288,13 +288,25 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val searchInputMeta = settings.metaInput
 
-      val ggMeta = combo( metas )() { meta =>
+      def metaLabel( m: ESettings ) = {
+         val n    = plainName( m.featureOutput )
+         if( n.endsWith( "-F" )) "First" else if( n.endsWith( "-L" )) "Last" else "Mix"
+      }
+
+      val metas0 = metas.sortBy( metaLabel( _ ) match {
+         case "Mix"   => 0
+         case "First" => 1
+         case "Last"  => 2
+      })
+
+      val ggMeta = combo( metas0 )() { meta =>
          val n    = plainName( meta.featureOutput )
-         val str  = if( n.endsWith( "-F" )) "First" else if( n.endsWith( "-L" )) "Last" else "Mix"
+         val str  = metaLabel( meta )
          if( searchInputMeta != null && plainName( searchInputMeta ) == n ) {
             "<html><i>" + str + "</i></html>"
          } else str
       }
+//      if( metas0.size > 1 && metas0.head.metaOutput == Option( searchInputMeta )) ggMeta.selection.index = 1
 
       val butSearch = button( "Start searching..." ) { b =>
          if( !settings.punchIn.span.isEmpty && settings.punchOut.isDefined ) {
