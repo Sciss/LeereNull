@@ -98,7 +98,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
                selectedAudioRegions.headOption.foreach { ar =>
                   val pos = ar.span.stop
                   if( span.contains( pos )) {
-println( "span = " + span + " ; ar.span = " + ar.span )
+//println( "span = " + span + " ; ar.span = " + ar.span )
                      tlv.joinEdit( "Set span" ) { implicit ce =>
                         tlv.editSelect( ce, span.replaceStart( pos ))
                      }

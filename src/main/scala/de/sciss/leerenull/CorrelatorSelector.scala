@@ -28,7 +28,6 @@
 
 package de.sciss.leerenull
 
-import de.sciss.strugatzki.FeatureCorrelation
 import de.sciss.kontur.session.Session
 import collection.breakOut
 import javax.swing.table.DefaultTableModel
@@ -36,12 +35,14 @@ import swing.{BorderPanel, ScrollPane, Table, Swing}
 import eu.flierl.grouppanel.GroupPanel
 import java.util.{Locale, Date}
 import java.io.File
-import FeatureCorrelation._
 import xml.{NodeSeq, XML}
-import java.text.{DateFormat, SimpleDateFormat}
+import java.text.DateFormat
 import de.sciss.app.AbstractWindow
 import de.sciss.kontur.gui.AppWindow
 import java.awt.BorderLayout
+import de.sciss.strugatzki.{FeatureExtraction, FeatureCorrelation}
+import FeatureCorrelation.{Settings => CSettings, Match}
+import FeatureExtraction.{Settings => ESettings}
 
 object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies {
    var verbose    = false
@@ -53,22 +54,29 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
       def fromXML( xml: NodeSeq ) : Search = {
          val date       = dateFormat.parse( (xml \ "date").text )
          val offset     = {xml \ "offset"}.text.toLong
-         val settings   = Settings.fromXML( xml \ "settings" )
+         val settings   = CSettings.fromXML( xml \ "settings" )
          val matches: IndexedSeq[ Match ] = ((xml \ "matches") \ "match").map( Match.fromXML( _ ))( breakOut )
          val master     = {
             val e = xml \ "master"
             if( e.isEmpty ) None else Some( Match.fromXML( e ))
          }
-         Search( date, offset, settings, matches, master )
+         val metas      = {
+            val res: IndexedSeq[ ESettings ] = (xml \ "metas").map( ESettings.fromXML( _ ))( breakOut )
+            if( res.nonEmpty ) res else {
+               IndexedSeq( ESettings.fromXMLFile( settings.metaInput ))
+            }
+         }
+         Search( date, offset, settings, matches, metas, master )
       }
    }
-   final case class Search( creation: Date, offset: Long, settings: Settings, matches: IndexedSeq[ Match ],
-                            master: Option[ Match ]) {
+   final case class Search( creation: Date, offset: Long, settings: CSettings, matches: IndexedSeq[ Match ],
+                            metas: IndexedSeq[ ESettings ], master: Option[ Match ]) {
       def toXML = <search>
   <date>{Search.dateFormat.format( creation )}</date>
   <offset>{offset}</offset>
   <settings>{settings.toXML.child}</settings>
   <matches>{matches.map(_.toXML)}</matches>
+  <metas>{metas.map( _.toXML )}</metas>
  {master match { case Some( m ) => <master>{m.toXML.child}</master>; case None => Nil }}
 </search>
    }
@@ -77,13 +85,14 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
     * @param   offset   the offset of the search input with respect to its
     *                   appearance in the main timeline
     */
-   def beginSearch( offset: Long, settings: Settings, master: Option[ Match ])( implicit doc: Session ) {
+   def beginSearch( offset: Long, settings: CSettings, metas: IndexedSeq[ ESettings ], master: Option[ Match ])
+                  ( implicit doc: Session ) {
       if( verbose ) println( settings )
 
       val dlg  = progressDialog( "Correlating with database" )
       val tim  = new Date()
       val fc   = FeatureCorrelation( settings ) {
-         case Success( res ) =>
+         case FeatureCorrelation.Success( res ) =>
             dlg.stop()
             if( verbose ) {
                println( "Done. " + res.size + " entries:" )
@@ -98,18 +107,18 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
                   }
                }
             }
-            val search = Search( tim, offset, settings, res, master )
+            val search = Search( tim, offset, settings, res, metas, master )
             if( autosave ) saveSearch( search )
             Swing.onEDT( makeSelector( search ))
 
-         case Failure( e ) =>
+         case FeatureCorrelation.Failure( e ) =>
             dlg.stop()
             e.printStackTrace()
 
-         case Aborted =>
+         case FeatureCorrelation.Aborted =>
             dlg.stop()
 
-         case Progress( i ) => dlg.progress = i
+         case FeatureCorrelation.Progress( i ) => dlg.progress = i
       }
       dlg.start( fc )
    }

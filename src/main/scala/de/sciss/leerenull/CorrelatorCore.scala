@@ -218,7 +218,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          val copy       = CSettingsBuilder( search.settings )
          copy.minPunch  = m.punch.length
          copy.maxPunch  = m.punch.length
-         CorrelatorSetup.makeSetup( arIn, copy, Some( m ))
+         CorrelatorSetup.makeSetup( arIn, copy, search.metas, Some( m ))
       }
       butSearchSplit.visible = search.master.isEmpty
 

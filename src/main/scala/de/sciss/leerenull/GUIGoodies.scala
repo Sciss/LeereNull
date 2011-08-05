@@ -37,10 +37,10 @@ import de.sciss.gui.{NumberEvent, NumberListener, NumberField, TimeFormat}
 import java.awt.event.{InputEvent, KeyEvent, ActionEvent}
 import de.sciss.strugatzki.Span
 import javax.swing.event.{AncestorEvent, AncestorListener}
-import swing.{Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
 import javax.swing.{SwingUtilities, JPanel, JOptionPane, WindowConstants, JDialog, JComponent, AbstractAction, Action => JAction, KeyStroke}
 import java.awt.{FileDialog, Component => AWTComponent, Frame => AWTFrame}
 import java.io.{FilenameFilter, File}
+import swing.{ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -69,6 +69,16 @@ trait GUIGoodies {
 //      }
       action = Action( label ) { act( but )}
    }
+
+   def combo[ A, B : ListView.Renderer ]( items: Seq[ A ])
+                                        ( act:  A => Unit = (_: A) => () )
+                                        ( rend: A => B = (a: A) => a.toString ) =
+      new ComboBox[ A ]( items ) {
+         peer.putClientProperty( "JComponent.sizeVariant", "small" )
+         peer.putClientProperty( "JComboBox.isSquare", java.lang.Boolean.TRUE )
+         focusable   = false
+         renderer    = ListView.Renderer( rend )
+      }
 
    def openFileDialog( title: String = "Open File", init: File = new File( "" ),
                        filter: File => Boolean = _ => true, parent: AWTComponent = null ) : Option[ File ] = {

@@ -33,17 +33,24 @@ import de.sciss.strugatzki.{FeatureExtraction, FeatureCorrelation, Span => SSpan
 import java.io.File
 import de.sciss.synth.io.{SampleFormat, AudioFileType, AudioFileSpec}
 import de.sciss.io.Span
-import de.sciss.kontur.session.{AudioTrack, Track, SessionUtil, BasicTimeline, Session, AudioRegion}
-import swing.{ProgressBar, Swing, Dialog}
 import javax.swing.{JOptionPane, SwingUtilities}
 import de.sciss.common.BasicWindowHandler
 import FeatureCorrelation.{Match, Punch, SettingsBuilder => CSettingsBuilder}
-import FeatureExtraction.{SettingsBuilder => ESettingsBuilder}
+import FeatureExtraction.{ChannelsBehavior, Settings => ESettings, SettingsBuilder => ESettingsBuilder}
+import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, Track, SessionUtil, BasicTimeline, Session, AudioRegion}
+import collection.breakOut
+import swing.{ProgressBar, Swing, Dialog}
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    def bounceAndExtract( tracks: List[ Track ], span: Span )( implicit doc: Session, timeline: BasicTimeline ) {
-      val numChannels = tracks.collect({ case at: AudioTrack if( at.diffusion.isDefined ) => at.diffusion.get })
-         .foldLeft( 0 )( (maxi, diff) => math.max( maxi, diff.numOutputChannels ))
+      val atracks = tracks.collect({ case at: AudioTrack if( at.diffusion.isDefined ) => at })
+      val numChannels = atracks.map( _.diffusion.get ).foldLeft( 0 )( (maxi, diff) => math.max( maxi, diff.numOutputChannels ))
+      val diffs: Set[ MatrixDiffusion ] = atracks.map( _.diffusion )
+         .collect({ case Some( m: MatrixDiffusion ) if( m.numOutputChannels > 1 ) => m })( breakOut )
+//      val hasFirst   = diffs.find( m => m.matrix.toSeq.find( p => p.head > 0f && p.last == 0f ).isDefined ).isDefined
+//      val hasLast    = diffs.find( m => m.matrix.toSeq.find( p => p.head == 0f && p.last > 1f ).isDefined ).isDefined
+      val hasFirst   = diffs.exists( _.matrix.toSeq.forall( _.last == 0f ))
+      val hasLast    = diffs.exists( _.matrix.toSeq.forall( _.head == 0f ))
 
       val id         = "bnc" + span.start
       val f          = stampedFile( LeereNull.bounceFolder, id, ".aif" )
@@ -71,13 +78,31 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          BasicWindowHandler.showDialog( op, null, "Bounce" )
          if( done ) {
             // now extract
-            extract( f ) { (meta, success) =>
-               if( success ) Swing.onEDT {
-                  val afe  = provideAudioFile( f ) // let it create the ce
-                  val ar   = AudioRegion( span, plainName( f ), afe, 0L )
-                  makeSetup( ar, defaultSettings( meta ), None )
+            var plainsBehaviors: List[ (String, ChannelsBehavior) ] = (plainName( f ), ChannelsBehavior.Mix) :: Nil
+            if( hasFirst ) plainsBehaviors ::= (plainName( f ) + "-F", ChannelsBehavior.First)
+            if( hasLast )  plainsBehaviors ::= (plainName( f ) + "-L", ChannelsBehavior.Last)
+            var metas = IndexedSeq.empty[ ESettings ]
+
+            def iter( b: List[ (String, ChannelsBehavior) ]) {
+               b match {
+                  case (plain, behavior) :: tail =>
+                     extract( f, plain, behavior ) { (meta, success) =>
+                        if( success ) {
+                           metas :+= meta
+                           iter( tail )
+                        }
+                     }
+                  case _ =>
+                     Swing.onEDT {
+                        val afe     = provideAudioFile( f ) // let it create the ce
+                        val ar      = AudioRegion( span, plainName( f ), afe, 0L )
+//                        val metas   = metaFiles.map( ESettings.fromXMLFile( _ ))
+                        makeSetup( ar, defaultSettings, metas, None )
+                     }
                }
             }
+            iter( plainsBehaviors )
+
          } else {
             canCancel.cancel()
          }
@@ -88,54 +113,57 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    }
 
    def prepareCorrelator( ar: AudioRegion )( implicit doc: Session ) {
-      val afPath  = ar.audioFile.path
-      val afName  = afPath.getName
-      val plain   = plainName( afPath )
-      val dbMeta  = dbMetaFile( plain )
-      val exMeta  = extrMetaFile( plain )
-      if( dbMeta.isFile ) {
-         makeSetup( ar, defaultSettings( dbMeta ), None )
-      } else if( exMeta.isFile ) {
-         makeSetup( ar, defaultSettings( exMeta ), None )
+      val afPath     = ar.audioFile.path
+      val afName     = afPath.getName
+      val plain      = plainName( afPath )
+      val metaFiles  = IndexedSeq( plain, plain + "-F", plain + "-L" ).map( n => (dbMetaFile( n ), extrMetaFile( n)))
+         .collect {
+            case (f, _) if( f.isFile ) => f
+            case (_, f) if( f.isFile ) => f
+         }
+      val metas      = metaFiles.map( ESettings.fromXMLFile( _ ))
+      if( metas.nonEmpty ) {
+         makeSetup( ar, defaultSettings, metas, None )
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
             "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
             "<B>Extract features now?</B></html>"
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
-            extract( afPath ) { (meta, success) =>
-               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings( meta ), None ))
+            extract( afPath, plainName( afPath ), ChannelsBehavior.Mix /* XXX */) { (meta, success) =>
+               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings, IndexedSeq( meta ), None ))
             }
          }
       }
    }
 
-   def extract( afPath: File )( whenDone: (File, Boolean) => Unit ) {
-      val settings            = new ESettingsBuilder
-      settings.audioInput     = afPath
-      val plain               = plainName( afPath )
-      settings.featureOutput  = featureFile( plain )
-      val meta                = extrMetaFile( plain )
-      settings.metaOutput     = Some( meta )
+   def extract( afPath: File, plain: String, behavior: ChannelsBehavior )( whenDone: (ESettings, Boolean) => Unit ) {
+      val sb               = new ESettingsBuilder
+      sb.audioInput        = afPath
+      sb.featureOutput     = featureFile( plain )
+      val meta             = extrMetaFile( plain )
+      sb.metaOutput        = Some( meta )
+      sb.channelsBehavior  = behavior
+      val settings         = sb.build
 
       val dlg = progressDialog( "Extracting features..." )
       val fe = FeatureExtraction( settings ) {
          case FeatureExtraction.Success =>
             dlg.stop()
-            whenDone( meta, true )
+            whenDone( settings, true )
          case FeatureExtraction.Failure( e ) =>
             dlg.stop()
             e.printStackTrace()
-            whenDone( meta, false )
+            whenDone( settings, false )
          case FeatureExtraction.Aborted =>
             dlg.stop()
-            whenDone( meta, false )
+            whenDone( settings, false )
          case FeatureExtraction.Progress( i ) => dlg.progress = i
       }
       dlg.start( fe )
    }
 
-   def defaultSettings( meta: File ) : CSettingsBuilder = {
+   def defaultSettings : CSettingsBuilder = {
 
       // grmphfffffff
       def secsToFrames( d: Double ) = (d * 44100.0 + 0.5).toLong
@@ -143,7 +171,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val sb            = new CSettingsBuilder
       sb.punchIn        = Punch( SSpan( 0L, 0L ), 0.5f )    // our indicator that punchIn hasn't been set yet
       sb.databaseFolder = LeereNull.databaseFolder
-      sb.metaInput      = meta
+//      sb.metaInput      = meta
 
       sb.numMatches     = 10
       sb.numPerFile     = 2
@@ -155,7 +183,8 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       sb
    }
 
-   def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, master: Option[ Match ])( implicit doc: Session ) {
+   def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, metas: IndexedSeq[ ESettings ], master: Option[ Match ])
+                ( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
       implicit val tl = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>
@@ -257,9 +286,24 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          settings.maxPunch = secsToFrames( secs )
       }
 
+      val searchInputMeta = settings.metaInput
+
+      val ggMeta = combo( metas )() { meta =>
+         val n    = plainName( meta.featureOutput )
+         val str  = if( n.endsWith( "-F" )) "First" else if( n.endsWith( "-L" )) "Last" else "Mix"
+         if( searchInputMeta != null && plainName( searchInputMeta ) == n ) {
+            "<html><i>" + str + "</i></html>"
+         } else str
+      }
+
       val butSearch = button( "Start searching..." ) { b =>
          if( !settings.punchIn.span.isEmpty && settings.punchOut.isDefined ) {
-            CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings, master )
+            ggMeta.selection.item.metaOutput match {
+               case Some( meta ) =>
+                  settings.metaInput = meta
+                  CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings, metas, master )
+               case None => message( "? No meta file available ?" )
+            }
          }
       }
 
@@ -275,11 +319,11 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             Parallel( lbWeightIn, lbWeightOut ),
             Parallel( ggMinPunch, ggMaxPunch ),
             Parallel( ggNumMatches, ggNumPerFile ),
-            Parallel( Sequential( ggMaxBoost, lbMaxBoost ), butSearch )
+            Parallel( Sequential( ggMaxBoost, lbMaxBoost ), Sequential( ggMeta, butSearch ))
          )
          theVerticalLayout is Sequential(
             Parallel( Baseline )( butToIn,  butFromIn,  lbPunchIn,  ggWeightIn,  lbWeightIn,  ggMinPunch, ggNumMatches, ggMaxBoost, lbMaxBoost ),
-            Parallel( Baseline )( butToOut, butFromOut, lbPunchOut, ggWeightOut, lbWeightOut, ggMaxPunch, ggNumPerFile, butSearch )
+            Parallel( Baseline )( butToOut, butFromOut, lbPunchOut, ggWeightOut, lbWeightOut, ggMaxPunch, ggNumPerFile, ggMeta, butSearch )
          )
       }
 
