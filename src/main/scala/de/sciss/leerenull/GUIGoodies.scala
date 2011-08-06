@@ -152,7 +152,7 @@ trait GUIGoodies {
          val p = process; if( p != null ) p.abort()
       }
 
-      new JOptionPane()
+//      new JOptionPane()
       val op = new JOptionPane( progressPane.peer, JOptionPane.INFORMATION_MESSAGE,
          JOptionPane.OK_CANCEL_OPTION, null, Array[ AnyRef ]( optionAbort.peer ), null )
       dlg = op.createDialog( null, title )

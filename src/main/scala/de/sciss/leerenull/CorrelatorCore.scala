@@ -31,14 +31,37 @@ package de.sciss.leerenull
 import de.sciss.leerenull.CorrelatorSelector.Search
 import eu.flierl.grouppanel.GroupPanel
 import de.sciss.strugatzki.{FeatureCorrelation, Span, FeatureExtraction}
-import FeatureCorrelation.{Match, Settings => CSettings, SettingsBuilder => CSettingsBuilder}
+import FeatureCorrelation.{Match, SettingsBuilder => CSettingsBuilder}
 import FeatureExtraction.{Settings => ESettings}
-import swing.Component
 import de.sciss.app.AbstractCompoundEdit
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
+import java.io.File
+import swing.Swing
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ) {
+      search.shift match {
+         case Some( freq ) =>
+            val m       = search.matches( idx )
+            val fShift  = new File( LeereNull.bounceFolder, plainName( m.file ) + "_Hlb" + freq.toInt + ".aif" )
+
+            def shiftDone() {
+               val m2      = m.copy( file = fShift )
+               val s2      = search.copy( matches = search.matches.patch( idx, IndexedSeq( m2 ), 1 ))
+               makeMatchEditor2( s2, idx )
+            }
+
+            if( fShift.isFile ) shiftDone() else {
+               FScape.shift( m.file, fShift, -freq ) { b =>
+                  if( b ) shiftDone()
+               }
+            }
+
+         case None => makeMatchEditor2( search, idx )
+      }
+   }
+
+   private def makeMatchEditor2( search: Search, idx: Int )( implicit doc: Session ) {
       val tls     = doc.timelines
       val set     = search.settings
 

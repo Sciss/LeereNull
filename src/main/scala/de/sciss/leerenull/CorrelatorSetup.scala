@@ -40,6 +40,7 @@ import FeatureExtraction.{ChannelsBehavior, Settings => ESettings, SettingsBuild
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, Track, SessionUtil, BasicTimeline, Session, AudioRegion}
 import collection.breakOut
 import swing.{ProgressBar, Swing, Dialog}
+import xml.XML
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    def bounceAndExtract( tracks: List[ Track ], span: Span, shift: Option[ Double ])( implicit doc: Session, timeline: BasicTimeline ) {
@@ -53,7 +54,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val hasLast    = diffs.exists( _.matrix.toSeq.forall( _.head == 0f ))
 
       val id         = "bnc" + span.start
-      val f          = stampedFile( LeereNull.bounceFolder, id, ".aif" )
+      val fNorm      = stampedFile( LeereNull.bounceFolder, id, ".aif" )
       val spec       = AudioFileSpec( AudioFileType.AIFF, SampleFormat.Float, numChannels, timeline.rate )
       var canCancel : { def cancel() : Unit } = null
 
@@ -71,7 +72,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       var done = false
       try {
-         canCancel  = SessionUtil.bounce( doc, timeline, tracks, span, f, spec, {
+         canCancel  = SessionUtil.bounce( doc, timeline, tracks, span, fNorm, spec, {
             case "done" => { done = true; fDispose() }
             case ("progress", i: Int) => ggProgress.value = i
          })
@@ -89,7 +90,10 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
                   case (plain, behavior) :: tail =>
                      extract( fExtrSource, plain, behavior ) { (meta, success) =>
                         if( success ) {
-                           metas :+= meta
+                           val sb         = ESettingsBuilder( meta )
+                           sb.audioInput  = fAudio // !
+                           val meta2      = saveMeta( sb, plain )
+                           metas :+= meta2
                            iter( tail )
                         }
                      }
@@ -108,12 +112,12 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          if( done ) {
             shift match {
                case Some( freq ) =>
-                  val fShift = new File( LeereNull.bounceFolder, plainName( f ) + "_Hlb.aif" )
-                  FScape.shift( f, fShift, freq ) { b =>
-                     if( b ) runExtract( f, fShift )
+                  val fShift = new File( LeereNull.bounceFolder, plainName( fNorm ) + "_Hlb.aif" )
+                  FScape.shift( fNorm, fShift, freq ) { b =>
+                     if( b ) runExtract( fNorm, fShift )
                   }
                case None =>
-                  runExtract( f, f )
+                  runExtract( fNorm, fNorm )
             }
 
          } else {
@@ -143,19 +147,32 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             "<B>Extract features now?</B></html>"
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
-            extract( afPath, plainName( afPath ), ChannelsBehavior.Mix /* XXX */) { (meta, success) =>
-               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings, IndexedSeq( meta ), None, None ))
+            val plain = plainName( afPath )
+            extract( afPath, plain, ChannelsBehavior.Mix /* XXX */) { (meta, success) =>
+               if( success ) {
+                  val meta2 = saveMeta( ESettingsBuilder( meta ), plain )
+                  Swing.onEDT( makeSetup( ar, defaultSettings, IndexedSeq( meta2 ), None, None ))
+               }
             }
          }
       }
+   }
+
+   def saveMeta( sb: ESettingsBuilder, plain: String ) : ESettings = {
+      val metaFile   = extrMetaFile( plain )
+      sb.metaOutput  = Some( metaFile )
+      val meta       = sb.build
+      val xml        = meta.toXML
+      XML.save( metaFile.getAbsolutePath, xml, "UTF-8", true, null )
+      meta
    }
 
    def extract( afPath: File, plain: String, behavior: ChannelsBehavior )( whenDone: (ESettings, Boolean) => Unit ) {
       val sb               = new ESettingsBuilder
       sb.audioInput        = afPath
       sb.featureOutput     = featureFile( plain )
-      val meta             = extrMetaFile( plain )
-      sb.metaOutput        = Some( meta )
+//      val meta             = extrMetaFile( plain )
+//      sb.metaOutput        = Some( meta )
       sb.channelsBehavior  = behavior
       val settings         = sb.build
 
