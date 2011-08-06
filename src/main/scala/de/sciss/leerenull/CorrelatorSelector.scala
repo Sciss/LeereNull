@@ -66,18 +66,23 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
                IndexedSeq( ESettings.fromXMLFile( settings.metaInput ))
             }
          }
-         Search( date, offset, settings, matches, metas, master )
+         val shift = {
+            val e = (xml \ "shift").text
+            if( e == "" ) None else Some( e.toDouble )
+         }
+         Search( date, offset, settings, matches, metas, master, shift )
       }
    }
    final case class Search( creation: Date, offset: Long, settings: CSettings, matches: IndexedSeq[ Match ],
-                            metas: IndexedSeq[ ESettings ], master: Option[ Match ]) {
+                            metas: IndexedSeq[ ESettings ], master: Option[ Match ], shift: Option[ Double ]) {
       def toXML = <search>
   <date>{Search.dateFormat.format( creation )}</date>
   <offset>{offset}</offset>
   <settings>{settings.toXML.child}</settings>
   <matches>{matches.map(_.toXML)}</matches>
   <metas>{metas.map( _.toXML )}</metas>
- {master match { case Some( m ) => <master>{m.toXML.child}</master>; case None => Nil }}
+  {master match { case Some( m ) => <master>{m.toXML.child}</master>; case None => Nil }}
+  {shift match { case Some( f ) => <shift>{f}</shift>; case None => Nil }}
 </search>
    }
 
@@ -85,7 +90,8 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
     * @param   offset   the offset of the search input with respect to its
     *                   appearance in the main timeline
     */
-   def beginSearch( offset: Long, settings: CSettings, metas: IndexedSeq[ ESettings ], master: Option[ Match ])
+   def beginSearch( offset: Long, settings: CSettings, metas: IndexedSeq[ ESettings ],
+                    master: Option[ Match ], shift: Option[ Double ])
                   ( implicit doc: Session ) {
       if( verbose ) println( settings )
 
@@ -107,7 +113,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
                   }
                }
             }
-            val search = Search( tim, offset, settings, res, metas, master )
+            val search = Search( tim, offset, settings, res, metas, master, shift )
             if( autosave ) saveSearch( search )
             Swing.onEDT( makeSelector( search ))
 

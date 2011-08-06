@@ -40,7 +40,7 @@ import javax.swing.event.{AncestorEvent, AncestorListener}
 import javax.swing.{SwingUtilities, JPanel, JOptionPane, WindowConstants, JDialog, JComponent, AbstractAction, Action => JAction, KeyStroke}
 import java.awt.{FileDialog, Component => AWTComponent, Frame => AWTFrame}
 import java.io.{FilenameFilter, File}
-import swing.{ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
+import swing.{CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -111,6 +111,11 @@ trait GUIGoodies {
       fixedWidth.foreach( i => constrainWidth( this, i ))
    }
 
+   def checkBox( txt: String )( fun: Boolean => Unit = (b: Boolean) => () ) = new CheckBox {
+      action = Action( txt )( fun( selected ))
+      peer.putClientProperty( "JComponent.sizeVariant", "small" )
+   }
+
    trait ProgressDialog {
       type Process = { def start() : Unit; def abort() : Unit }
 
@@ -177,7 +182,7 @@ trait GUIGoodies {
    }
 
    def integerField( lb: String, min: Int = 0, max: Int = 10, initial: Int = 0 )
-                   ( act: Int => Unit ) = new FlowPanel with IntegerWidget {
+                   ( act: Int => Unit = (i: Int) => () ) = new FlowPanel with IntegerWidget {
 
       val lab  = label( lb )
       val j    = new NumberField( NumberSpace.createIntSpace( min, max ))
@@ -199,6 +204,13 @@ trait GUIGoodies {
             }
          }
       }
+
+      override def enabled_=( b: Boolean ) {
+         super.enabled = b
+         j.setEnabled( b )
+      }
+
+      override def requestFocus() { j.requestFocus() }
 
       amap.put( "leerenull.up", inc( 1 ))
       amap.put( "leerenull.dn", inc( -1 ))

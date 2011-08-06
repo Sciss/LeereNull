@@ -42,7 +42,7 @@ import collection.breakOut
 import swing.{ProgressBar, Swing, Dialog}
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
-   def bounceAndExtract( tracks: List[ Track ], span: Span )( implicit doc: Session, timeline: BasicTimeline ) {
+   def bounceAndExtract( tracks: List[ Track ], span: Span, shift: Option[ Double ])( implicit doc: Session, timeline: BasicTimeline ) {
       val atracks = tracks.collect({ case at: AudioTrack if( at.diffusion.isDefined ) => at })
       val numChannels = atracks.map( _.diffusion.get ).foldLeft( 0 )( (maxi, diff) => math.max( maxi, diff.numOutputChannels ))
       val diffs: Set[ MatrixDiffusion ] = atracks.map( _.diffusion )
@@ -76,17 +76,18 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             case ("progress", i: Int) => ggProgress.value = i
          })
          BasicWindowHandler.showDialog( op, null, "Bounce" )
-         if( done ) {
+
+         def runExtract( fAudio: File, fExtrSource: File ) {
             // now extract
-            var plainsBehaviors: List[ (String, ChannelsBehavior) ] = (plainName( f ), ChannelsBehavior.Mix) :: Nil
-            if( hasFirst ) plainsBehaviors ::= (plainName( f ) + "-F", ChannelsBehavior.First)
-            if( hasLast )  plainsBehaviors ::= (plainName( f ) + "-L", ChannelsBehavior.Last)
+            var plainsBehaviors: List[ (String, ChannelsBehavior) ] = (plainName( fExtrSource ), ChannelsBehavior.Mix) :: Nil
+            if( hasFirst ) plainsBehaviors ::= (plainName( fExtrSource ) + "-F", ChannelsBehavior.First)
+            if( hasLast )  plainsBehaviors ::= (plainName( fExtrSource ) + "-L", ChannelsBehavior.Last)
             var metas = IndexedSeq.empty[ ESettings ]
 
             def iter( b: List[ (String, ChannelsBehavior) ]) {
                b match {
                   case (plain, behavior) :: tail =>
-                     extract( f, plain, behavior ) { (meta, success) =>
+                     extract( fExtrSource, plain, behavior ) { (meta, success) =>
                         if( success ) {
                            metas :+= meta
                            iter( tail )
@@ -94,14 +95,26 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
                      }
                   case _ =>
                      Swing.onEDT {
-                        val afe     = provideAudioFile( f ) // let it create the ce
-                        val ar      = AudioRegion( span, plainName( f ), afe, 0L )
+                        val afe     = provideAudioFile( fAudio ) // let it create the ce
+                        val ar      = AudioRegion( span, plainName( fAudio ), afe, 0L )
 //                        val metas   = metaFiles.map( ESettings.fromXMLFile( _ ))
-                        makeSetup( ar, defaultSettings, metas, None )
+                        makeSetup( ar, defaultSettings, metas, None, shift )
                      }
                }
             }
             iter( plainsBehaviors )
+         }
+
+         if( done ) {
+            shift match {
+               case Some( freq ) =>
+                  val fShift = new File( LeereNull.bounceFolder, plainName( f ) + "_Hlb.aif" )
+                  FScape.shift( f, fShift, freq ) { b =>
+                     if( b ) runExtract( f, fShift )
+                  }
+               case None =>
+                  runExtract( f, f )
+            }
 
          } else {
             canCancel.cancel()
@@ -123,7 +136,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          }
       val metas      = metaFiles.map( ESettings.fromXMLFile( _ ))
       if( metas.nonEmpty ) {
-         makeSetup( ar, defaultSettings, metas, None )
+         makeSetup( ar, defaultSettings, metas, None, None )
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
             "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
@@ -131,7 +144,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          val res = Dialog.showConfirmation( null, message, "Meta data", Dialog.Options.OkCancel, Dialog.Message.Question )
          if( res == Dialog.Result.Ok ) {
             extract( afPath, plainName( afPath ), ChannelsBehavior.Mix /* XXX */) { (meta, success) =>
-               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings, IndexedSeq( meta ), None ))
+               if( success ) Swing.onEDT( makeSetup( ar, defaultSettings, IndexedSeq( meta ), None, None ))
             }
          }
       }
@@ -183,7 +196,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       sb
    }
 
-   def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, metas: IndexedSeq[ ESettings ], master: Option[ Match ])
+   def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, metas: IndexedSeq[ ESettings ], master: Option[ Match ], shift: Option[ Double ])
                 ( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
@@ -313,7 +326,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             ggMeta.selection.item.metaOutput match {
                case Some( meta ) =>
                   settings.metaInput = meta
-                  CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings, metas, master )
+                  CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings, metas, master, shift )
                case None => message( "? No meta file available ?" )
             }
          }

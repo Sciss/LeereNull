@@ -33,6 +33,7 @@ import de.sciss.gui.{MenuItem, MenuGroup}
 import java.util.Properties
 import java.io.{File, FileInputStream}
 import swing.{Dialog, Swing}
+import eu.flierl.grouppanel.GroupPanel
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
    lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder) = {
@@ -68,13 +69,28 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
                cutTheCheese( selectedAudioRegions, span ) match {
                   case IndexedSeq( ar ) => CorrelatorSetup.prepareCorrelator( ar )
                   case _ =>
-                     val message = "<html>Multiple regions are selected. To proceed,<br>" +
-                        "an intermediate bounced representation is needed.<br>" +
-                        "<B>Go ahead and bounce?</B></html>"
-                     val res = Dialog.showConfirmation( null, message, "Extract", Dialog.Options.OkCancel, Dialog.Message.Question )
+//                     val message = "<html>Multiple regions are selected. To proceed,<br>" +
+//                        "an intermediate bounced representation is needed.<br>" +
+//                        "<B>Go ahead and bounce?</B></html>"
+                     val lbInfo = label( "<html>Multiple regions are selected. To proceed,<br>" +
+                               "an intermediate bounced representation is needed.<br>" +
+                               "<B>Go ahead and bounce?</B></html>"
+                     )
+                     val ggShiftAmount = integerField( "Amount (Hz):", 0, 11025, 0 )()
+                     ggShiftAmount.enabled = false
+                     val ggApplyShift = checkBox( "Freq Shift" ) { b =>
+                        ggShiftAmount.enabled = b
+                        if( b ) ggShiftAmount.requestFocus()
+                     }
+                     val p = new GroupPanel {
+                        theHorizontalLayout is Parallel( lbInfo, Sequential( ggApplyShift, ggShiftAmount ))
+                        theVerticalLayout is Sequential( lbInfo, Parallel( Baseline )( ggApplyShift, ggShiftAmount ))
+                     }
+                     val res = Dialog.showConfirmation( null, p.peer, "Extract", Dialog.Options.OkCancel, Dialog.Message.Question )
                      if( res == Dialog.Result.Ok ) {
-                        val tracks = trl.toList.filter( _.selected ).map( _.track )
-                        CorrelatorSetup.bounceAndExtract( tracks, span )
+                        val tracks  = trl.toList.filter( _.selected ).map( _.track )
+                        val shift   = if( ggApplyShift.selected ) Some( ggShiftAmount.integer.toDouble ) else None
+                        CorrelatorSetup.bounceAndExtract( tracks, span, shift )
                      }
                }
             }
