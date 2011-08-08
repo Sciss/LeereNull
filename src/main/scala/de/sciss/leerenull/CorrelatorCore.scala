@@ -36,25 +36,52 @@ import FeatureExtraction.{Settings => ESettings}
 import de.sciss.app.AbstractCompoundEdit
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
 import java.io.File
-import swing.Swing
+import de.sciss.synth.io.AudioFile
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ) {
       search.shift match {
          case Some( freq ) =>
-            val m       = search.matches( idx )
-            val fShift  = new File( LeereNull.bounceFolder, plainName( m.file ) + "_Hlb" + freq.toInt + ".aif" )
+            val m          = search.matches( idx )
+            val spec       = AudioFile.readSpec( m.file )
+            val wholeSpan  = Span( 0L, spec.numFrames )
+            val truncSpan  = Span( math.max( wholeSpan.start, m.punch.start - 176400L ), math.min( wholeSpan.stop, m.punch.stop + 176400L ))
+            val trunc      = truncSpan != wholeSpan
+            val fName      = plainName( m.file ) + (if( trunc ) "_" + m.punch.start + "_" + m.punch.stop else "") +
+               "_Hlb" + freq.toInt + ".aif"
+//println( "span " + truncSpan + "; whole " + wholeSpan + "; trunc " + trunc + "; file " + fName )
+            val fShift  = new File( LeereNull.bounceFolder, fName )
 
             def shiftDone() {
-               val m2      = m.copy( file = fShift )
+               val m2      = m.copy( file = fShift, punch = m.punch.shift( -truncSpan.start ))
                val s2      = search.copy( matches = search.matches.patch( idx, IndexedSeq( m2 ), 1 ))
+//println( "match " + m2 )
                makeMatchEditor2( s2, idx )
             }
 
-            if( fShift.isFile ) shiftDone() else {
-               FScape.shift( m.file, fShift, -freq ) { b =>
+            def runShift( f: File ) {
+               FScape.shift( f, fShift, -freq ) { b =>
                   if( b ) shiftDone()
                }
+            }
+
+            if( fShift.isFile ) shiftDone() else {
+               if( trunc ) {
+                  val truncFile = File.createTempFile( "trunc", ".aif" )
+                  truncFile.deleteOnExit()
+                  val dlg = progressDialog( "Extracting span" )
+                  val cutter = AudioFileCutter( m.file, truncFile, truncSpan ) {
+                     case AudioFileCutter.Success =>
+                        dlg.stop()
+                        runShift( truncFile )
+                     case AudioFileCutter.Failure( e ) =>
+                        dlg.stop()
+                        e.printStackTrace()
+                     case AudioFileCutter.Progress( i ) => dlg.progress = i
+                  }
+                  dlg.start( cutter )
+
+               } else runShift( m.file )
             }
 
          case None => makeMatchEditor2( search, idx )
