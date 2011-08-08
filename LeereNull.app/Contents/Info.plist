@@ -43,6 +43,7 @@
 		<string>1.6+</string>
 		<key>ClassPath</key>
 		<array>
+			<string>$JAVAROOT/fscapejobs.jar</string>
 			<string>$JAVAROOT/grouppanel.jar</string>
 			<string>$JAVAROOT/jsyntaxpane.jar</string>
 			<string>$JAVAROOT/kontur.jar</string>
