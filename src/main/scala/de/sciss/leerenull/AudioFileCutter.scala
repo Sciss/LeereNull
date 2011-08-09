@@ -30,9 +30,9 @@ package de.sciss.leerenull
 
 import de.sciss.synth
 import java.io.File
-import synth.io.AudioFile
 import actors.Actor
 import de.sciss.strugatzki.Span
+import synth.io.{AudioFileType, AudioFile}
 
 object AudioFileCutter {
    def apply( in: File, out: File, span: Span )( observer: PartialFunction[ ProgressOrResult, Unit ]) =
@@ -71,7 +71,7 @@ final class AudioFileCutter private ( val in: File, val out: File, val span: Spa
 
       private def procBody() : Boolean = {
          val afIn       = AudioFile.openRead( in )
-         val afOut      = AudioFile.openWrite( out, afIn.spec.copy( numFrames = span.length ))
+         val afOut      = AudioFile.openWrite( out, afIn.spec.copy( fileType = AudioFileType.AIFF, byteOrder = None, numFrames = span.length ))
          var rem        = span.length
          afIn.seekFrame( span.start )
          val b          = afIn.frameBuffer( 4096 )
