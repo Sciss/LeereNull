@@ -10,3 +10,15 @@ val sub1 = (37 * (1 - 0.8))/3
 def freq( off: Double ) = (1.0 - ((258.0 - off) / 150.0).max( 0.0 ).min( 1.0 )).linlin( 0.0, 1.0, 1000.0, 0.0 )
 
 val f1 = freq( 3*60+42.602-sub1+0.0 ) // 252
+val f2 = freq( 3*60+44.728-sub1+0.0 ) // 238
+val f3 = freq( 3*60+46.554-sub1+0.0 ) // 226
+
+val durs = Seq.tabulate(8)(i => 0.8.pow(i))
+
+val dur1 = durs(1) * 37
+val dur2 = durs(2) * 37
+//val sub2 = (dur1 * (1 - durs(2)))/3
+val sub2 = (dur1 - dur2)/3
+
+def freq( off: Double ) = (1.0 - (((4*60+12.199) - off) / 150.0).max( 0.0 ).min( 1.0 )).linlin( 0.0, 1.0, 1000.0, 0.0 )
+freq( 3*60+21.261 ) // 306
