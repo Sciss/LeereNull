@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>8/10/11 12:18:50 AM BST</date>
+  <offset>8083872</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/110810_001629_bnc8083872_Hlb-F_feat.xml</input>
+   <punchIn>
+   <start>0</start>
+   <stop>96792</stop>
+   <weight>0.43</weight>
+</punchIn>
+   <punchOut>
+   <start>275310</start>
+   <stop>371646</stop>
+   <weight>0.57</weight>
+</punchOut>
+   <minPunch>88200</minPunch>
+   <maxPunch>132300</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>7.943282</maxBoost>
+   <numMatches>60</numMatches>
+   <numPerFile>2</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>NaN</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/DeckelVorneKlopfenT.aif</file>
+   <start>401920</start>
+   <stop>489984</stop>
+   <boostIn>7.655089</boostIn>
+   <boostOut>3.359084</boostOut>
+</match></matches>
+  <metas><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110810_001629_bnc8083872.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110810_001629_bnc8083872_Hlb-L_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110810_001629_bnc8083872_Hlb-L_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>2</channels>
+</feature><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110810_001629_bnc8083872.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110810_001629_bnc8083872_Hlb-F_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110810_001629_bnc8083872_Hlb-F_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>1</channels>
+</feature><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110810_001629_bnc8083872.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110810_001629_bnc8083872_Hlb_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110810_001629_bnc8083872_Hlb_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>0</channels>
+</feature></metas>
+  
+  <shift>419.0</shift>
+</search>

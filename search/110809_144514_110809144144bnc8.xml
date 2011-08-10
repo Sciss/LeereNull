@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>8/9/11 2:45:14 PM BST</date>
+  <offset>8280521</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/110809_144144_bnc8280521_Hlb-F_feat.xml</input>
+   <punchIn>
+   <start>65289</start>
+   <stop>108732</stop>
+   <weight>0.43</weight>
+</punchIn>
+   <punchOut>
+   <start>179295</start>
+   <stop>231025</stop>
+   <weight>0.57</weight>
+</punchOut>
+   <minPunch>88200</minPunch>
+   <maxPunch>132300</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>25.128582</maxBoost>
+   <numMatches>10</numMatches>
+   <numPerFile>2</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>NaN</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/_SaitenMitPapierT.aif</file>
+   <start>20480</start>
+   <stop>108544</stop>
+   <boostIn>24.909204</boostIn>
+   <boostOut>16.453535</boostOut>
+</match><match>
+   <sim>0.73303217</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/AB goes MW low</file>
+   <start>8275968</start>
+   <stop>8405504</stop>
+   <boostIn>0.19470273</boostIn>
+   <boostOut>0.37010837</boostOut>
+</match><match>
+   <sim>0.7260731</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BgStn4'CCHPFOpBgStn8'lbLPFMix.aif</file>
+   <start>43668992</start>
+   <stop>43773440</stop>
+   <boostIn>2.087818</boostIn>
+   <boostOut>1.4968941</boostOut>
+</match><match>
+   <sim>0.7181763</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Alphaville.aif</file>
+   <start>12582400</start>
+   <stop>12692480</stop>
+   <boostIn>4.778324</boostIn>
+   <boostOut>0.9843734</boostOut>
+</match><match>
+   <sim>0.71285343</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/SC070'211WTOpSC070'409WTWTCut.aif</file>
+   <start>15469568</start>
+   <stop>15599616</stop>
+   <boostIn>0.7431713</boostIn>
+   <boostOut>1.3570335</boostOut>
+</match><match>
+   <sim>0.7063792</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Aff02'CpyWTConSoftHP.aif</file>
+   <start>4920832</start>
+   <stop>5024256</stop>
+   <boostIn>0.50779855</boostIn>
+   <boostOut>1.0497614</boostOut>
+</match><match>
+   <sim>0.7045044</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BgStn4'CCHPFOpBgStn8'lbLPFMix.aif</file>
+   <start>54889472</start>
+   <stop>55015424</stop>
+   <boostIn>1.7450479</boostIn>
+   <boostOut>1.9326304</boostOut>
+</match><match>
+   <sim>0.70316255</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Aff02'CpyWTConSoftHP.aif</file>
+   <start>4549120</start>
+   <stop>4671488</stop>
+   <boostIn>0.382534</boostIn>
+   <boostOut>0.9548464</boostOut>
+</match><match>
+   <sim>0.691971</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/WaldSteinEditCt.aif</file>
+   <start>17948160</start>
+   <stop>18055680</stop>
+   <boostIn>1.9470229</boostIn>
+   <boostOut>4.625318</boostOut>
+</match><match>
+   <sim>0.6913181</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/B21h08m31s08feb2011_withoutFScape.wav</file>
+   <start>1253376</start>
+   <stop>1371136</stop>
+   <boostIn>1.5066241</boostIn>
+   <boostOut>8.5362835</boostOut>
+</match></matches>
+  <metas><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110809_144144_bnc8280521.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110809_144144_bnc8280521_Hlb-L_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110809_144144_bnc8280521_Hlb-L_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>2</channels>
+</feature><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110809_144144_bnc8280521.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110809_144144_bnc8280521_Hlb-F_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110809_144144_bnc8280521_Hlb-F_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>1</channels>
+</feature><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110809_144144_bnc8280521.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110809_144144_bnc8280521_Hlb_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110809_144144_bnc8280521_Hlb_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>0</channels>
+</feature></metas>
+  
+  <shift>390.0</shift>
+</search>
