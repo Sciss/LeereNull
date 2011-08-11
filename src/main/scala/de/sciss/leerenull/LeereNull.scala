@@ -35,10 +35,10 @@ import java.io.{File, FileInputStream}
 import swing.{Dialog, Swing}
 import eu.flierl.grouppanel.GroupPanel
 import de.sciss.kontur.gui.TrailViewEditor
-import de.sciss.kontur.session.{MatrixDiffusion, Stake, AudioTrack, AudioRegion}
 import collection.breakOut
+import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, Stake, AudioTrack, AudioRegion}
 
-object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
+object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGoodies {
    lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder) = {
       val file = new File( "leerenull-settings.xml" )
       val prop = new Properties()
@@ -241,11 +241,76 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
             }
          }
       })
+      val miPanSelectedRegions = new MenuItem( "leerenull.panselregions", action( "Pan Selected Regions..." ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               implicit val tl0  = tl
+               implicit val tlv0 = tlv
+               implicit val trl0 = trl
+//               val span    = selSpan
+//               val tracks  = selTracks
+               val ggNumChannels = integerField( "Channels:", 2, 1024, 2 )()
+               val lbBal   = label( percentString( 0 ), Some( 40 ))
+               val slidBal = decimalSlider( "left", "right", 0.5, w = 144 ) { d =>
+                  lbBal.text = percentString( d * 2 - 1 )
+               }
+               val p = new GroupPanel {
+                  theHorizontalLayout is Parallel( ggNumChannels, Sequential( slidBal, lbBal ))
+                  theVerticalLayout is Sequential( ggNumChannels, Parallel( Baseline )( slidBal, lbBal ))
+               }
+               val res = Dialog.showConfirmation( null, p.peer, "Extract", Dialog.Options.OkCancel, Dialog.Message.Question )
+               if( res == Dialog.Result.Ok ) {
+                  tl.joinEdit( "Pan Selected Regions" ) { implicit ce =>
+                     val outChans   = ggNumChannels.integer
+                     val pan        = (slidBal.decimal * 2 - 1).toFloat
+                     var moreDiffs  = Set.empty[ Diffusion ]
+                     var moreTracks = Set.empty[ AudioTrack ]
+                     var regionMap  = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
+                     val trackPrefix= "T" + percentString( pan, 0 ) + "-"
+                     val tracks     = selTracks.toSet
+                     val span       = selSpan
+                     val arsMap     = collectAudioRegions({
+                        case tup @ (at, ar) if( ar.span.overlaps( span ) && tracks.contains( at )) => tup
+                     }).groupBy( _._1 ).mapValues( _.map( _._2 ))
+                     arsMap.foreach { case (at, ars) =>
+                        val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                        tveO.foreach( _.editDeselect( ce, ars: _* ))
+                        at.trail.editRemove( ce, ars: _* )
+                     }
+                     arsMap.values.flatten.foreach { ar =>
+                        val inChans = ar.audioFile.numChannels
+                        val diff    = provideDiffusion( pannedMatrix( inChans, outChans, pan ), more = moreDiffs.toIndexedSeq )
+                        val diffSeq = diff.matrix.toSeq
+                        moreDiffs  += diff
+                        val track   = provideAudioTrackSpace( ar.span, { at =>
+                           val ok1 = at.diffusion match {
+                              case Some( m: MatrixDiffusion ) if( m.matrix.toSeq == diffSeq ) => true
+                              case None => true
+                              case _ => false
+                           }
+                           if( ok1 ) {
+                              !regionMap.getOrElse( at, IndexedSeq.empty ).exists( _.span.overlaps( ar.span ))
+                           } else false
+                        }, more = moreTracks.toSeq, prefix = trackPrefix )
+                        moreTracks += track
+                        regionMap += track -> (regionMap.getOrElse( track, IndexedSeq.empty ) :+ ar)
+                        if( track.diffusion.isEmpty ) {
+                           track.editDiffusion( ce, Some( diff ))
+                        }
+                        track.trail.editAdd( ce, ar )
+                     }
+                  }
+               }
+            }
+         }
+      })
+
       mg.add( miExtractor )
       mg.add( miLoadSearch )
       mg.add( miSelStartToRegionEnd )
       mg.add( miCleanUpOverlaps )
       mg.add( miOptimizeTracksCapacities )
+      mg.add( miPanSelectedRegions )
       mf.add( mg )
    }
 }

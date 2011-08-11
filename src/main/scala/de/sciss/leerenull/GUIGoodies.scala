@@ -300,7 +300,7 @@ trait GUIGoodies {
    }
 
    def decimalSlider( minLb: String = "min", maxLb: String = "max", initial: Double = 0.0, steps: Int = 1000, w: Int = 72 )
-                    ( act: Double => Unit ) = new FlowPanel with DecimalWidget {
+                    ( act: Double => Unit = (d: Double) => () ) = new FlowPanel with DecimalWidget {
       vGap = 0
       val lbMin   = label( minLb )
       val lbMax   = label( maxLb )

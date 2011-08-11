@@ -90,7 +90,8 @@ trait KonturGoodies {
       ars.sortBy( _.span.start )
    }
 
-   def collectAudioRegions[ A ]( fun: PartialFunction[ (AudioTrack, AudioRegion), A ])( implicit tl: BasicTimeline ) : IndexedSeq[ A ] = {
+   def collectAudioRegions[ A ]( fun: PartialFunction[ (AudioTrack, AudioRegion), A ])
+                               ( implicit tl: BasicTimeline /*, trl: BasicTrackList */ ) : IndexedSeq[ A ] = {
       val trs = tl.tracks.toList.collect { case atr: AudioTrack => atr }
       val b = IndexedSeq.newBuilder[ A ]
       trs.foreach { tr =>
@@ -163,16 +164,16 @@ trait KonturGoodies {
 
    val acceptAll : AudioTrack => Boolean = _ => true
 
-   def findAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll )
+   def findAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll, more: Seq[ AudioTrack ] = Seq.empty )
                           ( implicit tl: BasicTimeline ) : Option[ AudioTrack ] = {
-      tl.tracks.toList.collect({ case at: AudioTrack if( accept( at )) => at })
+      (tl.tracks.toList ++ more).collect({ case at: AudioTrack if( accept( at )) => at })
          .find( _.trail.getRange( span ).isEmpty )
    }
 
    def provideAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll, more: Seq[ AudioTrack ] = Seq.empty,
                                prefix: String = "T" )
                              ( implicit doc: Session, tl: BasicTimeline, ceo: Maybe[ AbstractCompoundEdit ]) : AudioTrack =
-      findAudioTrackSpace( span, accept ).getOrElse {
+      findAudioTrackSpace( span, accept, more ).getOrElse {
          val ts = tl.tracks
          val ed = ts.editor.get
          ed.joinEdit( "Add track" ) { ce =>
@@ -322,6 +323,22 @@ trait KonturGoodies {
             val outw = if( outChans < 2 ) 1f else (out.toFloat / (outChans - 1))
             val w    = outw * (inChans - 1) // (if( inChans < 2 ) 1 else (inChans - 1))
             math.sqrt( 1f - math.min( 1f, math.abs( w - in ))).toFloat
+         }
+      }
+      Matrix2D.fromSeq( sq )
+   }
+
+   /**
+    * @param   bal   balance from -1 (hard left) to 1 (hard right)
+    */
+   def pannedMatrix( inChans: Int, outChans: Int, bal: Float = 0f ) : Matrix2D[ Float ] = {
+      val bal1 = 1f - math.max( 0f, math.min( 1f, bal * 0.5f + 0.5f ))
+      val sq = Seq.tabulate( inChans ) { in =>
+         Seq.tabulate( outChans ) { out =>
+            val outw = if( outChans < 2 ) 1f else (out.toFloat / (outChans - 1))
+            val w0   = outw * (inChans - 1)
+            val res0 = math.sqrt( 1f - math.min( 1f, math.abs( w0 - in ))).toFloat
+            res0 * math.min( 0.5f, math.abs( outw - bal1 )) * 2
          }
       }
       Matrix2D.fromSeq( sq )
