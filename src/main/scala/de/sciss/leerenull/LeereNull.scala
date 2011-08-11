@@ -36,6 +36,7 @@ import swing.{Dialog, Swing}
 import eu.flierl.grouppanel.GroupPanel
 import de.sciss.kontur.gui.TrailViewEditor
 import de.sciss.kontur.session.{MatrixDiffusion, Stake, AudioTrack, AudioRegion}
+import collection.breakOut
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
    lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder) = {
@@ -203,10 +204,48 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies {
             }
          }
       })
+      val miOptimizeTracksCapacities = new MenuItem( "leerenull.optimizetrackscapacities",
+         action( "Optimize Selected Tracks' Capacities" ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               implicit val tl0  = tl
+               implicit val tlv0 = tlv
+               implicit val trl0 = trl
+               val span = selSpan
+               tl.joinEdit( "Optimize Tracks Capacities" ) { implicit ce =>
+                  type Gaga      = (AudioTrack, Option[ Seq[ Seq[ Float ]]])
+                  var taken      = Set.empty[ Gaga ]
+                  val withDiffs: Set[ Gaga ] =
+                     selTracks.map( at => (at, at.diffusion) ).collect({
+                        case (at, Some( m: MatrixDiffusion )) => (at, Some( m.matrix.toSeq ))
+                        case (at, None) => (at, Option.empty[ Seq[ Seq[ Float ]]])
+                     })( breakOut )
+                  withDiffs.foreach { case tup @ (at, matO) =>
+                     val ars  = at.trail.getRange( span )
+                     val coll = (withDiffs -- taken - tup).filter { case (at2, matO2) =>
+                        (matO2 == matO) && ars.forall( ar => at2.trail.getRange( ar.span ).isEmpty )
+                     }
+                     val at2O = coll.toSeq.sortBy( _._1.name ).headOption
+                     at2O.foreach { case tup2 @ (at2, _) =>
+                        taken += tup
+                        taken += tup2   // we only do that because the trail view isn't updating during the edit!
+                        val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                        tveO.foreach( _.editDeselect( ce, ars: _* ))
+                        at.trail.editRemove( ce, ars: _* )
+                        at2.trail.editAdd( ce, ars: _* )
+                        val tve2O = trl.getElement( at2 ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                        tve2O.foreach( _.editSelect( ce, ars: _* ))
+                     }
+                  }
+               }
+            }
+         }
+      })
       mg.add( miExtractor )
       mg.add( miLoadSearch )
       mg.add( miSelStartToRegionEnd )
       mg.add( miCleanUpOverlaps )
+      mg.add( miOptimizeTracksCapacities )
       mf.add( mg )
    }
 }
