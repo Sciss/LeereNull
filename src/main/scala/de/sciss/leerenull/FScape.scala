@@ -31,7 +31,7 @@ object FScape extends GUIGoodies {
       val spec = FScapeJobs.OutputSpec.aiffFloat
       val doc  = FScapeJobs.Resample( in.getAbsolutePath, out.getAbsolutePath, spec = spec,
                                       gain = FScapeJobs.Gain.immediate,
-                                      rate = "GAGA", keepHeader = true, interpolate = false, fltLength = "GAGA" )
+                                      rate = (cents / 100).toString + "semi", keepHeader = true )
       process( "Resample", doc )( fun )
    }
 
