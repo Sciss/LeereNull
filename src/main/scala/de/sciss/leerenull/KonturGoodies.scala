@@ -164,13 +164,18 @@ trait KonturGoodies {
 
    val acceptAll : AudioTrack => Boolean = _ => true
 
-   def findAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll, more: Seq[ AudioTrack ] = Seq.empty )
+   def findAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll,
+                            more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty )
                           ( implicit tl: BasicTimeline ) : Option[ AudioTrack ] = {
-      (tl.tracks.toList ++ more).collect({ case at: AudioTrack if( accept( at )) => at })
-         .find( _.trail.getRange( span ).isEmpty )
+      (tl.tracks.toList ++ more.keys).collect({
+         case at: AudioTrack if( accept( at )) => at
+      }).find { at =>
+         at.trail.getRange( span ).isEmpty && !more.getOrElse( at, IndexedSeq.empty ).exists( _.span.overlaps( span ))
+      }
    }
 
-   def provideAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll, more: Seq[ AudioTrack ] = Seq.empty,
+   def provideAudioTrackSpace( span: Span, accept: AudioTrack => Boolean = acceptAll,
+                               more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty,
                                prefix: String = "T" )
                              ( implicit doc: Session, tl: BasicTimeline, ceo: Maybe[ AbstractCompoundEdit ]) : AudioTrack =
       findAudioTrackSpace( span, accept, more ).getOrElse {
@@ -180,7 +185,7 @@ trait KonturGoodies {
             val at = new AudioTrack( doc )
 //         at.diffusion = Some( stereoDiffusion )
             at.name = {
-               val set = (ts.toList ++ more).map( _.name ).toSet
+               val set = (ts.toList ++ more.keys).map( _.name ).toSet
                var i = 0
                var n = ""
                do {
@@ -194,7 +199,8 @@ trait KonturGoodies {
          }
       }
 
-   def place( ar: AudioRegion, accept: AudioTrack => Boolean = acceptAll, more: Seq[ AudioTrack ] = Seq.empty,
+   def place( ar: AudioRegion, accept: AudioTrack => Boolean = acceptAll,
+              more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty,
               prefix: String = "T" )
             ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
 
@@ -205,7 +211,7 @@ trait KonturGoodies {
       }
    }
 
-   def placeWithDiff( d: MatrixDiffusion, ar: AudioRegion, more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty,
+   def placeWithDiff( d: MatrixDiffusion, ar: AudioRegion, more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty,
                       trackPrefix: String = "T" )
                   ( implicit doc: Session, tl: BasicTimeline, ce: AbstractCompoundEdit ) : AudioTrack = {
       val sq   = d.matrix.toSeq
@@ -221,21 +227,23 @@ trait KonturGoodies {
       at
    }
 
-   def placeStereo( ar: AudioRegion, more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty,
+   def placeStereo( ar: AudioRegion, more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty,
                     diffPrefix: String = "", trackPrefix: String = "T" )
                   ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
-         val d = provideStereoDiffusion( ar.audioFile.numChannels, 2, diffPrefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))
+         val d = provideStereoDiffusion( ar.audioFile.numChannels, 2, diffPrefix,
+            more.map( _._1.diffusion ).collect({ case Some( d ) => d })( breakOut ))
          placeWithDiff( d, ar, more, trackPrefix )
       }
    }
 
-   def placeLeft( ar: AudioRegion, more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty,
+   def placeLeft( ar: AudioRegion, more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty,
                   diffPrefix: String = "", trackPrefix: String = "T-L" )
                 ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
          val numCh = ar.audioFile.numChannels
-         val d = provideLeftDiffusion( diffPrefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))( numCh )
+         val d = provideLeftDiffusion( diffPrefix,
+            more.map( _._1.diffusion ).collect({ case Some( d ) => d })( breakOut ))( numCh )
          placeWithDiff( d, ar, more, trackPrefix )
       }
    }
@@ -249,12 +257,13 @@ trait KonturGoodies {
       provideDiffusion( m, diffPrefix, more )
    }
 
-   def placeRight( ar: AudioRegion, more: IndexedSeq[ AudioTrack ] = IndexedSeq.empty,
+   def placeRight( ar: AudioRegion, more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty,
                    diffPrefix: String = "", trackPrefix: String = "T-R" )
                 ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
          val numCh = ar.audioFile.numChannels
-         val d = provideRightDiffusion( diffPrefix, more.map( _.diffusion ).collect({ case Some( d ) => d }))( numCh )
+         val d = provideRightDiffusion( diffPrefix,
+            more.map( _._1.diffusion ).collect({ case Some( d ) => d })( breakOut ))( numCh )
          placeWithDiff( d, ar, more, trackPrefix )
       }
    }

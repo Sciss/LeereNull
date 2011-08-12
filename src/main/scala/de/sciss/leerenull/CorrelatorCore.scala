@@ -247,10 +247,19 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          tl.span  = Span( 0L, (arsStereo ++ arsLeft ++ arsRight).map( _.span.stop ).max )
          tl.name  = uniqueName( tls, "$Matcher" )
          tls.editInsert( ce, tls.size, tl )
-         var trackSet = IndexedSeq.empty[ AudioTrack ]
-         arsStereo.foreach { ar => trackSet :+= placeStereo( ar, diffPrefix = "$", more = trackSet )}
-         arsLeft.foreach {   ar => trackSet :+= placeLeft(   ar, diffPrefix = "$", more = trackSet )}
-         arsRight.foreach {  ar => trackSet :+= placeRight(  ar, diffPrefix = "$", more = trackSet )}
+         var trackMap = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
+         arsStereo.foreach { ar =>
+            val tr = placeStereo( ar, diffPrefix = "$", more = trackMap )
+            trackMap += tr -> (trackMap.getOrElse( tr, IndexedSeq.empty ) :+ ar)
+         }
+         arsLeft.foreach { ar =>
+            val tr = placeLeft( ar, diffPrefix = "$", more = trackMap )
+            trackMap += tr -> (trackMap.getOrElse( tr, IndexedSeq.empty ) :+ ar)
+         }
+         arsRight.foreach { ar =>
+            val tr = placeRight( ar, diffPrefix = "$", more = trackMap )
+            trackMap += tr -> (trackMap.getOrElse( tr, IndexedSeq.empty ) :+ ar)
+         }
          tl
       }
 
@@ -319,11 +328,20 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                            }
                      }
                   }
-                  var trackSet = IndexedSeq.empty[ AudioTrack ]
+                  var trackMap = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
                   arsMap.foreach {
-                     case ("", ars)  => ars.foreach( r => trackSet :+= placeStereo( r, more = trackSet ))
-                     case ("L", ars) => ars.foreach( r => trackSet :+= placeLeft(   r, more = trackSet ))
-                     case ("R", ars) => ars.foreach( r => trackSet :+= placeRight(  r, more = trackSet ))
+                     case ("", ars)  => ars.foreach { ar =>
+                        val tr = placeStereo( ar, more = trackMap )
+                        trackMap += tr -> (trackMap.getOrElse( tr, IndexedSeq.empty ) :+ ar)
+                     }
+                     case ("L", ars) => ars.foreach { ar =>
+                        val tr = placeLeft( ar, more = trackMap )
+                        trackMap += tr -> (trackMap.getOrElse( tr, IndexedSeq.empty ) :+ ar)
+                     }
+                     case ("R", ars) => ars.foreach { ar =>
+                        val tr = placeRight( ar, more = trackMap )
+                        trackMap += tr -> (trackMap.getOrElse( tr, IndexedSeq.empty ) :+ ar)
+                     }
                   }
                }
             }

@@ -158,8 +158,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                implicit val trl0 = trl
                val span = selSpan
                tl.joinEdit( "Clean Up Overlaps" ) { implicit ce =>
-                  var inTxn      = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
-                  var moreTracks = Set.empty[ AudioTrack ]
+                  var trackMap      = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
+//                  var moreTracks = Set.empty[ AudioTrack ]
                   var moreDiffs  = Set.empty[ MatrixDiffusion ]
                   val withDiffs  = selTracks.map( at => (at, at.diffusion) ).collect {
                      case (at, Some( m: MatrixDiffusion )) => (at, Some( m.matrix.toSeq ))
@@ -194,12 +194,12 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                         at.trail.editRemove( ce, over: _* )
                         val moveMap = over.map( ar => {
                            val t2 = provideAudioTrackSpace( ar.span, { at =>
-                              inTxn.get( at ).map( !_.exists( _.span.overlaps( ar.span ))).getOrElse( true ) &&
+                              /* inTxn.get( at ).map( !_.exists( _.span.overlaps( ar.span ))).getOrElse( true ) && */
                               (at.diffusion match {
                                  case Some( m: MatrixDiffusion ) => Some( m.matrix.toSeq ) == matO
                                  case None => matO.isEmpty
                               })
-                           }, moreTracks.toSeq, trackPrefix )
+                           }, trackMap, trackPrefix )
                            if( t2.diffusion.isDefined != matO.isDefined ) {
                               assert( matO.isDefined )
                               val numInChans = ar.audioFile.numChannels
@@ -213,8 +213,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                               moreDiffs += d
                               t2.editDiffusion( ce, Some( d ))
                            }
-                           moreTracks += t2
-                           inTxn += t2 -> (inTxn.getOrElse( t2, IndexedSeq.empty[ AudioRegion ]) :+ ar)
+//                           moreTracks += t2
+                           trackMap += t2 -> (trackMap.getOrElse( t2, IndexedSeq.empty[ AudioRegion ]) :+ ar)
                            t2 -> ar
                         }).groupBy( _._1 ).mapValues( _.map( _._2 ))
                         moveMap.foreach { case (at, ars) =>
@@ -288,8 +288,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                      val outChans   = ggNumChannels.integer
                      val pan        = (slidBal.decimal * 2 - 1).toFloat
                      var moreDiffs  = Set.empty[ Diffusion ]
-                     var moreTracks = Set.empty[ AudioTrack ]
-                     var regionMap  = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
+//                     var moreTracks = Set.empty[ AudioTrack ]
+                     var trackMap  = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
                      val trackPrefix= "T" + percentString( pan, 0 ) + "-"
                      val tracks     = selTracks.toSet
                      val span       = selSpan
@@ -307,17 +307,17 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                         val diffSeq = diff.matrix.toSeq
                         moreDiffs  += diff
                         val track   = provideAudioTrackSpace( ar.span, { at =>
-                           val ok1 = at.diffusion match {
+                           /* val ok1 = */ at.diffusion match {
                               case Some( m: MatrixDiffusion ) if( m.matrix.toSeq == diffSeq ) => true
                               case None => true
                               case _ => false
                            }
-                           if( ok1 ) {
-                              !regionMap.getOrElse( at, IndexedSeq.empty ).exists( _.span.overlaps( ar.span ))
-                           } else false
-                        }, more = moreTracks.toSeq, prefix = trackPrefix )
-                        moreTracks += track
-                        regionMap += track -> (regionMap.getOrElse( track, IndexedSeq.empty ) :+ ar)
+//                           if( ok1 ) {
+//                              !regionMap.getOrElse( at, IndexedSeq.empty ).exists( _.span.overlaps( ar.span ))
+//                           } else false
+                        }, more = trackMap, prefix = trackPrefix )
+//                        moreTracks += track
+                        trackMap += track -> (trackMap.getOrElse( track, IndexedSeq.empty ) :+ ar)
                         if( track.diffusion.isEmpty ) {
                            track.editDiffusion( ce, Some( diff ))
                         }
