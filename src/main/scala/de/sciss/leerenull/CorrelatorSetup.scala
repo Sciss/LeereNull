@@ -278,14 +278,15 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val arDelta = ar.offset
 
-      val butToIn = button( "→ In" ) { b =>
+      lazy val butToIn = button( "→ In" ) { b =>
          val sp = selSpan.shift( arDelta )
          if( !sp.isEmpty ) {
             settings.punchIn  = settings.punchIn.copy( span = sp )
             lbPunchIn.text    = punchInText( settings.punchIn ) // str
+            butSearch.enabled = true
          }
       }
-      val butToOut = button( "→ Out" ) { b =>
+      lazy val butToOut = button( "→ Out" ) { b =>
          val sp = selSpan.shift( arDelta )
          if( !sp.isEmpty ) {
             settings.punchOut  = Some( Punch(
@@ -293,45 +294,45 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             lbPunchOut.text    = punchOutText( settings.punchOut ) // timeString( sp )
          }
       }
-      val butFromIn = button( "⬅ In" ) { b =>
+      lazy val butFromIn = button( "⬅ In" ) { b =>
          val sp = settings.punchIn.span
          if( !sp.isEmpty ) selSpan = sp
       }
-      val butFromOut = button( "⬅ Out" ) { b =>
+      lazy val butFromOut = button( "⬅ Out" ) { b =>
          settings.punchOut.foreach { po =>
             val sp = po.span
             if( !sp.isEmpty ) selSpan = sp
          }
       }
 
-      val ggNumMatches = integerField( "# Matches:", 1, 1000, initial = settings.numMatches ) { i =>
+      lazy val ggNumMatches = integerField( "# Matches:", 1, 1000, initial = settings.numMatches ) { i =>
          settings.numMatches = i
       }
-      val ggNumPerFile = integerField( "# Per File:", 1, 1000, initial = settings.numPerFile ) { i =>
+      lazy val ggNumPerFile = integerField( "# Per File:", 1, 1000, initial = settings.numPerFile ) { i =>
          settings.numPerFile = i
       }
 
-      val ggMinPunch = timeField( "Min dur:", 0.0, 60.0, framesToSecs( settings.minPunch )) { secs =>
+      lazy val ggMinPunch = timeField( "Min dur:", 0.0, 60.0, framesToSecs( settings.minPunch )) { secs =>
          settings.minPunch = secsToFrames( secs )
       }
-      val ggMaxPunch = timeField( "Max dur:", 0.0, 60.0, framesToSecs( settings.maxPunch )) { secs =>
+      lazy val ggMaxPunch = timeField( "Max dur:", 0.0, 60.0, framesToSecs( settings.maxPunch )) { secs =>
          settings.maxPunch = secsToFrames( secs )
       }
 
-      val searchInputMeta = settings.metaInput
+      lazy val searchInputMeta = settings.metaInput
 
       def metaLabel( m: ESettings ) = {
          val n    = plainName( m.featureOutput )
          if( n.endsWith( "-F" )) "First" else if( n.endsWith( "-L" )) "Last" else "Mix"
       }
 
-      val metas0 = metas.sortBy( metaLabel( _ ) match {
+      lazy val metas0 = metas.sortBy( metaLabel( _ ) match {
          case "Mix"   => 0
          case "First" => 1
          case "Last"  => 2
       })
 
-      val ggMeta = combo( metas0 )() { meta =>
+      lazy val ggMeta = combo( metas0 )() { meta =>
          val n    = plainName( meta.featureOutput )
          val str  = metaLabel( meta )
          if( searchInputMeta != null && plainName( searchInputMeta ) == n ) {
@@ -340,8 +341,8 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       }
 //      if( metas0.size > 1 && metas0.head.metaOutput == Option( searchInputMeta )) ggMeta.selection.index = 1
 
-      val butSearch = button( "Start searching..." ) { b =>
-         if( !settings.punchIn.span.isEmpty && settings.punchOut.isDefined ) {
+      lazy val butSearch = button( "Start searching..." ) { b =>
+         if( !settings.punchIn.span.isEmpty /* && settings.punchOut.isDefined */ ) {
             ggMeta.selection.item.metaOutput match {
                case Some( meta ) =>
                   settings.metaInput = meta
@@ -350,8 +351,9 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             }
          }
       }
+      butSearch.enabled = !settings.punchIn.span.isEmpty
 
-      val panel = new GroupPanel {
+      lazy val panel = new GroupPanel {
          linkHorizontalSize( butToIn, butToOut, butFromIn, butFromOut )
          linkHorizontalSize( ggMinPunch, ggMaxPunch )
          linkHorizontalSize( ggNumMatches, ggNumPerFile )
