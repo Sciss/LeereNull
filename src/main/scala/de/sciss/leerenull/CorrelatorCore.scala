@@ -37,35 +37,83 @@ import de.sciss.app.AbstractCompoundEdit
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
 import java.io.File
 import de.sciss.synth.io.AudioFile
+import xml.{Node, NodeSeq}
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
+   object Transform {
+      def fromXML( n: NodeSeq ) : Transform = {
+         (n \ "type").text match {
+            case "shift"      => TransformShift.fromXML( n )
+            case "resample"   => TransformResample.fromXML( n )
+            case ""           => TransformNone
+            case "none"       => TransformNone
+         }
+      }
+   }
+   sealed trait Transform {
+      def fscapeOption: Option[ (File, File) => (Boolean => Unit) => Unit ]
+      def fileID: String
+      def inverse: Transform
+      final def toXML : Node = <transform>{toInnerXML}</transform>
+      protected def toInnerXML : NodeSeq
+   }
+   case object TransformNone extends Transform {
+      def fscapeOption = None
+      def inverse = this
+      def fileID = ""
+      protected def toInnerXML = <type>none</type>
+   }
+   object TransformShift {
+      def fromXML( n: NodeSeq ) : TransformShift = {
+         TransformShift( (n \ "amount").text.toDouble )
+      }
+   }
+   /** @param amount shift amount in Hertz */
+   final case class TransformShift( amount: Double ) extends Transform {
+      def fileID = "_Hlb" + amount.toInt
+      def inverse = copy( amount = -amount )
+      def fscapeOption = Some( FScape.shift( amount ) _ )
+      protected def toInnerXML = <type>shift</type><amount>{amount}</amount>
+   }
+   object TransformResample {
+      def fromXML( n: NodeSeq ) : TransformResample = {
+         TransformResample( (n \ "amount").text.toDouble )
+      }
+   }
+   /** @param amount resampling amount in semintone cents */
+   final case class TransformResample( amount: Double ) extends Transform {
+      def fileID = "_Rsmp" + amount.toInt
+      def inverse = copy( amount = -amount )
+      def fscapeOption = Some( FScape.resample( amount ) _ )
+      protected def toInnerXML = <type>resample</type><amount>{amount}</amount>
+   }
+
    def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ) {
-      search.shift match {
-         case Some( freq ) =>
+      search.transform.inverse.fscapeOption match {
+         case Some( fsc ) =>
             val m          = search.matches( idx )
             val spec       = AudioFile.readSpec( m.file )
             val wholeSpan  = Span( 0L, spec.numFrames )
             val truncSpan  = Span( math.max( wholeSpan.start, m.punch.start - 176400L ), math.min( wholeSpan.stop, m.punch.stop + 176400L ))
             val trunc      = truncSpan != wholeSpan
             val fName      = plainName( m.file ) + (if( trunc ) "_" + m.punch.start + "_" + m.punch.stop else "") +
-               "_Hlb" + freq.toInt + ".aif"
-//println( "span " + truncSpan + "; whole " + wholeSpan + "; trunc " + trunc + "; file " + fName )
-            val fShift  = new File( LeereNull.bounceFolder, fName )
+               search.transform.fileID + ".aif"
+            val fTrns      = new File( LeereNull.bounceFolder, fName )
 
-            def shiftDone() {
-               val m2      = m.copy( file = fShift, punch = m.punch.shift( -truncSpan.start ))
+            def trnsDone() {
+               val m2      = m.copy( file = fTrns, punch = m.punch.shift( -truncSpan.start ))
                val s2      = search.copy( matches = search.matches.patch( idx, IndexedSeq( m2 ), 1 ))
-//println( "match " + m2 )
                makeMatchEditor2( s2, idx )
             }
 
             def runShift( f: File ) {
-               FScape.shift( f, fShift, -freq ) { b =>
-                  if( b ) shiftDone()
-               }
+//               FScape.shift( f, fTrns, -freq ) { b =>
+//                  if( b ) trnsDone()
+//               }
+               fsc( f, fTrns )( if( _ ) trnsDone() )
             }
 
-            if( fShift.isFile ) shiftDone() else {
+            if( fTrns.isFile ) trnsDone() else {
                if( trunc ) {
                   val truncFile = File.createTempFile( "trunc", ".aif" )
                   truncFile.deleteOnExit()
@@ -295,7 +343,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          val copy       = CSettingsBuilder( search.settings )
          copy.minPunch  = m.punch.length
          copy.maxPunch  = m.punch.length
-         CorrelatorSetup.makeSetup( arIn, copy, search.metas, Some( m ), search.shift )
+         CorrelatorSetup.makeSetup( arIn, copy, search.metas, Some( m ), search.transform )
       }
       butSearchSplit.visible = search.master.isEmpty
 

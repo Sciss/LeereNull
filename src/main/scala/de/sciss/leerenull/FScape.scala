@@ -19,12 +19,20 @@ object FScape extends GUIGoodies {
       res
    }
 
-   def shift( in: File, out: File, freq: Double )( fun: Boolean => Unit ) {
+   def shift( freq: Double )( in: File, out: File )( fun: Boolean => Unit ) {
       val spec = FScapeJobs.OutputSpec.aiffFloat
       val doc  = FScapeJobs.Hilbert( in.getAbsolutePath, out.getAbsolutePath, spec = spec,
                                      gain = FScapeJobs.Gain.immediate, freq = freq, antiAlias =  true )
 //      jobs.process( "Hilbert", doc, progress = (i: Int) => fun( Progress( i )))( b => fun( if( b ) Success else Failure ))
       process( "Hilbert", doc )( fun )
+   }
+
+   def resample( cents: Double )( in: File, out: File )( fun: Boolean => Unit ) {
+      val spec = FScapeJobs.OutputSpec.aiffFloat
+      val doc  = FScapeJobs.Resample( in.getAbsolutePath, out.getAbsolutePath, spec = spec,
+                                      gain = FScapeJobs.Gain.immediate,
+                                      rate = "GAGA", keepHeader = true, interpolate = false, fltLength = "GAGA" )
+      process( "Resample", doc )( fun )
    }
 
    def process( title: String, doc: FScapeJobs.Doc )( fun: Boolean => Unit ) {

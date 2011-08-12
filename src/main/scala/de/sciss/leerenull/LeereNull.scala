@@ -32,11 +32,11 @@ import de.sciss.kontur.{Main => Kontur}
 import de.sciss.gui.{MenuItem, MenuGroup}
 import java.util.Properties
 import java.io.{File, FileInputStream}
-import swing.{Dialog, Swing}
 import eu.flierl.grouppanel.GroupPanel
 import de.sciss.kontur.gui.TrailViewEditor
 import collection.breakOut
 import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, Stake, AudioTrack, AudioRegion}
+import swing.{ButtonGroup, RadioButton, Dialog, Swing}
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGoodies {
    lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder) = {
@@ -69,33 +69,57 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                implicit val trl0 = trl
 
                val span = selSpan
-               cutTheCheese( selectedAudioRegions, span ) match {
-                  case IndexedSeq( ar ) => CorrelatorSetup.prepareCorrelator( ar )
-                  case _ =>
-//                     val message = "<html>Multiple regions are selected. To proceed,<br>" +
-//                        "an intermediate bounced representation is needed.<br>" +
-//                        "<B>Go ahead and bounce?</B></html>"
-                     val lbInfo = label( "<html>Multiple regions are selected. To proceed,<br>" +
+// DISABLE THIS SHORTCUT, AS WE CANNOT SPECIFY SHIFT OR RESAMPLE
+//               cutTheCheese( selectedAudioRegions, span ) match {
+//                  case IndexedSeq( ar ) => CorrelatorSetup.prepareCorrelator( ar )
+//                  case _ =>
+////                     val message = "<html>Multiple regions are selected. To proceed,<br>" +
+////                        "an intermediate bounced representation is needed.<br>" +
+////                        "<B>Go ahead and bounce?</B></html>"
+                     val lbInfo = label( "<html>Feature Extraction: To proceed,<br>" +
                                "an intermediate bounced representation is needed.<br>" +
                                "<B>Go ahead and bounce?</B></html>"
                      )
-                     val ggShiftAmount = integerField( "Amount (Hz):", 0, 11025, 0 )()
-                     ggShiftAmount.enabled = false
-                     val ggApplyShift = checkBox( "Freq Shift" ) { b =>
-                        ggShiftAmount.enabled = b
-                        if( b ) ggShiftAmount.requestFocus()
+                     def actionBut() {
+                        ggShiftAmount.enabled      = bg.selected == Some( radShift )
+                        ggResampleAmount.enabled   = bg.selected == Some( radResample )
+                        bg.selected match {
+                           case Some( `radShift` )    => ggShiftAmount.requestFocus()
+                           case Some( `radResample` ) => ggResampleAmount.requestFocus()
+                           case _                     =>
+                        }
                      }
+                     lazy val radNoTrans    = radioButton( "No Transform" )( actionBut() )
+                     lazy val radShift      = radioButton( "Freq Shift" )( actionBut() )
+                     lazy val radResample   = radioButton( "Resample" )( actionBut() )
+                     lazy val bg = new ButtonGroup( radNoTrans, radShift, radResample )
+                     lazy val ggShiftAmount = integerField( "Amount (Hz):", 0, 11025, 0 )()
+                     ggShiftAmount.enabled = false
+                     lazy val ggResampleAmount = integerField( "Amount (Cent):", -4800, 4800, 0 )()
+                     ggResampleAmount.enabled = false
+                     bg.select( radNoTrans )
                      val p = new GroupPanel {
-                        theHorizontalLayout is Parallel( lbInfo, Sequential( ggApplyShift, ggShiftAmount ))
-                        theVerticalLayout is Sequential( lbInfo, Parallel( Baseline )( ggApplyShift, ggShiftAmount ))
+                        linkVerticalSize( radNoTrans, radShift, radResample, ggShiftAmount, ggResampleAmount )
+                        linkHorizontalSize( radNoTrans, radShift, radResample )
+                        linkHorizontalSize( ggShiftAmount, ggResampleAmount )
+                        theHorizontalLayout is Parallel( lbInfo, radNoTrans,
+                           Sequential( radShift, ggShiftAmount ), Sequential( radResample, ggResampleAmount ))
+                        theVerticalLayout is Sequential( lbInfo, radNoTrans,
+                           Parallel( Baseline )( radShift, ggShiftAmount ),
+                           Parallel( Baseline )( radResample, ggResampleAmount ))
                      }
                      val res = Dialog.showConfirmation( null, p.peer, "Extract", Dialog.Options.OkCancel, Dialog.Message.Question )
                      if( res == Dialog.Result.Ok ) {
                         val tracks  = trl.toList.filter( _.selected ).map( _.track )
-                        val shift   = if( ggApplyShift.selected ) Some( ggShiftAmount.integer.toDouble ) else None
-                        CorrelatorSetup.bounceAndExtract( tracks, span, shift )
+//                        val shift   = if( radShift.selected ) Some( ggShiftAmount.integer.toDouble ) else None
+                        val transform  = bg.selected match {
+                           case Some( `radShift` )    => CorrelatorCore.TransformShift( ggShiftAmount.integer.toDouble )
+                           case Some( `radResample` ) => CorrelatorCore.TransformResample( ggResampleAmount.integer.toDouble )
+                           case _                     => CorrelatorCore.TransformNone
+                        }
+                        CorrelatorSetup.bounceAndExtract( tracks, span, transform )
                      }
-               }
+//               }
             }
          }
       })

@@ -43,7 +43,7 @@ import swing.{ProgressBar, Swing, Dialog}
 import xml.XML
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
-   def bounceAndExtract( tracks: List[ Track ], span: Span, shift: Option[ Double ])( implicit doc: Session, timeline: BasicTimeline ) {
+   def bounceAndExtract( tracks: List[ Track ], span: Span, transform: CorrelatorCore.Transform )( implicit doc: Session, timeline: BasicTimeline ) {
       val atracks = tracks.collect({ case at: AudioTrack if( at.diffusion.isDefined ) => at })
       val numChannels = atracks.map( _.diffusion.get ).foldLeft( 0 )( (maxi, diff) => math.max( maxi, diff.numOutputChannels ))
       val diffs: Set[ MatrixDiffusion ] = atracks.map( _.diffusion )
@@ -102,7 +102,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
                         val afe     = provideAudioFile( fAudio ) // let it create the ce
                         val ar      = AudioRegion( span, plainName( fAudio ), afe, 0L )
 //                        val metas   = metaFiles.map( ESettings.fromXMLFile( _ ))
-                        makeSetup( ar, defaultSettings, metas, None, shift )
+                        makeSetup( ar, defaultSettings, metas, None, transform )
                      }
                }
             }
@@ -110,12 +110,13 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          }
 
          if( done ) {
-            shift match {
-               case Some( freq ) =>
-                  val fShift = new File( LeereNull.bounceFolder, plainName( fNorm ) + "_Hlb.aif" )
-                  FScape.shift( fNorm, fShift, freq ) { b =>
-                     if( b ) runExtract( fNorm, fShift )
-                  }
+            transform.fscapeOption match {
+               case Some( fsc ) =>
+                  val fTrns = new File( LeereNull.bounceFolder, plainName( fNorm ) + transform.fileID + ".aif" )
+//                  FScape.shift( fNorm, fTrns, freq ) { b =>
+//                     if( b ) runExtract( fNorm, fTrns )
+//                  }
+                  fsc( fNorm, fTrns )( if( _ ) runExtract( fNorm, fTrns ))
                case None =>
                   runExtract( fNorm, fNorm )
             }
@@ -140,7 +141,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          }
       val metas      = metaFiles.map( ESettings.fromXMLFile( _ ))
       if( metas.nonEmpty ) {
-         makeSetup( ar, defaultSettings, metas, None, None )
+         makeSetup( ar, defaultSettings, metas, None, CorrelatorCore.TransformNone )
       } else {
          val message = "<html>The audio file associated with the selected region<br>" +
             "<tt>" + afName + "</tt><br>is not in the feature database.<br>" +
@@ -151,7 +152,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             extract( afPath, plain, ChannelsBehavior.Mix /* XXX */) { (meta, success) =>
                if( success ) {
                   val meta2 = saveMeta( ESettingsBuilder( meta ), plain )
-                  Swing.onEDT( makeSetup( ar, defaultSettings, IndexedSeq( meta2 ), None, None ))
+                  Swing.onEDT( makeSetup( ar, defaultSettings, IndexedSeq( meta2 ), None, CorrelatorCore.TransformNone ))
                }
             }
          }
@@ -213,7 +214,8 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       sb
    }
 
-   def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, metas: IndexedSeq[ ESettings ], master: Option[ Match ], shift: Option[ Double ])
+   def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, metas: IndexedSeq[ ESettings ], master: Option[ Match ],
+                  transform: CorrelatorCore.Transform )
                 ( implicit doc: Session ) {
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
@@ -343,7 +345,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
             ggMeta.selection.item.metaOutput match {
                case Some( meta ) =>
                   settings.metaInput = meta
-                  CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings, metas, master, shift )
+                  CorrelatorSelector.beginSearch( ar.span.start - ar.offset, settings, metas, master, transform )
                case None => message( "? No meta file available ?" )
             }
          }

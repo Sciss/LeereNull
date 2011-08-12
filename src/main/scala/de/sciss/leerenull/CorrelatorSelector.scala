@@ -66,15 +66,17 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
                IndexedSeq( ESettings.fromXMLFile( settings.metaInput ))
             }
          }
-         val shift = {
-            val e = (xml \ "shift").text
-            if( e == "" ) None else Some( e.toDouble )
-         }
-         Search( date, offset, settings, matches, metas, master, shift )
+//         val shift = {
+//            val e = (xml \ "shift").text
+//            if( e == "" ) None else Some( e.toDouble )
+//         }
+         val transform = CorrelatorCore.Transform.fromXML( xml \ "transform" )
+         Search( date, offset, settings, matches, metas, master, transform )
       }
    }
    final case class Search( creation: Date, offset: Long, settings: CSettings, matches: IndexedSeq[ Match ],
-                            metas: IndexedSeq[ ESettings ], master: Option[ Match ], shift: Option[ Double ]) {
+                            metas: IndexedSeq[ ESettings ], master: Option[ Match ],
+                            transform: CorrelatorCore.Transform ) {
       def toXML = <search>
   <date>{Search.dateFormat.format( creation )}</date>
   <offset>{offset}</offset>
@@ -82,7 +84,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
   <matches>{matches.map(_.toXML)}</matches>
   <metas>{metas.map( _.toXML )}</metas>
   {master match { case Some( m ) => <master>{m.toXML.child}</master>; case None => Nil }}
-  {shift match { case Some( f ) => <shift>{f}</shift>; case None => Nil }}
+  <transform>{transform.toXML.child}</transform>
 </search>
    }
 
@@ -91,7 +93,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
     *                   appearance in the main timeline
     */
    def beginSearch( offset: Long, settings: CSettings, metas: IndexedSeq[ ESettings ],
-                    master: Option[ Match ], shift: Option[ Double ])
+                    master: Option[ Match ], transform: CorrelatorCore.Transform )
                   ( implicit doc: Session ) {
       if( verbose ) println( settings )
 
@@ -113,7 +115,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
                   }
                }
             }
-            val search = Search( tim, offset, settings, res, metas, master, shift )
+            val search = Search( tim, offset, settings, res, metas, master, transform )
             if( autosave ) saveSearch( search )
             Swing.onEDT( makeSelector( search ))
 

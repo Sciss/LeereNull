@@ -40,7 +40,7 @@ import javax.swing.event.{AncestorEvent, AncestorListener}
 import javax.swing.{SwingUtilities, JPanel, JOptionPane, WindowConstants, JDialog, JComponent, AbstractAction, Action => JAction, KeyStroke}
 import java.awt.{FileDialog, Component => AWTComponent, Frame => AWTFrame}
 import java.io.{FilenameFilter, File}
-import swing.{CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
+import swing.{ButtonGroup, RadioButton, CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -113,6 +113,11 @@ trait GUIGoodies {
 
    def checkBox( txt: String )( fun: Boolean => Unit = (b: Boolean) => () ) = new CheckBox {
       action = Action( txt )( fun( selected ))
+      peer.putClientProperty( "JComponent.sizeVariant", "small" )
+   }
+
+   def radioButton( txt: String )( fun: => Unit ) = new RadioButton {
+      action = Action( txt )( fun )
       peer.putClientProperty( "JComponent.sizeVariant", "small" )
    }
 
