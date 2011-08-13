@@ -78,8 +78,8 @@ trait KonturGoodies {
    def dbamp( d: Double ) = math.pow( 10, d / 20 )
    def ampdb( d: Double ) = math.log10( d ) * 20
 
-   def secsToFrames( d: Double )( implicit tl: BasicTimeline ) = (d * tl.rate + 0.5).toLong
-   def framesToSecs( n: Long )( implicit tl: BasicTimeline ) = n / tl.rate
+//   def secsToFrames( d: Double )( implicit tl: BasicTimeline ) = (d * tl.rate + 0.5).toLong
+//   def framesToSecs( n: Long )( implicit tl: BasicTimeline ) = n / tl.rate
 
    def selectedAudioRegions( implicit tl: BasicTimeline, tlv: TimelineView, trl: BasicTrackList ) : IndexedSeq[ AudioRegion ] = {
       val tr   = selTracks

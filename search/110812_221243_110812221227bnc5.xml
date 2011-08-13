@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>8/12/11 10:12:43 PM BST</date>
+  <offset>5783210</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/110812_221227_bnc5783210_feat.xml</input>
+   <punchIn>
+   <start>64408</start>
+   <stop>129540</stop>
+   <weight>0.5</weight>
+</punchIn>
+   
+   <minPunch>88200</minPunch>
+   <maxPunch>132300</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>7.943282</maxBoost>
+   <numMatches>10</numMatches>
+   <numPerFile>2</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>0.9992988</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Ens_KlakKlak_Sciss.aif</file>
+   <start>48421376</start>
+   <stop>48421376</stop>
+   <boostIn>0.969728</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.910981</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Ens_KlakKlak_Sciss.aif</file>
+   <start>48609280</start>
+   <stop>48609280</stop>
+   <boostIn>1.1082411</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.7711381</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/080306_125508_MeridaNebelwaldOKM.aif</file>
+   <start>6525440</start>
+   <stop>6525440</stop>
+   <boostIn>6.3986096</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.7698029</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/080306_125508_MeridaNebelwaldOKM.aif</file>
+   <start>9310720</start>
+   <stop>9310720</stop>
+   <boostIn>7.346124</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.7617913</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Ens_CoilJazz_Sciss.aif</file>
+   <start>3745280</start>
+   <stop>3745280</stop>
+   <boostIn>1.3254136</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.7565938</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080305_203158_MeridaPosadaOKMEd.aif</file>
+   <start>5563392</start>
+   <stop>5563392</stop>
+   <boostIn>7.756495</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.7509366</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/WTCDaubMassacre.aif</file>
+   <start>7927296</start>
+   <stop>7927296</stop>
+   <boostIn>6.6262193</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.7484659</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Einseifen.aif</file>
+   <start>3618816</start>
+   <stop>3618816</stop>
+   <boostIn>5.16605</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.7436636</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Bnce020414FTWTFTAmp.aif</file>
+   <start>3753472</start>
+   <stop>3753472</stop>
+   <boostIn>5.8009377</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.73570013</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/080327_124845_BraulioSalazarValencia.wav</file>
+   <start>38538240</start>
+   <stop>38538240</stop>
+   <boostIn>3.6626146</boostIn>
+   <boostOut>1.0</boostOut>
+</match></matches>
+  <metas><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110812_221227_bnc5783210.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110812_221227_bnc5783210_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110812_221227_bnc5783210_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>0</channels>
+</feature></metas>
+  
+  <transform><type>none</type></transform>
+</search>

@@ -151,7 +151,7 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
 //      }
 
       def rowStrings( m: Match ) : Seq[ String ] = Seq(
-         percentString( m.sim ), plainName( m.file ), timeString( m.punch ),
+         percentString( m.sim ), plainName( m.file ), timeString( m.punch, 44100 / search.transform.timeScale ),
          decibelString( ampdb( m.boostIn )), decibelString( ampdb( m.boostOut ))
       )
 

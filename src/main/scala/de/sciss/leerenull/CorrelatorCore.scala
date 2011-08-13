@@ -53,6 +53,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    sealed trait Transform {
       def fscapeOption: Option[ (File, File) => (Boolean => Unit) => Unit ]
       def fileID: String
+      def timeScale : Double
       def inverse: Transform
       final def toXML : Node = <transform>{toInnerXML}</transform>
       protected def toInnerXML : NodeSeq
@@ -61,6 +62,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       def fscapeOption = None
       def inverse = this
       def fileID = ""
+      def timeScale = 1.0
       protected def toInnerXML = <type>none</type>
    }
    object TransformShift {
@@ -73,6 +75,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       def fileID = "_Hlb" + amount.toInt
       def inverse = copy( amount = -amount )
       def fscapeOption = Some( FScape.shift( amount ) _ )
+      def timeScale = 1.0
       protected def toInnerXML = <type>shift</type><amount>{amount}</amount>
    }
    object TransformResample {
@@ -85,6 +88,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       def fileID = "_Rsmp" + amount.toInt
       def inverse = copy( amount = -amount )
       def fscapeOption = Some( FScape.resample( amount ) _ )
+      def timeScale = math.pow( 2, amount / -1200 )
       protected def toInnerXML = <type>resample</type><amount>{amount}</amount>
    }
 
@@ -106,7 +110,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                makeMatchEditor2( s2, idx )
             }
 
-            def runShift( f: File ) {
+            def runTrns( f: File ) {
 //               FScape.shift( f, fTrns, -freq ) { b =>
 //                  if( b ) trnsDone()
 //               }
@@ -121,7 +125,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                   val cutter = AudioFileCutter( m.file, truncFile, truncSpan ) {
                      case AudioFileCutter.Success =>
                         dlg.stop()
-                        runShift( truncFile )
+                        runTrns( truncFile )
                      case AudioFileCutter.Failure( e ) =>
                         dlg.stop()
                         e.printStackTrace()
@@ -129,7 +133,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                   }
                   dlg.start( cutter )
 
-               } else runShift( m.file )
+               } else runTrns( m.file )
             }
 
          case None => makeMatchEditor2( search, idx )
@@ -139,10 +143,15 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
    private def makeMatchEditor2( search: Search, idx: Int )( implicit doc: Session ) {
       val tls     = doc.timelines
       val set     = search.settings
+//      val itrns   = search.transform.inverse
 
       def frames( afe: AudioFileElement, secs: Double ) = (secs * afe.sampleRate + 0.5).toLong
+      def fromInputRate( sp: Span ) =
+         Span( (sp.start / search.transform.timeScale + 0.5).toLong,
+               (sp.stop  / search.transform.timeScale + 0.5).toLong )
 
       val m       = search.matches( idx )
+      val mPunch  = fromInputRate( m.punch )
       val meta    = ESettings.fromXMLFile( set.metaInput )
 
       var ar1Off     = -1L
@@ -170,11 +179,12 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          var arsRight   = IndexedSeq.empty[ AudioRegion ]
 
          val pi      = set.punchIn
-         val fOff1   = math.max( 0L, pi.span.start - frames( afe1, 10 ))
+         val piSpan  = fromInputRate( pi.span )
+         val fOff1   = math.max( 0L, piSpan.start - frames( afe1, 10 ))
          val start1  = 0L
-         val pre1    = pi.span.start - fOff1
-         val maxLen1 = set.punchOut.map( p => p.span.start ).getOrElse( afe1.numFrames ) - fOff1
-         val len1    = math.min( maxLen1, pi.span.stop - fOff1 + frames( afe1, 1 ))
+         val pre1    = piSpan.start - fOff1
+         val maxLen1 = set.punchOut.map( p => fromInputRate( p.span ).start ).getOrElse( afe1.numFrames ) - fOff1
+         val len1    = math.min( maxLen1, piSpan.stop - fOff1 + frames( afe1, 1 ))
          val stop1   = start1 + len1
          val fadeIn1 = FadeSpec( math.min( pre1, frames( afe1, 1 )))
          val fadeOut1= FadeSpec( math.min( len1 - pre1, frames( afe1, 1 )))
@@ -187,12 +197,13 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          splitPos    = ar1.span.stop + incorpOff
 
          set.punchOut.foreach { po =>
-            val fOff2      = math.max( fOff1 + len1, po.span.start - frames( afe1, 1 ))
-            val pre2       = po.span.start - fOff2
+            val poSpan     = fromInputRate( po.span )
+            val fOff2      = math.max( fOff1 + len1, poSpan.start - frames( afe1, 1 ))
+            val pre2       = poSpan.start - fOff2
             // start1 + pre1 = timeline spot where punch begins
-            val start2     = start1 + pre1 + m.punch.length - pre2
+            val start2     = start1 + pre1 + mPunch.length - pre2
             val maxLen2    = afe1.numFrames - fOff2
-            val len2       = math.min( maxLen2, pre2 + po.span.length + frames( afe1, 10 ))
+            val len2       = math.min( maxLen2, pre2 + poSpan.length + frames( afe1, 10 ))
             val stop2      = start2 + len2
             val fadeIn2    = FadeSpec( math.min( pre2, frames( afe1, 1 )))
             val fadeOut2   = FadeSpec( math.min( len2 - pre2, frames( afe1, 1 )))
@@ -203,14 +214,14 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
 
          def matchRegions( m: Match, pre: String ) : IndexedSeq[ AudioRegion ] = {
             val afe2    = provideAudioFile( m.file )
-            val fOff3   = m.punch.start
+            val fOff3   = mPunch.start
             val start3  = start1 + pre1
             val maxLen3 = afe2.numFrames - fOff3
             // merge if gain difference is less than 6 dB
             val split3  = set.punchOut.isDefined && (math.max( m.boostOut, m.boostIn ) / math.min( m.boostOut, m.boostIn )) > 2
             val boost3  = if( !split3 && set.punchOut.isDefined ) math.sqrt( m.boostOut * m.boostIn ).toFloat else m.boostIn
-            val fdt3    = m.punch.length / 4
-            val len3    = if( split3 ) (m.punch.length / 2) + fdt3 else math.min( maxLen3, m.punch.length + frames( afe2, 1 ))
+            val fdt3    = mPunch.length / 4
+            val len3    = if( split3 ) (mPunch.length / 2) + fdt3 else math.min( maxLen3, mPunch.length + frames( afe2, 1 ))
             val stop3   = start3 + len3
             val fade3   = FadeSpec( fdt3 )
             val arStart = AudioRegion( Span( start3, stop3 ), regionName( if( split3 ) "pin" else "punch", afe2, pre = pre ),
@@ -222,7 +233,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                case Some( po ) if( split3 ) =>
                   val start4  = stop3 - fdt3
                   val fOff4   = fOff3 + start4 - start3
-                  val len4    = math.min( afe2.numFrames - fOff4, m.punch.length - (start4 - start3) + frames( afe2, 1 ))
+                  val len4    = math.min( afe2.numFrames - fOff4, mPunch.length - (start4 - start3) + frames( afe2, 1 ))
                   val stop4   = start4 + len4
                   val fade4   = FadeSpec( fdt3 )
                   val boost4  = m.boostOut
@@ -311,8 +322,10 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                tl.joinEdit[ Unit ]( "Incorporate" ) { ce0: AbstractCompoundEdit =>
                   implicit val ce = ce0   // sucky IDEA
                   set.punchOut.foreach { po =>
-                     val splitDelta    = m.punch.length - (po.span.start - set.punchIn.span.start)   // korrekt?
-                     val splitThresh   = secsToFrames( 0.3 )
+                     val poSpan        = fromInputRate( po.span )
+                     val piSpan        = fromInputRate( set.punchIn.span )
+                     val splitDelta    = mPunch.length - (poSpan.start - piSpan.start)   // korrekt?
+                     val splitThresh   = (0.3 * tl.rate + 0.5).toLong // secsToFrames( 0.3 )
 //println( "pos " + splitPos + " ; delta " + splitDelta )
                      insertTimelineSpan( splitPos, splitDelta ) {
                         case (at, ar) =>
@@ -347,7 +360,8 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
             }
          }
       }
-      val lbIncorporate = label( "Regions will be offset by " + timeString( incorpOff ))
+//println( "incorpOff " + incorpOff + " : tl.rate " + tl.rate )
+      val lbIncorporate = label( "Regions will be offset by " + timeString( incorpOff, tl.rate ))
 
 //      var panelChildren = IndexedSeq[ Component ]( butIncorporate, lbIncorporate )
 
@@ -359,8 +373,8 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          //           numPerFile: Int, minSpacing: Long )
          val arIn       = AudioRegion( Span( search.offset, search.offset + afe1.numFrames ), afe1.name, afe1, 0L )
          val copy       = CSettingsBuilder( search.settings )
-         copy.minPunch  = m.punch.length
-         copy.maxPunch  = m.punch.length
+         copy.minPunch  = m.punch.length  // in input rate!
+         copy.maxPunch  = m.punch.length  // in input rate!
          CorrelatorSetup.makeSetup( arIn, copy, search.metas, Some( m ), search.transform )
       }
       butSearchSplit.visible = search.master.isEmpty

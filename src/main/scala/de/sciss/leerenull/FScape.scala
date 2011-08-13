@@ -27,11 +27,12 @@ object FScape extends GUIGoodies {
       process( "Hilbert", doc )( fun )
    }
 
+   /** @param cents  the pitch factor, not time factor! (thus 1200 means octave up / double speed) */
    def resample( cents: Double )( in: File, out: File )( fun: Boolean => Unit ) {
       val spec = FScapeJobs.OutputSpec.aiffFloat
       val doc  = FScapeJobs.Resample( in.getAbsolutePath, out.getAbsolutePath, spec = spec,
                                       gain = FScapeJobs.Gain.immediate,
-                                      rate = (cents / 100).toString + "semi", keepHeader = true )
+                                      rate = (cents / -100).toString + "semi", keepHeader = true )
       process( "Resample", doc )( fun )
    }
 

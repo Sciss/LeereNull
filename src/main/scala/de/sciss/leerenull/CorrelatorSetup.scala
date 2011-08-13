@@ -29,18 +29,18 @@
 package de.sciss.leerenull
 
 import eu.flierl.grouppanel.GroupPanel
-import de.sciss.strugatzki.{FeatureExtraction, FeatureCorrelation, Span => SSpan}
 import java.io.File
 import de.sciss.synth.io.{SampleFormat, AudioFileType, AudioFileSpec}
 import de.sciss.io.Span
 import javax.swing.{JOptionPane, SwingUtilities}
 import de.sciss.common.BasicWindowHandler
-import FeatureCorrelation.{Match, Punch, SettingsBuilder => CSettingsBuilder}
-import FeatureExtraction.{ChannelsBehavior, Settings => ESettings, SettingsBuilder => ESettingsBuilder}
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, Track, SessionUtil, BasicTimeline, Session, AudioRegion}
 import collection.breakOut
 import swing.{ProgressBar, Swing, Dialog}
 import xml.XML
+import de.sciss.strugatzki.{FeatureExtraction, FeatureCorrelation, Span => SSpan}
+import FeatureCorrelation.{Match, Punch, SettingsBuilder => CSettingsBuilder}
+import FeatureExtraction.{ChannelsBehavior, Settings => ESettings, SettingsBuilder => ESettingsBuilder}
 
 object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    def bounceAndExtract( tracks: List[ Track ], span: Span, transform: CorrelatorCore.Transform )( implicit doc: Session, timeline: BasicTimeline ) {
@@ -217,6 +217,15 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    def makeSetup( ar: AudioRegion, settings: CSettingsBuilder, metas: IndexedSeq[ ESettings ], master: Option[ Match ],
                   transform: CorrelatorCore.Transform )
                 ( implicit doc: Session ) {
+
+      val inputRate = ar.audioFile.sampleRate * transform.timeScale
+      def secsToFrames( d: Double ) = (d * inputRate + 0.5).toLong
+      def framesToSecs( n: Long ) = n / inputRate
+      def toInputRate( sp: SSpan ) =
+         SSpan( (sp.start * transform.timeScale + 0.5).toLong, (sp.stop * transform.timeScale + 0.5).toLong )
+      def fromInputRate( sp: SSpan ) =
+         SSpan( (sp.start / transform.timeScale + 0.5).toLong, (sp.stop / transform.timeScale + 0.5).toLong )
+
       val tls  = doc.timelines
       val ar0  = ar.move( -ar.span.start )
       implicit val tl = tls.tryEdit( "Add Extractor Timeline" ) { implicit ce =>
@@ -241,12 +250,12 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       implicit val tlv = tlf.timelineView
 
       def punchInText( p: Punch ) = {
-         if( p.span.isEmpty ) "<not set>" else timeString( p.span )
+         if( p.span.isEmpty ) "<not set>" else timeString( p.span, inputRate )
       }
 
       def punchOutText( p: Option[ Punch ]) = {
          p match {
-            case Some( po ) => timeString( po.span )
+            case Some( po ) => timeString( po.span, inputRate )
             case None       => "<not set>"
          }
       }
@@ -279,7 +288,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       val arDelta = ar.offset
 
       lazy val butToIn = button( "→ In" ) { b =>
-         val sp = selSpan.shift( arDelta )
+         val sp = toInputRate( selSpan.shift( arDelta ))
          if( !sp.isEmpty ) {
             settings.punchIn  = settings.punchIn.copy( span = sp )
             lbPunchIn.text    = punchInText( settings.punchIn ) // str
@@ -287,7 +296,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
          }
       }
       lazy val butToOut = button( "→ Out" ) { b =>
-         val sp = selSpan.shift( arDelta )
+         val sp = toInputRate( selSpan.shift( arDelta ))
          if( !sp.isEmpty ) {
             settings.punchOut  = Some( Punch(
                sp, settings.punchOut.map( _.temporalWeight ).getOrElse( ggWeightOut.decimal.toFloat )))
@@ -296,12 +305,12 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       }
       lazy val butFromIn = button( "⬅ In" ) { b =>
          val sp = settings.punchIn.span
-         if( !sp.isEmpty ) selSpan = sp
+         if( !sp.isEmpty ) selSpan = fromInputRate( sp )
       }
       lazy val butFromOut = button( "⬅ Out" ) { b =>
          settings.punchOut.foreach { po =>
             val sp = po.span
-            if( !sp.isEmpty ) selSpan = sp
+            if( !sp.isEmpty ) selSpan = fromInputRate( sp )
          }
       }
 
