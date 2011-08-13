@@ -303,8 +303,10 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                      }
                      arsMap.values.flatten.foreach { ar =>
                         val inChans = ar.audioFile.numChannels
-                        val diff    = provideDiffusion( pannedMatrix( inChans, outChans, pan ), more = moreDiffs.toIndexedSeq )
+                        val mat     = pannedMatrix( inChans, outChans, pan )
+                        val diff    = provideDiffusion( mat, more = moreDiffs.toIndexedSeq )
                         val diffSeq = diff.matrix.toSeq
+                        assert( mat.toSeq == diffSeq )
                         moreDiffs  += diff
                         val track   = provideAudioTrackSpace( ar.span, { at =>
                            /* val ok1 = */ at.diffusion match {
@@ -328,6 +330,39 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             }
          }
       })
+      val miSelectWrongChans = new MenuItem( "leerenull.selectwrongchans",
+         action( "Select Regions With Incompatible Track Diffusions" ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               implicit val tl0  = tl
+               implicit val tlv0 = tlv
+               implicit val trl0 = trl
+               val span = selSpan
+               tl.joinEdit( "Select Regions" ) { implicit ce =>
+                  val arsMap = collectAudioRegions({ case tup => tup }).groupBy( _._1 ).mapValues( _.map( _._2 ))
+                  arsMap.foreach { case (at, ars) =>
+                     val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                     tveO.foreach( _.editDeselect( ce, ars: _* ))
+                  }
+                  val flt = arsMap.map({ case (at, ars) =>
+                     at.diffusion match {
+                        case Some( diff ) =>
+                           val tNum = diff.numInputChannels
+                           at -> ars.filter( _.audioFile.numChannels != tNum )
+                        case None => (at, IndexedSeq.empty[ AudioRegion ])
+                     }
+                  }).filter( _._2.nonEmpty )
+                  var num = 0
+                  flt.foreach { case (at, ars) =>
+                     val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                     tveO.foreach( _.editSelect( ce, ars: _* ))
+                     num += ars.size
+                  }
+                  println( "Invalid regions: " + num )
+               }
+            }
+         }
+      })
 
       mg.add( miExtractor )
       mg.add( miLoadSearch )
@@ -335,6 +370,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       mg.add( miCleanUpOverlaps )
       mg.add( miOptimizeTracksCapacities )
       mg.add( miPanSelectedRegions )
+      mg.add( miSelectWrongChans )
       mf.add( mg )
    }
 }
