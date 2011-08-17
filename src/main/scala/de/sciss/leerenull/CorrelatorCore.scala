@@ -327,7 +327,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                      val splitDelta    = mPunch.length - (poSpan.start - piSpan.start)   // korrekt?
                      val splitThresh   = (0.3 * tl.rate + 0.5).toLong // secsToFrames( 0.3 )
 //println( "pos " + splitPos + " ; delta " + splitDelta )
-                     insertTimelineSpan( splitPos, splitDelta ) {
+                     if( splitDelta != 0L ) insertTimelineSpan( splitPos, splitDelta ) {
                         case (at, ar) =>
                            val start   = ar.span.start
                            val stop    = ar.span.stop
