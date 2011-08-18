@@ -1,0 +1,13 @@
+var f = Set.empty[java.io.File]
+def addCurrent() { f ++= doc.audioFiles.map( _.path )}
+
+addCurrent()
+
+
+
+
+val stakes = doc.timelines.toList.head.tracks.toList.collect({ case at: AudioTrack => at.trail.getAll() }).flatten
+val frames = stakes.map(_.span.getLength).sum
+val frStakes = stakes.filter(s => { val n = s.audioFile.path.getName; n.startsWith("11726") || n.startsWith("65296")})
+val frFrames = frStakes.map(_.span.getLength).sum
+val pct = frFrames.toDouble/frames*100 // 3.8%
