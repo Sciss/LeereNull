@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instant>
+  <Editor id="12" mixer-width="Wide" zoom-focus="3" zoom="512.000000" snap-to="12" snap-mode="1" edit-point="EditAtPlayhead" playhead="0" show-waveforms="yes" show-waveforms-rectified="no" show-waveforms-recording="yes" show-measures="yes" follow-playhead="yes" stationary-playhead="no" xfades-visible="yes" region-list-sort-type="ByEndInFile" mouse-mode="MouseObject" show-editor-mixer="yes">
+    <geometry x_size="1623" y_size="1006" x_pos="0" y_pos="22" x_off="0" y_off="44" edit_pane_pos="1405"/>
+  </Editor>
+  <Mixer narrow-strips="no" show-mixer="no"/>
+  <ExportDialog sample_rate="44.1kHz" src_quality="best" dither_type="None" channel_count="stereo" header_format="WAV" bitdepth_format="24 bit" endian_format="Little-endian (Intel)" filename="/Users/hhrutz/Documents/devel/LeereNull/ardour/Limiter/export/export.wav" cue_file_type="None">
+    <Tracks>
+      <Track channel1="off" channel2="off"/>
+      <Track channel1="off" channel2="off"/>
+    </Tracks>
+  </ExportDialog>
+</instant>

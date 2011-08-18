@@ -1,0 +1,470 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<search>
+  <date>8/17/11 6:54:23 PM BST</date>
+  <offset>10457697</offset>
+  <settings>
+   <database>/Users/hhrutz/Documents/devel/LeereNull/feature</database>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/extract/110817_185335_bnc10457697_Rsmp400_feat.xml</input>
+   <punchIn>
+   <start>0</start>
+   <stop>619436</stop>
+   <weight>0.5</weight>
+</punchIn>
+   
+   <minPunch>88200</minPunch>
+   <maxPunch>132300</maxPunch>
+   <normalize>true</normalize>
+   <maxBoost>7.943282</maxBoost>
+   <numMatches>60</numMatches>
+   <numPerFile>2</numPerFile>
+   <minSpacing>0</minSpacing>
+</settings>
+  <matches><match>
+   <sim>0.6184925</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Bnc031018MndCtrlBack-7.aif</file>
+   <start>19843584</start>
+   <stop>20463104</stop>
+   <boostIn>2.257462</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.6157454</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Box15_Bnce</file>
+   <start>1574400</start>
+   <stop>2193920</stop>
+   <boostIn>1.6708806</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.6144171</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/SC_070305_205654Gain.aif</file>
+   <start>82563072</start>
+   <stop>83182592</stop>
+   <boostIn>2.5854826</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.6138705</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080311_130102_ParaguanaMeer2AT.aif</file>
+   <start>339968</start>
+   <stop>959488</stop>
+   <boostIn>0.6028062</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.61173004</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/080311_130102_ParaguanaMeer2AT.aif</file>
+   <start>25534464</start>
+   <stop>26153984</stop>
+   <boostIn>0.4099792</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.6078099</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BibliothekTransport080930.aif</file>
+   <start>55678976</start>
+   <stop>56298496</stop>
+   <boostIn>4.2474675</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.6012757</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/reinkarnation.aif</file>
+   <start>508928</start>
+   <stop>1128448</stop>
+   <boostIn>0.21527928</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5991268</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/LthMlBRt2HlbConLthMl'bShftEQQuCut.aif</file>
+   <start>1539072</start>
+   <stop>2158592</stop>
+   <boostIn>1.958061</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5973104</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Schlie5AMBarRadio.aif</file>
+   <start>51963392</start>
+   <stop>52582912</stop>
+   <boostIn>3.9224114</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5954267</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/StyroporCut.aif</file>
+   <start>181760</start>
+   <stop>801280</stop>
+   <boostIn>3.4453144</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5947908</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Bnc031018MndCtrlBack-7.aif</file>
+   <start>10447872</start>
+   <stop>11067392</stop>
+   <boostIn>6.1706595</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.59383595</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Pfefferwerk.aif</file>
+   <start>56369664</start>
+   <stop>56989184</stop>
+   <boostIn>1.8512455</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5935018</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Amplifikation090914_SchoepsMK2S_EdHPF.aif</file>
+   <start>1510912</start>
+   <stop>2130432</stop>
+   <boostIn>2.548904</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5906315</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/LthMlBRt2HlbConLthMl'bShftEQQuCut.aif</file>
+   <start>7613440</start>
+   <stop>8232960</stop>
+   <boostIn>3.839339</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.58918047</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/SC_070305_205654Gain.aif</file>
+   <start>78961664</start>
+   <stop>79581184</stop>
+   <boostIn>4.926297</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.58870757</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/OrdingBuhne_081230_062407.aif</file>
+   <start>78539776</start>
+   <stop>79159296</stop>
+   <boostIn>5.0786767</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5870453</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/F1rsMosHMSSL'07Ct3hp.aif</file>
+   <start>924160</start>
+   <stop>1543680</stop>
+   <boostIn>1.054432</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5854161</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Pfefferwerk.aif</file>
+   <start>37190144</start>
+   <stop>37809664</stop>
+   <boostIn>1.4015869</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5846125</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/rec060308LangsamAtmen.aif</file>
+   <start>2135040</start>
+   <stop>2754560</stop>
+   <boostIn>1.0615133</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5831815</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BgStn4'CCHPFOpBgStn8'lbLPFMix.aif</file>
+   <start>46780416</start>
+   <stop>47399936</stop>
+   <boostIn>5.623339</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.58273643</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/plexischleifen2.aif</file>
+   <start>8256512</start>
+   <stop>8876032</stop>
+   <boostIn>2.747854</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5802821</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BallonsMittel.aif</file>
+   <start>5908992</start>
+   <stop>6528512</stop>
+   <boostIn>2.9142044</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5802349</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/080228_104415_CaracasPatioCage1AT.aif</file>
+   <start>65118720</start>
+   <stop>65738240</stop>
+   <boostIn>7.5049314</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5791957</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/plexischleifen2.aif</file>
+   <start>4206592</start>
+   <stop>4826112</stop>
+   <boostIn>3.3251185</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.57859147</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/B00h09m35s17mar2009.wav</file>
+   <start>79303168</start>
+   <stop>79922688</stop>
+   <boostIn>5.689696</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.57534206</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/SC070'211WTOpSC070'409WTWTCut.aif</file>
+   <start>10609152</start>
+   <stop>11228672</stop>
+   <boostIn>1.4799554</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5752961</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/B00h09m35s17mar2009.wav</file>
+   <start>8333312</start>
+   <stop>8952832</stop>
+   <boostIn>5.255493</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5730565</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/ZwSpl'2BlssOpZwSpl'4BlssEdSt.aif</file>
+   <start>20186112</start>
+   <stop>20805632</stop>
+   <boostIn>1.1017618</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5725485</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Angst_070903St.aif</file>
+   <start>1756160</start>
+   <stop>2375680</stop>
+   <boostIn>5.4869714</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5716009</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/F1rsMosHMSSL'07Ct3hp.aif</file>
+   <start>53760</start>
+   <stop>673280</stop>
+   <boostIn>1.046559</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5684923</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BigStone4.aif</file>
+   <start>58633216</start>
+   <stop>59252736</stop>
+   <boostIn>6.8018312</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5682568</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/AT_TremBnc3H'prAmpConBnc3H'kRsmpRsmpEd.aif</file>
+   <start>19644416</start>
+   <stop>20263936</stop>
+   <boostIn>0.40036976</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.56812376</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BallonsMittel.aif</file>
+   <start>3689472</start>
+   <stop>4308992</stop>
+   <boostIn>4.9059725</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5648749</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BottleDen-8LC.aif</file>
+   <start>1067520</start>
+   <stop>1687040</stop>
+   <boostIn>7.858681</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.56377065</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Bnce020414FTWTFTAmp.aif</file>
+   <start>726528</start>
+   <stop>1346048</stop>
+   <boostIn>1.1231588</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.56298137</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/ichneumon-5.aif</file>
+   <start>14673920</start>
+   <stop>15293440</stop>
+   <boostIn>1.5305539</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5628016</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BallonsKlein.aif</file>
+   <start>2098688</start>
+   <stop>2718208</stop>
+   <boostIn>4.38232</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.56113744</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/DepotKinofilm1Cut.aif</file>
+   <start>1724928</start>
+   <stop>2344448</stop>
+   <boostIn>0.7525169</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.56037426</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BetonPoch.aif</file>
+   <start>16183808</start>
+   <stop>16803328</stop>
+   <boostIn>4.3779993</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5595065</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Schlie5AMBarRadio.aif</file>
+   <start>35678208</start>
+   <stop>36297728</stop>
+   <boostIn>1.8402323</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5588646</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/LithMeloB-2.aif</file>
+   <start>3632640</start>
+   <stop>4252160</stop>
+   <boostIn>3.38217</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5571494</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/testCC1cHlb-1kCut.aif</file>
+   <start>4829696</start>
+   <stop>5449216</stop>
+   <boostIn>1.8637745</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5550091</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/CFTimeBase-T4L.aif</file>
+   <start>708096</start>
+   <stop>1327616</stop>
+   <boostIn>2.5975583</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.55460125</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/Amazonas.aif</file>
+   <start>621056</start>
+   <stop>1240576</stop>
+   <boostIn>0.2148901</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5545409</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/LangeNachtKling-L.aif</file>
+   <start>4420608</start>
+   <stop>5040128</stop>
+   <boostIn>2.0197828</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.55336505</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/rec110208_200252Cut.aif</file>
+   <start>12638720</start>
+   <stop>13258240</stop>
+   <boostIn>1.1195549</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5525843</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/_fsc12.aif</file>
+   <start>198656</start>
+   <stop>818176</stop>
+   <boostIn>2.74244</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.551875</sim>
+   <file>/Users/hhrutz/Desktop/SP_demo/tapes/WaldSteinEditCt.aif</file>
+   <start>7682048</start>
+   <stop>8301568</stop>
+   <boostIn>5.1890864</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.55128896</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/MilchhofSchweissen.aif</file>
+   <start>7663616</start>
+   <stop>8283136</stop>
+   <boostIn>1.468792</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.54939353</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/080228_095500_CaracasPatioAT.aif</file>
+   <start>46729728</start>
+   <stop>47349248</stop>
+   <boostIn>2.0463467</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.54877466</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BigStone4.aif</file>
+   <start>57224704</start>
+   <stop>57844224</stop>
+   <boostIn>2.8255897</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.54823387</sim>
+   <file>/Users/hhrutz/Desktop/new_projects/Utopia/Freesound/7350-10_felix.blume_UKRANIA/117180_felix.blume_Centrale_Chernobyl_site_vent_ruban_plastique_bruit_centrale_continue_chantier_CFE101105T057_441.aif</file>
+   <start>353792</start>
+   <stop>973312</stop>
+   <boostIn>2.0844023</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.54786533</sim>
+   <file>/Users/hhrutz/Desktop/new_projects/Utopia/Freesound/7350-10_felix.blume_UKRANIA/117264_felix.blume_Electricite_fil_centrale_Chernobyl_loin_oiseau_lgr_vent_sourd_CFE101028T035_441.aif</file>
+   <start>3064832</start>
+   <stop>3684352</stop>
+   <boostIn>2.4061046</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5467098</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/MilchhofSchweissen.aif</file>
+   <start>618496</start>
+   <stop>1238016</stop>
+   <boostIn>2.30474</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5460952</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/01StS'nFlt4Op01StS'CnFlt4.aif</file>
+   <start>27820544</start>
+   <stop>28440064</stop>
+   <boostIn>4.7283163</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.54473186</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/BgStn4'CCHPFOpBgStn8'lbLPFMix.aif</file>
+   <start>41647616</start>
+   <stop>42267136</stop>
+   <boostIn>5.993166</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5443753</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/rhizomwhisper2.aif</file>
+   <start>22177280</start>
+   <stop>22796800</stop>
+   <boostIn>4.444577</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5442916</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/080228_095500_CaracasPatioAT.aif</file>
+   <start>42959872</start>
+   <stop>43579392</stop>
+   <boostIn>2.063292</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.54354113</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/LangeNachtKling-L.aif</file>
+   <start>8621568</start>
+   <stop>9241088</stop>
+   <boostIn>3.1775599</boostIn>
+   <boostOut>1.0</boostOut>
+</match><match>
+   <sim>0.5431995</sim>
+   <file>/Users/hhrutz/Desktop/from_mnemo/ZahnradGong1.aif</file>
+   <start>2433024</start>
+   <stop>3052544</stop>
+   <boostIn>0.44692117</boostIn>
+   <boostOut>1.0</boostOut>
+</match></matches>
+  <metas><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110817_185335_bnc10457697.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110817_185335_bnc10457697_Rsmp400-L_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110817_185335_bnc10457697_Rsmp400-L_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>2</channels>
+</feature><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110817_185335_bnc10457697.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110817_185335_bnc10457697_Rsmp400-F_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110817_185335_bnc10457697_Rsmp400-F_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>1</channels>
+</feature><feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110817_185335_bnc10457697.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110817_185335_bnc10457697_Rsmp400_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110817_185335_bnc10457697_Rsmp400_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+   <channels>0</channels>
+</feature></metas>
+  
+  <transform><type>resample</type><amount>400.0</amount></transform>
+</search>

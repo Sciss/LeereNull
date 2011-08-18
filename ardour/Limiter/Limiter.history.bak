@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UndoHistory>
+  <UndoTransaction tv_sec="1313672844" tv_usec="395215" name="cut objects">
+    <MementoCommand obj_id="128" type_name="N6ARDOUR13AudioPlaylistE">
+      <Playlist name="Session56" orig_diskstream_id="78" frozen="no">
+        <Region id="97" name="Session56" start="0" length="13274175" position="0" ancestral-start="0" ancestral-length="0" stretch="1" shift="1" first_edit="nothing" layer="0" sync-position="0" flags="Opaque,DefaultFadeIn,DefaultFadeOut,WholeFile,FadeIn,FadeOut,External" scale-gain="1" source-0="62" source-1="64" channels="2" master-source-0="62" master-source-1="64">
+          <FadeIn default="yes" active="yes"/>
+          <FadeOut default="yes" active="yes"/>
+          <Envelope default="yes"/>
+          <extra>
+            <GUI waveform-visible="yes" envelope-visible="no" waveform-rectified="no" waveform-logscaled="no"/>
+          </extra>
+        </Region>
+      </Playlist>
+      <Playlist name="Session56" orig_diskstream_id="78" frozen="no"/>
+    </MementoCommand>
+  </UndoTransaction>
+  <UndoTransaction tv_sec="1313672901" tv_usec="663757" name="insert sndfile">
+    <MementoCommand obj_id="128" type_name="N6ARDOUR13AudioPlaylistE">
+      <Playlist name="Session56" orig_diskstream_id="78" frozen="no"/>
+      <Playlist name="Session56" orig_diskstream_id="78" frozen="no">
+        <Region id="228" name="Session56" start="0" length="13274175" position="0" ancestral-start="0" ancestral-length="0" stretch="1" shift="1" first_edit="id" layer="0" sync-position="0" flags="Opaque,DefaultFadeIn,DefaultFadeOut,WholeFile,FadeIn,FadeOut,External" scale-gain="1" source-0="62" source-1="64" channels="2" master-source-0="62" master-source-1="64">
+          <FadeIn default="yes" active="yes"/>
+          <FadeOut default="yes" active="yes"/>
+          <Envelope default="yes"/>
+          <extra>
+            <GUI waveform-visible="yes" envelope-visible="no" waveform-rectified="no" waveform-logscaled="no"/>
+          </extra>
+        </Region>
+      </Playlist>
+    </MementoCommand>
+  </UndoTransaction>
+</UndoHistory>

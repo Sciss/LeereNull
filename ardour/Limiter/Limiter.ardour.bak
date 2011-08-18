@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Session version="2.0.0" name="Limiter" sample-rate="44100" id-counter="235">
+  <Config>
+    <Option name="output-auto-connect" value="2"/>
+    <Option name="mtc-port-name" value="ardour"/>
+    <Option name="mmc-port-name" value="ardour"/>
+    <Option name="midi-port-name" value="ardour"/>
+    <Option name="meter-falloff" value="32"/>
+    <end-marker-is-free val="no"/>
+  </Config>
+  <Sources>
+    <Source name="Session56.aif" id="62" flags="" channel="0"/>
+    <Source name="Session56.aif" id="64" flags="" channel="1"/>
+  </Sources>
+  <Regions>
+    <Region id="223" name="Session56" start="0" length="13274175" position="0" ancestral-start="0" ancestral-length="0" stretch="1" shift="1" first_edit="name" layer="0" sync-position="0" flags="Opaque,DefaultFadeIn,DefaultFadeOut,WholeFile,FadeIn,FadeOut,External" scale-gain="1" source-0="62" source-1="64" channels="2" master-source-0="62" master-source-1="64">
+      <FadeIn default="yes" active="yes"/>
+      <FadeOut default="yes" active="yes"/>
+      <Envelope default="yes"/>
+    </Region>
+  </Regions>
+  <DiskStreams>
+    <AudioDiskstream flags="Recordable" channels="2" playlist="Session56" speed="1" name="Session56" id="78"/>
+  </DiskStreams>
+  <Locations>
+    <Location id="17" name="start" start="0" end="0" flags="IsMark,IsStart" locked="no"/>
+    <Location id="16" name="end" start="13274175" end="13274175" flags="IsMark,IsEnd" locked="no"/>
+    <Location id="54" name="Loop" start="0" end="13230000" flags="IsAutoLoop,IsHidden" locked="no"/>
+    <Location id="55" name="Punch" start="0" end="13230000" flags="IsAutoPunch,IsHidden" locked="no"/>
+  </Locations>
+  <Connections/>
+  <Routes>
+    <Route flags="MasterOut" default-type="audio" muted="no" soloed="no" phase-invert="no" denormal-protection="no" mute-affects-pre-fader="yes" mute-affects-post-fader="yes" mute-affects-control-outs="yes" mute-affects-main-outs="yes" meter-point="MeterPostFader" order-keys="editor=0:signal=0">
+      <IO name="master" id="18" active="yes" inputs="{Session56/out 1}{Session56/out 2}" outputs="{system:playback_1}{system:playback_2}" gain="1.000000000000" iolimits="-1,2,-1,2">
+        <Panner linked="no" link_direction="SameDirection" bypassed="no">
+          <Output x="0" y="0"/>
+          <Output x="1" y="0"/>
+          <StreamPanner x="0" type="Equal Power Stereo" muted="no">
+            <Automation>
+              <AutomationList id="50" default="0" min_yval="0" max_yval="1" max_xval="0" state="Off" style="Absolute"/>
+            </Automation>
+            <controllable name="panner" id="49"/>
+          </StreamPanner>
+          <StreamPanner x="1" type="Equal Power Stereo" muted="no">
+            <Automation>
+              <AutomationList id="53" default="1" min_yval="0" max_yval="1" max_xval="0" state="Off" style="Absolute"/>
+            </Automation>
+            <controllable name="panner" id="52"/>
+          </StreamPanner>
+        </Panner>
+        <controllable name="gaincontrol" id="19"/>
+        <Automation>
+          <AutomationList id="20" default="1" min_yval="0" max_yval="2" max_xval="0" state="Off" style="Absolute"/>
+        </Automation>
+      </IO>
+      <controllable name="solo" id="22"/>
+      <controllable name="mute" id="23"/>
+      <remote_control id="1"/>
+      <extra>
+        <GUI color="35785:6365:47050" shown_mixer="yes" height="62" shown_editor="yes">
+          <gain shown="no" height="62"/>
+          <pan shown="no" height="62"/>
+        </GUI>
+      </extra>
+    </Route>
+    <Route default-type="audio" muted="no" soloed="no" phase-invert="no" denormal-protection="no" mute-affects-pre-fader="yes" mute-affects-post-fader="yes" mute-affects-control-outs="yes" mute-affects-main-outs="yes" meter-point="MeterPostFader" order-keys="editor=1:signal=1" mode="Normal" diskstream-id="78">
+      <IO name="Session56" id="71" active="yes" inputs="{}{}" outputs="{master/in 1}{master/in 2}" gain="1.000000000000" iolimits="1,-1,-1,-1">
+        <Panner linked="no" link_direction="SameDirection" bypassed="no">
+          <Output x="0" y="0"/>
+          <Output x="1" y="0"/>
+          <StreamPanner x="0" type="Equal Power Stereo" muted="no">
+            <Automation>
+              <AutomationList id="83" default="0" min_yval="0" max_yval="1" max_xval="0" state="Off" style="Absolute"/>
+            </Automation>
+            <controllable name="panner" id="82"/>
+          </StreamPanner>
+          <StreamPanner x="1" type="Equal Power Stereo" muted="no">
+            <Automation>
+              <AutomationList id="86" default="1" min_yval="0" max_yval="1" max_xval="0" state="Off" style="Absolute"/>
+            </Automation>
+            <controllable name="panner" id="85"/>
+          </StreamPanner>
+        </Panner>
+        <controllable name="gaincontrol" id="72"/>
+        <Automation>
+          <AutomationList id="73" default="1" min_yval="0" max_yval="2" max_xval="0" state="Off" style="Absolute"/>
+        </Automation>
+      </IO>
+      <controllable name="solo" id="75"/>
+      <controllable name="mute" id="76"/>
+      <remote_control id="2"/>
+      <Insert type="ladspa" unique-id="1913" count="1">
+        <Redirect active="yes" placement="PostFader">
+          <IO name="Fast Lookahead limiter" id="104" active="yes" inputs="" outputs="" gain="1.000000000000" iolimits="-1,-1,-1,-1">
+            <Panner linked="no" link_direction="SameDirection" bypassed="no"/>
+            <controllable name="gaincontrol" id="105"/>
+            <Automation>
+              <Automation/>
+            </Automation>
+          </IO>
+          <Automation visible=""/>
+        </Redirect>
+        <ladspa>
+          <port number="0" value="-6.185567"/>
+          <controllable name="Input gain (dB)" id="108"/>
+          <port number="1" value="-0.206186"/>
+          <controllable name="Limit (dB)" id="110"/>
+          <port number="2" value="+0.102320"/>
+          <controllable name="Release time (s)" id="112"/>
+        </ladspa>
+        <controls>
+          <controllable name="Input gain (dB)" id="108" parameter="0"/>
+          <controllable name="Limit (dB)" id="110" parameter="1"/>
+          <controllable name="Release time (s)" id="112" parameter="2"/>
+          <controllable name="Attenuation (dB)" id="114" parameter="3"/>
+        </controls>
+        <PortAutomation>
+          <port number="0">
+            <AutomationList id="109" default="0" min_yval="1.17549435082e-38" max_yval="3.40282346639e+38" max_xval="0" state="Off" style="Absolute"/>
+          </port>
+          <port number="1">
+            <AutomationList id="111" default="0" min_yval="1.17549435082e-38" max_yval="3.40282346639e+38" max_xval="0" state="Off" style="Absolute"/>
+          </port>
+          <port number="2">
+            <AutomationList id="113" default="0.507499992847" min_yval="1.17549435082e-38" max_yval="3.40282346639e+38" max_xval="0" state="Off" style="Absolute"/>
+          </port>
+        </PortAutomation>
+      </Insert>
+      <extra>
+        <GUI color="36327:22974:43203" shown_mixer="yes" height="62" shown_editor="yes">
+          <gain shown="no" height="62"/>
+          <pan shown="no" height="62"/>
+        </GUI>
+      </extra>
+      <alignment style="ExistingMaterial"/>
+      <controllable name="recenable" id="159"/>
+    </Route>
+  </Routes>
+  <EditGroups/>
+  <MixGroups/>
+  <Playlists>
+    <Playlist name="Session56" orig_diskstream_id="78" frozen="no">
+      <Region id="228" name="Session56" start="0" length="13274175" position="0" ancestral-start="0" ancestral-length="0" stretch="1" shift="1" first_edit="id" layer="0" sync-position="0" flags="Opaque,DefaultFadeIn,DefaultFadeOut,WholeFile,FadeIn,FadeOut,External" scale-gain="1" source-0="62" source-1="64" channels="2" master-source-0="62" master-source-1="64">
+        <FadeIn default="yes" active="yes"/>
+        <FadeOut default="yes" active="yes"/>
+        <Envelope default="yes"/>
+        <extra>
+          <GUI waveform-visible="yes" envelope-visible="no" waveform-rectified="no" waveform-logscaled="no"/>
+        </extra>
+      </Region>
+    </Playlist>
+  </Playlists>
+  <UnusedPlaylists/>
+  <Click>
+    <IO name="click" id="24" active="yes" inputs="" outputs="{system:playback_1}{system:playback_2}" gain="1.000000000000" iolimits="0,0,-1,-1">
+      <Panner linked="no" link_direction="SameDirection" bypassed="no">
+        <Output x="0" y="0"/>
+        <Output x="1" y="0"/>
+        <StreamPanner x="0.5" type="Equal Power Stereo" muted="no">
+          <Automation>
+            <AutomationList id="47" default="0.5" min_yval="0" max_yval="1" max_xval="0" state="Off" style="Absolute"/>
+          </Automation>
+          <controllable name="panner" id="46"/>
+        </StreamPanner>
+      </Panner>
+      <controllable name="gaincontrol" id="25"/>
+      <Automation>
+        <AutomationList id="26" default="1" min_yval="0" max_yval="2" max_xval="0" state="Off" style="Absolute"/>
+      </Automation>
+    </IO>
+  </Click>
+  <NamedSelections/>
+  <TempoMap>
+    <Tempo start="1|1|0" beats-per-minute="120.000000" note-type="4.000000" movable="no"/>
+    <Meter start="1|1|0" note-type="4.000000" beats-per-bar="4.000000" movable="no"/>
+  </TempoMap>
+  <ControlProtocols>
+    <Protocol name="Generic MIDI" active="no"/>
+    <Protocol name="Mackie" active="no"/>
+  </ControlProtocols>
+  <extra>
+    <ClockModes primary="SMPTE" secondary="BBT" preroll="MinSec" postroll="MinSec" bigclock="SMPTE" editpoint="BBT" zoomrange="SMPTE" nudge="SMPTE" sfboxLengthClock="BBT" sfboxTimecodeClock="SMPTE"/>
+  </extra>
+</Session>
