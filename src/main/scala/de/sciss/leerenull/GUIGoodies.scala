@@ -81,6 +81,15 @@ trait GUIGoodies {
       }
 
    def openFileDialog( title: String = "Open File", init: File = new File( "" ),
+                       filter: File => Boolean = _ => true, parent: AWTComponent = null ) : Option[ File ] =
+      fileDialog( FileDialog.LOAD, title, init, filter, parent )
+
+   def saveFileDialog( title: String = "Save File", init: File = new File( "" ),
+                       filter: File => Boolean = _ => true, parent: AWTComponent = null ) : Option[ File ] =
+      fileDialog( FileDialog.SAVE, title, init, filter, parent )
+
+
+   private def fileDialog( mode: Int, title: String = "Open File", init: File = new File( "" ),
                        filter: File => Boolean = _ => true, parent: AWTComponent = null ) : Option[ File ] = {
       val f = if( parent != null ) {
          SwingUtilities.getWindowAncestor( parent ) match {
@@ -89,7 +98,7 @@ trait GUIGoodies {
          }
       } else null
 
-      val dlg = new FileDialog( f, title, FileDialog.LOAD )
+      val dlg = new FileDialog( f, title, mode )
       if( init.isFile ) {
          dlg.setDirectory( init.getParent )
          dlg.setFile( init.getName )

@@ -33,10 +33,11 @@ import de.sciss.gui.{MenuItem, MenuGroup}
 import java.util.Properties
 import java.io.{File, FileInputStream}
 import eu.flierl.grouppanel.GroupPanel
-import de.sciss.kontur.gui.TrailViewEditor
 import collection.breakOut
 import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, Stake, AudioTrack, AudioRegion}
 import swing.{ButtonGroup, RadioButton, Dialog, Swing}
+import de.sciss.kontur.io.SonagramOverview
+import de.sciss.kontur.gui.{DefaultTrackComponent, TrailViewEditor}
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGoodies {
    lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder) = {
@@ -363,14 +364,69 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             }
          }
       })
+      val miOptimizeFanatically = new MenuItem( "leerenull.optimizefanatically",
+         action( "Fanatically Optimize Track Capacities" ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               implicit val tl0  = tl
+               implicit val tlv0 = tlv
+               implicit val trl0 = trl
+               val allTracks = tl.tracks.toList.collect({ case at: AudioTrack => at }).toIndexedSeq // .sortBy( _.name )
+               allTracks.zipWithIndex.foreach { case (at, idx) =>
+                  val ars  = at.trail.getAll()
+//                     val coll = (withDiffs -- taken - tup).filter { case (at2, matO2) =>
+//                        (matO2 == matO) && ars.forall( ar => at2.trail.getRange( ar.span ).isEmpty )
+//                     }
+//                     val at2O = coll.toSeq.sortBy( _._1.name ).headOption
+                  ars.foreach { ar =>
+                     val at2O = allTracks.take( idx - 1 ).find( _.trail.getRange( ar.span ).isEmpty )
+                     at2O.foreach { at2 =>
+                        tl.joinEdit( "Optimize Tracks Capacities" ) { implicit ce =>
+                           at.trail.editRemove( ce, ar )
+                           at2.trail.editAdd( ce, ar )
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      })
+      val miExportPDF = new MenuItem( "leerenull.exportpdf", action( "Export Timeline as PDF..." ) {
+         currentDoc.foreach { implicit doc =>
+            findTimelineFrame.foreach { tlf =>
+               saveFileDialog( "Export Timeline as PDF" ).foreach { file =>
+                  val view = tlf.tracksPanel.getViewport.getView
+//                  val view = PDF.wrapTimeline( tlf, 1024, 64 )
+//                  view.span = tlf.tracksPanel.timelineView.span
+//                  val oldVerbose = SonagramOverview.verbose
+                  val old = DefaultTrackComponent.forceFullPaint
+                  DefaultTrackComponent.forceFullPaint = true
+//                  SonagramOverview.verbose = true
+                  try {
+                     println( "Exporting...")
+                     PDF.create( file, view, true, 0 )
+                     println( "Done." )
+                  } finally {
+                     DefaultTrackComponent.forceFullPaint = old
+//                     SonagramOverview.verbose = oldVerbose
+                  }
+               }
+            }
+         }
+      })
 
       mg.add( miExtractor )
       mg.add( miLoadSearch )
       mg.add( miSelStartToRegionEnd )
+      mg.addSeparator()
       mg.add( miCleanUpOverlaps )
-      mg.add( miOptimizeTracksCapacities )
       mg.add( miPanSelectedRegions )
+      mg.addSeparator()
+      mg.add( miOptimizeTracksCapacities )
       mg.add( miSelectWrongChans )
+      mg.add( miOptimizeFanatically )
+      mg.addSeparator()
+      mg.add( miExportPDF )
       mf.add( mg )
    }
 }

@@ -5,8 +5,10 @@ class LeereNullProject( info: ProjectInfo ) extends DefaultProject( info ) {
    val kontur        = "de.sciss" %% "kontur" % "0.15"
    val scalaSwing    = "org.scala-lang" % "scala-swing" % "2.9.0-1"
    val fscapeJobs    = "de.sciss" %% "fscapejobs" % "0.15"
+   val itextpdf      = "com.itextpdf" % "itextpdf" % "5.1.1"
 
    val repo1         = "Clojars Repository" at "http://clojars.org/repo" // this is needed for JSyntaxPane
+   val itextRepo     = "itextpdf.com" at "http://maven.itextpdf.com"
 
    val camelCaseName          = "LeereNull"
    def appBundleName          = camelCaseName + ".app"

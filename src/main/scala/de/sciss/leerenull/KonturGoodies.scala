@@ -135,15 +135,20 @@ trait KonturGoodies {
 
    def currentDoc : Option[ Session ] = Option( app.getDocumentHandler.getActiveDocument.asInstanceOf[ Session ])
 
-   def withTimeline( fun: (BasicTimeline, BasicTimelineView, BasicTrackList) => Unit )( implicit doc: Session ) {
-      doc.timelines.toList.filterNot( _.name.startsWith( "$" )).headOption.foreach {
+   def findTimelineFrame( implicit doc: Session ) : Option[ TimelineFrame ] = findTimelineWithFrame.map( _._2 )
+
+   private def findTimelineWithFrame( implicit doc: Session ) : Option[ (BasicTimeline, TimelineFrame) ] =
+      doc.timelines.toList.filterNot( _.name.startsWith( "$" )).headOption.flatMap {
          case tl: BasicTimeline =>
             JavaConversions.asScalaIterator( app.getWindowHandler.getWindows ).collect({
                case tlf: TimelineFrame if( tlf.timelineView.timeline == tl ) => tlf
-            }).toList.headOption.foreach { tlf =>
-               fun( tl, tlf.timelineView, tlf.tracksPanel )
-            }
-         case _ =>
+            }).toList.headOption.map( tlf => (tl, tlf ))
+         case _ => None
+      }
+
+   def withTimeline( fun: (BasicTimeline, BasicTimelineView, BasicTrackList) => Unit )( implicit doc: Session ) {
+      findTimelineWithFrame.foreach { case (tl, tlf) =>
+         fun( tl, tlf.timelineView, tlf.tracksPanel )
       }
    }
 
