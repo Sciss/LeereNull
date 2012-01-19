@@ -2,7 +2,7 @@
  *  TimelineFrame2.scala
  *  (LeereNull)
  *
- *  Copyright (c) 2011 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
  *
  *	This software is free software; you can redistribute it and/or
  *	modify it under the terms of the GNU General Public License
@@ -21,15 +21,11 @@
  *
  *	For further information, please contact Hanns Holger Rutz at
  *	contact@sciss.de
- *
- *
- *  Changelog:
  */
 
 package de.sciss.leerenull
 
 import de.sciss.kontur.gui.TimelineFrame
-import de.sciss.app.AbstractWindow
 import de.sciss.kontur.session.{Session, BasicTimeline}
 import swing.Component
 import java.awt.BorderLayout

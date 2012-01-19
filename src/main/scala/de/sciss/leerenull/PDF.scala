@@ -2,7 +2,7 @@
  *  PDF.scala
  *  (LeereNull)
  *
- *  Copyright (c) 2011 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
  *
  *	This software is free software; you can redistribute it and/or
  *	modify it under the terms of the GNU General Public License
@@ -21,9 +21,6 @@
  *
  *	For further information, please contact Hanns Holger Rutz at
  *	contact@sciss.de
- *
- *
- *  Changelog:
  */
 
 package de.sciss.leerenull
@@ -31,13 +28,11 @@ package de.sciss.leerenull
 import java.io.{FileOutputStream, File}
 import com.itextpdf.text.pdf.PdfWriter
 import com.itextpdf.text.{Document => IDocument, Rectangle => IRectangle}
-import de.sciss.kontur.gui.TimelineFrame
-import java.awt.{Dimension, Graphics, Graphics2D, Component}
-import de.sciss.io.Span
+import java.awt.Component
 
 object PDF {
    def create( file: File, view: Component, usePrefSize: Boolean = true, margin: Int = 0 ) {
-      val viewSz     = if( usePrefSize ) view.getPreferredSize else view.getSize()
+      val viewSz     = if( usePrefSize ) view.getPreferredSize else view.getSize
       val width      = viewSz.width + (margin << 1)
       val height     = viewSz.height + (margin << 1)
       val pageSize	= new IRectangle( 0, 0, width, height )

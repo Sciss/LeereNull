@@ -1,5 +1,5 @@
 /*
- *  NullGoodies.scala
+ *  PDF.scala
  *  (LeereNull)
  *
  *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
@@ -25,26 +25,31 @@
 
 package de.sciss.leerenull
 
+import de.sciss.kontur.session.BasicTimeline
+import de.sciss.strugatzki.Span
+import de.sciss.synth.io.AudioFile
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.{Date, Locale}
 
-trait NullGoodies {
-   def plainName( f: File ) : String = {
-      val n  = f.getName
-      val i  = n.lastIndexOf( '.' )
-      val n1 = if( i >= 0 ) n.substring( 0, i ) else n
-      if( n1.endsWith( "_feat" )) n1.dropRight( 5 ) else n1
+object ThirdMovement {
+   object Strategy {
+      def apply( bal: Double ) : Strategy = {
+         require( bal >= 0.0 && bal <= 1.0 )
+         new Strategy { val balance = bal }
+      }
+
+      case object Imitation extends Strategy { val bal = 0.0 }
+      case object Ecology   extends Strategy { val bal = 1.0 }
    }
+   sealed trait Strategy {
+      def balance: Double
+   }
+}
 
-   def dbMetaFile( plain: String )   : File  = new File( LeereNull.databaseFolder,  plain + "_feat.xml" )
-   def extrMetaFile( plain: String ) : File  = new File( LeereNull.extractorFolder, plain + "_feat.xml" )
-   def featureFile( plain: String )  : File  = new File( LeereNull.databaseFolder,  plain + "_feat.aif" )
+class ThirdMovement {
+   import ThirdMovement._
 
-   def stampedFile( folder: File, id: String, ext: String, date: Date = new Date() ) : File = {
-      val rem = id + ext
-      require( !rem.contains( '\'' ), "Invalid characters " + rem )
-      val df = new SimpleDateFormat( "yyMMdd'_'HHmmss'_" + rem + "'", Locale.US )
-      new File( folder, df.format( date ))
+   def generate( tl: BasicTimeline, tlSpan: Span, layer: AudioFile, layerOffset: Long, material: File,
+                 numChannels: Int, startStrategy: Strategy, stopStrategy: Strategy ) {
+
    }
 }
