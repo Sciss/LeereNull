@@ -26,12 +26,14 @@
 package de.sciss.leerenull
 
 import de.sciss.kontur.session.BasicTimeline
-import java.io.File
-import de.sciss.strugatzki.{FeatureSegmentation, FeatureExtraction, Span}
 import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
 import actors.Actor
 import util.control.ControlThrowable
 import de.sciss.strugatzki.FeatureSegmentation.Break
+import de.sciss.strugatzki.{Strugatzki, FeatureCorrelation, FeatureSegmentation, FeatureExtraction, Span}
+import java.io.{FileInputStream, FileOutputStream, File}
+import de.sciss.strugatzki.FeatureCorrelation.Match
+import collection.immutable.{IndexedSeq => IIdxSeq}
 
 object ThirdMovement extends ProcessorCompanion {
    type PayLoad = Unit
@@ -53,7 +55,9 @@ object ThirdMovement extends ProcessorCompanion {
 
    final case class Settings( timeline: BasicTimeline, tlSpan: Span, layer: File, layerOffset: Long,
                               materialFolder: File, numChannels: Int, startStrategy: Strategy,
-                              stopStrategy: Strategy )
+                              stopStrategy: Strategy, startDur: (Long, Long), stopDur: (Long, Long),
+                              startWeight: Float, stopWeight: Float, maxOverlap: Float,
+                              connectionWeight: Float, strategyWeight: Float )
 
    private case object AbortException extends ControlThrowable
 
@@ -131,15 +135,19 @@ extends NullGoodies with Processor {
 
    private def process() {
       val (metaFile, extrOption) = metaFileForLayer( settings.layer )
-      handleProcessOption[ Unit ]( 0.333f, extrOption )
+      handleProcessOption[ Unit ]( 0.1f, extrOption )
+
+      val spanLen             = settings.tlSpan.length
+      val numChannels         = settings.numChannels
 
       val segmCfg             = FeatureSegmentation.SettingsBuilder()
       segmCfg.corrLen         = 88200L // have one second on each side
       segmCfg.databaseFolder  = LeereNull.databaseFolder // hold the normalization data
       segmCfg.metaInput       = metaFile
-      segmCfg.minSpacing      = 22050L // 44100L -- no, smaller because we want to use overlap eventually
-      segmCfg.numBreaks       = (settings.tlSpan.length / segmCfg.minSpacing).toInt + 1
-      segmCfg.span            = Some( Span( settings.layerOffset, settings.layerOffset + settings.tlSpan.length ))
+      val minSpc              = math.min( settings.startDur._1, settings.stopDur._1 ) / 6
+      segmCfg.minSpacing      = minSpc // 22050L // 44100L -- no, smaller because we want to use overlap eventually
+      segmCfg.numBreaks       = (spanLen / segmCfg.minSpacing).toInt + 1
+      segmCfg.span            = Some( Span( settings.layerOffset, settings.layerOffset + spanLen ))
       segmCfg.temporalWeight  = 0.75f  // XXX could be configurable
       val segmProc = FeatureSegmentation( segmCfg ) {
          case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
@@ -148,11 +156,88 @@ extends NullGoodies with Processor {
          case FeatureSegmentation.Failure( e )     => failed( e )
       }
 
-      val segm = handleProcess[ IndexedSeq[ Break ]]( 0.667f, segmProc )
+      val segms      = handleProcess[ IndexedSeq[ Break ]]( 0.2f, segmProc ).map( _.pos ).sorted // XXX already sorted?
+      val numSegm    = segms.size
+      if( numSegm == 0 ) return
+      
+      var lastPos       = 0L
+      var lastSegmLen   = 0L
+      var lastIdx       = 0
+      val rnd           = new util.Random()
+      // tracks the matches per channel
+      var lastMatch     = Option.empty[ IIdxSeq[ Match ]]
+      val gagaDur       = (settings.startDur._1 + settings.startDur._2 + settings.stopDur._1 + settings.stopDur._2) / 4
+      while( lastPos < spanLen ) {
+         val maxOvl  = (settings.maxOverlap.toDouble * lastSegmLen + 0.5).toLong
+         var idx     = lastIdx
+         while( (idx > 0 &&) ((lastPos - segms( idx )) <= maxOvl) ) idx -= 1
+         val startIdx = math.min( lastIdx, idx + 1 )
+         val startPos = segms( startIdx )
 
-      segm.foreach( println )
+//         val w       = math.max( 0.0, math.min( 1.0, ((minStop + maxStop) / 2 - startPos).toDouble / spanLen ))
+         val w       = math.max( 0.0, math.min( 1.0, (gagaDur - startPos).toDouble / spanLen ))
+
+         val minDur  = ((settings.startDur._1 * (1 - w)) + (settings.stopDur._1 * w) + 0.5).toLong
+         val maxDur  = ((settings.startDur._2 * (1 - w)) + (settings.stopDur._2 * w) + 0.5).toLong
+         val temp    = ((settings.startWeight * (1 - w)) + (settings.stopWeight * w)).toFloat
+
+         val minStop = startPos + minDur
+         val maxStop = startPos + maxDur
+
+         idx = startIdx + 1; while( idx < numSegm && (segms( idx ) <= minStop )) idx += 1
+         val minIdx  = idx - 1
+         idx = minIdx + 1; while( (idx < numSegm) && (segms( idx ) <= maxStop )) idx += 1
+         val maxIdx  = idx - 1
+         if( minIdx <= maxIdx ) {
+            val stopIdx = minIdx + rnd.nextInt( maxIdx - minIdx + 1 )
+            val plainSpan  = Span( segms( startIdx ), segms( stopIdx ))
+            val layerSpan  = Span( plainSpan.start + settings.layerOffset, plainSpan.stop + settings.layerOffset )
+
+            val corrCfg    = FeatureCorrelation.SettingsBuilder()
+            corrCfg.databaseFolder = settings.materialFolder
+            val normFile   = new File( settings.materialFolder, Strugatzki.NORMALIZE_NAME )
+            if( !normFile.exists() ) {
+               val sourceFile = new File( LeereNull.databaseFolder, Strugatzki.NORMALIZE_NAME )
+               copyFile( sourceFile, normFile )
+            }
+            corrCfg.maxBoost     = 20  // +26 dB
+            corrCfg.minPunch     = plainSpan.length   // XXX is this actually used when punchOut == None?
+            corrCfg.maxPunch     = plainSpan.length   // XXX is this actually used when punchOut == None?
+            corrCfg.metaInput    = metaFile
+            corrCfg.minSpacing   = 4410L  // 100 ms
+            corrCfg.numMatches   = math.min( 4096, numChannels * numChannels * 100 )
+            corrCfg.numPerFile   = corrCfg.numMatches
+            corrCfg.punchIn      = FeatureCorrelation.Punch( layerSpan, temp )
+
+            val corrProc = FeatureCorrelation( corrCfg ) {
+               case FeatureCorrelation.Success( _segm )  => succeeded( _segm )
+               case FeatureCorrelation.Progress( i )     => progressed( i )
+               case FeatureCorrelation.Aborted           => Act ! Aborted
+               case FeatureCorrelation.Failure( e )      => failed( e )
+            }
+
+            val perc    = (0.7 * w + 0.2).toFloat
+            val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc )
+            val connW   = if( lastMatch.isDefined ) settings.connectionWeight else 0f
+            val w1      = if( connW > 0f ) {
+               corrs.map { m =>
+                  IIdxSeq.tabulate( numChannels ) { ch =>
+                     m.sim // XXX TODO
+                  }
+               }
+            } else {
+               corrs.map { m => IIdxSeq.fill( numChannels )( m.sim )}
+            }
+         }
+      }
    }
 
+   private def copyFile( source: File, dest: File ) {
+      val sourceCh   = new FileInputStream( source ).getChannel
+      val destCh     = new FileOutputStream( dest ).getChannel
+      destCh.transferFrom( sourceCh, 0, sourceCh.size() )
+   }
+   
    private def metaFileForLayer( layer: File ) : (File, Option[ FeatureExtraction ]) = {
       val featureDir = new File( folder, "feature" )
       val metaFile = extrMetaFile( plainName( layer ), featureDir )
