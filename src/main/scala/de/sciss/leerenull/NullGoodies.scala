@@ -37,9 +37,9 @@ trait NullGoodies {
       if( n1.endsWith( "_feat" )) n1.dropRight( 5 ) else n1
    }
 
-   def dbMetaFile( plain: String )   : File  = new File( LeereNull.databaseFolder,  plain + "_feat.xml" )
-   def extrMetaFile( plain: String ) : File  = new File( LeereNull.extractorFolder, plain + "_feat.xml" )
-   def featureFile( plain: String )  : File  = new File( LeereNull.databaseFolder,  plain + "_feat.aif" )
+   def dbMetaFile(   plain: String, dir: File = LeereNull.databaseFolder )  : File  = new File( dir, plain + "_feat.xml" )
+   def extrMetaFile( plain: String, dir: File = LeereNull.extractorFolder ) : File  = new File( dir, plain + "_feat.xml" )
+   def featureFile(  plain: String, dir: File = LeereNull.databaseFolder )  : File  = new File( dir, plain + "_feat.aif" )
 
    def stampedFile( folder: File, id: String, ext: String, date: Date = new Date() ) : File = {
       val rem = id + ext
