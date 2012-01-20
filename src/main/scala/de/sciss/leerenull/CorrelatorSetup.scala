@@ -166,7 +166,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
    }
 
    def extract( afPath: File, plain: String, behavior: ChannelsBehavior )( whenDone: (ESettings, Boolean) => Unit ) {
-      val sb               = new ESettingsBuilder
+      val sb               = ESettingsBuilder()
       sb.audioInput        = afPath
       sb.featureOutput     = featureFile( plain )
 //      val meta             = extrMetaFile( plain )
@@ -176,7 +176,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val dlg = progressDialog( "Extracting features..." )
       val fe = FeatureExtraction( settings ) {
-         case FeatureExtraction.Success =>
+         case FeatureExtraction.Success( _ ) =>
             dlg.stop()
             whenDone( settings, true )
          case FeatureExtraction.Failure( e ) =>
@@ -196,7 +196,7 @@ object CorrelatorSetup extends GUIGoodies with KonturGoodies with NullGoodies {
       // grmphfffffff
       def secsToFrames( d: Double ) = (d * 44100.0 + 0.5).toLong
 
-      val sb            = new CSettingsBuilder
+      val sb            = CSettingsBuilder()
       sb.punchIn        = Punch( SSpan( 0L, 0L ), 0.5f )    // our indicator that punchIn hasn't been set yet
       sb.databaseFolder = LeereNull.databaseFolder
 //      sb.metaInput      = meta

@@ -37,8 +37,8 @@ object ThirdMovement {
          new Strategy { val balance = bal }
       }
 
-      case object Imitation extends Strategy { val bal = 0.0 }
-      case object Ecology   extends Strategy { val bal = 1.0 }
+      case object Imitation extends Strategy { val balance = 0.0 }
+      case object Ecology   extends Strategy { val balance = 1.0 }
    }
    sealed trait Strategy {
       def balance: Double

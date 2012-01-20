@@ -70,13 +70,13 @@ final class AudioFileCutter private ( val in: File, val out: File, val span: Spa
          val afIn       = AudioFile.openRead( in )
          val afOut      = AudioFile.openWrite( out, afIn.spec.copy( fileType = AudioFileType.AIFF, byteOrder = None, numFrames = span.length ))
          var rem        = span.length
-         afIn.seekFrame( span.start )
-         val b          = afIn.frameBuffer( 4096 )
+         afIn.seek( span.start )
+         val b          = afIn.buffer( 4096 )
          var lastProg   = 0
          while( rem > 0L ) {
             val len  = math.min( rem, 4096 ).toInt
-            afIn.readFrames( b, 0, len )
-            afOut.writeFrames( b, 0, len )
+            afIn.read( b, 0, len )
+            afOut.write( b, 0, len )
             rem -= len
             val prog = ((1.0 - (rem.toDouble / span.length)) * 100).toInt
             if( prog != lastProg ) {
