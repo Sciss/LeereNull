@@ -35,6 +35,7 @@ import de.sciss.synth.io.AudioFile
 import FeatureSegmentation.Break
 import FeatureCorrelation.Match
 import collection.immutable.{LongMap, IndexedSeq => IIdxSeq}
+import java.awt.EventQueue
 
 object ThirdMovement extends ProcessorCompanion {
    type PayLoad = Unit
@@ -62,11 +63,23 @@ object ThirdMovement extends ProcessorCompanion {
 
    private case object AbortException extends ControlThrowable
 
-   def apply( settings: Settings )( observer: Observer ) : ThirdMovement =
-      new ThirdMovement( settings, observer )
+   type Updater = (Long, IIdxSeq[ Match ]) => Unit
+
+   /**
+    * @param   settings the settings that control how the material generation is perfored
+    * @param   updater  a function which is called _on the event dispatch thread_ each time a new
+    *                   piece of material has been generated for each of the required channels
+    * @param   observer a partial function receiving notifications about the progress of the
+    *                   process (abortion, failure, success, progress percentage)
+    *
+    * @return  the generating process which must then be started using `start()`.
+    */
+   def apply( settings: Settings, updater: Updater )( observer: Observer ) : ThirdMovement =
+      new ThirdMovement( settings, observer, updater )
 }
 
-class ThirdMovement private( settings: ThirdMovement.Settings, protected val observer: ThirdMovement.Observer )
+class ThirdMovement private( settings: ThirdMovement.Settings, protected val observer: ThirdMovement.Observer,
+                             updater: ThirdMovement.Updater )
 extends NullGoodies with Processor {
    import ThirdMovement._
 
@@ -388,6 +401,12 @@ extends NullGoodies with Processor {
                }
 
                val stratW     = settings.strategyWeight
+
+// e.g. for numChannels = 3
+//               totalNumStrat = numChannels * (numChannels + 1) / 2 = 6
+//               (a b c, a c b, b a c, b c a, c a b, c b a)
+//                  1      2      3      4      5      6
+
                val xTotalNum  = numChannels * (numChannels + 1) / 2  // number of cross correlations between channels
 
                def bestPrognosis( baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ]) : Float = {
@@ -428,6 +447,7 @@ extends NullGoodies with Processor {
                                  bestSeq  = taken1
                               } else {
                                  // go into next recursion...
+                                 recurse( taken1, baseDone1, xDone1 )
                               }
                            }
                         }
@@ -444,11 +464,33 @@ extends NullGoodies with Processor {
                   }
                j += 1 }
 
+               bestSeq
+
             } else {
                sys.error( "TODO: w1 find best combo" )
             }
+
+            val matches = w2.map( corrs( _ ))
+            val pos = lastPos
+
+            lastSegmLen = matches.map( _.punch.length ).min
+            lastPos     = plainSpan.start
+            lastIdx     = startIdx
+            lastMatch   = Some( matches )
+
+            defer { updater( pos, matches )}
+
+         } else {
+            lastSegmLen = 4410
+            lastIdx    += 1
+            lastPos     = if( lastIdx < numSegm ) segms( lastIdx ) else spanLen
+            lastMatch   = None
          }
       }
+   }
+
+   private def defer( thunk: => Unit ) {
+      EventQueue.invokeLater( new Runnable { def run() { thunk }})
    }
 
    private def copyFile( source: File, dest: File ) {
