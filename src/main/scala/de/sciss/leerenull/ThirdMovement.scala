@@ -29,11 +29,12 @@ import de.sciss.kontur.session.BasicTimeline
 import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
 import actors.Actor
 import util.control.ControlThrowable
-import de.sciss.strugatzki.FeatureSegmentation.Break
-import de.sciss.strugatzki.{Strugatzki, FeatureCorrelation, FeatureSegmentation, FeatureExtraction, Span}
+import de.sciss.strugatzki.{Strugatzki, FeatureCorrelation, FeatureSegmentation, FeatureExtraction, Span, aux}
 import java.io.{FileInputStream, FileOutputStream, File}
-import de.sciss.strugatzki.FeatureCorrelation.Match
 import collection.immutable.{IndexedSeq => IIdxSeq}
+import de.sciss.synth.io.AudioFile
+import FeatureSegmentation.Break
+import FeatureCorrelation.Match
 
 object ThirdMovement extends ProcessorCompanion {
    type PayLoad = Unit
@@ -139,6 +140,15 @@ extends NullGoodies with Processor {
 
       val spanLen             = settings.tlSpan.length
       val numChannels         = settings.numChannels
+      val extrIn              = FeatureExtraction.Settings.fromXMLFile( metaFile )
+      val stepSize            = extrIn.fftSize / extrIn.fftOverlap
+      val numCoeffs           = extrIn.numCoeffs
+
+      def fullToFeat( n: Long ) = ((n + (stepSize >> 1)) / stepSize).toInt
+      def featToFull( i: Int )  = i.toLong * stepSize
+
+//      val connSize            = fullToFeat( 44100L )
+      val connTempW           = 0.5f   // XXX could be configurable
 
       val segmCfg             = FeatureSegmentation.SettingsBuilder()
       segmCfg.corrLen         = 88200L // have one second on each side
@@ -218,15 +228,60 @@ extends NullGoodies with Processor {
 
             val perc    = (0.7 * w + 0.2).toFloat
             val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc )
-            val connW   = if( lastMatch.isDefined ) settings.connectionWeight else 0f
-            val w1      = if( connW > 0f ) {
-               corrs.map { m =>
-                  IIdxSeq.tabulate( numChannels ) { ch =>
-                     m.sim // XXX TODO
+            val w1      = lastMatch match {
+               case Some( lms ) if( settings.connectionWeight > 0f ) =>
+                  corrs.map { nm =>
+                     IIdxSeq.tabulate( numChannels ) { ch =>
+                        val lm         = lms( ch )
+
+                        val connFull   = math.min( nm.punch.length, lm.punch.length )
+                        val lmFeat     = featureFile( plainName( lm.file ), folder )
+                        val nmFeat     = featureFile( plainName( nm.file ), folder )
+                        val nStop0     = fullToFeat( nm.punch.start + connFull )
+                        val nStart     = fullToFeat( nm.punch.start )
+                        val lStop      = fullToFeat( lm.punch.stop )
+                        val lStart0    = fullToFeat( lm.punch.stop - connFull )
+                        val numF       = math.min( nStop0 - nStart, lStop - lStart0 )
+//                        val nStop      = nStart + numF
+                        val lStart     = lStop - numF
+                        val lastAF     = AudioFile.openRead( lmFeat )
+                        val nextAF     = AudioFile.openRead( nmFeat )
+                        require( lastAF.numChannels == numCoeffs + 1 )
+                        require( nextAF.numChannels == numCoeffs + 1 )
+                        val lBufT      = lastAF.buffer( numF )
+                        val lBufS      = lBufT.drop(1)
+                        val nBufT      = nextAF.buffer( numF )
+                        val nBufS      = nBufT.drop(1)
+                        lastAF.seek( lStart )
+                        nextAF.seek( nStart )
+                        lastAF.read( lBufT )
+                        nextAF.read( nBufT )
+                        lastAF.close()
+                        nextAF.close()
+                        val (lMeanT, lStdDevT) = aux.Math.stat( lBufT, 0, numF, 0, 1 )
+                        val (lMeanS, lStdDevS) = aux.Math.stat( lBufS, 0, numF, 0, numCoeffs )
+                        val (nMeanT, nStdDevT) = aux.Math.stat( nBufT, 0, numF, 0, 1 )
+                        val (nMeanS, nStdDevS) = aux.Math.stat( nBufS, 0, numF, 0, numCoeffs )
+                                                
+                        var maxCorr = 0f
+                        var off = 0; while( off < numF ) {
+                           val tempCorr = if( connTempW > 0f ) {
+                              aux.Math.correlate( lBufT, lMeanT, lStdDevT, numF, 1, nBufT, nMeanT, nStdDevT, off, 0 )
+                           } else 0f
+
+                           val specCorr = if( connTempW < 1f ) {
+                              aux.Math.correlate( lBufS, lMeanS, lStdDevS, numF, numCoeffs, nBufS, nMeanS, nStdDevS, off, 0 )
+                           } else 0f
+
+                           val connCorr = (tempCorr * connTempW) + (specCorr * (1 - connTempW))
+                           if( connCorr > maxCorr ) maxCorr = connCorr
+
+                        off += 1 }  // XXX if too slow, we can increase the step size
+
+                        (nm.sim * (1 - settings.connectionWeight)) + (maxCorr * settings.connectionWeight)
+                     }
                   }
-               }
-            } else {
-               corrs.map { m => IIdxSeq.fill( numChannels )( m.sim )}
+               case _ => corrs.map { nm => IIdxSeq.fill( numChannels )( nm.sim )}
             }
          }
       }
