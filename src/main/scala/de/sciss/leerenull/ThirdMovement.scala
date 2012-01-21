@@ -316,46 +316,54 @@ extends NullGoodies with Processor {
                var bestCorr   = 0.0
                var bestSeq    = IIdxSeq.empty[ Int ]
 
-               def stratCorr( aIdx: Int, b: Int ) : Float = {
+               def weightFun( values: IIdxSeq[ Float ]) : Float = {
+                  // we could change this to give extra penalty
+                  // to particularly low values. for now, just
+                  // the average will do.
+                  values.sum / values.size
+               }
+
+               def xChanCorr( aIdx: Int, b: Int ) : Float = {
                   sys.error( "TODO" )
                }
 
-               val stratW = settings.strategyWeight
-               val totalNumStrat = numChannels * (numChannels + 1) / 2
+               val stratW     = settings.strategyWeight
+               val xTotalNum  = numChannels * (numChannels + 1) / 2  // number of cross correlations between channels
 
-               def bestPrognosis( chansMissing: Int, baseSum: Double, stratSum: Double, stratsMissing: Int ) : Float = {
-//                  val chansMissing  = numChannels - (chan + 1)
-//                  val stratsMissing = totalNumStrat - numStrat
-                  val baseProg      = baseSum + chansMissing // 1.0 for each channel missing
-                  val stratProg     = stratSum + stratsMissing
-                  ((baseProg / numChannels) * (1 - stratW) + (stratProg / totalNumStrat) * stratW ).toFloat
+               def bestPrognosis( baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ]) : Float = {
+//                  val baseProg      = baseSum + chansMissing // 1.0 for each channel missing
+//                  val stratProg     = stratSum + stratsMissing
+//                  ((baseProg / numChannels) * (1 - stratW) + (stratProg / totalNumStrat) * stratW ).toFloat
+
+                  val chansMissing  = numChannels - baseDone.size
+                  val xMissing      = xTotalNum - xDone.size
+                  val baseValues    = baseDone ++ IIdxSeq.fill( chansMissing )( 1f )
+                  val xValues       = xDone ++ IIdxSeq.fill( xMissing )( 1f )
+                  weightFun( baseValues ) * (1f - stratW) + weightFun( xValues ) * stratW
                }
 
-               def recurse( chan: Int, taken: IIdxSeq[ Int ], baseSum: Double, stratSum: Double ) {
-                  val chansMissing  = numChannels - taken.size // (chan + 1)
-                  val stratsMissing = chansMissing * (chansMissing + 1) / 2
+               def recurse( taken: IIdxSeq[ Int ], baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ]) {
+                  val chan          = taken.size
+                  require( chan == baseDone.size )
 
                   var i = 0; while( i < numMatches ) {
                      if( !taken.contains( i )) {
                         val base       = w1( chan )( i )
-                        val baseSum1   = baseSum + base
-                        if( bestPrognosis( chansMissing, baseSum1, stratSum, stratsMissing ) > bestCorr ) {
-                           var stratSum1        = stratSum
-                           var stratsMissing1   = stratsMissing
-                           var prog             = 0f
-                           var ok               = true
+                        val baseDone1  = baseDone :+ base
+                        if( bestPrognosis( baseDone1, xDone ) > bestCorr ) {
+                           var xDone1  = xDone
+                           var prog    = 0f
+                           var ok      = true
                            var k = 0; while( k < taken.size && ok ) {
-                              val s = stratCorr( taken( k ), i )
-                              stratSum1 += s
-                              stratsMissing1 -= 1
-                              prog = bestPrognosis( chansMissing, baseSum1, stratSum1, stratsMissing1 )
+                              val x = xChanCorr( taken( k ), i )
+                              xDone1 :+= x
+                              prog = bestPrognosis( baseDone1, xDone1 )
                               ok = prog > bestCorr
                            k += 1 }
 
                            if( ok ) {
                               val taken1 = taken :+ i
-                              if( stratsMissing1 == 0 ) {
-                                 assert( taken1.size == numChannels )
+                              if( taken1.size == numChannels ) {
                                  bestCorr = prog   // not a prognosis any more
                                  bestSeq  = taken1
                               } else {
@@ -367,10 +375,12 @@ extends NullGoodies with Processor {
                   i += 1 }
                }
 
+               val xDone0 = IIdxSeq.empty
                var j = 0; while( j < numMatches ) {
                   val base = w1( 0 )( j )
-                  if( bestPrognosis( 0, base, 0.0, totalNumStrat ) > bestCorr ) {
-                     recurse( 1, IIdxSeq( j ), base, 0.0 )
+                  val baseDone0 = IIdxSeq( base )
+                  if( bestPrognosis( baseDone0, xDone0 ) > bestCorr ) {
+                     recurse( IIdxSeq( j ), baseDone0, xDone0 )
                   }
                j += 1 }
 
