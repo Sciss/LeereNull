@@ -25,7 +25,6 @@
 
 package de.sciss.leerenull
 
-import de.sciss.kontur.session.BasicTimeline
 import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
 import actors.Actor
 import util.control.ControlThrowable
@@ -36,6 +35,7 @@ import FeatureSegmentation.Break
 import FeatureCorrelation.Match
 import collection.immutable.{LongMap, IndexedSeq => IIdxSeq}
 import java.awt.EventQueue
+import xml.{XML, NodeSeq}
 
 object ThirdMovement extends ProcessorCompanion {
    type PayLoad = Unit
@@ -43,23 +43,119 @@ object ThirdMovement extends ProcessorCompanion {
    def folder = new File( LeereNull.baseFolder, "third_move" )
 
    object Strategy {
-//      def apply( bal: Double ) : Strategy = {
-//         require( bal >= 0.0 && bal <= 1.0 )
-//         new Strategy { val balance = bal }
-//      }
+      def apply( name: String ) : Strategy = name match {
+         case Imitation.name  => Imitation
+         case Ecology.name    => Ecology
+      }
 
-      case object Imitation extends Strategy // { val balance = 0.0 }
-      case object Ecology   extends Strategy // { val balance = 1.0 }
+      case object Imitation extends Strategy { val name = "imitation" }
+      case object Ecology   extends Strategy { val name = "ecology" }
    }
    sealed trait Strategy {
-//      def balance: Double
+      def name: String
    }
 
-   final case class Settings( timeline: BasicTimeline, tlSpan: Span, layer: File, layerOffset: Long,
+   sealed trait SettingsLike {
+      def tlSpan: Span
+      def layer: File
+      def layerOffset: Long
+      def materialFolder: File
+      def numChannels: Int
+      def strategy: Strategy
+      def startDur: (Long, Long)
+      def stopDur: (Long, Long)
+      def startWeight: Float
+      def stopWeight: Float
+      def maxOverlap: Float
+      def connectionWeight: Float
+      def strategyWeight: Float
+   }
+
+   object SettingsBuilder {
+      def apply() = new SettingsBuilder
+   }
+   final class SettingsBuilder private() extends SettingsLike {
+      var tlSpan           = Span( 0, 441000L )
+      var layer            = new File( "layer.aif" )
+      var layerOffset      = 0L
+      var materialFolder   = new File( "material" )
+      var numChannels      = 4
+      var strategy         = Strategy.Imitation: Strategy
+      var startDur         = (66150L, 132300L)
+      var stopDur          = (88400L, 176800L)
+      var startWeight      = 0.75f
+      var stopWeight       = 0.25f
+      var maxOverlap       = 0.333f
+      var connectionWeight = 0.5f
+      var strategyWeight   = 0.5f
+
+      def build : Settings = Settings(
+         tlSpan, layer, layerOffset, materialFolder, numChannels, strategy, startDur, stopDur,
+         startWeight, stopWeight, maxOverlap, connectionWeight, strategyWeight
+      )
+   }
+
+//   object Punch {
+//      def fromXML( xml: NodeSeq ) : Punch = {
+//         val start   = (xml \ "start").text.toLong
+//         val stop    = (xml \ "stop").text.toLong
+//         val weight  = (xml \ "weight").text.toFloat
+//         Punch( Span( start, stop ), weight )
+//      }
+//   }
+//   final case class Punch( span: Span, temporalWeight: Float = 0.5f ) {
+//      def toXML =
+//<punch>
+//   <start>{span.start}</start>
+//   <stop>{span.stop}</stop>
+//   <weight>{temporalWeight}</weight>
+//</punch>
+//   }
+
+   object Settings {
+      implicit def fromBuilder( sb: SettingsBuilder ) : Settings = sb.build
+      def fromXMLFile( file: File ) : Settings = fromXML( XML.loadFile( file ))
+      def fromXML( xml: NodeSeq ) : Settings = {
+         val sb               = SettingsBuilder()
+         sb.tlSpan            = Span( (xml \ "tlSpan" \ "start").text.toLong, (xml \ "tlSpan" \ "stop").text.toLong )
+         sb.layer             = new File( (xml \ "layer").text )
+         sb.layerOffset       = (xml \ "layerOffset").text.toLong
+         sb.materialFolder    = new File( (xml \ "materialFolder").text )
+         sb.numChannels       = (xml \ "numChannels").text.toInt
+         sb.strategy          = Strategy( (xml \ "strategy").text )
+         sb.startDur          = ((xml \ "startDur" \ "min").text.toLong, (xml \ "startDur" \ "max").text.toLong)
+         sb.stopDur           = ((xml \ "stopDur"  \ "min").text.toLong, (xml \ "stopDur"  \ "max").text.toLong)
+         sb.startWeight       = (xml \ "startWeight").text.toFloat
+         sb.stopWeight        = (xml \ "stopWeight").text.toFloat
+         sb.maxOverlap        = (xml \ "maxOverlap").text.toFloat
+         sb.connectionWeight  = (xml \ "connectionWeight").text.toFloat
+         sb.strategyWeight    = (xml \ "strategyWeight").text.toFloat
+         sb.build
+      }
+   }
+   final case class Settings( tlSpan: Span, layer: File, layerOffset: Long,
                               materialFolder: File, numChannels: Int, strategy: Strategy,
                               startDur: (Long, Long), stopDur: (Long, Long),
                               startWeight: Float, stopWeight: Float, maxOverlap: Float,
                               connectionWeight: Float, strategyWeight: Float )
+   extends SettingsLike {
+      def toXML =
+<ueberzeichnung>
+   <tlSpan><start>{tlSpan.start}</start><stop>{tlSpan.stop}</stop></tlSpan>
+   <layer>{layer.getPath}</layer>
+   <layerOffset>{layerOffset}</layerOffset>
+   <materialFolder>{materialFolder.getPath}</materialFolder>
+   <numChannels>{numChannels}</numChannels>
+   <strategy>{strategy.name}</strategy>
+   <startDur><min>{startDur._1}</min><max>{startDur._2}</max></startDur>
+   <stopDur><min>{stopDur._1}</min><max>{stopDur._2}</max></stopDur>
+   <startWeight>{startWeight}</startWeight>
+   <stopWeight>{stopWeight}</stopWeight>
+   <maxOverlap>{maxOverlap}</maxOverlap>
+   <connectionWeight>{connectionWeight}</connectionWeight>
+   <strategyWeight>{strategyWeight}</strategyWeight>
+</ueberzeichnung>
+   }
 
    private case object AbortException extends ControlThrowable
 
