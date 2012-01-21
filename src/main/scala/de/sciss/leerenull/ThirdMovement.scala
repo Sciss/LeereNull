@@ -31,10 +31,10 @@ import actors.Actor
 import util.control.ControlThrowable
 import de.sciss.strugatzki.{Strugatzki, FeatureCorrelation, FeatureSegmentation, FeatureExtraction, Span, aux}
 import java.io.{FileInputStream, FileOutputStream, File}
-import collection.immutable.{IndexedSeq => IIdxSeq}
 import de.sciss.synth.io.AudioFile
 import FeatureSegmentation.Break
 import FeatureCorrelation.Match
+import collection.immutable.{LongMap, IndexedSeq => IIdxSeq}
 
 object ThirdMovement extends ProcessorCompanion {
    type PayLoad = Unit
@@ -149,6 +149,7 @@ extends NullGoodies with Processor {
 
 //      val connSize            = fullToFeat( 44100L )
       val connTempW           = 0.5f   // XXX could be configurable
+      val stratTempW          = 0.25f  // XXX could be configurable
 
       val segmCfg             = FeatureSegmentation.SettingsBuilder()
       segmCfg.corrLen         = 88200L // have one second on each side
@@ -260,6 +261,7 @@ extends NullGoodies with Processor {
                         nextAF.seek( nStart )
                         lastAF.read( lBufT )
                         nextAF.read( nBufT )
+                        // XXX TODO: apply boosts
                         lastAF.close()
                         val (lMeanT, lStdDevT) = aux.Math.stat( lBufT, 0, numF, 0, 1 )
                         val (lMeanS, lStdDevS) = aux.Math.stat( lBufS, 0, numF, 0, numCoeffs )
@@ -315,6 +317,7 @@ extends NullGoodies with Processor {
             val w2 = if( (settings.strategyWeight > 0f) && (numMatches > numChannels) ) {
                var bestCorr   = 0.0
                var bestSeq    = IIdxSeq.empty[ Int ]
+               var xMap       = LongMap.empty[ Float ]
 
                def weightFun( values: IIdxSeq[ Float ]) : Float = {
                   // we could change this to give extra penalty
@@ -323,8 +326,65 @@ extends NullGoodies with Processor {
                   values.sum / values.size
                }
 
-               def xChanCorr( aIdx: Int, b: Int ) : Float = {
-                  sys.error( "TODO" )
+               def xCalc( a: Int, b: Int ) : Float = {
+                  val ma      = corrs( a )
+                  val mb      = corrs( b )
+                  val aFeat   = featureFile( plainName( ma.file ), folder )
+                  val bFeat   = featureFile( plainName( mb.file ), folder )
+                  val aAF     = AudioFile.openRead( aFeat )
+                  val bAF     = AudioFile.openRead( bFeat )
+                  val aStop0  = fullToFeat( ma.punch.stop )
+                  val bStop0  = fullToFeat( mb.punch.stop )
+                  val aStart  = fullToFeat( ma.punch.start )
+                  val bStart  = fullToFeat( mb.punch.start )
+                  val numF    = math.min( aStop0 - aStart, bStop0 - bStart )
+                  if( numF == 0 ) return 0f
+                  val bufSize = math.min( 4096, numF )
+                  val aBufT   = aAF.buffer( bufSize )
+                  val bBufT   = bAF.buffer( bufSize )
+                  val aBufS   = aBufT.drop( 1 )
+                  val bBufS   = bBufT.drop( 1 )
+                  var remain  = numF
+                  var c       = 0.0
+                  aAF.seek( aStart )
+                  bAF.seek( bStart )
+                  while( remain > 0 ) {
+                     val chunk = math.min( remain, bufSize )
+                     aAF.read( aBufT, 0, chunk )
+                     bAF.read( bBufT, 0, chunk )
+                     // XXX TODO: apply boosts
+                     val (aMeanT, aStdDevT) = aux.Math.stat( aBufT, 0, chunk, 0, 1 )
+                     val (aMeanS, aStdDevS) = aux.Math.stat( aBufS, 0, chunk, 0, numCoeffs )
+                     val (bMeanT, bStdDevT) = aux.Math.stat( bBufT, 0, chunk, 0, 1 )
+                     val (bMeanS, bStdDevS) = aux.Math.stat( bBufS, 0, chunk, 0, numCoeffs )
+                     val tempCorr = if( stratTempW > 0f ) {
+                        aux.Math.correlate( aBufT, aMeanT, aStdDevT, chunk, 1, bBufT, bMeanT, bStdDevT, 0, 0 )
+                     } else 0f
+                     val specCorr = if( stratTempW < 1f ) {
+                        aux.Math.correlate( aBufS, aMeanS, aStdDevS, chunk, numCoeffs, bBufS, bMeanS, bStdDevS, 0, 0 )
+                     } else 0f
+                     val stratCorr0 = (tempCorr * stratTempW) + (specCorr * (1 - stratTempW))
+                     val stratCorr  = if( settings.strategy == Strategy.Imitation ) stratCorr0 else 1f - stratCorr0
+                     c += stratCorr * chunk
+                     remain -= chunk
+                  }
+                  aAF.close()
+                  bAF.close()
+                  (c / numF).toFloat
+               }
+
+               def xChanCorr( aIdx: Int, bIdx: Int ) : Float = {
+                  require( aIdx != bIdx )
+                  val i    = math.min( aIdx, bIdx )
+                  val j    = math.max( aIdx, bIdx )
+                  val key  = (i.toLong << 32) | j
+                  xMap.get( key ) match {
+                     case Some( value ) => value
+                     case None =>
+                        val value = xCalc( i, j )
+                        xMap += ((key, value))
+                        value
+                  }
                }
 
                val stratW     = settings.strategyWeight
