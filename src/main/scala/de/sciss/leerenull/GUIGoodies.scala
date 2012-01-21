@@ -37,7 +37,7 @@ import javax.swing.event.{AncestorEvent, AncestorListener}
 import javax.swing.{SwingUtilities, JPanel, JOptionPane, WindowConstants, JDialog, JComponent, AbstractAction, Action => JAction, KeyStroke}
 import java.awt.{FileDialog, Component => AWTComponent, Frame => AWTFrame}
 import java.io.{FilenameFilter, File}
-import swing.{ButtonGroup, RadioButton, CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
+import swing.{TextField, ButtonGroup, RadioButton, CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -125,6 +125,12 @@ trait GUIGoodies {
    def radioButton( txt: String )( fun: => Unit ) = new RadioButton {
       action = Action( txt )( fun )
       peer.putClientProperty( "JComponent.sizeVariant", "small" )
+   }
+
+   def textField( txt: String, cols: Int )( fun: String => Unit = (txt: String) => () ) = new TextField( cols ) {
+      text = txt
+      peer.putClientProperty( "JComponent.sizeVariant", "small" )
+      action = Action( "Enter" )( fun( text ))
    }
 
    trait ProgressDialog {

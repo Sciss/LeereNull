@@ -27,21 +27,141 @@ package de.sciss.leerenull
 
 import de.sciss.kontur.session.BasicTimeline
 import de.sciss.app.AbstractWindow
-import de.sciss.kontur.gui.AppWindow
+import de.sciss.kontur.gui.{TimelineView, AppWindow}
+import eu.flierl.grouppanel.GroupPanel
+import java.awt.BorderLayout
+import de.sciss.synth.io.AudioFile
+import swing.Alignment
+import javax.swing.BorderFactory
+import javax.swing.border.BevelBorder
+import java.io.File
+import ThirdMovement.Strategy
 
 object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
-   def makeWindow( tl: BasicTimeline, settings: ThirdMovement.Settings ) {
+   def makeWindow( tl: BasicTimeline, tlv: TimelineView, settings: ThirdMovement.Settings ) {
       val a = new AppWindow( AbstractWindow.REGULAR ) {
          setTitle( "Überzeichnung : " + tl.name )
-         setLocationRelativeTo( null )
+         setResizable( false )
       }
 
       val sb = ThirdMovement.SettingsBuilder()
       sb.read( settings )
 
+      val sr = tl.rate
+      implicit val tlv0 = tlv
 
+//      def layerOffset: Long
+
+      lazy val lbSpan      = label( timeString( sb.tlSpan, sr ))
+      lazy val butToSpan   = button( "→ Span" ) { b =>
+         val sp = selSpan
+         if( !sp.isEmpty ) {
+            sb.tlSpan      = sp
+            lbSpan.text    = timeString( sp, sr )
+//            butSearch.enabled = true
+         }
+      }
+
+      val lbLayer    = label( "Layer file:" )
+      val txtLayer   = textField( sb.layer.getPath, 48 ) { txt =>
+         sb.layer    = new File( txt )
+      }
+      val butLayer   = button( "\u21EA" ) { b =>
+         openFileDialog( "Select layer file", sb.layer, { AudioFile.identify( _ ).isDefined }, a.getWindow ).foreach { f =>
+            sb.layer       = f
+            txtLayer.text  = f.getPath
+         }
+      }
+
+      val lbMaterial    = label( "Material folder:" )
+      val txtMaterial   = textField( sb.materialFolder.getPath, 48 ) { txt =>
+         sb.materialFolder = new File( txt )
+      }
+      val butMaterial   = button( "\u21EA" ) { b =>
+         openFileDialog( "Select material folder (a file inside that folder)", new File( sb.materialFolder, "<dir>" ),
+            parent = a.getWindow ).foreach { f =>
+            val dir = f.getParentFile
+            sb.materialFolder = dir
+            txtMaterial.text  = dir.getPath
+         }
+      }
+
+      def secsToFrames( d: Double ) = (d * sr + 0.5).toLong
+      def framesToSecs( n: Long ) = n / sr
+
+      val ggNumChannels = integerField( "Num. channels:", 2, 64, sb.numChannels )( sb.numChannels = _ )
+      val lbStrategy    = label( "Strategy:" )
+      val ggStrategy    = combo[ Strategy, String ]( Strategy.seq )( sb.strategy = _ )( _.name )
+      val lbStartWeight = label( "Start weight:" )
+      val ggStartWeight = decimalSlider( "Temp", "Spect", sb.startWeight, w = 216 )( d => sb.startWeight = d.toFloat )
+      val lbStopWeight  = label( "Stop weight:" )
+      val ggStopWeight  = decimalSlider( "Temp", "Spect", sb.startWeight, w = 216 )( d => sb.stopWeight = d.toFloat )
+      val lbConnWeight  = label( "Connection weight:" )
+      val ggConnWeight  = decimalSlider( "0%", "100%", sb.connectionWeight, w = 216 )( d => sb.connectionWeight = d.toFloat )
+      val lbMaxOverlap  = label( "Max. overlap:" )
+      val ggMaxOverlap  = decimalSlider( "0%", "100%", sb.maxOverlap, w = 216 )( d => sb.maxOverlap = d.toFloat )
+      val lbStratWeight = label( "Strategy weight:" )
+      val ggStratWeight = decimalSlider( "0%", "100%", sb.strategyWeight, w = 216 )( d => sb.strategyWeight = d.toFloat )
+      val ggStartMinDur = timeField( "Start min. duration:", 0.1, 100.0, framesToSecs( sb.startDur._1 )) { d =>
+         sb.startDur    = sb.startDur.copy( _1 = secsToFrames( d ))
+      }
+      val ggStartMaxDur = timeField( "Start max. duration:", 0.1, 100.0, framesToSecs( sb.startDur._2 )) { d =>
+         sb.startDur    = sb.startDur.copy( _2 = secsToFrames( d ))
+      }
+      val ggStopMinDur  = timeField( "Stop min. duration:", 0.1, 100.0, framesToSecs( sb.stopDur._1 )) { d =>
+         sb.stopDur     = sb.stopDur.copy( _1 = secsToFrames( d ))
+      }
+      val ggStopMaxDur  = timeField( "Stop max. duration:", 0.1, 100.0, framesToSecs( sb.stopDur._2 )) { d =>
+         sb.stopDur     = sb.stopDur.copy( _2 = secsToFrames( d ))
+      }
+      val ggLayerOff    = timeField( "Layer offset:", 0.0, 1000.0, framesToSecs( sb.layerOffset )) { d =>
+         sb.layerOffset = secsToFrames( d )
+      }
+
+      val ggSearch      = button( "Search..." ) { b =>
+         println( "TODO" )
+      }
+
+      lazy val panel = new GroupPanel {
+//         linkHorizontalSize( butToIn, butToOut, butFromIn, butFromOut )
+//         linkHorizontalSize( ggMinPunch, ggMaxPunch )
+//         linkHorizontalSize( ggNumMatches, ggNumPerFile )
+         theHorizontalLayout is Sequential(
+            Parallel( Sequential(
+               butToSpan,
+               lbSpan
+            ), Sequential(
+               Parallel( lbLayer, lbMaterial, lbStrategy, lbStartWeight, lbStopWeight, lbConnWeight, lbStratWeight, lbMaxOverlap ),
+               Parallel( txtLayer, txtMaterial, ggStrategy, ggStartWeight, ggStopWeight, ggConnWeight, ggStratWeight, ggMaxOverlap ),
+               Parallel( butLayer, butMaterial )
+            ), Sequential(
+               Parallel( ggStartMinDur, ggStopMinDur, ggLayerOff, ggNumChannels ),
+               Parallel( ggStartMaxDur, ggStopMaxDur )
+            ), ggSearch )
+         )
+         theVerticalLayout is Sequential(
+            Parallel( Baseline )( butToSpan, lbSpan ),
+            Parallel( Baseline )( lbLayer, txtLayer, butLayer ),
+            Parallel( Baseline )( lbMaterial, txtMaterial, butMaterial ),
+            Parallel( Baseline )( lbStrategy, ggStrategy ),
+            Parallel( Baseline )( lbStartWeight, ggStartWeight ),
+            Parallel( Baseline )( lbStopWeight, ggStopWeight ),
+            Parallel( Baseline )( lbConnWeight, ggConnWeight ),
+            Parallel( Baseline )( lbStratWeight, ggStratWeight ),
+            Parallel( Baseline )( lbMaxOverlap, ggMaxOverlap ),
+            Parallel( Baseline )( ggStartMinDur, ggStartMaxDur ),
+            Parallel( Baseline )( ggStopMinDur, ggStopMaxDur ),
+            ggLayerOff,
+            ggNumChannels,
+            ggSearch
+         )
+      }
+
+      val cp = a.getContentPane
+      cp.add( panel.peer, BorderLayout.CENTER )
 
       a.pack()
+      a.setLocationRelativeTo( null )
       a.setVisible( true )
    }
 }

@@ -50,6 +50,8 @@ object ThirdMovement extends ProcessorCompanion {
 
       case object Imitation extends Strategy { val name = "imitation" }
       case object Ecology   extends Strategy { val name = "ecology" }
+
+      def seq = Seq[ Strategy ]( Imitation, Ecology )
    }
    sealed trait Strategy {
       def name: String

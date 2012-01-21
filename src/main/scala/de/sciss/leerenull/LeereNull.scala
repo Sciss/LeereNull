@@ -418,7 +418,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             withTimeline { (tl, tlv, trl) =>
                openFileDialog( "Load Überzeichnung", ueberzeichnungFolder, filter = _.getName.endsWith( ".xml" )).foreach { file =>
                   val settings = ThirdMovement.Settings.fromXMLFile( file )
-                  ThirdMovementGUI.makeWindow( tl, settings )
+                  ThirdMovementGUI.makeWindow( tl, tlv, settings )
                }
             }
          }
@@ -426,13 +426,13 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       val miNewUeberzeichnung = new MenuItem( "leerenull.newueber", action( "New Überzeichnung..." ) {
          currentDoc.foreach { implicit doc =>
             withTimeline { (tl, tlv, trl) =>
-               implicit val tl0  = tl
-               implicit val tlv0 = tlv
-               implicit val trl0 = trl
-
-               val span       = selSpan
+//               implicit val tl0  = tl
+//               implicit val tlv0 = tlv
+//               implicit val trl0 = trl
+//
+//               val span       = selSpan
                val settings   = ThirdMovement.SettingsBuilder()
-               ThirdMovementGUI.makeWindow( tl, settings )
+               ThirdMovementGUI.makeWindow( tl, tlv, settings )
             }
          }
       })
