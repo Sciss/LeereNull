@@ -485,8 +485,44 @@ extends NullGoodies with Processor {
             // now adjust matches according to segmentation bounds in the match
             val basicOffset = plainSpan.start + settings.tlSpan.start
             val w4 = w3 map { m =>
+//               val mFeat               = featureFile( plainName( m.file ), folder )
+               val mMeta               = extrMetaFile( plainName( m.file ), folder )
+               val mSegCfg             = FeatureSegmentation.SettingsBuilder()
+               mSegCfg.corrLen         = 44100L // have 0.5 seconds on each side
+               mSegCfg.databaseFolder  = LeereNull.databaseFolder // hold the normalization data
+               mSegCfg.metaInput       = mMeta
+               mSegCfg.minSpacing      = 0L
+               mSegCfg.numBreaks       = 1
+               mSegCfg.temporalWeight  = 0.75f  // XXX could be configurable
 
-               (basicOffset, m)
+               def findAdjust( span: Span ) : Option[ Long ] = {
+                  mSegCfg.span         = Some( span )
+                  val mSegProc         = FeatureSegmentation( segmCfg ) {
+                     case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
+                     case FeatureSegmentation.Progress( i )    => progressed( i )
+                     case FeatureSegmentation.Aborted          => Act ! Aborted
+                     case FeatureSegmentation.Failure( e )     => failed( e )
+                  }
+                  handleProcess[ IndexedSeq[ Break ]]( perc, mSegProc ).map( _.pos ).headOption
+               }
+
+               val mSegStartStart   = math.max( 0L, m.punch.start - 66150L )
+               val mSegStartStop    = math.min( (m.punch.start + m.punch.stop) / 2, m.punch.start + 44100L ) + 22050L
+               val mStart0          = findAdjust( Span( mSegStartStart, mSegStartStop )).getOrElse( m.punch.start )
+
+               val mSegStopStart    = math.max( 0L, math.max( (m.punch.start + m.punch.stop) / 2, m.punch.stop - 44100L ) - 22050L )
+               val mFileLen         = AudioFile.readSpec( m.file ).numFrames
+               val mSegStopStop     = math.min( mFileLen, m.punch.stop + 66150L )
+               val mStop            = findAdjust( Span( mSegStopStart, mSegStopStop )).getOrElse( m.punch.stop )
+
+               val actualOffset0    = basicOffset + mStart0 - m.punch.start
+               val (actualOffset, mStart) = if( actualOffset0 >= 0 ) (actualOffset0, mStart0) else {
+                  (0L, mStart0 - actualOffset0)
+               }
+
+               val mAdjusted = m.copy( punch = Span( mStart, mStop ))
+
+               (actualOffset, mAdjusted)
             }
 
             defer { updater( w4 )}
