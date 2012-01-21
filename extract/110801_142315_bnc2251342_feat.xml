@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feature>
+   <input>/Users/hhrutz/Documents/devel/LeereNull/bounce/110801_142315_bnc2251342.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/110801_142315_bnc2251342_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/110801_142315_bnc2251342_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+</feature>

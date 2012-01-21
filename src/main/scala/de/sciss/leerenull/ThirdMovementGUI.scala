@@ -31,11 +31,11 @@ import de.sciss.kontur.gui.{TimelineView, AppWindow}
 import eu.flierl.grouppanel.GroupPanel
 import java.awt.BorderLayout
 import de.sciss.synth.io.AudioFile
-import swing.Alignment
-import javax.swing.BorderFactory
-import javax.swing.border.BevelBorder
 import java.io.File
 import ThirdMovement.Strategy
+import xml.XML
+import de.sciss.strugatzki.FeatureCorrelation.Match
+import collection.immutable.{IndexedSeq => IIdxSeq}
 
 object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
    def makeWindow( tl: BasicTimeline, tlv: TimelineView, settings: ThirdMovement.Settings ) {
@@ -118,8 +118,19 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
          sb.layerOffset = secsToFrames( d )
       }
 
-      val ggSearch      = button( "Search..." ) { b =>
-         println( "TODO" )
+      lazy val ggSearch = button( "Start searching..." ) { b =>
+         var err = Option.empty[ String ]
+         if( sb.tlSpan.isEmpty ) err = Some( "Timeline span is empty" )
+         if( AudioFile.identify( sb.layer ).isEmpty ) err = Some( "Layer file not recognized" )
+         if( !sb.materialFolder.isDirectory ) err = Some( "Material folder not recognized" )
+
+         err match {
+            case Some( txt ) => message( txt )
+            case _ =>
+               val set = sb.build
+               saveSettings( set )
+               beginSearch( tl, set )
+         }
       }
 
       lazy val panel = new GroupPanel {
@@ -164,8 +175,34 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
       a.setLocationRelativeTo( null )
       a.setVisible( true )
    }
+
+   def beginSearch( tl: BasicTimeline, settings: ThirdMovement.Settings ) {
+//      if( verbose ) println( settings )
+
+      def update( batch: IIdxSeq[ (Long, Match) ]) {
+         batch.foreach( println )
+      }
+
+      val dlg  = progressDialog( "Correlating with database" )
+      val proc = ThirdMovement( settings, update _ ) {
+         case ThirdMovement.Success( _ ) =>
+            dlg.stop()
+
+         case ThirdMovement.Failure( e ) =>
+            dlg.stop()
+            e.printStackTrace()
+
+         case ThirdMovement.Aborted =>
+            dlg.stop()
+
+         case ThirdMovement.Progress( i ) => dlg.progress = i
+      }
+      dlg.start( proc )
+   }
+
+   def saveSettings( settings: ThirdMovement.Settings ) {
+      val id   = plainName( settings.layer ) + "@" + settings.layerOffset
+      val f = stampedFile( LeereNull.ueberzeichnungFolder, id, ".xml" )
+      XML.save( f.getAbsolutePath, settings.toXML, "UTF-8", true, null )
+   }
 }
-//final class ThirdMovementGUI private( tl: BasicTimeline, settings: ThirdMovement.Settings )
-//extends GUIGoodies with KonturGoodies with NullGoodies {
-//
-//}

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feature>
+   <input>/Users/hhrutz/Desktop/new_projects/Utopia/audio_work/Raspad_30'58.aif</input>
+   <output>/Users/hhrutz/Documents/devel/LeereNull/feature/Raspad_30'58_feat.aif</output>
+   <meta>/Users/hhrutz/Documents/devel/LeereNull/extract/Raspad_30'58_feat.xml</meta>
+   <numCoeffs>13</numCoeffs>
+   <fftSize>1024</fftSize>
+   <fftOverlap>2</fftOverlap>
+</feature>
