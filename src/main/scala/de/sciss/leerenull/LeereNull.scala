@@ -31,24 +31,24 @@ import java.util.Properties
 import java.io.{File, FileInputStream}
 import eu.flierl.grouppanel.GroupPanel
 import collection.breakOut
-import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, Stake, AudioTrack, AudioRegion}
-import swing.{ButtonGroup, RadioButton, Dialog, Swing}
-import de.sciss.kontur.io.SonagramOverview
+import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, AudioTrack, AudioRegion}
+import swing.{ButtonGroup, Dialog, Swing}
 import de.sciss.kontur.gui.{DefaultTrackComponent, TrailViewEditor}
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGoodies {
-   lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder) = {
+   lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder, ueberzeichnungFolder) = {
       val file = new File( "leerenull-settings.xml" )
       val prop = new Properties()
       val is = new FileInputStream( file )
       prop.loadFromXML( is )
       is.close()
-      val base       = new File( prop.getProperty( "base" ))
-      val database   = new File( base, "feature" )
-      val extractor  = new File( base, "extract" )
-      val search     = new File( base, "search" )
-      val bounce     = new File( base, "bounce" )
-      (base, database, extractor, search, bounce)
+      val base             = new File( prop.getProperty( "base" ))
+      val database         = new File( base, "feature" )
+      val extractor        = new File( base, "extract" )
+      val search           = new File( base, "search" )
+      val bounce           = new File( base, "bounce" )
+      val ueberzeichnung   = new File( base, "ueberzeichnung" )
+      (base, database, extractor, search, bounce, ueberzeichnung)
    }
 
    def main( args: Array[ String ]) {
@@ -215,10 +215,10 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                            trackMap += t2 -> (trackMap.getOrElse( t2, IndexedSeq.empty[ AudioRegion ]) :+ ar)
                            t2 -> ar
                         }).groupBy( _._1 ).mapValues( _.map( _._2 ))
-                        moveMap.foreach { case (at, ars) =>
-                           at.trail.editAdd( ce, ars: _* )
-                           val tve2O = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
-                           tve2O.foreach( _.editSelect( ce, ars: _* ))
+                        moveMap.foreach { case (at1, ars1) =>
+                           at1.trail.editAdd( ce, ars1: _* )
+                           val tve2O = trl.getElement( at1 ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                           tve2O.foreach( _.editSelect( ce, ars1: _* ))
                         }
                      }
                   }
@@ -245,7 +245,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                   withDiffs.foreach { case tup @ (at, matO) =>
                      val ars  = at.trail.getRange( span )
                      val coll = (withDiffs -- taken - tup).filter { case (at2, matO2) =>
-                        (matO2 == matO) && ars.forall( ar => at2.trail.getRange( ar.span ).isEmpty )
+                        (matO2 == matO) && ars.forall( (ar: AudioRegion) => at2.trail.getRange( ar.span ).isEmpty )
                      }
                      val at2O = coll.toSeq.sortBy( _._1.name ).headOption
                      at2O.foreach { case tup2 @ (at2, _) =>
@@ -335,7 +335,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                implicit val tl0  = tl
                implicit val tlv0 = tlv
                implicit val trl0 = trl
-               val span = selSpan
+//               val span = selSpan
                tl.joinEdit( "Select Regions" ) { implicit ce =>
                   val arsMap = collectAudioRegions({ case tup => tup }).groupBy( _._1 ).mapValues( _.map( _._2 ))
                   arsMap.foreach { case (at, ars) =>
@@ -412,6 +412,31 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
          }
       })
 
+      // third movement
+      val miLoadUeberzeichnung = new MenuItem( "leerenull.loadueber", action( "Load Überzeichnung..." ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               openFileDialog( "Load Überzeichnung", ueberzeichnungFolder, filter = _.getName.endsWith( ".xml" )).foreach { file =>
+                  val settings = ThirdMovement.Settings.fromXMLFile( file )
+                  ThirdMovementGUI.makeWindow( tl, settings )
+               }
+            }
+         }
+      })
+      val miNewUeberzeichnung = new MenuItem( "leerenull.newueber", action( "New Überzeichnung..." ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               implicit val tl0  = tl
+               implicit val tlv0 = tlv
+               implicit val trl0 = trl
+
+               val span       = selSpan
+               val settings   = ThirdMovement.SettingsBuilder()
+               ThirdMovementGUI.makeWindow( tl, settings )
+            }
+         }
+      })
+
       mg.add( miExtractor )
       mg.add( miLoadSearch )
       mg.add( miSelStartToRegionEnd )
@@ -424,6 +449,11 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       mg.add( miOptimizeFanatically )
       mg.addSeparator()
       mg.add( miExportPDF )
+
+      mg.addSeparator()
+      mg.add( miLoadUeberzeichnung )
+      mg.add( miNewUeberzeichnung )
+
       mf.add( mg )
    }
 }

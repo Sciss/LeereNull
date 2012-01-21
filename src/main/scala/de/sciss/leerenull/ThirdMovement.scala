@@ -93,24 +93,23 @@ object ThirdMovement extends ProcessorCompanion {
          tlSpan, layer, layerOffset, materialFolder, numChannels, strategy, startDur, stopDur,
          startWeight, stopWeight, maxOverlap, connectionWeight, strategyWeight
       )
-   }
 
-//   object Punch {
-//      def fromXML( xml: NodeSeq ) : Punch = {
-//         val start   = (xml \ "start").text.toLong
-//         val stop    = (xml \ "stop").text.toLong
-//         val weight  = (xml \ "weight").text.toFloat
-//         Punch( Span( start, stop ), weight )
-//      }
-//   }
-//   final case class Punch( span: Span, temporalWeight: Float = 0.5f ) {
-//      def toXML =
-//<punch>
-//   <start>{span.start}</start>
-//   <stop>{span.stop}</stop>
-//   <weight>{temporalWeight}</weight>
-//</punch>
-//   }
+      def read( settings: Settings ) {
+         tlSpan            = settings.tlSpan
+         layer             = settings.layer
+         layerOffset       = settings.layerOffset
+         materialFolder    = settings.materialFolder
+         numChannels       = settings.numChannels
+         strategy          = settings.strategy
+         startDur          = settings.startDur
+         stopDur           = settings.stopDur
+         startWeight       = settings.startWeight
+         stopWeight        = settings.stopWeight
+         maxOverlap        = settings.maxOverlap
+         connectionWeight  = settings.connectionWeight
+         strategyWeight    = settings.strategyWeight
+      }
+   }
 
    object Settings {
       implicit def fromBuilder( sb: SettingsBuilder ) : Settings = sb.build

@@ -25,6 +25,27 @@
 
 package de.sciss.leerenull
 
-class ThirdMovementGUI {
+import de.sciss.kontur.session.BasicTimeline
+import de.sciss.app.AbstractWindow
+import de.sciss.kontur.gui.AppWindow
 
+object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
+   def makeWindow( tl: BasicTimeline, settings: ThirdMovement.Settings ) {
+      val a = new AppWindow( AbstractWindow.REGULAR ) {
+         setTitle( "Überzeichnung : " + tl.name )
+         setLocationRelativeTo( null )
+      }
+
+      val sb = ThirdMovement.SettingsBuilder()
+      sb.read( settings )
+
+
+
+      a.pack()
+      a.setVisible( true )
+   }
 }
+//final class ThirdMovementGUI private( tl: BasicTimeline, settings: ThirdMovement.Settings )
+//extends GUIGoodies with KonturGoodies with NullGoodies {
+//
+//}
