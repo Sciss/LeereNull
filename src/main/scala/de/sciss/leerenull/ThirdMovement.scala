@@ -63,7 +63,7 @@ object ThirdMovement extends ProcessorCompanion {
 
    private case object AbortException extends ControlThrowable
 
-   type Updater = (Long, IIdxSeq[ Match ]) => Unit
+   type Updater = IIdxSeq[ (Long, Match) ] => Unit
 
    /**
     * @param   settings the settings that control how the material generation is perfored
@@ -158,7 +158,7 @@ extends NullGoodies with Processor {
       val numCoeffs           = extrIn.numCoeffs
 
       def fullToFeat( n: Long ) = ((n + (stepSize >> 1)) / stepSize).toInt
-      def featToFull( i: Int )  = i.toLong * stepSize
+//      def featToFull( i: Int )  = i.toLong * stepSize
 
 //      val connSize            = fullToFeat( 44100L )
       val connTempW           = 0.5f   // XXX could be configurable
@@ -240,7 +240,7 @@ extends NullGoodies with Processor {
                case FeatureCorrelation.Failure( e )      => failed( e )
             }
 
-            val perc    = (0.7 * w + 0.2).toFloat
+            val perc    = (0.8 * w + 0.2).toFloat
             val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc ).filterNot( _.sim.isNaN )
             val numMatches = corrs.size
 
@@ -274,7 +274,9 @@ extends NullGoodies with Processor {
                         nextAF.seek( nStart )
                         lastAF.read( lBufT )
                         nextAF.read( nBufT )
-                        // XXX TODO: apply boosts
+
+                        // XXX to-do: apply boosts?
+
                         lastAF.close()
                         val (lMeanT, lStdDevT) = aux.Math.stat( lBufT, 0, numF, 0, 1 )
                         val (lMeanS, lStdDevS) = aux.Math.stat( lBufS, 0, numF, 0, numCoeffs )
@@ -365,7 +367,9 @@ extends NullGoodies with Processor {
                      val chunk = math.min( remain, bufSize )
                      aAF.read( aBufT, 0, chunk )
                      bAF.read( bBufT, 0, chunk )
-                     // XXX TODO: apply boosts
+
+                     // XXX to-do: apply boosts?
+
                      val (aMeanT, aStdDevT) = aux.Math.stat( aBufT, 0, chunk, 0, 1 )
                      val (aMeanS, aStdDevS) = aux.Math.stat( aBufS, 0, chunk, 0, numCoeffs )
                      val (bMeanT, bStdDevT) = aux.Math.stat( bBufT, 0, chunk, 0, 1 )
@@ -470,15 +474,22 @@ extends NullGoodies with Processor {
                sys.error( "TODO: w1 find best combo" )
             }
 
-            val matches = w2.map( corrs( _ ))
-            val pos = lastPos
+            val w3 = w2.map( corrs( _ ))
+//            val pos = lastPos
 
-            lastSegmLen = matches.map( _.punch.length ).min
+            lastSegmLen = w3.map( _.punch.length ).min
             lastPos     = plainSpan.start
             lastIdx     = startIdx
-            lastMatch   = Some( matches )
+            lastMatch   = Some( w3 )   // without the adjustments?
 
-            defer { updater( pos, matches )}
+            // now adjust matches according to segmentation bounds in the match
+            val basicOffset = plainSpan.start + settings.tlSpan.start
+            val w4 = w3 map { m =>
+
+               (basicOffset, m)
+            }
+
+            defer { updater( w4 )}
 
          } else {
             lastSegmLen = 4410
