@@ -312,28 +312,56 @@ extends NullGoodies with Processor {
             // c11 x c23 x c34 x c43
             // c11 x c23 x c34 x c45...c4x
 
-            val w2 = if( settings.strategyWeight > 0f ) {
-               var bestCorr = 0.0
+            val w2 = if( (settings.strategyWeight > 0f) && (numMatches > numChannels) ) {
+               var bestCorr   = 0.0
+               var bestSeq    = IIdxSeq.empty[ Int ]
 
-//               def stratCorr()
-
-               val stratW = settings.strategyWeight
-
-               def bestPrognosis( chan: Int, baseSum: Double, stratSum: Double ) : Float = {
-                  val chansMissing  = numChannels - (chan + 1)
-                  val baseProg      = baseSum + chansMissing // 1.0 for each channel missing
-                  val stratProg     = stratSum + chansMissing
-                  ((baseProg / numChannels) * (1 - stratW) + (stratProg / (numChannels - 1)) * stratW ).toFloat
+               def stratCorr( aIdx: Int, b: Int ) : Float = {
+                  sys.error( "TODO" )
                }
 
-               def recurse( chan: Int, taken: Set[ Int ], baseSum: Double, stratSum: Double ) {
+               val stratW = settings.strategyWeight
+               val totalNumStrat = numChannels * (numChannels + 1) / 2
+
+               def bestPrognosis( chansMissing: Int, baseSum: Double, stratSum: Double, stratsMissing: Int ) : Float = {
+//                  val chansMissing  = numChannels - (chan + 1)
+//                  val stratsMissing = totalNumStrat - numStrat
+                  val baseProg      = baseSum + chansMissing // 1.0 for each channel missing
+                  val stratProg     = stratSum + stratsMissing
+                  ((baseProg / numChannels) * (1 - stratW) + (stratProg / totalNumStrat) * stratW ).toFloat
+               }
+
+               def recurse( chan: Int, taken: IIdxSeq[ Int ], baseSum: Double, stratSum: Double ) {
+                  val chansMissing  = numChannels - taken.size // (chan + 1)
+                  val stratsMissing = chansMissing * (chansMissing + 1) / 2
+
                   var i = 0; while( i < numMatches ) {
                      if( !taken.contains( i )) {
                         val base       = w1( chan )( i )
                         val baseSum1   = baseSum + base
-                        if( bestPrognosis( chan, baseSum1, stratSum ) > bestCorr ) {
-                           val taken1  = taken + i
+                        if( bestPrognosis( chansMissing, baseSum1, stratSum, stratsMissing ) > bestCorr ) {
+                           var stratSum1        = stratSum
+                           var stratsMissing1   = stratsMissing
+                           var prog             = 0f
+                           var ok               = true
+                           var k = 0; while( k < taken.size && ok ) {
+                              val s = stratCorr( taken( k ), i )
+                              stratSum1 += s
+                              stratsMissing1 -= 1
+                              prog = bestPrognosis( chansMissing, baseSum1, stratSum1, stratsMissing1 )
+                              ok = prog > bestCorr
+                           k += 1 }
 
+                           if( ok ) {
+                              val taken1 = taken :+ i
+                              if( stratsMissing1 == 0 ) {
+                                 assert( taken1.size == numChannels )
+                                 bestCorr = prog   // not a prognosis any more
+                                 bestSeq  = taken1
+                              } else {
+                                 // go into next recursion...
+                              }
+                           }
                         }
                      }
                   i += 1 }
@@ -341,13 +369,13 @@ extends NullGoodies with Processor {
 
                var j = 0; while( j < numMatches ) {
                   val base = w1( 0 )( j )
-                  if( bestPrognosis( 0, base, 0.0 ) > bestCorr ) {
-                     recurse( 1, Set( j ), base, 0.0 )
+                  if( bestPrognosis( 0, base, 0.0, totalNumStrat ) > bestCorr ) {
+                     recurse( 1, IIdxSeq( j ), base, 0.0 )
                   }
                j += 1 }
 
             } else {
-               sys.error( "TODO" )
+               sys.error( "TODO: w1 find best combo" )
             }
          }
       }
