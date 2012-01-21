@@ -42,21 +42,21 @@ object ThirdMovement extends ProcessorCompanion {
    def folder = new File( LeereNull.baseFolder, "third_move" )
 
    object Strategy {
-      def apply( bal: Double ) : Strategy = {
-         require( bal >= 0.0 && bal <= 1.0 )
-         new Strategy { val balance = bal }
-      }
+//      def apply( bal: Double ) : Strategy = {
+//         require( bal >= 0.0 && bal <= 1.0 )
+//         new Strategy { val balance = bal }
+//      }
 
-      case object Imitation extends Strategy { val balance = 0.0 }
-      case object Ecology   extends Strategy { val balance = 1.0 }
+      case object Imitation extends Strategy // { val balance = 0.0 }
+      case object Ecology   extends Strategy // { val balance = 1.0 }
    }
    sealed trait Strategy {
-      def balance: Double
+//      def balance: Double
    }
 
    final case class Settings( timeline: BasicTimeline, tlSpan: Span, layer: File, layerOffset: Long,
-                              materialFolder: File, numChannels: Int, startStrategy: Strategy,
-                              stopStrategy: Strategy, startDur: (Long, Long), stopDur: (Long, Long),
+                              materialFolder: File, numChannels: Int, strategy: Strategy,
+                              startDur: (Long, Long), stopDur: (Long, Long),
                               startWeight: Float, stopWeight: Float, maxOverlap: Float,
                               connectionWeight: Float, strategyWeight: Float )
 
@@ -227,16 +227,21 @@ extends NullGoodies with Processor {
             }
 
             val perc    = (0.7 * w + 0.2).toFloat
-            val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc )
+            val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc ).filterNot( _.sim.isNaN )
+            val numMatches = corrs.size
+
+            // account for connectivity
             val w1      = lastMatch match {
                case Some( lms ) if( settings.connectionWeight > 0f ) =>
                   corrs.map { nm =>
-                     IIdxSeq.tabulate( numChannels ) { ch =>
+                     val nmFeat     = featureFile( plainName( nm.file ), folder )
+                     val nextAF     = AudioFile.openRead( nmFeat )
+
+                     val res = IIdxSeq.tabulate( numChannels ) { ch =>
                         val lm         = lms( ch )
 
                         val connFull   = math.min( nm.punch.length, lm.punch.length )
                         val lmFeat     = featureFile( plainName( lm.file ), folder )
-                        val nmFeat     = featureFile( plainName( nm.file ), folder )
                         val nStop0     = fullToFeat( nm.punch.start + connFull )
                         val nStart     = fullToFeat( nm.punch.start )
                         val lStop      = fullToFeat( lm.punch.stop )
@@ -245,7 +250,6 @@ extends NullGoodies with Processor {
 //                        val nStop      = nStart + numF
                         val lStart     = lStop - numF
                         val lastAF     = AudioFile.openRead( lmFeat )
-                        val nextAF     = AudioFile.openRead( nmFeat )
                         require( lastAF.numChannels == numCoeffs + 1 )
                         require( nextAF.numChannels == numCoeffs + 1 )
                         val lBufT      = lastAF.buffer( numF )
@@ -257,7 +261,6 @@ extends NullGoodies with Processor {
                         lastAF.read( lBufT )
                         nextAF.read( nBufT )
                         lastAF.close()
-                        nextAF.close()
                         val (lMeanT, lStdDevT) = aux.Math.stat( lBufT, 0, numF, 0, 1 )
                         val (lMeanS, lStdDevS) = aux.Math.stat( lBufS, 0, numF, 0, numCoeffs )
                         val (nMeanT, nStdDevT) = aux.Math.stat( nBufT, 0, numF, 0, 1 )
@@ -280,8 +283,71 @@ extends NullGoodies with Processor {
 
                         (nm.sim * (1 - settings.connectionWeight)) + (maxCorr * settings.connectionWeight)
                      }
+
+                     nextAF.close()
+                     res
                   }
                case _ => corrs.map { nm => IIdxSeq.fill( numChannels )( nm.sim )}
+            }
+
+            // account for strategy
+
+            // with w1 now:
+            //
+            // m1    m2 ...
+            // --------
+            // c11  c21 ...
+            // c21  c22 ...
+            // ...  ...
+            //
+
+            // for w2
+            //
+            // c11 -> mean( max( xcorr( c2... )), max( xcorr( c3... )), ... )
+            // while in each sub-step first calculating the 'best possible outcome' and stop
+            // if that's below the best match so far.
+
+            // c11 x c22 x c33 x c44
+            // c11 x c22 x c33 x c45...c4x
+            // c11 x c23 x c34 x c43
+            // c11 x c23 x c34 x c45...c4x
+
+            val w2 = if( settings.strategyWeight > 0f ) {
+               var bestCorr = 0.0
+
+//               def stratCorr()
+
+               val stratW = settings.strategyWeight
+
+               def bestPrognosis( chan: Int, baseSum: Double, stratSum: Double ) : Float = {
+                  val chansMissing  = numChannels - (chan + 1)
+                  val baseProg      = baseSum + chansMissing // 1.0 for each channel missing
+                  val stratProg     = stratSum + chansMissing
+                  ((baseProg / numChannels) * (1 - stratW) + (stratProg / (numChannels - 1)) * stratW ).toFloat
+               }
+
+               def recurse( chan: Int, taken: Set[ Int ], baseSum: Double, stratSum: Double ) {
+                  var i = 0; while( i < numMatches ) {
+                     if( !taken.contains( i )) {
+                        val base       = w1( chan )( i )
+                        val baseSum1   = baseSum + base
+                        if( bestPrognosis( chan, baseSum1, stratSum ) > bestCorr ) {
+                           val taken1  = taken + i
+
+                        }
+                     }
+                  i += 1 }
+               }
+
+               var j = 0; while( j < numMatches ) {
+                  val base = w1( 0 )( j )
+                  if( bestPrognosis( 0, base, 0.0 ) > bestCorr ) {
+                     recurse( 1, Set( j ), base, 0.0 )
+                  }
+               j += 1 }
+
+            } else {
+               sys.error( "TODO" )
             }
          }
       }
