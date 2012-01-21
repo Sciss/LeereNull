@@ -40,7 +40,8 @@ import xml.{XML, NodeSeq}
 object ThirdMovement extends ProcessorCompanion {
    type PayLoad = Unit
 
-   def folder = new File( LeereNull.baseFolder, "third_move" )
+   def folder        = new File( LeereNull.baseFolder, "third_move" )
+   def featureFolder = new File( folder, "feature" )
 
    object Strategy {
       def apply( name: String ) : Strategy = name match {
@@ -209,7 +210,9 @@ extends NullGoodies with Processor {
          if( checkAborted ) throw AbortException
          failure.foreach( throw _ )
          success match {
-            case Some( res ) => return res.asInstanceOf[ A ]
+            case Some( res ) =>
+//               if( verbose ) println( p.toString + " results " + res )
+               return res.asInstanceOf[ A ]
             case None =>
                monitor.synchronized {
                   monitor.wait( 500 )
@@ -329,8 +332,14 @@ extends NullGoodies with Processor {
             corrCfg.numMatches   = math.min( 4096, numChannels * numChannels * 100 )
             corrCfg.numPerFile   = corrCfg.numMatches
             corrCfg.punchIn      = FeatureCorrelation.Punch( layerSpan, temp )
+            val corrCfgB = corrCfg.build
 
-            val corrProc = FeatureCorrelation( corrCfg ) {
+            if( verbose ) {
+               println( ":::::::::: Basic Correlation ::::::::::" )
+               println( corrCfgB )
+            }
+
+            val corrProc = FeatureCorrelation( corrCfgB ) {
                case FeatureCorrelation.Success( _segm )  => succeeded( _segm )
                case FeatureCorrelation.Progress( i )     => progressed( i )
                case FeatureCorrelation.Aborted           => Act ! Aborted
@@ -341,18 +350,20 @@ extends NullGoodies with Processor {
             val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc ).filterNot( _.sim.isNaN )
             val numMatches = corrs.size
 
+            if( verbose ) println( "matches: " + numMatches )
+
             // account for connectivity
             val w1      = lastMatch match {
                case Some( lms ) if( settings.connectionWeight > 0f ) =>
                   corrs.map { nm =>
-                     val nmFeat     = featureFile( plainName( nm.file ), folder )
+                     val nmFeat     = featureFile( plainName( nm.file ), featureFolder )
                      val nextAF     = AudioFile.openRead( nmFeat )
 
                      val res = IIdxSeq.tabulate( numChannels ) { ch =>
                         val lm         = lms( ch )
 
                         val connFull   = math.min( nm.punch.length, lm.punch.length )
-                        val lmFeat     = featureFile( plainName( lm.file ), folder )
+                        val lmFeat     = featureFile( plainName( lm.file ), featureFolder )
                         val nStop0     = fullToFeat( nm.punch.start + connFull )
                         val nStart     = fullToFeat( nm.punch.start )
                         val lStop      = fullToFeat( lm.punch.stop )
@@ -441,8 +452,8 @@ extends NullGoodies with Processor {
                def xCalc( a: Int, b: Int ) : Float = {
                   val ma      = corrs( a )
                   val mb      = corrs( b )
-                  val aFeat   = featureFile( plainName( ma.file ), folder )
-                  val bFeat   = featureFile( plainName( mb.file ), folder )
+                  val aFeat   = featureFile( plainName( ma.file ), featureFolder )
+                  val bFeat   = featureFile( plainName( mb.file ), featureFolder )
                   val aAF     = AudioFile.openRead( aFeat )
                   val bAF     = AudioFile.openRead( bFeat )
                   val aStop0  = fullToFeat( ma.punch.stop )
@@ -583,7 +594,7 @@ extends NullGoodies with Processor {
             val basicOffset = plainSpan.start + settings.tlSpan.start
             val w4 = w3 map { m =>
 //               val mFeat               = featureFile( plainName( m.file ), folder )
-               val mMeta               = extrMetaFile( plainName( m.file ), folder )
+               val mMeta               = extrMetaFile( plainName( m.file ), featureFolder )
                val mSegCfg             = FeatureSegmentation.SettingsBuilder()
                mSegCfg.corrLen         = 44100L // have 0.5 seconds on each side
                mSegCfg.databaseFolder  = LeereNull.databaseFolder // hold the normalization data
@@ -644,8 +655,7 @@ extends NullGoodies with Processor {
    }
    
    private def metaFileForLayer( layer: File ) : (File, Option[ FeatureExtraction ]) = {
-      val featureDir = new File( folder, "feature" )
-      val metaFile = extrMetaFile( plainName( layer ), featureDir )
+      val metaFile = extrMetaFile( plainName( layer ), featureFolder )
       if( metaFile.exists() ) {
          (metaFile, None)
       } else {
@@ -653,7 +663,7 @@ extends NullGoodies with Processor {
          if( !metaDir.exists() ) metaDir.mkdirs()
          val extrCfg = FeatureExtraction.SettingsBuilder()
          extrCfg.audioInput     = layer
-         val ff                  = featureFile( plainName( layer ),featureDir )
+         val ff                  = featureFile( plainName( layer ),featureFolder )
          extrCfg.featureOutput  = ff
          extrCfg.metaOutput     = Some( metaFile )
 //         settings.numCoeffs      = default

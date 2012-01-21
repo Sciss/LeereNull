@@ -127,12 +127,16 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
          err match {
             case Some( txt ) => message( txt )
             case _ =>
-               val set = sb.build
-               saveSettings( set )
-               beginSearch( tl, set )
+               val newSettings = sb.build
+               if( newSettings != settings ) {
+                  saveSettings( newSettings )
+               }
+ThirdMovement.verbose = true
+               beginSearch( tl, newSettings )
          }
       }
 
+      // a bit ugly, but who cares now?
       lazy val panel = new GroupPanel {
 //         linkHorizontalSize( butToIn, butToOut, butFromIn, butFromOut )
 //         linkHorizontalSize( ggMinPunch, ggMaxPunch )
