@@ -201,6 +201,10 @@ extends NullGoodies with Processor {
       }
    }
 
+   private def handleAbortion() {
+      if( checkAborted ) throw AbortException
+   }
+
    private def handleProcess[ A ]( perc: Float, p: Processor ) : A = {
       failure        = None
       success        = None
@@ -249,7 +253,7 @@ extends NullGoodies with Processor {
 
    private def process() {
       val (metaFile, extrOption) = metaFileForLayer( settings.layer )
-      handleProcessOption[ Unit ]( 0.1f, extrOption )
+      handleProcessOption[ Unit ]( 0.05f, extrOption )
 
       val spanLen             = settings.tlSpan.length
       val numChannels         = settings.numChannels
@@ -285,12 +289,12 @@ extends NullGoodies with Processor {
          case FeatureSegmentation.Failure( e )     => failed( e )
       }
 
-      val segms      = 0L +: handleProcess[ IndexedSeq[ Break ]]( 0.2f, segmProc ).map( _.pos ).sorted // XXX already sorted?
+      val segms      = 0L +: handleProcess[ IndexedSeq[ Break ]]( 0.1f, segmProc ).map( _.pos ).sorted // XXX already sorted?
       val numSegm    = segms.size
       if( numSegm == 0 ) return
 
       if( verbose ) {
-         println( "\n:::::::::: " + (if( numSegm <= 5 ) "All " + numSegm else "First 5") + " segments ::::::::::\n" )
+         println( "\n:::::::::: " + (if( numSegm <= 5 ) "All " else "First 5 of ") + numSegm + " segments ::::::::::\n" )
          segms.take( 5 ).foreach( m => println( m ))
       }
 
@@ -322,6 +326,9 @@ extends NullGoodies with Processor {
          val minIdx  = math.max( startIdx + 1, idx - 1 )
          idx = minIdx + 1; while( (idx < numSegm) && (segms( idx ) <= maxStop )) idx += 1
          val maxIdx  = idx - 1
+
+         var chunkOk = false
+
          if( minIdx <= maxIdx ) {
             val stopIdx    = minIdx + rnd.nextInt( maxIdx - minIdx + 1 )
             val plainSpan  = Span( segms( startIdx ), segms( stopIdx ))
@@ -356,12 +363,12 @@ extends NullGoodies with Processor {
                case FeatureCorrelation.Failure( e )      => failed( e )
             }
 
-            val perc    = (0.8 * w + 0.2).toFloat
+            val perc    = (0.9 * w + 0.1).toFloat
             val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc ).filterNot( _.sim.isNaN )
             val numMatches = corrs.size
 
             if( verbose ) {
-               println( "\n:::::::::: " + (if( numMatches <= 5 ) "All " + numMatches else "First 5") + " matches ::::::::::\n" )
+               println( "\n:::::::::: " + (if( numMatches <= 5 ) "All " else "First 5 of ") + numMatches + " matches ::::::::::\n" )
                corrs.take( 5 ).foreach( m => println( m.pretty + "\n" ))
             }
 
@@ -450,7 +457,7 @@ extends NullGoodies with Processor {
             // c11 x c23 x c34 x c43
             // c11 x c23 x c34 x c45...c4x
 
-            val w2 = if( (settings.strategyWeight > 0f) && (numMatches > numChannels) ) {
+            if( (settings.strategyWeight > 0f) && (numMatches > numChannels) ) {
                var bestCorr   = 0.0
                var bestSeq    = IIdxSeq.empty[ Int ]
                var xMap       = LongMap.empty[ Float ]
@@ -546,13 +553,27 @@ extends NullGoodies with Processor {
                   weightFun( baseValues ) * (1f - stratW) + weightFun( xValues ) * stratW
                }
 
-               def recurse( taken: IIdxSeq[ Int ], baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ]) {
+               var progDone = 0
+               val progDoneNum = numMatches * numMatches
+
+               def recurse( taken: IIdxSeq[ Int ], baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ], numDone: Int ) {
                   val chan          = taken.size
                   require( chan == baseDone.size )
+                  handleAbortion()
 
                   var i = 0; while( i < numMatches ) {
+                     val numDone1 = numDone + (i + 1)
+                     if( verbose ) {
+                        val progDone1  = numDone1 * 27 / progDoneNum
+                        while( progDone < progDone1 ) {
+                           print( "#" )
+                           progDone += 1
+                        }
+                     }
+
                      if( !taken.contains( i )) {
-                        val base       = w1( chan )( i )
+//                        val base       = w1( chan )( i )
+                        val base       = w1( i )( chan )
                         val baseDone1  = baseDone :+ base
                         if( bestPrognosis( baseDone1, xDone ) > bestCorr ) {
                            var xDone1  = xDone
@@ -572,7 +593,7 @@ extends NullGoodies with Processor {
                                  bestSeq  = taken1
                               } else {
                                  // go into next recursion...
-                                 recurse( taken1, baseDone1, xDone1 )
+                                 recurse( taken1, baseDone1, xDone1, numDone1 )
                               }
                            }
                         }
@@ -580,75 +601,87 @@ extends NullGoodies with Processor {
                   i += 1 }
                }
 
+               if( verbose ) {
+                  println( "\nFinding best combination... (out of " + ((numMatches - 1) * (numMatches - 1)) + ")" )
+               }
+
                val xDone0 = IIdxSeq.empty
                var j = 0; while( j < numMatches ) {
-                  val base = w1( 0 )( j )
+//                  val base = w1( 0 )( j )
+                  val base = w1( j )( 0 )
                   val baseDone0 = IIdxSeq( base )
                   if( bestPrognosis( baseDone0, xDone0 ) > bestCorr ) {
-                     recurse( IIdxSeq( j ), baseDone0, xDone0 )
+                     recurse( IIdxSeq( j ), baseDone0, xDone0, j + 1 )
                   }
                j += 1 }
 
-               bestSeq
+               val w2 = bestSeq
 
-            } else {
-               sys.error( "TODO: w1 find best combo" )
-            }
-
-            val w3 = w2.map( corrs( _ ))
-//            val pos = lastPos
-
-            lastSegmLen = w3.map( _.punch.length ).min
-            lastPos     = plainSpan.start
-            lastIdx     = startIdx
-            lastMatch   = Some( w3 )   // without the adjustments?
-
-            // now adjust matches according to segmentation bounds in the match
-            val basicOffset = plainSpan.start + settings.tlSpan.start
-            val w4 = w3 map { m =>
-//               val mFeat               = featureFile( plainName( m.file ), folder )
-               val mMeta               = extrMetaFile( plainName( m.file ), featureFolder )
-               val mSegCfg             = FeatureSegmentation.SettingsBuilder()
-               mSegCfg.corrLen         = 44100L // have 0.5 seconds on each side
-               mSegCfg.databaseFolder  = LeereNull.databaseFolder // hold the normalization data
-               mSegCfg.metaInput       = mMeta
-               mSegCfg.minSpacing      = 0L
-               mSegCfg.numBreaks       = 1
-               mSegCfg.temporalWeight  = 0.75f  // XXX could be configurable
-
-               def findAdjust( span: Span ) : Option[ Long ] = {
-                  mSegCfg.span         = Some( span )
-                  val mSegProc         = FeatureSegmentation( segmCfg ) {
-                     case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
-                     case FeatureSegmentation.Progress( i )    => progressed( i )
-                     case FeatureSegmentation.Aborted          => Act ! Aborted
-                     case FeatureSegmentation.Failure( e )     => failed( e )
+               if( verbose ) {
+                  while( progDone < 27 ) {
+                     print( "#" )
+                     progDone += 1
                   }
-                  handleProcess[ IndexedSeq[ Break ]]( perc, mSegProc ).map( _.pos ).headOption
+                  println( "\nResult : " + bestSeq )
                }
 
-               val mSegStartStart   = math.max( 0L, m.punch.start - 66150L )
-               val mSegStartStop    = math.min( (m.punch.start + m.punch.stop) / 2, m.punch.start + 44100L ) + 22050L
-               val mStart0          = findAdjust( Span( mSegStartStart, mSegStartStop )).getOrElse( m.punch.start )
+               val w3 = w2.map( corrs( _ ))
+   //            val pos = lastPos
 
-               val mSegStopStart    = math.max( 0L, math.max( (m.punch.start + m.punch.stop) / 2, m.punch.stop - 44100L ) - 22050L )
-               val mFileLen         = AudioFile.readSpec( m.file ).numFrames
-               val mSegStopStop     = math.min( mFileLen, m.punch.stop + 66150L )
-               val mStop            = findAdjust( Span( mSegStopStart, mSegStopStop )).getOrElse( m.punch.stop )
+               lastSegmLen = w3.map( _.punch.length ).min
+               lastPos     = plainSpan.start
+               lastIdx     = startIdx
+               lastMatch   = Some( w3 )   // without the adjustments?
 
-               val actualOffset0    = basicOffset + mStart0 - m.punch.start
-               val (actualOffset, mStart) = if( actualOffset0 >= 0 ) (actualOffset0, mStart0) else {
-                  (0L, mStart0 - actualOffset0)
+               // now adjust matches according to segmentation bounds in the match
+               val basicOffset = plainSpan.start + settings.tlSpan.start
+               val w4 = w3 map { m =>
+   //               val mFeat               = featureFile( plainName( m.file ), folder )
+                  val mMeta               = extrMetaFile( plainName( m.file ), featureFolder )
+                  val mSegCfg             = FeatureSegmentation.SettingsBuilder()
+                  mSegCfg.corrLen         = 44100L // have 0.5 seconds on each side
+                  mSegCfg.databaseFolder  = LeereNull.databaseFolder // hold the normalization data
+                  mSegCfg.metaInput       = mMeta
+                  mSegCfg.minSpacing      = 0L
+                  mSegCfg.numBreaks       = 1
+                  mSegCfg.temporalWeight  = 0.75f  // XXX could be configurable
+
+                  def findAdjust( span: Span ) : Option[ Long ] = {
+                     mSegCfg.span         = Some( span )
+                     val mSegProc         = FeatureSegmentation( segmCfg ) {
+                        case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
+                        case FeatureSegmentation.Progress( i )    => progressed( i )
+                        case FeatureSegmentation.Aborted          => Act ! Aborted
+                        case FeatureSegmentation.Failure( e )     => failed( e )
+                     }
+                     handleProcess[ IndexedSeq[ Break ]]( perc, mSegProc ).map( _.pos ).headOption
+                  }
+
+                  val mSegStartStart   = math.max( 0L, m.punch.start - 66150L )
+                  val mSegStartStop    = math.min( (m.punch.start + m.punch.stop) / 2, m.punch.start + 44100L ) + 22050L
+                  val mStart0          = findAdjust( Span( mSegStartStart, mSegStartStop )).getOrElse( m.punch.start )
+
+                  val mSegStopStart    = math.max( 0L, math.max( (m.punch.start + m.punch.stop) / 2, m.punch.stop - 44100L ) - 22050L )
+                  val mFileLen         = AudioFile.readSpec( m.file ).numFrames
+                  val mSegStopStop     = math.min( mFileLen, m.punch.stop + 66150L )
+                  val mStop            = findAdjust( Span( mSegStopStart, mSegStopStop )).getOrElse( m.punch.stop )
+
+                  val actualOffset0    = basicOffset + mStart0 - m.punch.start
+                  val (actualOffset, mStart) = if( actualOffset0 >= 0 ) (actualOffset0, mStart0) else {
+                     (0L, mStart0 - actualOffset0)
+                  }
+
+                  val mAdjusted = m.copy( punch = Span( mStart, mStop ))
+
+                  (actualOffset, mAdjusted)
                }
 
-               val mAdjusted = m.copy( punch = Span( mStart, mStop ))
-
-               (actualOffset, mAdjusted)
+               chunkOk = true
+               defer { updater( w4 )}
             }
+         }
 
-            defer { updater( w4 )}
-
-         } else {
+         if( !chunkOk ) {
             lastSegmLen = 4410
             lastIdx    += 1
             lastPos     = if( lastIdx < numSegm ) segms( lastIdx ) else spanLen
@@ -676,7 +709,7 @@ extends NullGoodies with Processor {
          if( !metaDir.exists() ) metaDir.mkdirs()
          val extrCfg = FeatureExtraction.SettingsBuilder()
          extrCfg.audioInput     = layer
-         val ff                  = featureFile( plainName( layer ),featureFolder )
+         val ff                  = featureFile( plainName( layer ), featureFolder )
          extrCfg.featureOutput  = ff
          extrCfg.metaOutput     = Some( metaFile )
 //         settings.numCoeffs      = default
