@@ -648,7 +648,7 @@ extends NullGoodies with Processor {
 
                   def findAdjust( span: Span ) : Option[ Long ] = {
                      mSegCfg.span         = Some( span )
-                     val mSegProc         = FeatureSegmentation( segmCfg ) {
+                     val mSegProc         = FeatureSegmentation( mSegCfg ) {
                         case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
                         case FeatureSegmentation.Progress( i )    => progressed( i )
                         case FeatureSegmentation.Aborted          => Act ! Aborted
