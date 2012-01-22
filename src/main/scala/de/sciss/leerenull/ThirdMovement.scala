@@ -273,17 +273,27 @@ extends NullGoodies with Processor {
       segmCfg.numBreaks       = (spanLen / segmCfg.minSpacing).toInt + 1
       segmCfg.span            = Some( Span( settings.layerOffset, settings.layerOffset + spanLen ))
       segmCfg.temporalWeight  = 0.75f  // XXX could be configurable
-      val segmProc = FeatureSegmentation( segmCfg ) {
+      val segmCfgB            = segmCfg.build
+
+      println( "\n:::::::::: Layer Segmentation ::::::::::\n" )
+      println( segmCfgB.pretty )
+
+      val segmProc = FeatureSegmentation( segmCfgB ) {
          case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
          case FeatureSegmentation.Progress( i )    => progressed( i )
          case FeatureSegmentation.Aborted          => Act ! Aborted
          case FeatureSegmentation.Failure( e )     => failed( e )
       }
 
-      val segms      = handleProcess[ IndexedSeq[ Break ]]( 0.2f, segmProc ).map( _.pos ).sorted // XXX already sorted?
+      val segms      = 0L +: handleProcess[ IndexedSeq[ Break ]]( 0.2f, segmProc ).map( _.pos ).sorted // XXX already sorted?
       val numSegm    = segms.size
       if( numSegm == 0 ) return
-      
+
+      if( verbose ) {
+         println( "\n:::::::::: " + (if( numSegm <= 5 ) "All " + numSegm else "First 5") + " segments ::::::::::\n" )
+         segms.take( 5 ).foreach( m => println( m ))
+      }
+
       var lastPos       = 0L
       var lastSegmLen   = 0L
       var lastIdx       = 0
@@ -309,11 +319,11 @@ extends NullGoodies with Processor {
          val maxStop = startPos + maxDur
 
          idx = startIdx + 1; while( idx < numSegm && (segms( idx ) <= minStop )) idx += 1
-         val minIdx  = idx - 1
+         val minIdx  = math.max( startIdx + 1, idx - 1 )
          idx = minIdx + 1; while( (idx < numSegm) && (segms( idx ) <= maxStop )) idx += 1
          val maxIdx  = idx - 1
          if( minIdx <= maxIdx ) {
-            val stopIdx = minIdx + rnd.nextInt( maxIdx - minIdx + 1 )
+            val stopIdx    = minIdx + rnd.nextInt( maxIdx - minIdx + 1 )
             val plainSpan  = Span( segms( startIdx ), segms( stopIdx ))
             val layerSpan  = Span( plainSpan.start + settings.layerOffset, plainSpan.stop + settings.layerOffset )
 
@@ -335,8 +345,8 @@ extends NullGoodies with Processor {
             val corrCfgB = corrCfg.build
 
             if( verbose ) {
-               println( ":::::::::: Basic Correlation ::::::::::" )
-               println( corrCfgB )
+               println( "\n:::::::::: Basic Correlation ::::::::::\n" )
+               println( corrCfgB.pretty )
             }
 
             val corrProc = FeatureCorrelation( corrCfgB ) {
@@ -350,7 +360,10 @@ extends NullGoodies with Processor {
             val corrs   = handleProcess[ IndexedSeq[ Match ]]( perc, corrProc ).filterNot( _.sim.isNaN )
             val numMatches = corrs.size
 
-            if( verbose ) println( "matches: " + numMatches )
+            if( verbose ) {
+               println( "\n:::::::::: " + (if( numMatches <= 5 ) "All " + numMatches else "First 5") + " matches ::::::::::\n" )
+               corrs.take( 5 ).foreach( m => println( m.pretty + "\n" ))
+            }
 
             // account for connectivity
             val w1      = lastMatch match {
