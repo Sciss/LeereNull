@@ -1,0 +1,458 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<konturSession>
+    <audioFiles>
+  <coll>
+  <audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif</path>
+  <numFrames>53645366</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif</path>
+  <numFrames>53645366</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif</path>
+  <numFrames>53645366</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif</path>
+  <numFrames>53645366</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="1">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif</path>
+  <numFrames>26977548</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile>
+</coll>
+</audioFiles>
+    <diffusions>
+  <coll>
+  <diffusion class="matrix" id="2">
+          <name>Stereo</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 0.0</row><row>0.0 1.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="3">
+          <name>2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 0.0 1.0</row><row>0.0 0.0 0.0 0.35</row></matrix>
+       </diffusion><diffusion class="matrix" id="4">
+          <name>2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 1.0 0.0</row><row>0.0 0.0 0.35 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="5">
+          <name>2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 1.0 0.0 0.0</row><row>0.0 0.35 0.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="6">
+          <name>2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.35 0.0 0.0 0.0</row><row>1.0 0.0 0.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="7">
+          <name>2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 0.0 0.35</row><row>0.0 0.0 0.0 1.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="8">
+          <name>2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 0.35 0.0</row><row>0.0 0.0 1.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="9">
+          <name>2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>1.0 0.0 0.0 0.0</row><row>0.35 0.0 0.0 0.0</row></matrix>
+       </diffusion>
+</coll>
+</diffusions>
+    <timelines>
+       <coll>
+  <timeline id="10">
+   <name>Timeline</name>
+   <span stop="2646000" start="0"></span>
+   <rate>44100.0</rate>
+   <tracks id="11">
+      <coll>
+  <audioTrack id="12">
+      <name>T1</name>
+      <diffusion idref="2"></diffusion>
+      <trail>
+  
+</trail>
+      </audioTrack><audioTrack id="13">
+      <name>T2</name>
+      <diffusion idref="3"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@27730432</name>
+      <span stop="693760" start="614400"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>27730432</offset>
+      <gain>0.005833663</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="14">
+      <name>T2</name>
+      <diffusion idref="4"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@30955520</name>
+      <span stop="693760" start="574976"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>30955520</offset>
+      <gain>0.0068175066</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="15">
+      <name>T2</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@33451008</name>
+      <span stop="716800" start="586240"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>33451008</offset>
+      <gain>0.0022824097</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="16">
+      <name>T2</name>
+      <diffusion idref="6"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@32822272</name>
+      <span stop="694272" start="578560"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>32822272</offset>
+      <gain>0.0071632317</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="17">
+      <name>T3</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@27730432</name>
+      <span stop="693760" start="614400"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>27730432</offset>
+      <gain>0.005833663</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="18">
+      <name>T3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@30955520</name>
+      <span stop="693760" start="574976"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>30955520</offset>
+      <gain>0.0068175066</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="19">
+      <name>T3</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@33451008</name>
+      <span stop="716800" start="586240"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>33451008</offset>
+      <gain>0.0022824097</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="20">
+      <name>T3</name>
+      <diffusion idref="6"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@32822272</name>
+      <span stop="694272" start="578560"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>32822272</offset>
+      <gain>0.0071632317</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="21">
+      <name>T4</name>
+      <diffusion idref="3"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@27730432</name>
+      <span stop="693760" start="614400"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>27730432</offset>
+      <gain>0.005833663</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="22">
+      <name>T4</name>
+      <diffusion idref="4"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@30955520</name>
+      <span stop="693760" start="574976"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>30955520</offset>
+      <gain>0.0068175066</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="23">
+      <name>T4</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@33451008</name>
+      <span stop="716800" start="586240"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>33451008</offset>
+      <gain>0.0022824097</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="24">
+      <name>T4</name>
+      <diffusion idref="6"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@32822272</name>
+      <span stop="694272" start="578560"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>32822272</offset>
+      <gain>0.0071632317</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="25">
+      <name>T5</name>
+      <diffusion idref="3"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@2942976</name>
+      <span stop="763392" start="657408"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>2942976</offset>
+      <gain>0.30651844</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="26">
+      <name>T5</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'tRsmpOpScttM'2kHlb@1734144</name>
+      <span stop="759808" start="665600"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>1734144</offset>
+      <gain>0.25125185</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="27">
+      <name>T5</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@6608896</name>
+      <span stop="730112" start="686592"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>6608896</offset>
+      <gain>1.6187834</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="28">
+      <name>T5</name>
+      <diffusion idref="9"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@2624512</name>
+      <span stop="750592" start="654336"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>2624512</offset>
+      <gain>0.06010673</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="29">
+      <name>T6</name>
+      <diffusion idref="3"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'tRsmpOpScttM'2kHlb@1258496</name>
+      <span stop="763904" start="658944"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>1258496</offset>
+      <gain>2.1793246</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="30">
+      <name>T6</name>
+      <diffusion idref="4"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@2942976</name>
+      <span stop="798720" start="690688"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>2942976</offset>
+      <gain>2.0927927</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="31">
+      <name>T6</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@5754368</name>
+      <span stop="763904" start="681472"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>5754368</offset>
+      <gain>0.70310324</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="32">
+      <name>T6</name>
+      <diffusion idref="9"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@5469696</name>
+      <span stop="776704" start="688128"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>5469696</offset>
+      <gain>0.06323036</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="33">
+      <name>T7</name>
+      <diffusion idref="3"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'tRsmpOpScttM'2kHlb@1258496</name>
+      <span stop="763904" start="658944"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>1258496</offset>
+      <gain>2.4565828</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="34">
+      <name>T7</name>
+      <diffusion idref="4"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@2942976</name>
+      <span stop="786432" start="690688"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>2942976</offset>
+      <gain>1.5046583</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="35">
+      <name>T7</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'02855ConLayer1White@20779008</name>
+      <span stop="763392" start="661504"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>20779008</offset>
+      <gain>8.895901</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="36">
+      <name>T7</name>
+      <diffusion idref="6"></diffusion>
+      <trail>
+  <stake>
+      <name>ScttM'tRsmpOpScttM'2kHlb@7802368</name>
+      <span stop="762880" start="669184"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>7802368</offset>
+      <gain>5.3197985</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline>
+</coll>
+    </timelines>
+</konturSession>

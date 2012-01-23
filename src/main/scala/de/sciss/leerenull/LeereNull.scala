@@ -418,7 +418,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             withTimeline { (tl, tlv, trl) =>
                openFileDialog( "Load Überzeichnung", ueberzeichnungFolder, filter = _.getName.endsWith( ".xml" )).foreach { file =>
                   val settings = ThirdMovement.Settings.fromXMLFile( file )
-                  ThirdMovementGUI.makeWindow( tl, tlv, settings )
+                  ThirdMovementGUI.makeWindow( tl, tlv, doc, settings )
                }
             }
          }
@@ -432,7 +432,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
 //
 //               val span       = selSpan
                val settings   = ThirdMovement.SettingsBuilder()
-               ThirdMovementGUI.makeWindow( tl, tlv, settings )
+               ThirdMovementGUI.makeWindow( tl, tlv, doc, settings )
             }
          }
       })

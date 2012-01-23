@@ -25,7 +25,6 @@
 
 package de.sciss.leerenull
 
-import de.sciss.kontur.session.BasicTimeline
 import de.sciss.app.AbstractWindow
 import de.sciss.kontur.gui.{TimelineView, AppWindow}
 import eu.flierl.grouppanel.GroupPanel
@@ -36,9 +35,12 @@ import ThirdMovement.Strategy
 import xml.XML
 import de.sciss.strugatzki.FeatureCorrelation.Match
 import collection.immutable.{IndexedSeq => IIdxSeq}
+import de.sciss.strugatzki.Span
+import de.sciss.kontur.util.Matrix2D
+import de.sciss.kontur.session.{FadeSpec, AudioTrack, Session, AudioRegion, BasicTimeline}
 
 object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
-   def makeWindow( tl: BasicTimeline, tlv: TimelineView, settings: ThirdMovement.Settings ) {
+   def makeWindow( tl: BasicTimeline, tlv: TimelineView, doc: Session, settings: ThirdMovement.Settings ) {
       val a = new AppWindow( AbstractWindow.REGULAR ) {
          setTitle( "Überzeichnung : " + tl.name )
          setResizable( false )
@@ -132,7 +134,7 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
                   saveSettings( newSettings )
                }
 ThirdMovement.verbose = true
-               beginSearch( tl, newSettings )
+               beginSearch( tl, doc, newSettings )
          }
       }
 
@@ -180,11 +182,49 @@ ThirdMovement.verbose = true
       a.setVisible( true )
    }
 
-   def beginSearch( tl: BasicTimeline, settings: ThirdMovement.Settings ) {
+   def beginSearch( tl: BasicTimeline, doc: Session, settings: ThirdMovement.Settings ) {
 //      if( verbose ) println( settings )
 
+      implicit val _doc = doc
+      implicit val _tl  = tl
+
+      val rnd     = new util.Random()
+      val fadeLen = 882 // 20 ms
+      val fadeIn  = Some( FadeSpec( fadeLen ))
+      val fadeOut = Some( FadeSpec( fadeLen ))
+
       def update( batch: IIdxSeq[ (Long, Match) ]) {
-         batch.foreach( println )
+         tl.tryEdit( "Add segments" ) { implicit ed =>
+            var tracks = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
+            batch.zipWithIndex.foreach { case ((pos, Match( _, file, fileSpan, gain, _ )), ch) =>
+               val af      = provideAudioFile( file )
+               val tlSpan  = Span( pos, pos + fileSpan.length )
+               val ar      = AudioRegion( tlSpan, plainName( file ) + "@" + fileSpan.start, af, fileSpan.start,
+                                          gain, fadeIn, fadeOut )
+               val mat     = Matrix2D.fromSeq( if( af.numChannels == 1 ) {
+                  Seq( Seq.tabulate( settings.numChannels )( outCh => if( outCh == ch ) 1f else 0f ))
+               } else {
+                  val (g1, g2) = if( rnd.nextBoolean() ) {
+                     // favour left (first) channel
+                     (1f, 0.35f)
+                  } else {
+                     // favour right (last) channel
+                     (0.35f, 1f)
+                  }
+
+                  Seq.tabulate( af.numChannels ) { inCh =>
+                     Seq.tabulate( settings.numChannels )( outCh =>
+                        if( outCh == ch ) {
+                           if( inCh == 0 ) g1 else if( inCh == af.numChannels - 1 ) g2 else 0f
+                        } else 0f
+                     )
+                  }
+               })
+               val diff    = provideDiffusion( mat, prefix = "Ch-" + (ch+1) + " " )
+               val at      = placeWithDiff( diff, ar, more = tracks )
+               tracks     += ((at, tracks.getOrElse( at, IndexedSeq.empty ) :+ ar))
+            }
+         }
       }
 
       val dlg  = progressDialog( "Correlating with database" )
