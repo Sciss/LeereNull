@@ -1,8 +1,6 @@
-import AssemblyKeys._
+// import AssemblyKeys._
 
-name           := "leerenull"
-
-appbundleName  := "LeereNull"
+name           := "LeereNull"
 
 version        := "0.13-SNAPSHOT"
 
@@ -23,8 +21,10 @@ scalacOptions ++= Seq( "-deprecation", "-unchecked" )
 
 // ---- packaging ----
 
-seq( assemblySettings: _* )
+// seq( assemblySettings: _* )
 
-test in assembly := {}
+// test in assembly := {}
 
-seq( appbundleSettings: _* )
+seq( appbundle.settings: _* )
+
+appbundle.icon := Some( file( "application.icns" ))
