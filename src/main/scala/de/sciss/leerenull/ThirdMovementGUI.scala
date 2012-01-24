@@ -196,9 +196,10 @@ ThirdMovement.verbose = true
       def update( batch: IIdxSeq[ (Long, Match) ]) {
          tl.tryEdit( "Add segments" ) { implicit ed =>
             var tracks = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
-            batch.zipWithIndex.foreach { case ((pos, Match( _, file, fileSpan, gain, _ )), ch) =>
+            batch.zipWithIndex.foreach { case ((pos, Match( _, file, fileSpan, gain0, _ )), ch) =>
                val af      = provideAudioFile( file )
                val tlSpan  = Span( pos, pos + fileSpan.length )
+               val gain    = if( gain0.isNaN ) 1f else gain0
                val ar      = AudioRegion( tlSpan, plainName( file ) + "@" + fileSpan.start, af, fileSpan.start,
                                           gain, fadeIn, fadeOut )
                val mat     = Matrix2D.fromSeq( if( af.numChannels == 1 ) {
@@ -220,8 +221,9 @@ ThirdMovement.verbose = true
                      )
                   }
                })
-               val diff    = provideDiffusion( mat, prefix = "Ch-" + (ch+1) + " " )
-               val at      = placeWithDiff( diff, ar, more = tracks )
+               val pre     = "Ch-" + (ch+1) + " "
+               val diff    = provideDiffusion( mat, prefix = pre )
+               val at      = placeWithDiff( diff, ar, more = tracks, trackPrefix = pre )
                tracks     += ((at, tracks.getOrElse( at, IndexedSeq.empty ) :+ ar))
             }
          }

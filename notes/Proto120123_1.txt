@@ -1,0 +1,2531 @@
+
+:::::::::: Layer Segmentation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Documents/devel/LeereNull/feature
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   span           = Some(Span(0,13291534))
+   corrLen        = 88200
+   temporalWeight = 0.75
+   normalize      = true
+   numBreaks      = 1206
+   minSpacing     = 11025
+)
+
+:::::::::: First 5 of 538 segments ::::::::::
+
+0
+675328
+707584
+718848
+730112
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(675328,741376),0.75)
+   punchOut       = None
+   minPunch       = 66048
+   maxPunch       = 66048
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8344178
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(2645504,2711552)
+   boostIn  = 0.06010673
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8196768
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(11646464,11712512)
+   boostIn  = 1.0160692
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8171963
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(6597632,6663680)
+   boostIn  = 1.6187834
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8002036
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(15688192,15754240)
+   boostIn  = 9.903411
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7953423
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6188544,6254592)
+   boostIn  = 0.12824032
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(0, 2, 9, 30)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(730112,787968),0.75)
+   punchOut       = None
+   minPunch       = 57856
+   maxPunch       = 57856
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8218237
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6081536,6139392)
+   boostIn  = 6.870879
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8206088
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33050112,33107968)
+   boostIn  = 3.5368252
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.81157726
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33273344,33331200)
+   boostIn  = 10.294935
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8097351
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(33522688,33580544)
+   boostIn  = 2.1226883
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8063938
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(13143040,13200896)
+   boostIn  = 2.8253276
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(25, 200, 285, 84)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(776704,901120),0.75)
+   punchOut       = None
+   minPunch       = 124416
+   maxPunch       = 124416
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.79480445
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3404288,3528704)
+   boostIn  = 0.868683
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7915897
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(7995904,8120320)
+   boostIn  = 2.211475
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.787061
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(6518784,6643200)
+   boostIn  = 3.5341651
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.78345567
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(14880256,15004672)
+   boostIn  = 10.162949
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.78336585
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(45408256,45532672)
+   boostIn  = 2.4012725
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(0, 108, 18, 7)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(875520,983552),0.75)
+   punchOut       = None
+   minPunch       = 108032
+   maxPunch       = 108032
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.69832444
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1708544,1816576)
+   boostIn  = 3.6972938
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.6965335
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(32870912,32978944)
+   boostIn  = 2.1250954
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.68822587
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(2559488,2667520)
+   boostIn  = 13.582495
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.6581627
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(2464768,2572800)
+   boostIn  = 1.7527153
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.6508063
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(28174848,28282880)
+   boostIn  = 4.0923724
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(52, 15, 24, 0)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(957440,1058304),0.75)
+   punchOut       = None
+   minPunch       = 100864
+   maxPunch       = 100864
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.7541736
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(23535616,23636480)
+   boostIn  = 5.4031053
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.74326086
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1520640,1621504)
+   boostIn  = 4.7533545
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7312415
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3150848,3251712)
+   boostIn  = 1.2757057
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7310185
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(15418368,15519232)
+   boostIn  = 2.0025923
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.72442365
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(18050560,18151424)
+   boostIn  = 1.9090893
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(115, 122, 10, 1)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1058304,1169408),0.75)
+   punchOut       = None
+   minPunch       = 111104
+   maxPunch       = 111104
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8336239
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(12860416,12971520)
+   boostIn  = 0.27088198
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83347106
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(32837632,32948736)
+   boostIn  = 0.98112637
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8304032
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(35897344,36008448)
+   boostIn  = 2.2025518
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8297273
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8611840,8722944)
+   boostIn  = 12.994045
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8246975
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(6781440,6892544)
+   boostIn  = 15.599603
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(89, 52, 28, 75)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1158144,1240064),0.75)
+   punchOut       = None
+   minPunch       = 81920
+   maxPunch       = 81920
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8787831
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42976256,43058176)
+   boostIn  = 19.023441
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.870388
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42023424,42105344)
+   boostIn  = 5.8945856
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.86464477
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(41889792,41971712)
+   boostIn  = 5.0818934
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8641651
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3409408,3491328)
+   boostIn  = 2.8976839
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.85574555
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(31117824,31199744)
+   boostIn  = 5.9943953
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(119, 59, 49, 83)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1240064,1313792),0.75)
+   punchOut       = None
+   minPunch       = 73728
+   maxPunch       = 73728
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.63267475
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43208704,43282432)
+   boostIn  = 4.094557
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.5863211
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(6746624,6820352)
+   boostIn  = 2.44784
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.5748202
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(30954496,31028224)
+   boostIn  = 6.055227
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.57389164
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(47823872,47897600)
+   boostIn  = 14.334899
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.5725035
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3547648,3621376)
+   boostIn  = 8.075248
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(330, 208, 335, 373)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1291264,1350144),0.75)
+   punchOut       = None
+   minPunch       = 58880
+   maxPunch       = 58880
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.77829295
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(31384064,31442944)
+   boostIn  = 7.193698
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.77039176
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(41883648,41942528)
+   boostIn  = 0.85761064
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7667357
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(6785536,6844416)
+   boostIn  = 5.036681
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7580745
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43144192,43203072)
+   boostIn  = 1.6112931
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7576468
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5898752,5957632)
+   boostIn  = 2.399739
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(2, 14, 7, 21)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1338880,1409024),0.75)
+   punchOut       = None
+   minPunch       = 70144
+   maxPunch       = 70144
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.7973835
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42958336,43028480)
+   boostIn  = 1.5929825
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7922805
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5541376,5611520)
+   boostIn  = 1.1154662
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.79178953
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(32846336,32916480)
+   boostIn  = 2.900443
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.78542143
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(27847680,27917824)
+   boostIn  = 2.4314198
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7769307
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(13152256,13222400)
+   boostIn  = 2.1454983
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(15, 26, 12, 3)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1409024,1517568),0.75)
+   punchOut       = None
+   minPunch       = 108544
+   maxPunch       = 108544
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.871262
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(14945792,15054336)
+   boostIn  = 4.0663223
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8549227
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(15686144,15794688)
+   boostIn  = 0.62665397
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8544736
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1273856,1382400)
+   boostIn  = 0.790457
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.85180014
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(32848384,32956928)
+   boostIn  = 0.68563014
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.84472156
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(12141568,12250112)
+   boostIn  = 0.7042583
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(65, 80, 3, 6)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1483776,1528832),0.75)
+   punchOut       = None
+   minPunch       = 45056
+   maxPunch       = 45056
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.87103444
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6151680,6196736)
+   boostIn  = 2.4621
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8703928
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1348608,1393664)
+   boostIn  = 1.3905549
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.86197084
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10276352,10321408)
+   boostIn  = 1.4247797
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8410251
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10415616,10460672)
+   boostIn  = 0.8023891
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8394106
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(13808128,13853184)
+   boostIn  = 14.5680275
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(11, 87, 1, 58)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1517568,1614336),0.75)
+   punchOut       = None
+   minPunch       = 96768
+   maxPunch       = 96768
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.84412664
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1300480,1397248)
+   boostIn  = 2.5485897
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8307652
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10227712,10324480)
+   boostIn  = 3.7381902
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8292713
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(13953024,14049792)
+   boostIn  = 1.4187405
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82822657
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(33493504,33590272)
+   boostIn  = 1.6943363
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82257277
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(35934208,36030976)
+   boostIn  = 4.914324
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(145, 14, 9, 1)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1614336,1702912),0.75)
+   punchOut       = None
+   minPunch       = 88576
+   maxPunch       = 88576
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8598727
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3391488,3480064)
+   boostIn  = 1.5307139
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8276995
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(7983616,8072192)
+   boostIn  = 2.3973784
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.820595
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6736896,6825472)
+   boostIn  = 3.8846283
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.80687475
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(14867456,14956032)
+   boostIn  = 11.71051
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.80307114
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6500864,6589440)
+   boostIn  = 5.170993
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(202, 105, 147, 59)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1702912,1811968),0.75)
+   punchOut       = None
+   minPunch       = 109056
+   maxPunch       = 109056
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.79965204
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(7938560,8047616)
+   boostIn  = 0.6107344
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.76005656
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(18128384,18237440)
+   boostIn  = 2.718547
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.71664786
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(5481984,5591040)
+   boostIn  = 0.029122448
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7126156
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8110592,8219648)
+   boostIn  = 17.066702
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.6916934
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(23426048,23535104)
+   boostIn  = 0.04007081
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(27, 2, 10, 0)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1778176,1827840),0.75)
+   punchOut       = None
+   minPunch       = 49664
+   maxPunch       = 49664
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8657869
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8012800,8062464)
+   boostIn  = 0.37105846
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8645295
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(20454912,20504576)
+   boostIn  = 0.025841495
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.86235106
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8179712,8229376)
+   boostIn  = 5.0428247
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8498084
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42994688,43044352)
+   boostIn  = 0.79607815
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.84801733
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8102400,8152064)
+   boostIn  = 2.3684437
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(29, 4, 5, 2)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1811968,1938432),0.75)
+   punchOut       = None
+   minPunch       = 126464
+   maxPunch       = 126464
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8546978
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(32833024,32959488)
+   boostIn  = 1.1914256
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8441762
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33452032,33578496)
+   boostIn  = 0.44507834
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83707887
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5772288,5898752)
+   boostIn  = 4.835044
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83547115
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1257984,1384448)
+   boostIn  = 1.5560657
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8294022
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(30972416,31098880)
+   boostIn  = 1.0458412
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(45, 2, 3, 21)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(1915904,2030592),0.75)
+   punchOut       = None
+   minPunch       = 114688
+   maxPunch       = 114688
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.7969711
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6517760,6632448)
+   boostIn  = 11.444002
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7765225
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(13817856,13932544)
+   boostIn  = 4.534546
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7754313
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(3036672,3151360)
+   boostIn  = 5.038603
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7537823
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(18620416,18735104)
+   boostIn  = 19.871834
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.750918
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(45141504,45256192)
+   boostIn  = 19.966997
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(93, 6, 2, 12)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2030592,2087424),0.75)
+   punchOut       = None
+   minPunch       = 56832
+   maxPunch       = 56832
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.82704115
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8684032,8740864)
+   boostIn  = 19.554852
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.81122124
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(28534784,28591616)
+   boostIn  = 0.7752528
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8093811
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5289472,5346304)
+   boostIn  = 0.724077
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8070691
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(4041216,4098048)
+   boostIn  = 7.364475
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.80562747
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(7872512,7929344)
+   boostIn  = 0.75442845
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(12, 10, 71, 18)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2076160,2170880),0.75)
+   punchOut       = None
+   minPunch       = 94720
+   maxPunch       = 94720
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.6597918
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(18421760,18516480)
+   boostIn  = 2.9561408
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.63417417
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(4423680,4518400)
+   boostIn  = 2.567712
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.6095717
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8925696,9020416)
+   boostIn  = 0.5855369
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.6060591
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3975680,4070400)
+   boostIn  = 4.5214825
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.59952384
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(22380544,22475264)
+   boostIn  = 0.5569997
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(234, 42, 169, 206)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2146816,2244096),0.75)
+   punchOut       = None
+   minPunch       = 97280
+   maxPunch       = 97280
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.84956133
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6539776,6637056)
+   boostIn  = 10.050213
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.837942
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(20457472,20554752)
+   boostIn  = 0.49476555
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82870793
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5938176,6035456)
+   boostIn  = 3.3759859
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8253596
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1296896,1394176)
+   boostIn  = 3.1773505
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8153423
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(45017088,45114368)
+   boostIn  = 5.9997997
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(150, 16, 30, 13)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2232832,2356224),0.75)
+   punchOut       = None
+   minPunch       = 123392
+   maxPunch       = 123392
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.86513114
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(7961600,8084992)
+   boostIn  = 2.839052
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.841732
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6478848,6602240)
+   boostIn  = 6.146639
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82637393
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3369984,3493376)
+   boostIn  = 2.1350877
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82434607
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(16813568,16936960)
+   boostIn  = 0.94450784
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8239101
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6715392,6838784)
+   boostIn  = 5.0583186
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(63, 48, 20, 15)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2321408,2412032),0.75)
+   punchOut       = None
+   minPunch       = 90624
+   maxPunch       = 90624
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.829703
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(13818368,13908992)
+   boostIn  = 0.15775892
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82080656
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43854336,43944960)
+   boostIn  = 0.417612
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7938763
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(30629376,30720000)
+   boostIn  = 0.28542647
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7908154
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43337728,43428352)
+   boostIn  = 0.5131665
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.78316355
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43475968,43566592)
+   boostIn  = 0.30676517
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(86, 28, 5, 10)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2412032,2537472),0.75)
+   punchOut       = None
+   minPunch       = 125440
+   maxPunch       = 125440
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.7845639
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3348480,3473920)
+   boostIn  = 3.2795155
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7587649
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42878464,43003904)
+   boostIn  = 3.6043046
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.73841965
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6457344,6582784)
+   boostIn  = 8.252637
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7127247
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(4106752,4232192)
+   boostIn  = 7.607951
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.71107733
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33021952,33147392)
+   boostIn  = 2.3155346
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(93, 77, 166, 37)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2514944,2571264),0.75)
+   punchOut       = None
+   minPunch       = 56320
+   maxPunch       = 56320
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.90505
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43751424,43807744)
+   boostIn  = 1.6350617
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.9004537
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(18060800,18117120)
+   boostIn  = 0.089936726
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8999455
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42972672,43028992)
+   boostIn  = 0.4218432
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8909304
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(12246528,12302848)
+   boostIn  = 5.776528
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.89013374
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43881984,43938304)
+   boostIn  = 0.9192388
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(57, 10, 25, 52)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2571264,2647552),0.75)
+   punchOut       = None
+   minPunch       = 76288
+   maxPunch       = 76288
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8945781
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43905536,43981824)
+   boostIn  = 0.6121958
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8882245
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43811328,43887616)
+   boostIn  = 0.53691643
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8743365
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43089408,43165696)
+   boostIn  = 0.3819798
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.86820453
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42088448,42164736)
+   boostIn  = 0.08285845
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.85986596
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(28039680,28115968)
+   boostIn  = 0.47793365
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(15, 5, 71, 35)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2647552,2778112),0.75)
+   punchOut       = None
+   minPunch       = 130560
+   maxPunch       = 130560
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8461118
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10539008,10669568)
+   boostIn  = 2.1340187
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83579695
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(7983104,8113664)
+   boostIn  = 4.862594
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83122826
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3390976,3521536)
+   boostIn  = 2.4006264
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8278102
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10272256,10402816)
+   boostIn  = 5.0271907
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8129814
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(31791104,31921664)
+   boostIn  = 5.0536027
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(73, 9, 0, 3)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2763264,2880512),0.75)
+   punchOut       = None
+   minPunch       = 117248
+   maxPunch       = 117248
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.81300306
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(2480128,2597376)
+   boostIn  = 1.1223128
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7656007
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(18730496,18847744)
+   boostIn  = 7.2220297
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7621955
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43024896,43142144)
+   boostIn  = 10.903948
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.75588495
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(13962240,14079488)
+   boostIn  = 1.8182384
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.754923
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(13407744,13524992)
+   boostIn  = 1.106565
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(54, 159, 218, 146)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2856448,2931200),0.75)
+   punchOut       = None
+   minPunch       = 74752
+   maxPunch       = 74752
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.88789845
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(7987200,8061952)
+   boostIn  = 6.6252193
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8724467
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6740480,6815232)
+   boostIn  = 10.577573
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8710636
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(6504448,6579200)
+   boostIn  = 12.919966
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.86564493
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3395584,3470336)
+   boostIn  = 4.2349296
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.85599583
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(16839168,16913920)
+   boostIn  = 2.2429006
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(32, 23, 78, 31)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(2908672,3018240),0.75)
+   punchOut       = None
+   minPunch       = 109568
+   maxPunch       = 109568
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.84442663
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(13784576,13894144)
+   boostIn  = 0.4125498
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8384707
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43714048,43823616)
+   boostIn  = 3.63209
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83757865
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43305984,43415552)
+   boostIn  = 1.4482272
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.81455964
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(4473856,4583424)
+   boostIn  = 1.1771499
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8103961
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42943488,43053056)
+   boostIn  = 1.3441725
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(57, 136, 120, 123)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3006976,3085824),0.75)
+   punchOut       = None
+   minPunch       = 78848
+   maxPunch       = 78848
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.9374723
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8178688,8257536)
+   boostIn  = 0.029928312
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.93370247
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(8060416,8139264)
+   boostIn  = 0.008941967
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8973385
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5589504,5668352)
+   boostIn  = 0.9530483
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8968617
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(14571520,14650368)
+   boostIn  = 7.0899294E-4
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.88881314
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(4294656,4373504)
+   boostIn  = 4.9802824E-4
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(67, 80, 77, 51)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3063296,3150848),0.75)
+   punchOut       = None
+   minPunch       = 87552
+   maxPunch       = 87552
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: All 1 matches ::::::::::
+
+Match(
+   sim      = 0.0
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(23685120,23772672)
+   boostIn  = NaN
+   boostOut = 1.0
+)
+
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3150848,3183616),0.75)
+   punchOut       = None
+   minPunch       = 32768
+   maxPunch       = 32768
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.85960716
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33060352,33093120)
+   boostIn  = 1.1789173
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8368298
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5208064,5240832)
+   boostIn  = 1.7691263
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8343823
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33283584,33316352)
+   boostIn  = 3.5715113
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8269169
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1339904,1372672)
+   boostIn  = 0.8620101
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82588893
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1457664,1490432)
+   boostIn  = 1.0474966
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(0, 5, 10, 43)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3183616,3284480),0.75)
+   punchOut       = None
+   minPunch       = 100864
+   maxPunch       = 100864
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8498664
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1308160,1409024)
+   boostIn  = 2.8701577
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8153056
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10235392,10336256)
+   boostIn  = 5.3447804
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8119863
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(4112896,4213760)
+   boostIn  = 5.7952685
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8107893
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10374656,10475520)
+   boostIn  = 2.8676724
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8034584
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10502144,10603008)
+   boostIn  = 2.3981364
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(1, 4, 3, 16)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3284480,3356672),0.75)
+   punchOut       = None
+   minPunch       = 72192
+   maxPunch       = 72192
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.90066063
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(12232192,12304384)
+   boostIn  = 1.4904351
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8937126
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33567232,33639424)
+   boostIn  = 0.03440363
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.89225256
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(42972160,43044352)
+   boostIn  = 0.29561105
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8890566
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(43750400,43822592)
+   boostIn  = 1.2636178
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.888715
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5554176,5626368)
+   boostIn  = 0.29184508
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(35, 53, 37, 109)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3334144,3417600),0.75)
+   punchOut       = None
+   minPunch       = 83456
+   maxPunch       = 83456
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.9369704
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(49321984,49405440)
+   boostIn  = 0.6971877
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.93565303
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(16631296,16714752)
+   boostIn  = 1.4174654
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.91673255
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(12878336,12961792)
+   boostIn  = 1.0399649
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.90462375
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(5603840,5687296)
+   boostIn  = 1.1961449
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8991887
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(23660544,23744000)
+   boostIn  = 9.837033
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(210, 264, 202, 266)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3395072,3417600),0.75)
+   punchOut       = None
+   minPunch       = 22528
+   maxPunch       = 22528
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: All 1 matches ::::::::::
+
+Match(
+   sim      = 0.0
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(26946048,26968576)
+   boostIn  = NaN
+   boostOut = 1.0
+)
+
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3642880,3752448),0.75)
+   punchOut       = None
+   minPunch       = 109568
+   maxPunch       = 109568
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.81760406
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1275392,1384960)
+   boostIn  = 2.1288104
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8158839
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(14947328,15056896)
+   boostIn  = 11.040912
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.80031633
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(30059520,30169088)
+   boostIn  = 4.280195
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.79718643
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScottMetalLayer1_120113_202855.aif
+   punch    = Span(15681536,15791104)
+   boostIn  = 3.7995532
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.7967777
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(28474880,28584448)
+   boostIn  = 1.0662106
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(43, 48, 58, 36)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3718656,3828224),0.75)
+   punchOut       = None
+   minPunch       = 109568
+   maxPunch       = 109568
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8483109
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10545152,10654720)
+   boostIn  = 1.9840226
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83788496
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(10418176,10527744)
+   boostIn  = 2.509701
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.831192
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(1516032,1625600)
+   boostIn  = 5.2380147
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.82935095
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3397632,3507200)
+   boostIn  = 2.551377
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8237038
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(18847744,18957312)
+   boostIn  = 3.6161966
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(95, 108, 96, 78)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3797504,3909120),0.75)
+   punchOut       = None
+   minPunch       = 111616
+   maxPunch       = 111616
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.8843292
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(32837632,32949248)
+   boostIn  = 0.6116356
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8825699
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(33456128,33567744)
+   boostIn  = 0.20859511
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8794563
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(28143104,28254720)
+   boostIn  = 1.106701
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.87250745
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(30977536,31089152)
+   boostIn  = 0.52205855
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.8683504
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(28310528,28422144)
+   boostIn  = 0.35921773
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+
+Result : Vector(63, 77, 93, 57)
+
+:::::::::: Basic Correlation ::::::::::
+
+Settings(
+   databaseFolder = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/feat
+   metaInput      = /Users/hhrutz/Documents/devel/LeereNull/third_move/feature/Layer1DynRsmp_feat.xml
+   punchIn        = Punch(Span(3897856,3957760),0.75)
+   punchOut       = None
+   minPunch       = 59904
+   maxPunch       = 59904
+   normalize      = true
+   maxBoost       = 20.0
+   numMatches     = 400
+   numPerFiles    = 400
+   minSpacing     = 4410
+)
+
+:::::::::: First 5 of 400 matches ::::::::::
+
+Match(
+   sim      = 0.85816693
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(32961024,33020928)
+   boostIn  = 1.6459115
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.852473
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(3410432,3470336)
+   boostIn  = 2.9662888
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.84279454
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(39985664,40045568)
+   boostIn  = 13.245297
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.84221226
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'tRsmpOpScttM'2kHlb.aif
+   punch    = Span(14561792,14621696)
+   boostIn  = 2.7627568
+   boostOut = 1.0
+)
+
+Match(
+   sim      = 0.83995247
+   file     = /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/layer1/audio/ScttM'02855ConLayer1White.aif
+   punch    = Span(31124992,31184896)
+   boostIn  = 13.705474
+   boostOut = 1.0
+)
+
+
+Finding best combination... (out of 159201)
+(hangs)

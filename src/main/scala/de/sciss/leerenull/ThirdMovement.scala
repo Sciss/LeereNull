@@ -298,18 +298,30 @@ extends NullGoodies with Processor {
          segms.take( 5 ).foreach( m => println( m ))
       }
 
-      var lastPos       = 0L
+      var lastSpan      = Span( 0L, 0L )
       var lastSegmLen   = 0L
-      var lastIdx       = 0
+      var lastStartIdx  = 0
+      var lastStopIdx   = 0
       val rnd           = new util.Random()
       // tracks the matches per channel
       var lastMatch     = Option.empty[ IIdxSeq[ Match ]]
       val gagaDur       = (settings.startDur._1 + settings.startDur._2 + settings.stopDur._1 + settings.stopDur._2) / 4
-      while( lastPos < spanLen ) {
+      var sameStartIdx  = 0
+      while( lastSpan.stop < spanLen ) {
          val maxOvl  = (settings.maxOverlap.toDouble * lastSegmLen + 0.5).toLong
-         var idx     = lastIdx
-         while( (idx > 0 &&) ((lastPos - segms( idx )) <= maxOvl) ) idx -= 1
-         val startIdx = math.min( lastIdx, idx + 1 )
+         var idx     = lastStopIdx
+         while( (idx > 0 &&) ((lastSpan.stop - segms( idx )) <= maxOvl) ) idx -= 1
+//         val startIdx = math.min( lastIdx, idx + 1 )
+         val startIdx = {
+            val res = math.max( lastStartIdx, idx + 1 )
+            if( res == lastStartIdx ) {
+               sameStartIdx += 1
+               if( sameStartIdx == 3 ) {
+                  sameStartIdx = 0
+                  res + 1
+               } else res
+            } else res
+         }
          val startPos = segms( startIdx )
 
 //         val w       = math.max( 0.0, math.min( 1.0, ((minStop + maxStop) / 2 - startPos).toDouble / spanLen ))
@@ -346,7 +358,8 @@ extends NullGoodies with Processor {
             corrCfg.maxPunch     = plainSpan.length   // XXX is this actually used when punchOut == None?
             corrCfg.metaInput    = metaFile
             corrCfg.minSpacing   = 4410L  // 100 ms
-            corrCfg.numMatches   = math.min( 4096, numChannels * numChannels * 100 )
+//            corrCfg.numMatches   = math.min( 4096, numChannels * numChannels * 100 )
+            corrCfg.numMatches   = math.min( 1024, numChannels * 100 )
             corrCfg.numPerFile   = corrCfg.numMatches
             corrCfg.punchIn      = FeatureCorrelation.Punch( layerSpan, temp )
             val corrCfgB = corrCfg.build
@@ -526,7 +539,8 @@ extends NullGoodies with Processor {
                   xMap.get( key ) match {
                      case Some( value ) => value
                      case None =>
-                        val value = xCalc( i, j )
+                        val value0  = xCalc( i, j )
+                        val value   = if( value0.isNaN ) 0f else value0
                         xMap += ((key, value))
                         value
                   }
@@ -564,10 +578,11 @@ extends NullGoodies with Processor {
                   var i = 0; while( i < numMatches ) {
                      val numDone1 = numDone + (i + 1)
                      if( verbose ) {
-                        val progDone1  = numDone1 * 27 / progDoneNum
+                        val progDone1  = numDone1 * 10 / progDoneNum
                         while( progDone < progDone1 ) {
-                           print( "#" )
+//                           print( "#" )
                            progDone += 1
+                           println( progDone )
                         }
                      }
 
@@ -618,20 +633,22 @@ extends NullGoodies with Processor {
                val w2 = bestSeq
 
                if( verbose ) {
-                  while( progDone < 27 ) {
-                     print( "#" )
-                     progDone += 1
-                  }
+//                  while( progDone < 27 ) {
+//                     print( "#" )
+//                     progDone += 1
+//                  }
                   println( "\nResult : " + bestSeq )
                }
 
                val w3 = w2.map( corrs( _ ))
    //            val pos = lastPos
 
-               lastSegmLen = w3.map( _.punch.length ).min
-               lastPos     = plainSpan.start
-               lastIdx     = startIdx
-               lastMatch   = Some( w3 )   // without the adjustments?
+               lastSegmLen    = w3.map( _.punch.length ).min
+//               lastPos     = plainSpan.start
+               lastSpan       = plainSpan // .stop
+               lastStartIdx   = startIdx
+               lastStopIdx    = stopIdx
+               lastMatch      = Some( w3 )   // without the adjustments?
 
                // now adjust matches according to segmentation bounds in the match
                val basicOffset = plainSpan.start + settings.tlSpan.start
@@ -683,8 +700,12 @@ extends NullGoodies with Processor {
 
          if( !chunkOk ) {
             lastSegmLen = 4410
-            lastIdx    += 1
-            lastPos     = if( lastIdx < numSegm ) segms( lastIdx ) else spanLen
+//            lastSpan    = Span( lastSpan.stop, lastSpan.stop + lastSegmLen )
+            lastStartIdx += 1
+            lastStopIdx  += 1
+//            lastSpan     = if( lastStartIdx < numSegm ) segms( lastStartIdx ) else spanLen
+            lastSpan    = Span( if( lastStartIdx < numSegm ) segms( lastStartIdx ) else spanLen,
+                                if( lastStopIdx  < numSegm ) segms( lastStopIdx )  else spanLen )
             lastMatch   = None
          }
       }
