@@ -572,7 +572,7 @@ extends NullGoodies with Processor {
                }
 
                var progDone = 0
-               val progDoneNum = numMatches * numMatches
+               val progDoneNum = numMatches * numChannels // numMatches
 
                def recurse( taken: IIdxSeq[ Int ], baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ], numDone: Int ) {
                   val chan          = taken.size
@@ -621,9 +621,9 @@ extends NullGoodies with Processor {
                }
 
                if( verbose ) {
-                  println( "\nFinding best combination... (out of " + ((numMatches - 1) * (numMatches - 1)) + ")" )
+                  var prod = 1L; var i = 0; while( i < numChannels ) { prod *= numMatches - i; i += 1 }
+                  println( "\nFinding best combination... (out of " + prod + ")" )
                }
-
                val xDone0 = IIdxSeq.empty
                var j = 0; while( j < numMatches ) {
 //                  val base = w1( 0 )( j )
@@ -656,7 +656,7 @@ extends NullGoodies with Processor {
                lastMatch      = Some( w3 )   // without the adjustments?
 
                // now adjust matches according to segmentation bounds in the match
-               val basicOffset = -layStart + tlStart
+               val basicOffset = tlStart + (layerSpan.start - layStart)
                val w4 = w3 map { m =>
    //               val mFeat               = featureFile( plainName( m.file ), folder )
                   val mMeta               = extrMetaFile( plainName( m.file ), featureFolder )
@@ -688,7 +688,7 @@ extends NullGoodies with Processor {
                   val mSegStopStop     = math.min( mFileLen, m.punch.stop + 66150L )
                   val mStop            = findAdjust( Span( mSegStopStart, mSegStopStop )).getOrElse( m.punch.stop )
 
-                  val actualOffset0    = basicOffset + mStart0 // - m.punch.start
+                  val actualOffset0    = basicOffset + mStart0 - m.punch.start
                   val (actualOffset, mStart) = if( actualOffset0 >= 0 ) (actualOffset0, mStart0) else {
                      (0L, mStart0 - actualOffset0)
                   }

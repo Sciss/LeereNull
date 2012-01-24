@@ -196,7 +196,9 @@ ThirdMovement.verbose = true
       def update( batch: IIdxSeq[ (Long, Match) ]) {
          tl.tryEdit( "Add segments" ) { implicit ed =>
             var tracks = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
-            batch.zipWithIndex.foreach { case ((pos, Match( _, file, fileSpan, gain0, _ )), ch) =>
+println( "\n::::::: Insertions :::::::\n" )
+            batch.zipWithIndex.foreach { case ((pos, m @ Match( _, file, fileSpan, gain0, _ )), ch) =>
+println( "  at " + pos + " file span " + fileSpan )
                val af      = provideAudioFile( file )
                val tlSpan  = Span( pos, pos + fileSpan.length )
                val gain    = if( gain0.isNaN ) 1f else gain0
