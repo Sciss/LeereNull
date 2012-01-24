@@ -255,7 +255,10 @@ extends NullGoodies with Processor {
       val (metaFile, extrOption) = metaFileForLayer( settings.layer )
       handleProcessOption[ Unit ]( 0.05f, extrOption )
 
+      val tlStart             = settings.tlSpan.start
       val spanLen             = settings.tlSpan.length
+      val layStart            = settings.layerOffset
+      val layStop             = layStart + spanLen
       val numChannels         = settings.numChannels
       val extrIn              = FeatureExtraction.Settings.fromXMLFile( metaFile )
       val stepSize            = extrIn.fftSize / extrIn.fftOverlap
@@ -275,7 +278,7 @@ extends NullGoodies with Processor {
       val minSpc              = math.min( settings.startDur._1, settings.stopDur._1 ) / 6
       segmCfg.minSpacing      = minSpc // 22050L // 44100L -- no, smaller because we want to use overlap eventually
       segmCfg.numBreaks       = (spanLen / segmCfg.minSpacing).toInt + 1
-      segmCfg.span            = Some( Span( settings.layerOffset, settings.layerOffset + spanLen ))
+      segmCfg.span            = Some( Span( layStart, layStop ))
       segmCfg.temporalWeight  = 0.75f  // XXX could be configurable
       val segmCfgB            = segmCfg.build
 
@@ -289,7 +292,7 @@ extends NullGoodies with Processor {
          case FeatureSegmentation.Failure( e )     => failed( e )
       }
 
-      val segms      = 0L +: handleProcess[ IndexedSeq[ Break ]]( 0.1f, segmProc ).map( _.pos ).sorted // XXX already sorted?
+      val segms      = layStart +: handleProcess[ IndexedSeq[ Break ]]( 0.1f, segmProc ).map( _.pos ).sorted // XXX already sorted?
       val numSegm    = segms.size
       if( numSegm == 0 ) return
 
@@ -298,7 +301,7 @@ extends NullGoodies with Processor {
          segms.take( 5 ).foreach( m => println( m ))
       }
 
-      var lastSpan      = Span( 0L, 0L )
+      var lastSpan      = Span( layStart, layStart )
       var lastSegmLen   = 0L
       var lastStartIdx  = 0
       var lastStopIdx   = 0
@@ -307,7 +310,7 @@ extends NullGoodies with Processor {
       var lastMatch     = Option.empty[ IIdxSeq[ Match ]]
       val gagaDur       = (settings.startDur._1 + settings.startDur._2 + settings.stopDur._1 + settings.stopDur._2) / 4
       var sameStartIdx  = 0
-      while( lastSpan.stop < spanLen ) {
+      while( lastSpan.stop < layStop ) {
          val maxOvl  = (settings.maxOverlap.toDouble * lastSegmLen + 0.5).toLong
          var idx     = lastStopIdx
          while( (idx > 0 &&) ((lastSpan.stop - segms( idx )) <= maxOvl) ) idx -= 1
@@ -325,7 +328,7 @@ extends NullGoodies with Processor {
          val startPos = segms( startIdx )
 
 //         val w       = math.max( 0.0, math.min( 1.0, ((minStop + maxStop) / 2 - startPos).toDouble / spanLen ))
-         val w       = math.max( 0.0, math.min( 1.0, (gagaDur - startPos).toDouble / spanLen ))
+         val w       = math.max( 0.0, math.min( 1.0, (gagaDur + startPos - layStart).toDouble / spanLen ))
 
          val minDur  = ((settings.startDur._1 * (1 - w)) + (settings.stopDur._1 * w) + 0.5).toLong
          val maxDur  = ((settings.startDur._2 * (1 - w)) + (settings.stopDur._2 * w) + 0.5).toLong
@@ -343,8 +346,9 @@ extends NullGoodies with Processor {
 
          if( minIdx <= maxIdx ) {
             val stopIdx    = minIdx + rnd.nextInt( maxIdx - minIdx + 1 )
-            val plainSpan  = Span( segms( startIdx ), segms( stopIdx ))
-            val layerSpan  = Span( plainSpan.start + settings.layerOffset, plainSpan.stop + settings.layerOffset )
+//            val plainSpan  = Span( segms( startIdx ), segms( stopIdx ))
+//            val layerSpan  = Span( plainSpan.start + settings.layerOffset, plainSpan.stop + settings.layerOffset )
+            val layerSpan  = Span( segms( startIdx ), segms( stopIdx ))
 
             val corrCfg    = FeatureCorrelation.SettingsBuilder()
             corrCfg.databaseFolder = settings.materialFolder
@@ -354,8 +358,8 @@ extends NullGoodies with Processor {
                copyFile( sourceFile, normFile )
             }
             corrCfg.maxBoost     = 20  // +26 dB
-            corrCfg.minPunch     = plainSpan.length   // XXX is this actually used when punchOut == None?
-            corrCfg.maxPunch     = plainSpan.length   // XXX is this actually used when punchOut == None?
+            corrCfg.minPunch     = layerSpan.length   // XXX is this actually used when punchOut == None?
+            corrCfg.maxPunch     = layerSpan.length   // XXX is this actually used when punchOut == None?
             corrCfg.metaInput    = metaFile
             corrCfg.minSpacing   = 4410L  // 100 ms
 //            corrCfg.numMatches   = math.min( 4096, numChannels * numChannels * 100 )
@@ -645,13 +649,14 @@ extends NullGoodies with Processor {
 
                lastSegmLen    = w3.map( _.punch.length ).min
 //               lastPos     = plainSpan.start
-               lastSpan       = plainSpan // .stop
+//               lastSpan       = plainSpan // .stop
+               lastSpan       = layerSpan
                lastStartIdx   = startIdx
                lastStopIdx    = stopIdx
                lastMatch      = Some( w3 )   // without the adjustments?
 
                // now adjust matches according to segmentation bounds in the match
-               val basicOffset = plainSpan.start + settings.tlSpan.start
+               val basicOffset = -layStart + tlStart
                val w4 = w3 map { m =>
    //               val mFeat               = featureFile( plainName( m.file ), folder )
                   val mMeta               = extrMetaFile( plainName( m.file ), featureFolder )
@@ -683,7 +688,7 @@ extends NullGoodies with Processor {
                   val mSegStopStop     = math.min( mFileLen, m.punch.stop + 66150L )
                   val mStop            = findAdjust( Span( mSegStopStart, mSegStopStop )).getOrElse( m.punch.stop )
 
-                  val actualOffset0    = basicOffset + mStart0 - m.punch.start
+                  val actualOffset0    = basicOffset + mStart0 // - m.punch.start
                   val (actualOffset, mStart) = if( actualOffset0 >= 0 ) (actualOffset0, mStart0) else {
                      (0L, mStart0 - actualOffset0)
                   }
@@ -704,8 +709,8 @@ extends NullGoodies with Processor {
             lastStartIdx += 1
             lastStopIdx  += 1
 //            lastSpan     = if( lastStartIdx < numSegm ) segms( lastStartIdx ) else spanLen
-            lastSpan    = Span( if( lastStartIdx < numSegm ) segms( lastStartIdx ) else spanLen,
-                                if( lastStopIdx  < numSegm ) segms( lastStopIdx )  else spanLen )
+            lastSpan    = Span( if( lastStartIdx < numSegm ) segms( lastStartIdx ) else layStop,
+                                if( lastStopIdx  < numSegm ) segms( lastStopIdx )  else layStop )
             lastMatch   = None
          }
       }
