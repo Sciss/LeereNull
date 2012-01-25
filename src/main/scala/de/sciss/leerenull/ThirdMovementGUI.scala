@@ -250,6 +250,7 @@ println( "  at " + pos + " file span " + fileSpan )
             if( (now - lastSave) > (15 * 60 * 1000L) ) {
                val f = stampedFile( autoSaveDir, "kontur-autosave", ".xml" )
                doc.save( f )
+               lastSave = now
             }
          }
       }
