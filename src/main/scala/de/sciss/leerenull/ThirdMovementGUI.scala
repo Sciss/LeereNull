@@ -97,7 +97,7 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
       val lbStartWeight = label( "Start weight:" )
       val ggStartWeight = decimalSlider( "Temp", "Spect", sb.startWeight, w = 216 )( d => sb.startWeight = d.toFloat )
       val lbStopWeight  = label( "Stop weight:" )
-      val ggStopWeight  = decimalSlider( "Temp", "Spect", sb.startWeight, w = 216 )( d => sb.stopWeight = d.toFloat )
+      val ggStopWeight  = decimalSlider( "Temp", "Spect", sb.stopWeight, w = 216 )( d => sb.stopWeight = d.toFloat )
       val lbConnWeight  = label( "Connection weight:" )
       val ggConnWeight  = decimalSlider( "0%", "100%", sb.connectionWeight, w = 216 )( d => sb.connectionWeight = d.toFloat )
       val lbMaxOverlap  = label( "Max. overlap:" )
@@ -119,13 +119,26 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
       val ggLayerOff    = timeField( "Layer offset:", 0.0, 1000.0, framesToSecs( sb.layerOffset )) { d =>
          sb.layerOffset = secsToFrames( d )
       }
+      
+      val ggAutoSave = checkBox( "Autosave (every 15 mins.)" )()
+      ggAutoSave.selected = true
 
       lazy val ggSearch = button( "Start searching..." ) { b =>
          var err = Option.empty[ String ]
          if( sb.tlSpan.isEmpty ) err = Some( "Timeline span is empty" )
          if( AudioFile.identify( sb.layer ).isEmpty ) err = Some( "Layer file not recognized" )
          if( !sb.materialFolder.isDirectory ) err = Some( "Material folder not recognized" )
-
+         val autoSave = if( ggAutoSave.selected ) {
+            val dir = new File( ThirdMovement.folder, "autosave" )
+            if( !dir.exists ) {
+               if( !dir.mkdirs() ) err = Some( "Could not create autosave folder" )
+            }
+            val testFile = File.createTempFile( "test", "test", dir )
+            if( !testFile.exists ) err = Some( "Autosave folder is not writable" )
+            testFile.delete()
+            Some( dir )
+         } else None
+         
          err match {
             case Some( txt ) => message( txt )
             case _ =>
@@ -134,7 +147,7 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
                   saveSettings( newSettings )
                }
 ThirdMovement.verbose = true
-               beginSearch( tl, doc, newSettings )
+               beginSearch( tl, doc, newSettings, autoSave )
          }
       }
 
@@ -154,7 +167,7 @@ ThirdMovement.verbose = true
             ), Sequential(
                Parallel( ggStartMinDur, ggStopMinDur, ggLayerOff, ggNumChannels ),
                Parallel( ggStartMaxDur, ggStopMaxDur )
-            ), ggSearch )
+            ), Sequential( ggSearch, ggAutoSave ))
          )
          theVerticalLayout is Sequential(
             Parallel( Baseline )( butToSpan, lbSpan ),
@@ -170,7 +183,7 @@ ThirdMovement.verbose = true
             Parallel( Baseline )( ggStopMinDur, ggStopMaxDur ),
             ggLayerOff,
             ggNumChannels,
-            ggSearch
+            Parallel( Baseline )( ggSearch, ggAutoSave )
          )
       }
 
@@ -182,7 +195,7 @@ ThirdMovement.verbose = true
       a.setVisible( true )
    }
 
-   def beginSearch( tl: BasicTimeline, doc: Session, settings: ThirdMovement.Settings ) {
+   def beginSearch( tl: BasicTimeline, doc: Session, settings: ThirdMovement.Settings, autoSave: Option[ File ]) {
 //      if( verbose ) println( settings )
 
       implicit val _doc = doc
@@ -192,6 +205,8 @@ ThirdMovement.verbose = true
       val fadeLen = 882 // 20 ms
       val fadeIn  = Some( FadeSpec( fadeLen ))
       val fadeOut = Some( FadeSpec( fadeLen ))
+
+      var lastSave   = System.currentTimeMillis()
 
       def update( batch: IIdxSeq[ (Long, Match) ]) {
          tl.tryEdit( "Add segments" ) { implicit ed =>
@@ -227,6 +242,14 @@ println( "  at " + pos + " file span " + fileSpan )
                val diff    = provideDiffusion( mat, prefix = pre )
                val at      = placeWithDiff( diff, ar, more = tracks, trackPrefix = pre )
                tracks     += ((at, tracks.getOrElse( at, IndexedSeq.empty ) :+ ar))
+            }
+         }
+
+         autoSave.foreach { autoSaveDir =>
+            val now = System.currentTimeMillis()
+            if( (now - lastSave) > (15 * 60 * 1000L) ) {
+               val f = stampedFile( autoSaveDir, "kontur-autosave", ".xml" )
+               doc.save( f )
             }
          }
       }

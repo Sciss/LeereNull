@@ -27,4 +27,4 @@ scalacOptions ++= Seq( "-deprecation", "-unchecked" )
 
 seq( appbundle.settings: _* )
 
-appbundle.icon := Some( file( "application.icns" ))
+appbundle.icon := Some( file( "src" ) / "main" / "resources" / "leere_null.png" )
