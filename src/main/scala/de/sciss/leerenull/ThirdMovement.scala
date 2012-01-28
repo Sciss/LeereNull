@@ -45,17 +45,53 @@ object ThirdMovement extends ProcessorCompanion {
 
    object Strategy {
       def apply( name: String ) : Strategy = name match {
-         case Imitation.name  => Imitation
-         case Ecology.name    => Ecology
+         case Imitation.name   => Imitation
+         case Ecology.name     => Ecology
+         case NImitation.name  => NImitation
+         case NEcology.name    => NEcology
       }
 
-      case object Imitation extends Strategy { val name = "imitation" }
-      case object Ecology   extends Strategy { val name = "ecology" }
+      /**
+       * Imitation between all channels
+       */
+      case object Imitation  extends Strategy {
+         val name = "imitation"
+         val isImitative = true
+         val isLocal = false
+      }
+      /**
+       * Distinction between all channels
+       */
+      case object Ecology extends Strategy {
+         val name = "ecology"
+         val isImitative = false
+         val isLocal = false
+      }
+      /**
+       * Imitation between neighbouring channels
+       */
+      case object NImitation extends Strategy {
+         val name = "n-imitation"
+         val isImitative = true
+         val isLocal = true
+      }
+      /**
+       * Distinction between neighbouring channels
+       */
+      case object NEcology extends Strategy {
+         val name = "n-ecology"
+         val isImitative = false
+         val isLocal = true
+      }
 
-      def seq = Seq[ Strategy ]( Imitation, Ecology )
+      def seq = Seq[ Strategy ]( Imitation, Ecology, NImitation, NEcology )
    }
    sealed trait Strategy {
       def name: String
+      def isImitative: Boolean
+      final def isEcological: Boolean = !isImitative
+      def isLocal: Boolean
+      final def isGlobal: Boolean = !isLocal
    }
 
    sealed trait SettingsLike {
@@ -263,6 +299,8 @@ extends NullGoodies with Processor {
       val extrIn              = FeatureExtraction.Settings.fromXMLFile( metaFile )
       val stepSize            = extrIn.fftSize / extrIn.fftOverlap
       val numCoeffs           = extrIn.numCoeffs
+      val imitativeStrategy   = settings.strategy.isImitative
+      val localStrategy       = settings.strategy.isLocal
 
       def fullToFeat( n: Long ) = ((n + (stepSize >> 1)) / stepSize).toInt
 //      def featToFull( i: Int )  = i.toLong * stepSize
@@ -526,7 +564,7 @@ extends NullGoodies with Processor {
                         aux.Math.correlate( aBufS, aMeanS, aStdDevS, chunk, numCoeffs, bBufS, bMeanS, bStdDevS, 0, 0 )
                      } else 0f
                      val stratCorr0 = (tempCorr * stratTempW) + (specCorr * (1 - stratTempW))
-                     val stratCorr  = if( settings.strategy == Strategy.Imitation ) stratCorr0 else 1f - stratCorr0
+                     val stratCorr  = if( imitativeStrategy ) stratCorr0 else 1f - stratCorr0
                      c += stratCorr * chunk
                      remain -= chunk
                   }
@@ -552,18 +590,13 @@ extends NullGoodies with Processor {
 
                val stratW     = settings.strategyWeight
 
-// e.g. for numChannels = 3
-//               totalNumStrat = numChannels * (numChannels + 1) / 2 = 6
-//               (a b c, a c b, b a c, b c a, c a b, c b a)
-//                  1      2      3      4      5      6
-
-               val xTotalNum  = numChannels * (numChannels + 1) / 2  // number of cross correlations between channels
+               // "The number of connections in a full mesh = n(n - 1) / 2."
+               // versus Ring: numChannels
+               val xTotalNum  = if( localStrategy ) numChannels else {
+                  numChannels * (numChannels + 1) / 2
+               }  // number of cross correlations between channels
 
                def bestPrognosis( baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ]) : Float = {
-//                  val baseProg      = baseSum + chansMissing // 1.0 for each channel missing
-//                  val stratProg     = stratSum + stratsMissing
-//                  ((baseProg / numChannels) * (1 - stratW) + (stratProg / totalNumStrat) * stratW ).toFloat
-
                   val chansMissing  = numChannels - baseDone.size
                   val xMissing      = xTotalNum - xDone.size
                   val baseValues    = baseDone ++ IIdxSeq.fill( chansMissing )( 1f )
@@ -584,21 +617,20 @@ extends NullGoodies with Processor {
                      if( verbose ) {
                         val progDone1  = numDone1 * 10 / progDoneNum
                         while( progDone < progDone1 ) {
-//                           print( "#" )
                            progDone += 1
                            println( progDone )
                         }
                      }
 
                      if( !taken.contains( i )) {
-//                        val base       = w1( chan )( i )
                         val base       = w1( i )( chan )
                         val baseDone1  = baseDone :+ base
                         if( bestPrognosis( baseDone1, xDone ) > bestCorr ) {
                            var xDone1  = xDone
                            var prog    = 0f
                            var ok      = true
-                           var k = 0; while( k < taken.size && ok ) {
+                           var k = if( localStrategy ) taken.size - 1 else 0
+                           while( k < taken.size && ok ) {
                               val x = xChanCorr( taken( k ), i )
                               xDone1 :+= x
                               prog = bestPrognosis( baseDone1, xDone1 )
@@ -621,12 +653,18 @@ extends NullGoodies with Processor {
                }
 
                if( verbose ) {
-                  var prod = 1L; var i = 0; while( i < numChannels ) { prod *= numMatches - i; i += 1 }
-                  println( "\nFinding best combination... (out of " + prod + ")" )
+                  val numCombi = if( localStrategy ) {
+                     numMatches.toLong * numChannels - (2 * numChannels)
+                  } else {
+                     // XXX correct?
+                     var prod = 1L; var i = 0; while( i < numChannels ) { prod *= numMatches - i; i += 1 }
+                     prod
+                  }
+                  println( "\nFinding best combination... (out of " + numCombi + ")" )
                }
+
                val xDone0 = IIdxSeq.empty
                var j = 0; while( j < numMatches ) {
-//                  val base = w1( 0 )( j )
                   val base = w1( j )( 0 )
                   val baseDone0 = IIdxSeq( base )
                   if( bestPrognosis( baseDone0, xDone0 ) > bestCorr ) {
@@ -637,19 +675,12 @@ extends NullGoodies with Processor {
                val w2 = bestSeq
 
                if( verbose ) {
-//                  while( progDone < 27 ) {
-//                     print( "#" )
-//                     progDone += 1
-//                  }
                   println( "\nResult : " + bestSeq )
                }
 
                val w3 = w2.map( corrs( _ ))
-   //            val pos = lastPos
 
                lastSegmLen    = w3.map( _.punch.length ).min
-//               lastPos     = plainSpan.start
-//               lastSpan       = plainSpan // .stop
                lastSpan       = layerSpan
                lastStartIdx   = startIdx
                lastStopIdx    = stopIdx

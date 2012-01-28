@@ -2,15 +2,23 @@
 
 name           := "LeereNull"
 
-version        := "0.13-SNAPSHOT"
+version        := "0.14-SNAPSHOT"
 
 organization   := "de.sciss"
 
 scalaVersion   := "2.9.1"
 
+description := "Materials and tools for an algorithmic tape music composition"
+
+homepage := Some( url( "https://github.com/Sciss/LeereNull" ))
+
+licenses := Seq( "GPL v2+" -> url( "http://www.gnu.org/licenses/gpl-2.0.txt" ))
+
+resolvers += "Clojars Repository" at "http://clojars.org/repo"  // for jsyntaxpane
+
 libraryDependencies ++= Seq(
-   "de.sciss" %% "strugatzki" % "0.15",
-   "de.sciss" %% "kontur" % "0.17-SNAPSHOT",
+   "de.sciss" %% "strugatzki" % "0.16",
+   "de.sciss" %% "kontur" % "0.17",
    "de.sciss" %% "fscapejobs" % "0.17",
    "com.itextpdf" % "itextpdf" % "5.1.1"
 )
