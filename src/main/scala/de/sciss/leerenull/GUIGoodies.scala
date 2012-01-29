@@ -26,8 +26,6 @@
 package de.sciss.leerenull
 
 import java.util.Locale
-import de.sciss.kontur.session.BasicTimeline
-import swing.event.ValueChanged
 import java.text.NumberFormat
 import de.sciss.util.NumberSpace
 import de.sciss.gui.{NumberEvent, NumberListener, NumberField, TimeFormat}
@@ -37,7 +35,8 @@ import javax.swing.event.{AncestorEvent, AncestorListener}
 import javax.swing.{SwingUtilities, JPanel, JOptionPane, WindowConstants, JDialog, JComponent, AbstractAction, Action => JAction, KeyStroke}
 import java.awt.{FileDialog, Component => AWTComponent, Frame => AWTFrame}
 import java.io.{FilenameFilter, File}
-import swing.{TextField, ButtonGroup, RadioButton, CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
+import swing.{TextField, RadioButton, CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
+import swing.event.{SelectionChanged, ValueChanged}
 
 trait GUIGoodies {
    def action( name: String, ks: String = "" )( thunk: => Unit ) = new AbstractAction( name ) {
@@ -75,6 +74,10 @@ trait GUIGoodies {
          peer.putClientProperty( "JComboBox.isSquare", java.lang.Boolean.TRUE )
          focusable   = false
          renderer    = ListView.Renderer( rend )
+         listenTo( selection )
+         reactions += {
+            case SelectionChanged( _ ) => act( selection.item )
+         }
       }
 
    def openFileDialog( title: String = "Open File", init: File = new File( "" ),

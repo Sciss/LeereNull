@@ -93,7 +93,7 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val ggNumChannels = integerField( "Num. channels:", 2, 64, sb.numChannels )( sb.numChannels = _ )
       val lbStrategy    = label( "Strategy:" )
-      val ggStrategy    = combo[ Strategy, String ]( Strategy.seq )( sb.strategy = _ )( _.name )
+      val ggStrategy    = combo[ Strategy, String ]( Strategy.seq )( s => { sb.strategy = s; println( s )})( _.name )
       val lbStartWeight = label( "Start weight:" )
       val ggStartWeight = decimalSlider( "Temp", "Spect", sb.startWeight, w = 216 )( d => sb.startWeight = d.toFloat )
       val lbStopWeight  = label( "Stop weight:" )
