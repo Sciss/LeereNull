@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ueberzeichnung>
+   <tlSpan><start>3969000</start><stop>21213620</stop></tlSpan>
+   <layer>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/Layer3DynRsmp.aif</layer>
+   <layerOffset>3969000</layerOffset>
+   <materialFolder>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/nimit/layer3/feat</materialFolder>
+   <numChannels>4</numChannels>
+   <strategy>n-imitation</strategy>
+   <startDur><min>70560</min><max>132300</max></startDur>
+   <stopDur><min>110250</min><max>176400</max></stopDur>
+   <startWeight>0.495</startWeight>
+   <stopWeight>0.558</stopWeight>
+   <maxOverlap>0.321</maxOverlap>
+   <connectionWeight>0.5</connectionWeight>
+   <strategyWeight>0.521</strategyWeight>
+</ueberzeichnung>
