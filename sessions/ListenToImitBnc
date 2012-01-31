@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<konturSession>
+    <audioFiles>
+  <coll>
+  <audioFile id="0">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay1.aif</path>
+  <numFrames>16332157</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="1">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay2Ez.aif</path>
+  <numFrames>10258101</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="2">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay4Ez.aif</path>
+  <numFrames>16445147</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="3">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay5Ez.aif</path>
+  <numFrames>15100856</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="4">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay1Ez.aif</path>
+  <numFrames>19450637</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="5">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay2Ez.aif</path>
+  <numFrames>21139729</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="6">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay3Ez.aif</path>
+  <numFrames>21159096</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="7">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay4Ez.aif</path>
+  <numFrames>21155195</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="8">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay5Ez.aif</path>
+  <numFrames>18013830</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="9">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay6Ez.aif</path>
+  <numFrames>21141371</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile>
+</coll>
+</audioFiles>
+    <diffusions>
+  <coll>
+  <diffusion class="matrix" id="10">
+          <name>Quad</name>
+          <numInputChannels>4</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>1.0 0.0 0.0 0.0</row><row>0.0 1.0 0.0 0.0</row><row>0.0 0.0 1.0 0.0</row><row>0.0 0.0 0.0 1.0</row></matrix>
+       </diffusion>
+</coll>
+</diffusions>
+    <timelines>
+       <coll>
+  <timeline id="11">
+   <name>Timeline</name>
+   <span stop="23814000" start="0"></span>
+   <rate>44100.0</rate>
+   <tracks id="12">
+      <coll>
+  <audioTrack id="13">
+      <name>T1</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay1.aif</name>
+      <span stop="16332157" start="0"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="14">
+      <name>T2</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay2Ez.aif</name>
+      <span stop="10258101" start="0"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="15">
+      <name>T3</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay4Ez.aif</name>
+      <span stop="16445147" start="0"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="16">
+      <name>T4</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay5Ez.aif</name>
+      <span stop="15100856" start="0"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="17">
+      <name>T5</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay1Ez.aif</name>
+      <span stop="19450637" start="0"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="18">
+      <name>T6</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay2Ez.aif</name>
+      <span stop="21139729" start="0"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="19">
+      <name>T7</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay3Ez.aif</name>
+      <span stop="21159096" start="0"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="20">
+      <name>T8</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay4Ez.aif</name>
+      <span stop="21155195" start="0"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="21">
+      <name>T9</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay5Ez.aif</name>
+      <span stop="18013830" start="0"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="22">
+      <name>T10</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay6Ez.aif</name>
+      <span stop="21141371" start="0"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline>
+</coll>
+    </timelines>
+</konturSession>

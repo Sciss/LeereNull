@@ -25,7 +25,7 @@
 
 package de.sciss.leerenull
 
-import de.sciss.kontur.{Main => Kontur}
+import de.sciss.kontur.Kontur
 import de.sciss.gui.{MenuItem, MenuGroup}
 import java.util.Properties
 import java.io.{File, FileInputStream}

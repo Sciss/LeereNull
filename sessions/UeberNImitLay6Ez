@@ -1,0 +1,8318 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<konturSession>
+    <audioFiles>
+  <coll>
+  <audioFile id="0">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/nimit/layer6/audio/WrkSh'bWhteConLayer6HlbB.aif</path>
+  <numFrames>29442929</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="1">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/nimit/layer6/audio/WrkSh'6WhteConLayer6B.aif</path>
+  <numFrames>29444357</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="2">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/phase_three/nimit/layer6/audio/WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8.aif</path>
+  <numFrames>46872838</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile>
+</coll>
+</audioFiles>
+    <diffusions>
+  <coll>
+  <diffusion class="matrix" id="3">
+          <name>Ch-4 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 0.0 1.0</row><row>0.0 0.0 0.0 0.35</row></matrix>
+       </diffusion><diffusion class="matrix" id="4">
+          <name>Ch-3 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 1.0 0.0</row><row>0.0 0.0 0.35 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="5">
+          <name>Ch-2 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.35 0.0 0.0</row><row>0.0 1.0 0.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="6">
+          <name>Ch-1 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>1.0 0.0 0.0 0.0</row><row>0.35 0.0 0.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="7">
+          <name>Ch-4 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 0.0 0.35</row><row>0.0 0.0 0.0 1.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="8">
+          <name>Ch-2 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 1.0 0.0 0.0</row><row>0.0 0.35 0.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="9">
+          <name>Ch-3 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 0.35 0.0</row><row>0.0 0.0 1.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="10">
+          <name>Ch-1 2-&gt;4</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.35 0.0 0.0 0.0</row><row>1.0 0.0 0.0 0.0</row></matrix>
+       </diffusion>
+</coll>
+</diffusions>
+    <timelines>
+       <coll>
+  <timeline id="11">
+   <name>Timeline</name>
+   <span stop="26460000" start="0"></span>
+   <rate>44100.0</rate>
+   <tracks id="12">
+      <coll>
+  <audioTrack id="13">
+      <name>Ch-4 1</name>
+      <diffusion idref="3"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@20334080</name>
+      <span stop="18674176" start="18548736"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>20334080</offset>
+      <gain>0.049303576</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14867968</name>
+      <span stop="18496000" start="18350080"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14867968</offset>
+      <gain>10.75362</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18799616</name>
+      <span stop="18072576" start="17966080"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18799616</offset>
+      <gain>0.596716</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="17934848" start="17779712"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.3307861</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14137856</name>
+      <span stop="17320960" start="17205760"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14137856</offset>
+      <gain>0.8693611</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14021632</name>
+      <span stop="17149440" start="16988672"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14021632</offset>
+      <gain>2.2450159</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="16551936" start="16384512"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.5849478</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14011392</name>
+      <span stop="20968960" start="20845568"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14011392</offset>
+      <gain>0.42193744</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18760704</name>
+      <span stop="20797952" start="20680704"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18760704</offset>
+      <gain>0.40618968</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="20568576" start="20431872"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.49841937</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="20269056" start="20134400"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.44242185</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15443456</name>
+      <span stop="19802624" start="19682304"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15443456</offset>
+      <gain>1.7010448</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14012928</name>
+      <span stop="18912256" start="18853376"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14012928</offset>
+      <gain>1.1491648</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="19034112" start="18913792"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.8085501</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14255104</name>
+      <span stop="19195904" start="19054080"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14255104</offset>
+      <gain>0.2672398</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14017024</name>
+      <span stop="19521536" start="19357696"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14017024</offset>
+      <gain>2.0542572</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="15906304" start="15833600"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.1430506</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14021120</name>
+      <span stop="16086016" start="15972352"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14021120</offset>
+      <gain>0.039004907</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="16287744" start="16151040"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.24921437</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15022592</name>
+      <span stop="15592960" start="15479296"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15022592</offset>
+      <gain>5.083506E-4</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@31525888</name>
+      <span stop="15075840" start="14937600"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>31525888</offset>
+      <gain>0.0878381</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="14809088" start="14699520"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.44760722</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="14572032" start="14468096"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>0.38303533</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="14334976" start="14239744"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>2.88796</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="14112256" start="13948928"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.08740801</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="13324288" start="13173248"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.6820526</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14071296</name>
+      <span stop="13160448" start="13047808"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14071296</offset>
+      <gain>3.8364377</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19126272</name>
+      <span stop="12341248" start="12276736"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19126272</offset>
+      <gain>0.47990525</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14134784</name>
+      <span stop="12602880" start="12485120"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14134784</offset>
+      <gain>2.8501816</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19097088</name>
+      <span stop="12878336" start="12710400"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19097088</offset>
+      <gain>10.033321</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="12214784" start="12094464"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.4580889</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16735744</name>
+      <span stop="11981824" start="11931136"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16735744</offset>
+      <gain>0.69415975</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@17796608</name>
+      <span stop="11897344" start="11718656"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>17796608</offset>
+      <gain>0.3607496</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="11718656" start="11643392"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.2835094</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="11594240" start="11473408"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.25665715</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14004736</name>
+      <span stop="11469824" start="11386880"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14004736</offset>
+      <gain>0.08837109</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16651776</name>
+      <span stop="11248640" start="11164160"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16651776</offset>
+      <gain>8.582289</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19030016</name>
+      <span stop="10981376" start="10914304"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19030016</offset>
+      <gain>0.45192155</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@21273088</name>
+      <span stop="10747392" start="10614784"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>21273088</offset>
+      <gain>0.060751002</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13944320</name>
+      <span stop="10209280" start="10125824"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13944320</offset>
+      <gain>1.0059522</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19746304</name>
+      <span stop="10066432" start="9993216"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19746304</offset>
+      <gain>0.85518</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13925376</name>
+      <span stop="9951232" start="9790976"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13925376</offset>
+      <gain>0.29542905</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="14">
+      <name>Ch-3 1</name>
+      <diffusion idref="4"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="17626112" start="17445376"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>0.10796369</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14897664</name>
+      <span stop="17384960" start="17260032"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14897664</offset>
+      <gain>5.2968283</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="17223168" start="17102336"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.3768287</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="16778240" start="16657408"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.120448545</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="16536576" start="16381440"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.3637353</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="15906304" start="15832576"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.10422423</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15440896</name>
+      <span stop="15779328" start="15636992"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15440896</offset>
+      <gain>2.5161748</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="20002816" start="19907584"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>1.7769462</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="19896320" start="19786752"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.22617884</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13938688</name>
+      <span stop="19411968" start="19279360"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13938688</offset>
+      <gain>0.59036493</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15444480</name>
+      <span stop="19094016" start="19001856"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15444480</offset>
+      <gain>0.0032214478</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="18919936" start="18848768"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>1.8264362</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13937152</name>
+      <span stop="18787840" start="18639360"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13937152</offset>
+      <gain>0.4807331</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14178304</name>
+      <span stop="17792512" start="17715200"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14178304</offset>
+      <gain>0.6035972</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="18189824" start="18068992"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.24790302</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18865664</name>
+      <span stop="18388480" start="18286080"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18865664</offset>
+      <gain>0.70398676</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15444480</name>
+      <span stop="18571264" start="18462720"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15444480</offset>
+      <gain>0.016646735</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="15211520" start="15086080"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>3.7546167</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14013440</name>
+      <span stop="15311872" start="15227904"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14013440</offset>
+      <gain>0.21297793</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14134272</name>
+      <span stop="15379456" start="15329792"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14134272</offset>
+      <gain>1.4434303</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@22892032</name>
+      <span stop="15054848" start="14907904"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>22892032</offset>
+      <gain>0.15430215</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14006784</name>
+      <span stop="14694912" start="14616064"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14006784</offset>
+      <gain>0.29156852</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14071296</name>
+      <span stop="14612480" start="14452224"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14071296</offset>
+      <gain>0.28106028</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="14359552" start="14282752"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.6313152</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14087680</name>
+      <span stop="14244352" start="14080000"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14087680</offset>
+      <gain>1.1644627</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14251520</name>
+      <span stop="13786624" start="13701632"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14251520</offset>
+      <gain>0.22531733</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13921792</name>
+      <span stop="13639680" start="13510656"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13921792</offset>
+      <gain>0.21395123</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14255104</name>
+      <span stop="13357568" start="13273600"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14255104</offset>
+      <gain>0.027559511</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14137856</name>
+      <span stop="12513792" start="12407808"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14137856</offset>
+      <gain>0.16797526</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19119104</name>
+      <span stop="12850688" start="12731904"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19119104</offset>
+      <gain>7.276211</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="13159424" start="13064192"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>5.337176</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="12396544" start="12325888"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.014596683</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="12221952" start="12101120"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.29098144</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="12101120" start="12003328"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>0.3659274</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16773632</name>
+      <span stop="11909632" start="11762688"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16773632</offset>
+      <gain>0.62306356</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="11726848" start="11656192"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.15255529</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16631296</name>
+      <span stop="11370496" start="11212288"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16631296</offset>
+      <gain>3.003153</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15483904</name>
+      <span stop="11135488" start="11018240"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15483904</offset>
+      <gain>0.2671012</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16631296</name>
+      <span stop="10945536" start="10838528"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16631296</offset>
+      <gain>0.36790797</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@23537152</name>
+      <span stop="10717184" start="10631168"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>23537152</offset>
+      <gain>0.02064826</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="10401792" start="10306048"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>1.428765E-7</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="10174976" start="10049536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>7.7439528</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="9939968" start="9793536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.20347133</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="15">
+      <name>Ch-2 1</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@15311360</name>
+      <span stop="18536960" start="18468352"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15311360</offset>
+      <gain>0.020793207</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14910464</name>
+      <span stop="18367488" start="18242048"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14910464</offset>
+      <gain>5.650403</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14231552</name>
+      <span stop="18191360" start="18083840"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14231552</offset>
+      <gain>0.6357533</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13989888</name>
+      <span stop="17792512" start="17710080"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13989888</offset>
+      <gain>0.12664357</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="17694720" start="17624064"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.18307815</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16631296</name>
+      <span stop="20987904" start="20838912"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16631296</offset>
+      <gain>1.312216</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14966272</name>
+      <span stop="20801536" start="20667392"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14966272</offset>
+      <gain>5.083231</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13989888</name>
+      <span stop="20225536" start="20127744"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13989888</offset>
+      <gain>0.16037706</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15397376</name>
+      <span stop="18948608" start="18809344"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15397376</offset>
+      <gain>5.9861774</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@22733824</name>
+      <span stop="19088384" start="19021824"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>22733824</offset>
+      <gain>4.99113E-4</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14087680</name>
+      <span stop="19408384" start="19240960"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14087680</offset>
+      <gain>2.0343287</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15024128</name>
+      <span stop="19684352" start="19554816"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15024128</offset>
+      <gain>7.144133</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@22032384</name>
+      <span stop="19797504" start="19701760"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>22032384</offset>
+      <gain>8.042677</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="20123648" start="20002816"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.17843612</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16738304</name>
+      <span stop="17303552" start="17210368"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16738304</offset>
+      <gain>0.6113207</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19190784</name>
+      <span stop="17000448" start="16902656"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19190784</offset>
+      <gain>0.309382</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16622080</name>
+      <span stop="16777728" start="16663552"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16622080</offset>
+      <gain>1.0062674</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18805248</name>
+      <span stop="16407040" start="16280576"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18805248</offset>
+      <gain>0.25394922</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14255104</name>
+      <span stop="16096768" start="16012800"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14255104</offset>
+      <gain>0.037210487</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="15950336" start="15818240"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.24095252</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15387136</name>
+      <span stop="15742464" start="15592960"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15387136</offset>
+      <gain>1.4075557</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19119104</name>
+      <span stop="15367680" start="15296000"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19119104</offset>
+      <gain>1.6317456</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15283712</name>
+      <span stop="15074816" start="14915072"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15283712</offset>
+      <gain>0.53525966</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16681472</name>
+      <span stop="14829568" start="14679552"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16681472</offset>
+      <gain>1.8021998</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@31926272</name>
+      <span stop="14391808" start="14285312"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>31926272</offset>
+      <gain>1.0330046</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="14201856" start="14089216"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>0.5877245</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16789504</name>
+      <span stop="13751296" start="13675520"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16789504</offset>
+      <gain>0.15682445</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14093824</name>
+      <span stop="13641216" start="13479936"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14093824</offset>
+      <gain>0.58755845</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="13345280" start="13258240"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>0.014840759</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14137856</name>
+      <span stop="13163008" start="13116928"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14137856</offset>
+      <gain>3.499169</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="12848640" start="12727808"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.5467725</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="12662784" start="12580352"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.354533</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13937152</name>
+      <span stop="12475392" start="12391424"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13937152</offset>
+      <gain>0.0627968</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14231552</name>
+      <span stop="12300288" start="12192768"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14231552</offset>
+      <gain>0.4384702</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13999616</name>
+      <span stop="11897856" start="11762688"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13999616</offset>
+      <gain>0.32700276</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="11762688" start="11631104"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.43785787</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16783360</name>
+      <span stop="11630080" start="11568640"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16783360</offset>
+      <gain>0.34770155</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16608256</name>
+      <span stop="11512320" start="11384320"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16608256</offset>
+      <gain>0.5225331</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14061568</name>
+      <span stop="11277824" start="11158528"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14061568</offset>
+      <gain>5.555588</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="11020800" start="10949632"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.37751654</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15599104</name>
+      <span stop="10889728" start="10713600"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15599104</offset>
+      <gain>2.2834933</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14071296</name>
+      <span stop="10399232" start="10286592"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14071296</offset>
+      <gain>2.5305786E-7</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19737088</name>
+      <span stop="10222080" start="10134528"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19737088</offset>
+      <gain>1.0728302</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14137856</name>
+      <span stop="9932800" start="9804800"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14137856</offset>
+      <gain>0.59655476</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="16">
+      <name>Ch-1 1</name>
+      <diffusion idref="6"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15310848</name>
+      <span stop="18543616" start="18457600"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15310848</offset>
+      <gain>0.041661922</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14913536</name>
+      <span stop="18364416" start="18242560"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14913536</offset>
+      <gain>10.025258</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14009856</name>
+      <span stop="17702912" start="17627136"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14009856</offset>
+      <gain>0.25653878</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14013440</name>
+      <span stop="17435136" start="17358848"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14013440</offset>
+      <gain>0.29907325</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16736256</name>
+      <span stop="17311744" start="17208832"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16736256</offset>
+      <gain>0.894347</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@21978112</name>
+      <span stop="17168896" start="16994304"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>21978112</offset>
+      <gain>5.9587097</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@22243328</name>
+      <span stop="21128704" start="20931072"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>22243328</offset>
+      <gain>1.6220083</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18877952</name>
+      <span stop="20868096" start="20749312"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18877952</offset>
+      <gain>0.3075252</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14971392</name>
+      <span stop="20460032" start="20324864"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14971392</offset>
+      <gain>2.0250478</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@22725120</name>
+      <span stop="19038720" start="18944512"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>22725120</offset>
+      <gain>0.4453185</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13917696</name>
+      <span stop="19211264" start="19043328"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13917696</offset>
+      <gain>0.19536707</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16789504</name>
+      <span stop="19584000" start="19517440"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16789504</offset>
+      <gain>0.42257255</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@21999616</name>
+      <span stop="19832832" start="19679744"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>21999616</offset>
+      <gain>3.6860392</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13947904</name>
+      <span stop="20233216" start="20095488"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13947904</offset>
+      <gain>0.23454475</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="16917504" start="16797184"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.18482563</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16631296</name>
+      <span stop="16774656" start="16667648"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16631296</offset>
+      <gain>0.50076205</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15396864</name>
+      <span stop="16646656" start="16575488"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15396864</offset>
+      <gain>1.2288411</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="16517120" start="16396800"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.25719288</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16605184</name>
+      <span stop="16297472" start="16166400"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16605184</offset>
+      <gain>0.59751874</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15709696</name>
+      <span stop="15746560" start="15636992"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15709696</offset>
+      <gain>2.8099897</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19030016</name>
+      <span stop="15379456" start="15313408"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19030016</offset>
+      <gain>1.4579738</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13989888</name>
+      <span stop="15111168" start="15050240"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13989888</offset>
+      <gain>0.10513833</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15441408</name>
+      <span stop="14969344" start="14827520"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15441408</offset>
+      <gain>4.181401</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18877440</name>
+      <span stop="14706688" start="14616064"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18877440</offset>
+      <gain>0.33371973</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14255104</name>
+      <span stop="14220800" start="14078976"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14255104</offset>
+      <gain>0.37105402</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18996736</name>
+      <span stop="13876224" start="13753856"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18996736</offset>
+      <gain>0.14355281</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="13745152" start="13664256"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.077367365</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="13656576" start="13491712"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>1.5011088</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13640192</name>
+      <span stop="13481984" start="13327360"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13640192</offset>
+      <gain>1.1721476</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13981696</name>
+      <span stop="12964864" start="12858880"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13981696</offset>
+      <gain>0.18741834</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19030528</name>
+      <span stop="13094912" start="13006336"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19030528</offset>
+      <gain>3.186916</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="13301760" start="13181440"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.27007458</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="12749312" start="12673536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.55821574</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14231552</name>
+      <span stop="12428800" start="12341760"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14231552</offset>
+      <gain>0.045782518</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14044160</name>
+      <span stop="12338176" start="12293632"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14044160</offset>
+      <gain>0.028742999</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="12237312" start="12077056"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>1.1526304</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18996736</name>
+      <span stop="11956736" start="11843584"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18996736</offset>
+      <gain>0.4552551</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="11762688" start="11632128"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.7196655</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="11274752" start="11141632"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>4.4478383</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14034944</name>
+      <span stop="10930688" start="10830848"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14034944</offset>
+      <gain>0.39201406</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@21655552</name>
+      <span stop="10717696" start="10608640"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>21655552</offset>
+      <gain>0.04631612</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="10328064" start="10207744"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.25824735</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14253056</name>
+      <span stop="10164736" start="10077696"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14253056</offset>
+      <gain>0.75371224</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14134784</name>
+      <span stop="9932800" start="9804288"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14134784</offset>
+      <gain>0.9707953</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="17">
+      <name>Ch-4 2</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="18540544" start="18458112"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>0.056439985</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18867200</name>
+      <span stop="18384896" start="18286080"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18867200</offset>
+      <gain>1.6671807</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="18184704" start="18064384"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.3860952</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="17726464" start="17589760"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.8664449</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="17476608" start="17339904"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.8161582</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="16934400" start="16797696"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.43479118</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14017024</name>
+      <span stop="16759296" start="16641536"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.31607866</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14971392</name>
+      <span stop="21130752" start="20951040"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14971392</offset>
+      <gain>0.9128571</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18760704</name>
+      <span stop="20871168" start="20766208"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18760704</offset>
+      <gain>0.37472403</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14061568</name>
+      <span stop="20708864" start="20517888"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14061568</offset>
+      <gain>0.45059943</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18872832</name>
+      <span stop="20362240" start="20269056"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18872832</offset>
+      <gain>0.48838365</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="20135936" start="20001280"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.41448498</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="18745856" start="18636288"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.29387662</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14249472</name>
+      <span stop="19278848" start="19180032"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14249472</offset>
+      <gain>2.0194051</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15607808</name>
+      <span stop="19688448" start="19577856"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15607808</offset>
+      <gain>2.029376</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13914624</name>
+      <span stop="19877376" start="19777536"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13914624</offset>
+      <gain>0.5246783</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="16160256" start="16111104"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>1.3862591</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="16335360" start="16225792"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.029659552</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15242240</name>
+      <span stop="16641536" start="16560128"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15242240</offset>
+      <gain>1.206069</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16629248</name>
+      <span stop="15783424" start="15636992"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16629248</offset>
+      <gain>1.4991257</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="15339008" start="15218688"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.35108337</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@30617600</name>
+      <span stop="15118336" start="15008256"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>30617600</offset>
+      <gain>0.64848816</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@31516672</name>
+      <span stop="14974464" start="14827008"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>31516672</offset>
+      <gain>0.6557644</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14004736</name>
+      <span stop="14681600" start="14615040"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14004736</offset>
+      <gain>0.19112927</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19097088</name>
+      <span stop="14389248" start="14291456"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19097088</offset>
+      <gain>3.7360048</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="14243840" start="14078976"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>1.8352734</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14231552</name>
+      <span stop="13971968" start="13867520"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14231552</offset>
+      <gain>0.7486874</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="13359616" start="13274112"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>0.04348057</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13914624</name>
+      <span stop="13613056" start="13506560"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13914624</offset>
+      <gain>0.34199223</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14247424</name>
+      <span stop="13786624" start="13701632"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14247424</offset>
+      <gain>0.33759183</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16577536</name>
+      <span stop="13001728" start="12840960"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16577536</offset>
+      <gain>1.0409926</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18755584</name>
+      <span stop="12706816" start="12601344"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18755584</offset>
+      <gain>0.5506924</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14134784</name>
+      <span stop="12513792" start="12412416"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14134784</offset>
+      <gain>0.29326946</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="12332544" start="12169728"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.3482414</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14255104</name>
+      <span stop="12141568" start="11999744"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14255104</offset>
+      <gain>0.24909402</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16789504</name>
+      <span stop="11959808" start="11831296"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16789504</offset>
+      <gain>0.3080024</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16651776</name>
+      <span stop="11371008" start="11236352"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16651776</offset>
+      <gain>6.1955705</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="11135488" start="11053056"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>0.15580127</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15033856</name>
+      <span stop="10898432" start="10713600"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15033856</offset>
+      <gain>7.910356</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14255104</name>
+      <span stop="10391040" start="10307072"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14255104</offset>
+      <gain>7.935736E-8</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13900288</name>
+      <span stop="10193408" start="10076672"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13900288</offset>
+      <gain>0.7767629</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="10065920" start="9888768"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>6.4534535</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="18">
+      <name>Ch-3 2</name>
+      <diffusion idref="4"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14134784</name>
+      <span stop="16793088" start="16730624"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14134784</offset>
+      <gain>0.671821</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15249408</name>
+      <span stop="16572928" start="16482816"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15249408</offset>
+      <gain>1.3141404</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14008832</name>
+      <span stop="15840768" start="15758336"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14008832</offset>
+      <gain>0.25661844</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14071296</name>
+      <span stop="15361024" start="15294464"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14071296</offset>
+      <gain>4.5511813</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="13739520" start="13589504"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.5268909</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14638080</name>
+      <span stop="13479936" start="13327360"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14638080</offset>
+      <gain>4.3881483</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="17470464" start="17335808"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.5202785</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="17721856" start="17587200"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.54639345</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18800128</name>
+      <span stop="18318848" start="18150912"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18800128</offset>
+      <gain>0.59890246</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="18835968" start="18726400"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.7624307</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="20138496" start="20001792"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.66027206</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14133760</name>
+      <span stop="13164544" start="13117440"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14133760</offset>
+      <gain>6.866893</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14137856</name>
+      <span stop="12598784" start="12481536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14137856</offset>
+      <gain>1.7282377</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15028224</name>
+      <span stop="10898432" start="10713600"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15028224</offset>
+      <gain>6.556456</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13900288</name>
+      <span stop="10041344" start="9924608"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13900288</offset>
+      <gain>0.6006346</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="19">
+      <name>Ch-2 2</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="18293760" start="18163712"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.36377993</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="18061312" start="17966080"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>3.2968242</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="17950208" start="17783296"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.280052</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16631296</name>
+      <span stop="17602048" start="17443840"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16631296</offset>
+      <gain>0.13844287</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14904832</name>
+      <span stop="17376768" start="17267712"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14904832</offset>
+      <gain>2.9845955</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14231552</name>
+      <span stop="17243136" start="17135616"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14231552</offset>
+      <gain>0.65958816</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16604672</name>
+      <span stop="21123584" start="21072384"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16604672</offset>
+      <gain>0.09223642</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16622080</name>
+      <span stop="20869632" start="20755456"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16622080</offset>
+      <gain>2.3175652</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="20563968" start="20443136"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.12999064</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14915072</name>
+      <span stop="20341760" start="20225024"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14915072</offset>
+      <gain>2.8859875</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14249472</name>
+      <span stop="20010496" start="19911680"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14249472</offset>
+      <gain>0.75282073</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@17095168</name>
+      <span stop="18689024" start="18504704"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>17095168</offset>
+      <gain>0.024802176</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13918208</name>
+      <span stop="18809856" start="18706944"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13918208</offset>
+      <gain>1.2309976</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="19010048" start="18938880"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>11.6026325</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="19173888" start="19064320"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.12294697</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="19588096" start="19516928"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.21478732</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14016512</name>
+      <span stop="16894976" start="16811520"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14016512</offset>
+      <gain>0.109617025</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13989888</name>
+      <span stop="16806912" start="16745984"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13989888</offset>
+      <gain>0.05942618</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15377920</name>
+      <span stop="16679424" start="16566784"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15377920</offset>
+      <gain>0.8931785</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="16519680" start="16398848"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.17651424</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14007808</name>
+      <span stop="16253440" start="16169472"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14007808</offset>
+      <gain>0.059201423</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="16036352" start="15883264"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.114498466</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="15882240" start="15747584"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.68342084</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@20549632</name>
+      <span stop="15608832" start="15488000"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>20549632</offset>
+      <gain>0.001040839</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="15346688" start="15209984"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.86241066</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="15207936" start="15074816"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>0.94444674</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14004736</name>
+      <span stop="14512128" start="14379008"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14004736</offset>
+      <gain>0.16043285</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16782848</name>
+      <span stop="14679552" start="14616064"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16782848</offset>
+      <gain>0.6626704</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15283712</name>
+      <span stop="14968320" start="14808576"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15283712</offset>
+      <gain>4.3019104</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14249472</name>
+      <span stop="14333952" start="14244352"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14249472</offset>
+      <gain>0.7983835</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="14102016" start="13934592"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.18536466</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19097088</name>
+      <span stop="13933568" start="13835776"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19097088</offset>
+      <gain>6.2351036</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="13727232" start="13606400"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.21857682</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13673472</name>
+      <span stop="13482496" start="13327360"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13673472</offset>
+      <gain>0.056294046</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18966528</name>
+      <span stop="13057024" start="12962304"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18966528</offset>
+      <gain>3.9505641</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14004736</name>
+      <span stop="13314560" start="13181440"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14004736</offset>
+      <gain>0.16641542</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13947392</name>
+      <span stop="12962304" start="12822528"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13947392</offset>
+      <gain>0.2894559</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14041600</name>
+      <span stop="12338176" start="12277248"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14041600</offset>
+      <gain>0.10701563</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14071296</name>
+      <span stop="12140032" start="11979776"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14071296</offset>
+      <gain>0.7675422</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16630272</name>
+      <span stop="11586048" start="11478016"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16630272</offset>
+      <gain>1.1340988</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18996736</name>
+      <span stop="11406336" start="11317760"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18996736</offset>
+      <gain>0.56155705</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14248448</name>
+      <span stop="11152896" start="11062272"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14248448</offset>
+      <gain>0.02037051</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@23534592</name>
+      <span stop="10717184" start="10628608"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>23534592</offset>
+      <gain>0.024966976</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252032</name>
+      <span stop="10173952" start="10077696"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252032</offset>
+      <gain>1.1181563</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="10064384" start="9883648"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>1.6020616</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="20">
+      <name>Ch-1 2</name>
+      <diffusion idref="6"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@16738304</name>
+      <span stop="17372672" start="17279488"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16738304</offset>
+      <gain>0.61322063</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="17260032" start="17094144"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>1.0316062</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19163136</name>
+      <span stop="17014784" start="16894976"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19163136</offset>
+      <gain>0.4588828</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15396864</name>
+      <span stop="16571392" start="16500224"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15396864</offset>
+      <gain>0.7725478</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13845504</name>
+      <span stop="16305152" start="16213504"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13845504</offset>
+      <gain>0.17377412</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@17100288</name>
+      <span stop="18661888" start="18516480"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>17100288</offset>
+      <gain>0.037856653</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16542208</name>
+      <span stop="18457600" start="18356736"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16542208</offset>
+      <gain>3.6535597</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16789504</name>
+      <span stop="19289088" start="19158016"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16789504</offset>
+      <gain>1.2559161</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14255104</name>
+      <span stop="19873280" start="19789312"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14255104</offset>
+      <gain>0.767242</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="20561920" start="20441600"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.1961148</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13950464</name>
+      <span stop="21117440" start="21046272"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13950464</offset>
+      <gain>0.044716254</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19032064</name>
+      <span stop="15379456" start="15329792"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19032064</offset>
+      <gain>1.2321885</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15300096</name>
+      <span stop="15063040" start="14918656"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15300096</offset>
+      <gain>0.87583214</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16542208</name>
+      <span stop="14797824" start="14691840"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16542208</offset>
+      <gain>2.7415442</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@31837184</name>
+      <span stop="14324736" start="14200320"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>31837184</offset>
+      <gain>1.2179968</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="13727744" start="13607424"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.32296517</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14028288</name>
+      <span stop="13339648" start="13233152"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14028288</offset>
+      <gain>0.024934338</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16651776</name>
+      <span stop="13150208" start="13065728"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16651776</offset>
+      <gain>3.4115129</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="12878336" start="12713984"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>1.117976</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13989888</name>
+      <span stop="11899392" start="11751424"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13989888</offset>
+      <gain>0.21519694</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19015168</name>
+      <span stop="10960384" start="10914304"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19015168</offset>
+      <gain>0.48065993</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15319552</name>
+      <span stop="10884608" start="10713600"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15319552</offset>
+      <gain>1.205518</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="10395648" start="10300416"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>4.4288007E-7</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13989888</name>
+      <span stop="10215424" start="10154496"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13989888</offset>
+      <gain>0.47215456</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="10021888" start="9923584"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>2.1483588</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="21">
+      <name>Ch-3 3</name>
+      <diffusion idref="9"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="19171328" start="19050496"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>0.37082916</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14248960</name>
+      <span stop="19270144" start="19180032"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14248960</offset>
+      <gain>1.2978717</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="19525120" start="19358208"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>1.1977309</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="19025920" start="18905088"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.7188344</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14904320</name>
+      <span stop="21117440" start="21046272"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14904320</offset>
+      <gain>0.85491794</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="19584000" start="19529216"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.13041933</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15444480</name>
+      <span stop="19811840" start="19673088"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15444480</offset>
+      <gain>3.8475459</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="20269056" start="20139008"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.7138962</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18869760</name>
+      <span stop="20367360" start="20269056"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18869760</offset>
+      <gain>0.20714895</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="20574720" start="20422144"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.32273436</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18755584</name>
+      <span stop="20801024" start="20678656"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18755584</offset>
+      <gain>0.5895703</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16785920</name>
+      <span stop="20980224" start="20845568"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16785920</offset>
+      <gain>0.77331895</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@20303872</name>
+      <span stop="18683392" start="18514432"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>20303872</offset>
+      <gain>0.093777955</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15607808</name>
+      <span stop="18457600" start="18345984"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15607808</offset>
+      <gain>4.67858</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18797056</name>
+      <span stop="18100736" start="17966080"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18797056</offset>
+      <gain>1.1689293</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14181376</name>
+      <span stop="17946624" start="17779712"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14181376</offset>
+      <gain>0.5452025</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14134784</name>
+      <span stop="17320960" start="17207296"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14134784</offset>
+      <gain>1.4659921</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="17162752" start="16995840"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>1.1321518</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="16928256" start="16793600"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.27496094</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14071296</name>
+      <span stop="16159232" start="16092672"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14071296</offset>
+      <gain>1.4184391</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18805760</name>
+      <span stop="16313856" start="16213504"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18805760</offset>
+      <gain>0.037783492</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15246336</name>
+      <span stop="16641536" start="16555520"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15246336</offset>
+      <gain>1.8271425</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="16018944" start="15898112"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.05275774</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14187520</name>
+      <span stop="15496192" start="15335424"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14187520</offset>
+      <gain>1.2778475</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@17368064</name>
+      <span stop="15095296" start="15026688"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>17368064</offset>
+      <gain>1.1946449</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@22699008</name>
+      <span stop="14942208" start="14821888"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>22699008</offset>
+      <gain>0.417696</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13914624</name>
+      <span stop="14797824" start="14684160"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13914624</offset>
+      <gain>0.81472933</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="14520320" start="14368256"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.4196819</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="14334464" start="14201344"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>2.2786024</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14183936</name>
+      <span stop="13971968" start="13825536"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14183936</offset>
+      <gain>1.1795808</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18996736</name>
+      <span stop="12706816" start="12606464"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18996736</offset>
+      <gain>1.0548451</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15666688</name>
+      <span stop="13005312" start="12852736"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15666688</offset>
+      <gain>1.9724864</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="13324288" start="13172736"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.43367144</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="12297216" start="12176384"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.22798511</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16735744</name>
+      <span stop="11984896" start="11931136"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16735744</offset>
+      <gain>0.45193392</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="11928576" start="11841536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>0.2952706</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14009344</name>
+      <span stop="11644928" start="11568640"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14009344</offset>
+      <gain>0.15333901</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16605184</name>
+      <span stop="11496960" start="11383296"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16605184</offset>
+      <gain>0.9304275</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="11381248" start="11310080"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.15220462</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16631296</name>
+      <span stop="11288576" start="11139072"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16631296</offset>
+      <gain>4.340335</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14004736</name>
+      <span stop="11035648" start="10969088"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14004736</offset>
+      <gain>0.13307217</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="10961920" start="10912768"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>1.5112045</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14231040</name>
+      <span stop="10357248" start="10249216"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14231040</offset>
+      <gain>0.28229782</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19746304</name>
+      <span stop="10224128" start="10150912"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19746304</offset>
+      <gain>1.2860677</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19778048</name>
+      <span stop="10060800" start="10014208"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19778048</offset>
+      <gain>0.6872341</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="22">
+      <name>Ch-2 3</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="20710400" start="20535808"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>1.5575768</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14966272</name>
+      <span stop="20464640" start="20317184"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14966272</offset>
+      <gain>3.4215996</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="14578688" start="14482944"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>0.13011606</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19116544</name>
+      <span stop="15379456" start="15329792"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19116544</offset>
+      <gain>0.8227051</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18799616</name>
+      <span stop="16345600" start="16213504"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18799616</offset>
+      <gain>0.09942392</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15377920</name>
+      <span stop="16603648" start="16491008"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15377920</offset>
+      <gain>0.56375045</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14009856</name>
+      <span stop="17436672" start="17358848"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14009856</offset>
+      <gain>0.19119747</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@17203712</name>
+      <span stop="18746880" start="18671104"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>17203712</offset>
+      <gain>0.530323</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="19302912" start="19137536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.9203513</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16631296</name>
+      <span stop="13150208" start="13043200"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16631296</offset>
+      <gain>1.4806652</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14185472</name>
+      <span stop="12432384" start="12300288"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14185472</offset>
+      <gain>0.07458726</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="12225024" start="12069888"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.71728015</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@17368064</name>
+      <span stop="10058240" start="9991680"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>17368064</offset>
+      <gain>5.1956687</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="23">
+      <name>Ch-1 3</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13991936</name>
+      <span stop="17804288" start="17710592"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13991936</offset>
+      <gain>0.19352382</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="18077184" start="17944064"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>1.4746847</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13914624</name>
+      <span stop="18316800" start="18145792"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13914624</offset>
+      <gain>0.5748576</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16622080</name>
+      <span stop="17601536" start="17437184"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16622080</offset>
+      <gain>0.3158499</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16622080</name>
+      <span stop="20949504" start="20835328"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16622080</offset>
+      <gain>2.5218034</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18793984</name>
+      <span stop="20677120" start="20539392"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18793984</offset>
+      <gain>0.20667608</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14910976</name>
+      <span stop="20341760" start="20225024"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14910976</offset>
+      <gain>1.609771</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@17198592</name>
+      <span stop="18769408" start="18672640"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>17198592</offset>
+      <gain>0.6943572</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15444480</name>
+      <span stop="18955264" start="18846720"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15444480</offset>
+      <gain>10.212713</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@22819328</name>
+      <span stop="19097600" start="19024896"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>22819328</offset>
+      <gain>0.0010250625</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="19409408" start="19242496"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>3.2644799</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15027200</name>
+      <span stop="19687424" start="19563520"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15027200</offset>
+      <gain>6.346521</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14249472</name>
+      <span stop="20001280" start="19911680"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14249472</offset>
+      <gain>0.48689955</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="20122112" start="20001792"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.26641077</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13982208</name>
+      <span stop="16793088" start="16741376"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13982208</offset>
+      <gain>0.09309777</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16670720</name>
+      <span stop="16177664" start="16112128"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16670720</offset>
+      <gain>1.7369568</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="16107008" start="16011264"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>0.061226703</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="15884800" start="15752704"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>1.1042513</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19119104</name>
+      <span stop="15480320" start="15361536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19119104</offset>
+      <gain>4.547225</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="15349760" start="15215104"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.5464772</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085120</name>
+      <span stop="15210496" start="15114752"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085120</offset>
+      <gain>1.266372</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19119104</name>
+      <span stop="13971968" start="13857280"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19119104</offset>
+      <gain>3.7580278</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'pWhteConLyr6WhtRsmpBHPFRsmp-8@25966592</name>
+      <span stop="14377472" start="14285312"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>25966592</offset>
+      <gain>2.4565713</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14004736</name>
+      <span stop="14510592" start="14380544"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14004736</offset>
+      <gain>0.24318047</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="13182976" start="13111808"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.81165236</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="12662784" start="12588032"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.4067881</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13981696</name>
+      <span stop="12494336" start="12425216"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13981696</offset>
+      <gain>0.03229134</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="12318720" start="12151296"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.7550493</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="12101120" start="11994112"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>1.0093879</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14087680</name>
+      <span stop="11984896" start="11888640"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14087680</offset>
+      <gain>0.9399061</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15712768</name>
+      <span stop="11674112" start="11568640"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15712768</offset>
+      <gain>1.1648337</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15692800</name>
+      <span stop="11512320" start="11389440"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15692800</offset>
+      <gain>0.93995184</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="11346944" start="11213824"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>2.8928723</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14250496</name>
+      <span stop="11159552" start="11061760"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14250496</offset>
+      <gain>0.031788923</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="11022336" start="10950656"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.60632676</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13982208</name>
+      <span stop="10058752" start="10007040"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13982208</offset>
+      <gain>0.67811775</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="24">
+      <name>Ch-4 3</name>
+      <diffusion idref="3"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="16024576" start="15904256"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.06433186</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="16394752" start="16285184"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.06633537</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15282176</name>
+      <span stop="16568320" start="16524288"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15282176</offset>
+      <gain>0.8839812</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14021120</name>
+      <span stop="17254400" start="17094656"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14021120</offset>
+      <gain>0.8715158</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16124928</name>
+      <span stop="17380864" start="17275904"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16124928</offset>
+      <gain>2.3539608</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15311360</name>
+      <span stop="19073536" start="19006976"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15311360</offset>
+      <gain>0.004214227</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="19584000" start="19506688"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.3660674</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@19119104</name>
+      <span stop="13182976" start="13113344"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>19119104</offset>
+      <gain>2.3379173</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14014464</name>
+      <span stop="11641856" start="11568640"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.10441059</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16738304</name>
+      <span stop="11035136" start="10941952"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16738304</offset>
+      <gain>0.504458</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14181888</name>
+      <span stop="10358272" start="10205184"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14181888</offset>
+      <gain>0.44800776</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="25">
+      <name>Ch-2 4</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@20492288</name>
+      <span stop="21102592" start="20931072"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>20492288</offset>
+      <gain>3.1495876</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14252544</name>
+      <span stop="19884032" start="19788288"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14252544</offset>
+      <gain>1.1947582</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18755584</name>
+      <span stop="19516928" start="19394560"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18755584</offset>
+      <gain>1.207927</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13937152</name>
+      <span stop="12620800" start="12472320"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13937152</offset>
+      <gain>0.8760103</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16681984</name>
+      <span stop="12746752" start="12639232"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16681984</offset>
+      <gain>1.7518736</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="13852672" start="13732352"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.0805994</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13991936</name>
+      <span stop="15118848" start="15049216"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13991936</offset>
+      <gain>0.14772907</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16642560</name>
+      <span stop="16176128" start="16080384"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16642560</offset>
+      <gain>0.8268563</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15443968</name>
+      <span stop="17152512" start="16988672"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15443968</offset>
+      <gain>7.268646</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15591936</name>
+      <span stop="18497024" start="18328064"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15591936</offset>
+      <gain>6.168656</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14026752</name>
+      <span stop="11926528" start="11818496"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14026752</offset>
+      <gain>0.41490954</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14061568</name>
+      <span stop="11351552" start="11232256"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14061568</offset>
+      <gain>3.5580494</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="10927616" start="10840576"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>0.34857163</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="10341888" start="10221056"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.1227982</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="26">
+      <name>Ch-4 4</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14005760</name>
+      <span stop="15840768" start="15758336"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14005760</offset>
+      <gain>0.38435087</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="15362048" start="15312896"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>5.0267944</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15536640</name>
+      <span stop="15239168" start="15109120"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15536640</offset>
+      <gain>6.1165633</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="14520320" start="14371328"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.6609675</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="13739520" start="13589504"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.8377542</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14635520</name>
+      <span stop="13483008" start="13327360"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14635520</offset>
+      <gain>3.937889</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14061568</name>
+      <span stop="13060096" start="12986880"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14061568</offset>
+      <gain>4.16202</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14904832</name>
+      <span stop="21117440" start="21047808"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14904832</offset>
+      <gain>0.52863955</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15531008</name>
+      <span stop="20483584" start="20347904"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15531008</offset>
+      <gain>5.3044796</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="20001280" start="19868160"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>1.4249825</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13914624</name>
+      <span stop="19437568" start="19267072"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13914624</offset>
+      <gain>1.0150995</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15563776</name>
+      <span stop="18817536" start="18719232"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15563776</offset>
+      <gain>19.112206</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16737792</name>
+      <span stop="18288640" start="18179072"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16737792</offset>
+      <gain>1.278838</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14137856</name>
+      <span stop="16823296" start="16731648"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14137856</offset>
+      <gain>0.46836093</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14071296</name>
+      <span stop="17044480" start="16862720"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14071296</offset>
+      <gain>0.14947824</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="17627136" start="17469952"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>0.17809877</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14137856</name>
+      <span stop="17797120" start="17679872"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14137856</offset>
+      <gain>0.37948924</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14074880</name>
+      <span stop="12748288" start="12639232"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14074880</offset>
+      <gain>4.285202</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="12389888" start="12312576"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.02778087</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="11378176" start="11323392"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.08176651</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16622592</name>
+      <span stop="10944512" start="10830848"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16622592</offset>
+      <gain>0.896335</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="27">
+      <name>Ch-2 5</name>
+      <diffusion idref="5"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="11986432" start="11891200"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>1.5560029</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14073856</name>
+      <span stop="10957824" start="10889216"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14073856</offset>
+      <gain>1.9423954</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="28">
+      <name>Ch-1 4</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@14971392</name>
+      <span stop="20801536" start="20675072"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14971392</offset>
+      <gain>2.8816903</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14250496</name>
+      <span stop="14573568" start="14484992"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14250496</offset>
+      <gain>0.091418825</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15444480</name>
+      <span stop="15598080" start="15459328"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15444480</offset>
+      <gain>1.704482E-4</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="15950336" start="15821312"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.3861507</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14014464</name>
+      <span stop="17956352" start="17789952"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14014464</offset>
+      <gain>0.3472022</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14182912</name>
+      <span stop="18207232" start="18047488"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14182912</offset>
+      <gain>0.97759986</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@16737280</name>
+      <span stop="18809344" start="18750976"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>16737280</offset>
+      <gain>2.6324093</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@18760704</name>
+      <span stop="19510784" start="19393536"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18760704</offset>
+      <gain>0.92397875</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="14090752" start="13935616"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.11699407</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@13941248</name>
+      <span stop="12614144" start="12484096"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13941248</offset>
+      <gain>0.5782333</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@15708672</name>
+      <span stop="11588608" start="11478016"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>15708672</offset>
+      <gain>2.092992</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18966016</name>
+      <span stop="11403776" start="11308544"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18966016</offset>
+      <gain>0.7700179</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="29">
+      <name>Ch-3 4</name>
+      <diffusion idref="9"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14966272</name>
+      <span stop="21112832" start="20947456"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14966272</offset>
+      <gain>1.4260125</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@18755584</name>
+      <span stop="20871168" start="20764160"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>18755584</offset>
+      <gain>0.4993036</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="20710400" start="20517888"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>0.24140537</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="14077440" start="13956608"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.055665057</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15013888</name>
+      <span stop="15613440" start="15476224"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15013888</offset>
+      <gain>3.498043E-4</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="16124416" start="15994368"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>0.03353835</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="16297472" start="16148480"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.15871121</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="17034752" start="16867840"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>0.17496274</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15311360</name>
+      <span stop="19688960" start="19556864"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15311360</offset>
+      <gain>1.3932658</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@15536640</name>
+      <span stop="20467712" start="20342272"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>15536640</offset>
+      <gain>3.0807831</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'6WhteConLayer6B@14050816</name>
+      <span stop="13055488" start="12968448"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14050816</offset>
+      <gain>3.9220147</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14085632</name>
+      <span stop="12749312" start="12654080"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14085632</offset>
+      <gain>6.749719</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19026432</name>
+      <span stop="12356096" start="12285952"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19026432</offset>
+      <gain>0.34065932</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@16622080</name>
+      <span stop="11587072" start="11472896"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>16622080</offset>
+      <gain>2.185224</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="30">
+      <name>Ch-4 5</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14098432</name>
+      <span stop="15373312" start="15323648"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14098432</offset>
+      <gain>5.089813</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="13886464" start="13719040"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.16588765</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="31">
+      <name>Ch-3 5</name>
+      <diffusion idref="4"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@14017024</name>
+      <span stop="13890048" start="13725696"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14017024</offset>
+      <gain>0.06551596</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="32">
+      <name>Ch-4 6</name>
+      <diffusion idref="7"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@14183936</name>
+      <span stop="15493632" start="15338496"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14183936</offset>
+      <gain>0.7317395</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="33">
+      <name>Ch-2 6</name>
+      <diffusion idref="8"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@19097088</name>
+      <span stop="15457792" start="15340032"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>19097088</offset>
+      <gain>6.433023</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="34">
+      <name>Ch-1 5</name>
+      <diffusion idref="10"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@14180864</name>
+      <span stop="16036352" start="15884288"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14180864</offset>
+      <gain>0.1829342</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="35">
+      <name>Ch-3 6</name>
+      <diffusion idref="9"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'6WhteConLayer6B@18805760</name>
+      <span stop="16380928" start="16280576"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18805760</offset>
+      <gain>0.10005672</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="36">
+      <name>Ch-1 6</name>
+      <diffusion idref="6"></diffusion>
+      <trail>
+  <stake>
+      <name>WrkSh'bWhteConLayer6HlbB@13939712</name>
+      <span stop="16375808" start="16280576"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>13939712</offset>
+      <gain>0.09749547</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline>
+</coll>
+    </timelines>
+</konturSession>

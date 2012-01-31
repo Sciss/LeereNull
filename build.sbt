@@ -18,7 +18,7 @@ resolvers += "Clojars Repository" at "http://clojars.org/repo"  // for jsyntaxpa
 
 libraryDependencies ++= Seq(
    "de.sciss" %% "strugatzki" % "0.16",
-   "de.sciss" %% "kontur" % "0.17",
+   "de.sciss" %% "kontur" % "0.18-SNAPSHOT",
    "de.sciss" %% "fscapejobs" % "0.17",
    "com.itextpdf" % "itextpdf" % "5.1.1"
 )
