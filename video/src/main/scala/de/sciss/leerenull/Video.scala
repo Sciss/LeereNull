@@ -2,9 +2,9 @@ package de.sciss.leerenull
 
 import processing.{core, video}
 import core.PApplet
-import javax.swing.{WindowConstants, JFrame}
 import java.awt.{Dimension, BorderLayout, EventQueue}
 import java.io.{PrintStream, File}
+import javax.swing.{JProgressBar, WindowConstants, JFrame}
 
 object Video extends App {
    EventQueue.invokeLater( new Runnable { def run() {
@@ -31,23 +31,31 @@ object Video extends App {
    val videoFPS         = 24
    val raspadStartIdx   = 169
    val raspadStopIdx    = 999
-   val folder           = new File( "data" )
+   val dataFolder       = new File( "data" )
+   val outputFolder     = new File( "data_out" )
+   val totalDuration    = 30.0
+   val totalNumFrames   = (totalDuration * videoFPS + 0.5).toInt
 }
 
 class Video extends PApplet {
    import Video._
 
-   val f = new JFrame( "Leere Null" );
+   val f = new JFrame( "Leere Null" )
+   private val ggProgress = new JProgressBar( 0, totalNumFrames )
 
    // ---- constructor ----
 
-   f.setResizable( false )
-   f.getContentPane.add( this, BorderLayout.CENTER )
-   init()
-   f.pack()
-   f.setLocationRelativeTo( null )
-   f.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE )
-   f.setVisible( true )
+   {
+      f.setResizable( false )
+      val cp = f.getContentPane
+      cp.add( this, BorderLayout.CENTER )
+      cp.add( ggProgress, BorderLayout.NORTH )
+      init()
+      f.pack()
+      f.setLocationRelativeTo( null )
+      f.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE )
+      f.setVisible( true )
+   }
 
    override def getPreferredSize = new Dimension( videoWidth, videoHeight )
 
@@ -58,6 +66,7 @@ class Video extends PApplet {
    var outMovie : MovieMaker = _
 //   var raspadDuration = 0.0
    var raspadIdx = 0 // FUCKING PROCESSING RUNS DRAW BEFORE VAR INIT
+   var framesWritten = 0
 
    override def setup() {
 //      noLoop()
@@ -101,9 +110,19 @@ class Video extends PApplet {
 
       if( raspadIdx < (raspadStopIdx - raspadStartIdx) ) {
 //         println( "AYA " + raspadIdx )
-         val img = loadImage( new File( folder, "RaspadExtr " + (raspadIdx + raspadStartIdx + 10000).toString.substring( 1 ) + ".png" ).getPath )
+         val img = loadImage( new File( dataFolder, "RaspadExtr " + (raspadIdx + raspadStartIdx + 10000).toString.substring( 1 ) + ".png" ).getPath )
          image( img, 0, 0 )
          raspadIdx += 1
+      }
+
+      if( framesWritten < totalNumFrames ) {
+         val outFile = new File( outputFolder, "frame" + (framesWritten + 10000).toString.substring( 1 ) + ".png" )
+         save( outFile.getPath )
+         framesWritten += 1
+         ggProgress.setValue( framesWritten )
+      } else {
+         noLoop()
+         println( "\nDone." )
       }
    }
 }
