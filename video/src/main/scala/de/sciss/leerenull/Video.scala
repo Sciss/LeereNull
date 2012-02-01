@@ -26,8 +26,12 @@ object Video extends App {
       new Video
    }})
 
-   val videoWidth    = 1024
-   val videoHeight   = 768
+   val videoWidth       = 1024
+   val videoHeight      = 768
+   val videoFPS         = 24
+   val raspadStartIdx   = 169
+   val raspadStopIdx    = 999
+   val folder           = new File( "data" )
 }
 
 class Video extends PApplet {
@@ -50,37 +54,56 @@ class Video extends PApplet {
    import core._
    import video._
 
-   lazy val folder = {
-//      val cr = new File( "Contents/Resources" )
-//      if( cr.isDirectory ) new File( cr, "data" ) else
-         new File( "data" )
-   }
-   var myMovie : Movie = _
+//   var raspadMovie : Movie = _
+   var outMovie : MovieMaker = _
+//   var raspadDuration = 0.0
+   var raspadIdx = 0 // FUCKING PROCESSING RUNS DRAW BEFORE VAR INIT
 
    override def setup() {
-      frameRate( 1 )
+//      noLoop()
+//      frameRate( 1 )
+      frameRate( videoFPS )
       size( videoWidth, videoHeight )
-//      setPreferredSize( getSize )
       background( 0 )
-      val movieFile = new File( folder, "RaspadExtr.mov" )
-//f.setTitle( movieFile.getAbsolutePath )
-      myMovie = new Movie( this, movieFile.getPath )
-      myMovie.loop()
+//      val raspadFile = new File( folder, "RaspadExtr.mov" )
+//      raspadMovie    = new Movie( this, raspadFile.getPath )
+//      raspadDuration = raspadMovie.duration()
+//      raspadMovie.play()
+//      raspadMovie.loop()
+//      raspadIdx = raspadStartIdx
+//      println( "AQUI " + raspadIdx )
    }
 
-   var cnt = 0
+//   var frameCount = 0
 
-   def movieEvent( m: Movie ) {
-//      cnt += 1
-//      f.setTitle( cnt.toString )
-      m.read()
-   }
+//   def movieEvent( m: Movie ) {
+////      cnt += 1
+////      f.setTitle( cnt.toString )
+//      println( "MOVIE time = " + m.time() )
+//      m.read()
+//      redraw()
+//   }
 
    override def draw() {
-//      fill( 255 )
-//      rect( videoWidth / 3, videoHeight / 3, videoWidth / 3, videoHeight / 3 )
-      tint( 255, 20 )
-//      image( myMovie, mouseX - myMovie.width / 2, mouseY - myMovie.height / 2 )
-      image( myMovie, 0, 0 )
+      val now = frameCount.toDouble / videoFPS
+//      println( "NOW = " + now )
+//      if( now < raspadDuration ) {
+//         raspadMovie.jump( now )
+//         raspadMovie.read()
+//         image( raspadMovie, 0, 0 )
+//      }
+
+//      raspadMovie.available()
+//      tint( 255, 20 )
+//      image( raspadMovie, 0, 0 )
+
+//      frameCount += 1
+
+      if( raspadIdx < (raspadStopIdx - raspadStartIdx) ) {
+//         println( "AYA " + raspadIdx )
+         val img = loadImage( new File( folder, "RaspadExtr " + (raspadIdx + raspadStartIdx + 10000).toString.substring( 1 ) + ".png" ).getPath )
+         image( img, 0, 0 )
+         raspadIdx += 1
+      }
    }
 }
