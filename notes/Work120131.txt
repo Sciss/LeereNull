@@ -1,0 +1,8 @@
+val used = doc.audioFiles.toList.map( _.path )
+val all = new java.io.File( "/Users/hhrutz/Desktop/from_mnemo" ).listFiles.filter( de.sciss.synth.io.AudioFile.identify( _ ).isDefined )
+all.size
+val unused = all diff used
+unused.size
+val synt = used.filterNot( _.getAbsolutePath.contains( "from_mnemo" ))
+synt foreach println
+unused.foreach( file => println( "ln -s " + file.getAbsolutePath.replace( " ", "\\ " ).replace("'", "\\'" ) + " /Users/hhrutz/Desktop/new_projects/Utopia/phase_three/mnemo_unused" ))
