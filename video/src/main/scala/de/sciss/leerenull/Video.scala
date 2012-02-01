@@ -62,7 +62,7 @@ class Video extends PApplet {
       size( videoWidth, videoHeight )
 //      setPreferredSize( getSize )
       background( 0 )
-      val movieFile = new File( folder, "station.mov" )
+      val movieFile = new File( folder, "RaspadExtr.mov" )
 //f.setTitle( movieFile.getAbsolutePath )
       myMovie = new Movie( this, movieFile.getPath )
       myMovie.loop()
