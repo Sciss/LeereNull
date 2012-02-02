@@ -26,6 +26,7 @@
 package de.sciss.leerenull
 
 trait VideoLayer {
+   def startTime: Double
    def stopTime: Double
 
    protected def video: Video

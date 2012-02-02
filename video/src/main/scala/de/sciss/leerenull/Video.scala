@@ -33,8 +33,9 @@ import javax.swing.{BorderFactory, Box, JLabel, JProgressBar, WindowConstants, J
 import java.awt.{Color, Font, Dimension, BorderLayout, EventQueue}
 
 object Video extends App {
-   val writeOutput   = false
-   val renderStart   = 7.0
+   val writeOutput   = true
+   val renderStart   = 0.0
+   val realtime      = false
 
    EventQueue.invokeLater( new Runnable { def run() {
       val log = new LogPane
@@ -125,44 +126,81 @@ class Video extends PApplet {
 
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
-      val title   = TitleLayer( this )
-//      val raspad  = RaspadLayer( this, title.stopTime )
+      lazy val titleDur = 7.0
+      val title1  = TitleLayer( this,
+         startTime = 0.0,
+         title = "Leere Null 2",
+         fontSize = 72,
+         fadeIn = 2.0,
+         fadeOut = 2.5,
+         duration = titleDur,
+         offY = 120
+      )
+      val title2  = TitleLayer( this,
+         startTime = title1.startTime + 2.5,
+         title = "(Empties)",
+         fontSize = 54,
+         fadeIn = 2.0,
+         fadeOut = 2.5,
+         duration = titleDur - 2.5,
+         offY = 180
+      )
+
+      val raspad  = RaspadLayer( this, title2.stopTime + 1.0 )
+
       val sonoRec = {
          val r = SonogramLayer.Recorder()
          import r._
          val cropDur = 0.5
          val moveDur = 0.5
+         val dissolveDur = 1.0
          unroll( imageID = "raspad", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = 0.0, spanStart = 0.0, spanStop = 14.837 /* 15.011 */)
          val loop1Stop = 14.837
          val loop2Stop = 22.610
+         branch {
+            val spanStart = 5.622
+            val spanStop  = 7.947
+            val timeDelta = -spanStart
+            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
+            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+            prolong( loop2Stop - loop1Stop )
+            dissolve( dissolveDur )
+         }
+         branch {
+            val spanStart = 7.947
+            val spanStop  = 11.072
+            val timeDelta = 19.691 - loop1Stop - spanStart
+            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
+            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+            prolong( loop2Stop - loop1Stop )
+            dissolve( dissolveDur )
+         }
+         val pedalSpanStart = 16.011
+         advance( pedalSpanStart - loop1Stop )
+         unroll( imageID = "pedale", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = pedalSpanStart - loop1Stop, spanStart = 0.0, spanStop = 6.262 )
+prolong( 4.0 )
+         dissolve( 1.0 )
+
+//         prolong( 4.0 )
 //         branch {
-//            val spanStart = 5.622
-//            val spanStop  = 7.947
-//            val timeDelta = -spanStart
-//            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
-//            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
-//            advance( loop2Stop - loop1Stop )
-//            dissolve( 1.0 )
+//            crop( 4.0, spanStart = 0.0, spanStop = 4.0 )
+//            prolong( 4.0 )
+//            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = 0.0 )
+//            dissolve( 4.0 )
 //         }
 //         branch {
-//            val spanStart = 7.947
-//            val spanStop  = 11.072
-//            val timeDelta = 19.691 - loop1Stop - spanStart
-//            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
-//            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
-//            advance( loop2Stop - loop1Stop )
-//            dissolve( 1.0 )
+//            crop( 4.0, spanStart = 8.0, spanStop = 15.0 )
+//            prolong( 4.0 )
+//            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = -4.0 )
+//            dissolve( 4.0 )
 //         }
-//         val pedalSpanStart = 16.011
-//         advance( pedalSpanStart - loop1Stop )
-//         unroll( imageID = "pedale", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = pedalSpanStart - loop1Stop, spanStart = 0.0, spanStop = 6.262 )
-//         dissolve( 1.0 )
-         dissolve( 8.0 )
+//         advance( 8.0 )
+//         dissolve( 8.0 )
          r
       }
       // ...
-      val sono    = SonogramLayer( this, sonoRec.build, title.stopTime )
-      List( title, /* raspad, */ sono )
+      val sono    = SonogramLayer( this, sonoRec.build, raspad.stopTime + 1.0 )
+      List( title1, title2, raspad, sono )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1
@@ -173,7 +211,7 @@ class Video extends PApplet {
    override def setup() {
 //      noLoop()
 //      frameRate( 1 )
-      frameRate( 100 ) // videoFPS
+      frameRate( if( realtime ) videoFPS else 100 )
       size( videoWidth, videoHeight )
       background( 0 )
       colorMode( RGB, 1.0f )

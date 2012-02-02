@@ -2,12 +2,12 @@ package de.sciss.leerenull
 
 import java.io.File
 import collection.immutable.IntMap
-import processing.core.PImage
 import collection.immutable.{IndexedSeq => IIdxSeq}
+import processing.core.{PConstants, PImage}
 
 object SonogramLayer {
    val pixelsPerSecond  = 50
-   val trackHeight      = 140
+   val trackHeight      = 180
    val trackYOff        = 200
    val trackXOff        = 100
 
@@ -34,7 +34,7 @@ object SonogramLayer {
                            fadeIn: Double, fadeOut: Double, startGain: Double, stopGain: Double,
                            startTrackStart: Double, stopTrackStart: Double ) {
 
-      def atEnd = copy( startTime = stopTime, stopTrackIdx = startTrackIdx,
+      def atEnd = copy( startTime = stopTime, startTrackIdx = stopTrackIdx,
                         startSpanStart = stopSpanStart, startSpanStop = stopSpanStop,
                         fadeIn = 0.0, startGain = stopGain, startTrackStart = stopTrackStart )
 
@@ -73,17 +73,25 @@ object SonogramLayer {
          }
 
          def advance( delta: Double ) {
-//            require( delta >= 0.0 )
+            timeOffset += delta
+            require( timeOffset >= 0.0 )
+         }
+
+         def prolong( delta: Double ) {
+            require( delta >= 0.0 )
             stack match {
                case head :: tail =>
-                  val in = head.shiftSpan( delta )
-                  require( in.startTime >= 0.0 )
-                  stack = in :: tail
+                  val in0 = head.atEnd
+//                  val in = head.shiftSpan( delta )
+                  val in = in0.copy( stopTime = in0.startTime + delta, fadeOut = 0.0 )
+//                  require( in.startTime >= 0.0 )
+                  stack = in :: stack // tail
+                  timeOffset = in.stopTime
                case _ =>
             }
          }
 
-         def branch( body: => Unit ) {
+         def branch( body: => Unit ) : Double = {
             val oldTimeOffset = timeOffset
             val oldSz = stack.size
             body
@@ -97,7 +105,9 @@ object SonogramLayer {
 //               case head :: tail => stack = tail; body; stack = head :: stack
 //               case _ => body
 //            }
+            val res = timeOffset
             timeOffset = oldTimeOffset
+            res
          }
 
          def dissolve( transitDur: Double ) {
@@ -132,6 +142,7 @@ object SonogramLayer {
                                        stopGain = in0.startGain + deltaGain,
                                        stopTrackStart = in0.startTrackStart + deltaTrackStart )
                   require( in.stopSpanStart < in.stopSpanStop )
+                  stack = in :: stack
                   timeOffset = in.stopTime
 
                case _ => needInstruction()
@@ -139,6 +150,7 @@ object SonogramLayer {
          }
 
          def crop( transitDur: Double, spanStart: Double, spanStop: Double ) {
+            require( spanStop > spanStart )
             stack match {
                case head :: tail =>
                   val in0 = head.atEnd
@@ -173,11 +185,12 @@ object SonogramLayer {
 
    trait Recorder {
       def unroll( imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double )
-      def branch( body: => Unit )
+      def branch( body: => Unit ) : Double
       def crop( transitDur: Double, spanStart: Double, spanStop: Double )
       def animate( transitDur: Double, deltaGain: Double = 0.0, deltaTrackIdx: Int = 0, deltaTrackStart: Double = 0.0,
                 deltaSpanStart: Double = 0.0, deltaSpanStop: Double = 0.0 )
       def dissolve( transitDur: Double )
+      def prolong( delta: Double )
       def advance( delta: Double )
 
       def build: IIdxSeq[ Instruction ]
@@ -201,7 +214,7 @@ object SonogramLayer {
    }
 }
 
-class SonogramLayer( protected val video: Video, instr: IIdxSeq[ SonogramLayer.Instruction ], startTime: Double )
+class SonogramLayer( protected val video: Video, instr: IIdxSeq[ SonogramLayer.Instruction ], val startTime: Double )
 extends VideoLayer {
    import SonogramLayer._
 
@@ -225,19 +238,35 @@ extends VideoLayer {
          val delta2  = delta - in.startTime
          val wStop   = math.max( 0.0, math.min( 1.0, delta2 / dur ))
          val wStart  = 1.0 - wStop
+
+         val wStartSin = (1.0 - math.cos( wStart * math.Pi )) * 0.5
+         val wStopSin  = (1.0 - math.cos( wStop  * math.Pi )) * 0.5
+
          val a1      = if( in.fadeIn > 0.0 ) (math.min( in.fadeIn, delta2 ) / in.fadeIn) else 1.0
          val a2      = if( in.fadeOut > 0.0 ) (math.min( in.fadeOut, dur - delta2 ) / in.fadeOut) else 1.0
 //if( a2 < 1.0 ) println( "JUHU " + a2 )
          val alpha   = a1 * a2
          if( alpha < 1.0 ) tint( 1.0f, alpha.toFloat )
 
-         val tx      = trackXOff + timeToPix( wStart * in.startTrackStart + wStop * in.stopTrackStart )
-         val ty      = trackIdxToPix( wStart * in.startTrackIdx + wStop * in.stopTrackIdx )
+         val tx      = trackXOff + timeToPix( wStartSin * in.startTrackStart + wStopSin * in.stopTrackStart )
+         val ty      = trackIdxToPix( wStartSin * in.startTrackIdx + wStopSin * in.stopTrackIdx )
          val ix      = timeToPix( wStart * in.startSpanStart + wStop * in.stopSpanStart )
          val iw      = math.min( img.width, timeToPix( wStart * in.startSpanStop + wStop * in.stopSpanStop )) - ix
          val h       = img.height
 
-         copy( img, ix, 0, iw, h, tx, ty, iw, h )
+//         copy( img, ix, 0, iw, h, tx, ty, iw, h )
+//         video.clip( tx, ty, iw, h )
+//         image( img, tx - ix, ty )
+//         video.noClip()
+
+         if( ix != 0 || iw != img.width ) {
+            val fuckYou = createImage( iw, h, PConstants.ARGB )
+            fuckYou.copy( img, ix, 0, iw, h, 0, 0, iw, h )
+            image( fuckYou, tx, ty )
+            fuckYou.delete()
+         } else {
+            image( img, tx, ty )
+         }
 
          noTint()
       }

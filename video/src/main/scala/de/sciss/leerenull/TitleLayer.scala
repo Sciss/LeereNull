@@ -29,17 +29,21 @@ import processing.core.PConstants
 
 object TitleLayer {
 //   val startTime  = 0.0
-   val duration   = 7.0 // 10.0
-   val fadeIn     = 2.0
-   val fadeOut    = 2.5
+//   val duration   = 7.0 // 10.0
+//   val fadeIn     = 2.0
+//   val fadeOut    = 2.5
    val fontFace   = "Calisto MT" // AkkoRoundedPro-Regular"
-   val fontSize   = 72 // 80
-   val title      = "Leere Null (2)"
-   val offY       = 120
+//   val fontSize   = 72 // 80
+//   val title      = "Leere Null (2)"
+//   val offY       = 120
 
-   def apply( video: Video, startTime: Double = 0.0 ) : TitleLayer = new TitleLayer( video, startTime )
+   def apply( video: Video, startTime: Double = 0.0, duration: Double = 7.0, title: String,
+              fontSize: Int = 72, offY: Int = 120, fadeIn: Double = 2.0, fadeOut: Double = 2.5 ) : TitleLayer =
+      new TitleLayer( video, startTime, duration, title, fontSize, offY, fadeIn, fadeOut )
 }
-class TitleLayer( protected val video: Video, startTime: Double ) extends VideoLayer {
+class TitleLayer( protected val video: Video, val startTime: Double, duration: Double, title: String, fontSize: Int,
+                  offY: Int, fadeIn: Double, fadeOut: Double )
+extends VideoLayer {
    import Video._
    import TitleLayer._
    import PConstants._
