@@ -32,7 +32,7 @@ object RaspadLayer {
    val stopIdx    = 553 // 999
    val raspadFPS  = 24
 //   val startTime  = 0.0
-   val startTime  = TitleLayer.startTime + TitleLayer.duration + 1.0
+//   val startTime  = TitleLayer.startTime + TitleLayer.duration + 1.0
    val raspadHeight  = 480
    val offX       = 0
    val offY       = (Video.videoHeight - raspadHeight) / 2
@@ -42,9 +42,9 @@ object RaspadLayer {
    def numFrames  = stopIdx - startIdx
    def duration   = numFrames.toDouble / raspadFPS
 
-   def apply( video: Video ) : RaspadLayer = new RaspadLayer( video )
+   def apply( video: Video, startTime: Double = 0.0 ) : RaspadLayer = new RaspadLayer( video, startTime )
 }
-class RaspadLayer( protected val video: Video ) extends VideoLayer {
+class RaspadLayer( protected val video: Video, startTime: Double ) extends VideoLayer {
    import Video._
    import RaspadLayer._
 

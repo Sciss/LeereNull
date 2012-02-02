@@ -28,7 +28,7 @@ package de.sciss.leerenull
 import processing.core.PConstants
 
 object TitleLayer {
-   val startTime  = 0.0
+//   val startTime  = 0.0
    val duration   = 7.0 // 10.0
    val fadeIn     = 2.0
    val fadeOut    = 2.5
@@ -37,9 +37,9 @@ object TitleLayer {
    val title      = "Leere Null (2)"
    val offY       = 120
 
-   def apply( video: Video ) : TitleLayer = new TitleLayer( video )
+   def apply( video: Video, startTime: Double = 0.0 ) : TitleLayer = new TitleLayer( video, startTime )
 }
-class TitleLayer( protected val video: Video ) extends VideoLayer {
+class TitleLayer( protected val video: Video, startTime: Double ) extends VideoLayer {
    import Video._
    import TitleLayer._
    import PConstants._

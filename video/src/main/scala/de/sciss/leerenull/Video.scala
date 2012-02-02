@@ -118,7 +118,13 @@ class Video extends PApplet {
 //   var raspadDuration = 0.0
    var framesWritten = 0
 
-   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
+//   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
+   lazy val layers         = {
+      val title   = TitleLayer( this )
+      val raspad  = RaspadLayer( this, title.stopTime )
+      val sono    = SonogramLayer( this, "TestSono", raspad.stopTime )
+      List( title, raspad, sono )
+   }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1
 
