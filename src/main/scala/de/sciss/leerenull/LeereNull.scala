@@ -436,6 +436,34 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             }
          }
       })
+      val miCreateSonogram = new MenuItem( "leerenull.sonogram", action( "Export Region as Sonogram...", "control G"  ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               implicit val _tl  = tl
+               implicit val _tlv = tlv
+               implicit val _trl = trl
+               selectedAudioRegions.headOption.foreach { ar =>
+                  saveFileDialog( "Save Sonogram", new File( ueberzeichnungFolder, "out.png" )).foreach { file =>
+                     val dlg  = progressDialog( "Creating Sonogram" )
+                     val proc = SonogramOutput( ar, file ) {
+                        case SonogramOutput.Success( _ ) =>
+                           dlg.stop()
+
+                        case SonogramOutput.Failure( e ) =>
+                           dlg.stop()
+                           e.printStackTrace()
+
+                        case SonogramOutput.Aborted =>
+                           dlg.stop()
+
+                        case SonogramOutput.Progress( i ) => dlg.progress = i
+                     }
+                     dlg.start( proc )
+                  }
+               }
+            }
+         }
+      })
 
       mg.add( miExtractor )
       mg.add( miLoadSearch )
@@ -449,6 +477,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       mg.add( miOptimizeFanatically )
       mg.addSeparator()
       mg.add( miExportPDF )
+      mg.add( miCreateSonogram )
 
       mg.addSeparator()
       mg.add( miLoadUeberzeichnung )

@@ -20,7 +20,8 @@ libraryDependencies ++= Seq(
    "de.sciss" %% "strugatzki" % "0.16",
    "de.sciss" %% "kontur" % "0.18-SNAPSHOT",
    "de.sciss" %% "fscapejobs" % "0.17",
-   "com.itextpdf" % "itextpdf" % "5.1.1"
+   "com.itextpdf" % "itextpdf" % "5.1.1",
+   "de.sciss" %% "sonogramoverview" % "0.17"
 )
 
 retrieveManaged := true
