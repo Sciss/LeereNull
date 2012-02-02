@@ -56,8 +56,8 @@ class TitleLayer( protected val video: Video, startTime: Double ) extends VideoL
       val delta = now - startTime
       if( delta < 0.0 || delta >= duration ) return
 
-      val a1      = (math.min( fadeIn, delta ) / fadeIn)
-      val a2      = (math.min( fadeOut, duration - delta ) / fadeOut)
+      val a1      = if( fadeIn > 0.0 ) (math.min( fadeIn, delta ) / fadeIn) else 1.0
+      val a2      = if( fadeOut > 0.0 ) (math.min( fadeOut, duration - delta ) / fadeOut) else 1.0
 //println( "in " + a1 + " out " + a2 + " duration - delta = " + (duration - delta) )
       val alpha   = a1 * a2
 

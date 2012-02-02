@@ -122,7 +122,9 @@ class Video extends PApplet {
    lazy val layers         = {
       val title   = TitleLayer( this )
       val raspad  = RaspadLayer( this, title.stopTime )
-      val sono    = SonogramLayer( this, "TestSono", raspad.stopTime )
+      val sonoRec = SonogramLayer.Recorder()
+      // ...
+      val sono    = SonogramLayer( this, sonoRec.build, raspad.stopTime )
       List( title, raspad, sono )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
