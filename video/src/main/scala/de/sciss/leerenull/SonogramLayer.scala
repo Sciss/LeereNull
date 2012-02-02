@@ -29,7 +29,7 @@ object SonogramLayer {
 //   case class Instr( imageID: Int, trackIdx: Int, spanStart: Double, spanStop: Double, trackStart: Double,
 //                     presentationDuration: Double, presentationFadeIn: Double, presentationFadeOut: Double )
 
-   case class Instruction( imageID: Int, startTime: Double, stopTime: Double, startTrackIdx: Int, stopTrackIdx: Int,
+   case class Instruction( imageID: String, startTime: Double, stopTime: Double, startTrackIdx: Int, stopTrackIdx: Int,
                            startSpanStart: Double, stopSpanStart: Double, startSpanStop: Double, stopSpanStop: Double,
                            fadeIn: Double, fadeOut: Double, startGain: Double, stopGain: Double,
                            startTrackStart: Double, stopTrackStart: Double ) {
@@ -48,7 +48,7 @@ object SonogramLayer {
          var timeOffset: Double = 0.0
          var stack = List.empty[ Instruction ]
 
-         def unroll( _imageID: Int, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double ) {
+         def unroll( _imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double ) {
             val dur = spanStop - spanStart
             require( dur > 0.0 )
             val in = Instruction(
@@ -59,7 +59,7 @@ object SonogramLayer {
                stopTrackIdx   = trackIdx,
                startSpanStart = spanStart,
                stopSpanStart  = spanStart,
-               startSpanStop  = spanStop,
+               startSpanStop  = spanStart, // spanStop,
                stopSpanStop   = spanStop,
                fadeIn         = 0.0,
                fadeOut        = 0.0,
@@ -118,7 +118,7 @@ object SonogramLayer {
                                  fadeIn: Double, fadeOut: Double, startGain: Double, stopGain: Double,
                                  startTrackStart: Double, stopTrackStart: Double )
 
-         def move( transitDur: Double, deltaGain: Double, deltaTrackIdx: Int, deltaTrackStart: Double,
+         def animate( transitDur: Double, deltaGain: Double, deltaTrackIdx: Int, deltaTrackStart: Double,
                    deltaSpanStart: Double, deltaSpanStop: Double ) {
             require( transitDur > 0.0 )
             stack match {
@@ -148,8 +148,12 @@ object SonogramLayer {
                      head.copy( fadeOut = transitDur, stopTime = head.stopTime + (transitDur - head.fadeOut) )
                   }
                   val startTime = in1.stopTime - transitDur
+                  val trackStart = in0.startTrackStart + spanStart - in0.stopSpanStart
                   val in2 = in0.copy( startTime = startTime, stopTime = startTime + transitDur,
-                                      stopSpanStart = spanStart, stopSpanStop = spanStop )
+                                      startSpanStart = spanStart, stopSpanStart = spanStart,
+                                      startSpanStop = spanStop, stopSpanStop = spanStop,
+                                      fadeIn = transitDur, fadeOut = 0.0,
+                                      startTrackStart = trackStart, stopTrackStart = trackStart )
                   stack = in2 :: in1 :: tail
                   timeOffset = in2.stopTime
 
@@ -161,17 +165,18 @@ object SonogramLayer {
 
          def build = {
             val res = stack.reverseIterator.toIndexedSeq
-            assert( res == res.sortBy( _.startTime ))
+//            assert( res == res.sortBy( _.startTime ))
             res
          }
       }
    }
 
    trait Recorder {
-      def unroll( imageID: Int, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double )
+      def unroll( imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double )
       def branch( body: => Unit )
       def crop( transitDur: Double, spanStart: Double, spanStop: Double )
-      def move( transitDur: Double, deltaGain: Double = 0.0, deltaTrackIdx: Int = 0, deltaTrackStart: Double = 0.0, deltaSpanStart: Double = 0.0, deltaSpanStop: Double = 0.0 )
+      def animate( transitDur: Double, deltaGain: Double = 0.0, deltaTrackIdx: Int = 0, deltaTrackStart: Double = 0.0,
+                deltaSpanStart: Double = 0.0, deltaSpanStop: Double = 0.0 )
       def dissolve( transitDur: Double )
       def advance( delta: Double )
 
@@ -183,13 +188,13 @@ object SonogramLayer {
 //      def thenSlice( fadeDur: Double, slices: (Double, Double) ) : Seq[ Slice ]
 //   }
 
-   private var imageMap = IntMap.empty[ PImage ]
+   private var imageMap = Map.empty[ String, PImage ]
 
-   def cachedImage( video: Video, id: Int ) : PImage = {
+   def cachedImage( video: Video, id: String ) : PImage = {
       imageMap.get( id ) match {
          case Some( img ) => img
          case _ =>
-            val img = video.loadImage( new File( Video.dataFolder, "Sono" + id + ".png" ).getPath )
+            val img = video.loadImage( new File( Video.dataFolder, "Sono_" + id + ".png" ).getPath )
             imageMap += id -> img
             img
       }
@@ -217,10 +222,12 @@ extends VideoLayer {
       instr.filter( in => in.startTime <= delta && in.stopTime > delta ).foreach { in =>
          val img     = cachedImage( video, in.imageID )
          val dur     = in.stopTime - in.startTime
-         val wStop   = math.max( 0.0, math.min( 1.0, (delta - in.startTime) / dur ))
+         val delta2  = delta - in.startTime
+         val wStop   = math.max( 0.0, math.min( 1.0, delta2 / dur ))
          val wStart  = 1.0 - wStop
-         val a1      = if( in.fadeIn > 0.0 ) (math.min( in.fadeIn, delta ) / in.fadeIn) else 1.0
-         val a2      = if( in.fadeOut > 0.0 ) (math.min( in.fadeOut, dur - delta ) / in.fadeOut) else 1.0
+         val a1      = if( in.fadeIn > 0.0 ) (math.min( in.fadeIn, delta2 ) / in.fadeIn) else 1.0
+         val a2      = if( in.fadeOut > 0.0 ) (math.min( in.fadeOut, dur - delta2 ) / in.fadeOut) else 1.0
+//if( a2 < 1.0 ) println( "JUHU " + a2 )
          val alpha   = a1 * a2
          if( alpha < 1.0 ) tint( 1.0f, alpha.toFloat )
 

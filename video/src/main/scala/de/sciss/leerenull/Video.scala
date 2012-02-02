@@ -33,6 +33,9 @@ import javax.swing.{BorderFactory, Box, JLabel, JProgressBar, WindowConstants, J
 import java.awt.{Color, Font, Dimension, BorderLayout, EventQueue}
 
 object Video extends App {
+   val writeOutput   = false
+   val renderStart   = 7.0
+
    EventQueue.invokeLater( new Runnable { def run() {
       val log = new LogPane
       log.init()
@@ -118,19 +121,54 @@ class Video extends PApplet {
 //   var raspadDuration = 0.0
    var framesWritten = 0
 
+   def dbToAmp( db: Double ) = 20 * math.log10( db )
+
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
       val title   = TitleLayer( this )
-      val raspad  = RaspadLayer( this, title.stopTime )
-      val sonoRec = SonogramLayer.Recorder()
+//      val raspad  = RaspadLayer( this, title.stopTime )
+      val sonoRec = {
+         val r = SonogramLayer.Recorder()
+         import r._
+         val cropDur = 0.5
+         val moveDur = 0.5
+         unroll( imageID = "raspad", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = 0.0, spanStart = 0.0, spanStop = 14.837 /* 15.011 */)
+         val loop1Stop = 14.837
+         val loop2Stop = 22.610
+//         branch {
+//            val spanStart = 5.622
+//            val spanStop  = 7.947
+//            val timeDelta = -spanStart
+//            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
+//            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+//            advance( loop2Stop - loop1Stop )
+//            dissolve( 1.0 )
+//         }
+//         branch {
+//            val spanStart = 7.947
+//            val spanStop  = 11.072
+//            val timeDelta = 19.691 - loop1Stop - spanStart
+//            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
+//            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+//            advance( loop2Stop - loop1Stop )
+//            dissolve( 1.0 )
+//         }
+//         val pedalSpanStart = 16.011
+//         advance( pedalSpanStart - loop1Stop )
+//         unroll( imageID = "pedale", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = pedalSpanStart - loop1Stop, spanStart = 0.0, spanStop = 6.262 )
+//         dissolve( 1.0 )
+         dissolve( 8.0 )
+         r
+      }
       // ...
-      val sono    = SonogramLayer( this, sonoRec.build, raspad.stopTime )
-      List( title, raspad, sono )
+      val sono    = SonogramLayer( this, sonoRec.build, title.stopTime )
+      List( title, /* raspad, */ sono )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1
 
-   var now           = 0.0
+   private var _now           = 0.0
+   def now = _now + renderStart
 
    override def setup() {
 //      noLoop()
@@ -143,13 +181,15 @@ class Video extends PApplet {
 
    override def draw() {
       background( 0 )
-      now = framesWritten.toDouble / videoFPS
+      _now = framesWritten.toDouble / videoFPS
 
       layers.foreach( _.draw() )
 
       if( framesWritten < totalNumFrames ) {
-         val outFile = new File( outputFolder, "frame" + (framesWritten + 10000).toString.substring( 1 ) + ".png" )
-         save( outFile.getPath )
+         if( writeOutput ) {
+            val outFile = new File( outputFolder, "frame" + (framesWritten + 10000).toString.substring( 1 ) + ".png" )
+            save( outFile.getPath )
+         }
 
          framesWritten += 1
          ggProgress.setValue( framesWritten )
