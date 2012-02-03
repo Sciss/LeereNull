@@ -1,0 +1,30 @@
+def defer( thunk: => Unit ) {
+   java.awt.EventQueue.invokeLater( new Runnable { def run() { thunk }})
+}
+
+def edit( e: de.sciss.kontur.edit.Editor, name: String = "Edit" )( fun: de.sciss.app.AbstractCompoundEdit => Unit ) {
+   val ce = e.editBegin( name )
+   var open = true
+   try {
+      fun( ce )
+      e.editEnd( ce )
+      open = false
+   } finally {
+      if( open ) e.editCancel( ce )
+   }
+}
+
+def sortTracks( t: Timeline = doc.timelines.toList.head ) {
+   val tracks   = t.tracks
+   val ts       = tracks.toList
+   tracks.editor.foreach { e =>
+      edit( e, "Arrange tracks" ) { ce =>
+         ts.foreach( e.editRemove( ce, _ ))
+         ts.sortBy( _.name.toUpperCase ).zipWithIndex.foreach {
+            case (t, i) => e.editInsert( ce, i, t )
+         }
+      }
+   }
+}
+
+defer( sortTracks() )
