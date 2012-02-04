@@ -1254,40 +1254,6 @@
       <diffusion idref="4"></diffusion>
       <trail>
   <stake>
-      <name>ScttM'90237ConLayer6White@18710016</name>
-      <span stop="11294158" start="11137550"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>18710016</offset>
-      <gain>11.459309</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ScttM'90237ConLayer6White@3885568</name>
-      <span stop="11379214" start="11288590"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>3885568</offset>
-      <gain>4.3465996</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
       <name>ScttM'90237ConLayer6White@13244416</name>
       <span stop="11851278" start="11764238"></span>
       <audioFile idref="1"></audioFile>
@@ -1373,6 +1339,57 @@
 </fade></fadeOut>
       
    </stake><stake>
+      <name>ScttM'tRsmpOpScttM'6kHlb6@8998912</name>
+      <span stop="13230000" start="13163952"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>8998912</offset>
+      <gain>0.59561235</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
+   </stake><stake>
+      <name>ScttM'90237ConLayer6White@3885568</name>
+      <span stop="11379214" start="11288590"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>3885568</offset>
+      <gain>4.3465996</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ScttM'90237ConLayer6White@18710016</name>
+      <span stop="11294158" start="11137550"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>18710016</offset>
+      <gain>11.459309</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
       <name>ScottMetalLayer6_120113_190237@46117376</name>
       <span stop="10775566" start="10723342"></span>
       <audioFile idref="2"></audioFile>
@@ -1406,23 +1423,6 @@
   
 </fade></fadeOut>
       
-   </stake><stake>
-      <name>ScttM'tRsmpOpScttM'6kHlb6@8998912</name>
-      <span stop="10130958" start="10064910"></span>
-      <audioFile idref="0"></audioFile>
-      <offset>8998912</offset>
-      <gain>0.59561235</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      <muted></muted>
    </stake><stake>
       <name>ScttM'tRsmpOpScttM'6kHlb6@8365056</name>
       <span stop="9888270" start="9838606"></span>
@@ -1839,45 +1839,11 @@
       <diffusion idref="3"></diffusion>
       <trail>
   <stake>
-      <name>ScttM'90237ConLayer6White@13632000</name>
-      <span stop="12709414" start="12600334"></span>
+      <name>ScttM'90237ConLayer6White@7730176</name>
+      <span stop="12608471" start="12512782"></span>
       <audioFile idref="1"></audioFile>
-      <offset>13632000</offset>
-      <gain>0.33272222</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>28955</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ScttM'90237ConLayer6White@13895680</name>
-      <span stop="12338702" start="12276750"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>13895680</offset>
-      <gain>0.34595627</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ScttM'90237ConLayer6White@29346816</name>
-      <span stop="10897847" start="10749454"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>29346816</offset>
-      <gain>0.8596857</gain>
+      <offset>7730176</offset>
+      <gain>2.1822927</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1907,11 +1873,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>ScttM'90237ConLayer6White@7730176</name>
-      <span stop="12608471" start="12512782"></span>
+      <name>ScttM'90237ConLayer6White@13895680</name>
+      <span stop="12338702" start="12276750"></span>
       <audioFile idref="1"></audioFile>
-      <offset>7730176</offset>
-      <gain>2.1822927</gain>
+      <offset>13895680</offset>
+      <gain>0.34595627</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1923,6 +1889,40 @@
   
 </fade></fadeOut>
       
+   </stake><stake>
+      <name>ScttM'90237ConLayer6White@13632000</name>
+      <span stop="12709414" start="12600334"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13632000</offset>
+      <gain>0.33272222</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>28955</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ScottMetalLayer6_120113_190237@35791360</name>
+      <span stop="9783564" start="9702000"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>35791360</offset>
+      <gain>0.18046495</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      <muted></muted>
    </stake><stake>
       <name>ScttM'tRsmpOpScttM'6kHlb6@1949184</name>
       <span stop="10044910" start="9972750"></span>
@@ -1941,11 +1941,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>ScottMetalLayer6_120113_190237@35791360</name>
-      <span stop="10719758" start="10604046"></span>
-      <audioFile idref="2"></audioFile>
-      <offset>35791360</offset>
-      <gain>0.18046495</gain>
+      <name>ScttM'90237ConLayer6White@29346816</name>
+      <span stop="10897847" start="10749454"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>29346816</offset>
+      <gain>0.8596857</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1956,7 +1956,7 @@
   
   
 </fade></fadeOut>
-      <muted></muted>
+      
    </stake><stake>
       <name>ScttM'90237ConLayer6White@24164864</name>
       <span stop="10245598" start="10145806"></span>
