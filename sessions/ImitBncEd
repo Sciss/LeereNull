@@ -32,12 +32,42 @@
   <numFrames>3528020</numFrames>
   <numChannels>4</numChannels>
   <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="6">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay1Ed_@1'30&quot;.aif</path>
+  <numFrames>14994085</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="7">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay2Ed_@1'30&quot;.aif</path>
+  <numFrames>17640100</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="8">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay3Ed_@1'30&quot;.aif</path>
+  <numFrames>17640100</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="9">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay4Ed_@1'30&quot;.aif</path>
+  <numFrames>17640100</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="10">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay5Ed_@2'10&quot;.aif</path>
+  <numFrames>12348070</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="11">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay6Ed_@3'40&quot;.aif</path>
+  <numFrames>11907068</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
 </audioFile>
 </coll>
 </audioFiles>
     <diffusions>
   <coll>
-  <diffusion class="matrix" id="6">
+  <diffusion class="matrix" id="12">
           <name>Quad</name>
           <numInputChannels>4</numInputChannels>
           <numOutputChannels>4</numOutputChannels>
@@ -47,39 +77,21 @@
 </diffusions>
     <timelines>
        <coll>
-  <timeline id="7">
+  <timeline id="13">
    <name>Timeline</name>
    <span stop="26460000" start="0"></span>
    <rate>44100.0</rate>
-   <tracks id="8">
+   <tracks id="14">
       <coll>
-  <audioTrack id="9">
+  <audioTrack id="15">
       <name>Imit 1</name>
-      <diffusion idref="6"></diffusion>
+      <diffusion idref="12"></diffusion>
       <trail>
   <stake>
       <name>UeberLay1Ed_@0'10&quot;.aif</name>
-      <span stop="15876087" start="2798520"></span>
+      <span stop="1846571" start="441000"></span>
       <audioFile idref="0"></audioFile>
-      <offset>2357520</offset>
-      <gain>1.0</gain>
-      
-      
-      
-   </stake><stake>
-      <name>UeberLay1Ed_@0'10&quot;.aif</name>
-      <span stop="2798520" start="2385082"></span>
-      <audioFile idref="0"></audioFile>
-      <offset>1944082</offset>
-      <gain>1.0</gain>
-      
-      
-      <muted></muted>
-   </stake><stake>
-      <name>UeberLay1Ed_@0'10&quot;.aif</name>
-      <span stop="2385082" start="2131461"></span>
-      <audioFile idref="0"></audioFile>
-      <offset>1690461</offset>
+      <offset>0</offset>
       <gain>1.0</gain>
       
       
@@ -95,37 +107,46 @@
       <muted></muted>
    </stake><stake>
       <name>UeberLay1Ed_@0'10&quot;.aif</name>
-      <span stop="1846571" start="441000"></span>
+      <span stop="2385082" start="2131461"></span>
       <audioFile idref="0"></audioFile>
-      <offset>0</offset>
+      <offset>1690461</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="2798520" start="2385082"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>1944082</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="15876087" start="2798520"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>2357520</offset>
       <gain>1.0</gain>
       
       
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="10">
+      </audioTrack><audioTrack id="16">
       <name>Imit 2</name>
-      <diffusion idref="6"></diffusion>
+      <diffusion idref="12"></diffusion>
       <trail>
   <stake>
       <name>UeberLay2Ed_@0'10&quot;.aif</name>
-      <span stop="1712812" start="1276792"></span>
+      <span stop="1019696" start="441000"></span>
       <audioFile idref="1"></audioFile>
-      <offset>835792</offset>
+      <offset>0</offset>
       <gain>1.0</gain>
       
       
       <muted></muted>
-   </stake><stake>
-      <name>UeberLay2Ed_@0'10&quot;.aif</name>
-      <span stop="10584058" start="1712812"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>1271812</offset>
-      <gain>1.0</gain>
-      
-      
-      
    </stake><stake>
       <name>UeberLay2Ed_@0'10&quot;.aif</name>
       <span stop="1276792" start="1019696"></span>
@@ -137,18 +158,27 @@
       
    </stake><stake>
       <name>UeberLay2Ed_@0'10&quot;.aif</name>
-      <span stop="1019696" start="441000"></span>
+      <span stop="10584058" start="1712812"></span>
       <audioFile idref="1"></audioFile>
-      <offset>0</offset>
+      <offset>1271812</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay2Ed_@0'10&quot;.aif</name>
+      <span stop="1712812" start="1276792"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>835792</offset>
       <gain>1.0</gain>
       
       
       <muted></muted>
    </stake>
 </trail>
-      </audioTrack><audioTrack id="11">
+      </audioTrack><audioTrack id="17">
       <name>Imit 3</name>
-      <diffusion idref="6"></diffusion>
+      <diffusion idref="12"></diffusion>
       <trail>
   <stake>
       <name>UeberLay3Ed_@0'50&quot;.aif</name>
@@ -161,20 +191,11 @@
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="12">
+      </audioTrack><audioTrack id="18">
       <name>Imit 4</name>
-      <diffusion idref="6"></diffusion>
+      <diffusion idref="12"></diffusion>
       <trail>
   <stake>
-      <name>UeberLay4Ed_@0'50&quot;.aif</name>
-      <span stop="15876078" start="3340505"></span>
-      <audioFile idref="3"></audioFile>
-      <offset>1135505</offset>
-      <gain>1.0</gain>
-      
-      
-      
-   </stake><stake>
       <name>UeberLay4Ed_@0'50&quot;.aif</name>
       <span stop="3340505" start="2205000"></span>
       <audioFile idref="3"></audioFile>
@@ -183,22 +204,22 @@
       
       
       <muted></muted>
+   </stake><stake>
+      <name>UeberLay4Ed_@0'50&quot;.aif</name>
+      <span stop="15876078" start="3340505"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>1135505</offset>
+      <gain>1.0</gain>
+      
+      
+      
    </stake>
 </trail>
-      </audioTrack><audioTrack id="13">
+      </audioTrack><audioTrack id="19">
       <name>Imit 5</name>
-      <diffusion idref="6"></diffusion>
+      <diffusion idref="12"></diffusion>
       <trail>
   <stake>
-      <name>UeberLay5Ed_@0'50&quot;.aif</name>
-      <span stop="2895799" start="2205000"></span>
-      <audioFile idref="4"></audioFile>
-      <offset>0</offset>
-      <gain>0.5011872</gain>
-      
-      
-      
-   </stake><stake>
       <name>UeberLay5Ed_@0'50&quot;.aif</name>
       <span stop="14994073" start="2895799"></span>
       <audioFile idref="4"></audioFile>
@@ -207,16 +228,115 @@
       
       
       
+   </stake><stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="2895799" start="2205000"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>0</offset>
+      <gain>0.5011872</gain>
+      
+      
+      
    </stake>
 </trail>
-      </audioTrack><audioTrack id="14">
+      </audioTrack><audioTrack id="20">
       <name>Imit 6</name>
-      <diffusion idref="6"></diffusion>
+      <diffusion idref="12"></diffusion>
       <trail>
   <stake>
       <name>UeberLay6Ed_@3'40&quot;.aif</name>
       <span stop="13230020" start="9702000"></span>
       <audioFile idref="5"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="21">
+      <name>N-Imit 1</name>
+      <diffusion idref="12"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay1Ed_@1'30&quot;.aif</name>
+      <span stop="18963085" start="3969000"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="22">
+      <name>N-Imit 2</name>
+      <diffusion idref="12"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="21609100" start="3969000"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="23">
+      <name>N-Imit 3</name>
+      <diffusion idref="12"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay3Ed_@1'30&quot;.aif</name>
+      <span stop="21609100" start="3969000"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="24">
+      <name>N-Imit 4</name>
+      <diffusion idref="12"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="21609100" start="3969000"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="25">
+      <name>N-Imit 5</name>
+      <diffusion idref="12"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay5Ed_@2'10&quot;.aif</name>
+      <span stop="18081070" start="5733000"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="26">
+      <name>N-Imit 6</name>
+      <diffusion idref="12"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay6Ed_@3'40&quot;.aif</name>
+      <span stop="21609068" start="9702000"></span>
+      <audioFile idref="11"></audioFile>
       <offset>0</offset>
       <gain>1.0</gain>
       
