@@ -14,4 +14,12 @@
 
 
 inaudible:
-'I2—Ch (2)' at frame  1735877 = 00:00:39:362'I2—Ch (4)' at frame  1866446 = 00:00:42:323'I2—Ch (1)' at frame  2902977 = 00:01:05:827'I2—Ch (4)' at frame  5872711 = 00:02:13:168'E1—Ch (4)' at frame 11881447 = 00:04:29:420
+'I2—Ch (2)' at frame  1735877 = 00:00:39:362'I2—Ch (4)' at frame  1866446 = 00:00:42:323'I2—Ch (1)' at frame  2902977 = 00:01:05:827'I2—Ch (4)' at frame  5872711 = 00:02:13:168'E1—Ch (4)' at frame 11881447 = 00:04:29:420
+
+::::::::::::::::::::::::::
+
+this is a problem with scsynth in NRT
+
+'chokes' and repeates 4389 samples at the end of the region
+
+adding 100 ms for 'endsAfter' seems to fix the problem...
