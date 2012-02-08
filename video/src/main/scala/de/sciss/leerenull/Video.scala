@@ -184,6 +184,7 @@ class Video extends PApplet {
 //
 //      val raspad  = RaspadLayer( this, title2.stopTime + 1.0 )
 
+//      val sonoPageFlips = IndexedSeq( 0, 611033, 955418, 1238531, 1567022 ) :+ 2160900
       val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 ) :+ 2116800
       val sonoRegions   = dataFolder.listFiles( new FileFilter {
          def accept( f: File ) = {
