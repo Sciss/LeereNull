@@ -26,16 +26,19 @@
 package de.sciss.leerenull
 
 import processing.core
-import core.{PConstants, PApplet}
+import core.PApplet
 import de.sciss.gui.j.LCDPanel
 import javax.swing.{BorderFactory, Box, JLabel, JProgressBar, WindowConstants, JFrame}
-import java.awt.{Color, Font, Dimension, BorderLayout, EventQueue}
+import java.awt.{Font, Dimension, BorderLayout, EventQueue}
 import java.io.{FileFilter, PrintStream, File}
 
 object Video extends App {
-   val writeOutput   = false
-   val renderStart   = 0.0
-   val realtime      = true
+   sealed trait Mode { def start: Double }
+   final case class Write( start: Double = 0.0 ) extends Mode
+   final case class Realtime( start: Double = 0.0 ) extends Mode
+   case object Offline extends Mode { val start = 0.0 }
+
+   val mode: Mode = Offline
 
    EventQueue.invokeLater( new Runnable { def run() {
       val log = new LogPane
@@ -73,7 +76,10 @@ class Video extends PApplet {
       res.getRootPane.putClientProperty( "apple.awt.brushMetalLook", java.lang.Boolean.TRUE )
       res
    }
-   private val ggProgress = new JProgressBar( 0, totalNumFrames )
+   private val ggProgress = mode match {
+      case Offline   => None
+      case _         => Some( new JProgressBar( 0, totalNumFrames ))
+   }
    private val pSecs      = new LCDPanel
    private val ggSecs     = {
       val res = new JLabel( "00:00" )
@@ -90,7 +96,7 @@ class Video extends PApplet {
       res.setBorder( BorderFactory.createEmptyBorder( 4, 4, 4, 4 ))
 // has no effect...
 //      res.setBackground( Color.black )
-      res.add( ggProgress )
+      ggProgress.foreach( res.add )
       res.add( Box.createHorizontalStrut( 8 ))
       res.add( pSecs )
       res.add( Box.createHorizontalGlue() )
@@ -126,27 +132,27 @@ class Video extends PApplet {
 
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
-      lazy val titleDur = 7.0
-      val title1  = TitleLayer( this,
-         startTime = 0.0,
-         title = "Leere Null 2",
-         fontSize = 72,
-         fadeIn = 2.0,
-         fadeOut = 2.5,
-         duration = titleDur,
-         offY = 120
-      )
-      val title2  = TitleLayer( this,
-         startTime = title1.startTime + 2.5,
-         title = "(Empties)",
-         fontSize = 54,
-         fadeIn = 2.0,
-         fadeOut = 2.5,
-         duration = titleDur - 2.5,
-         offY = 180
-      )
-
-      val raspad  = RaspadLayer( this, title2.stopTime + 1.0 )
+//      lazy val titleDur = 7.0
+//      val title1  = TitleLayer( this,
+//         startTime = 0.0,
+//         title = "Leere Null 2",
+//         fontSize = 72,
+//         fadeIn = 2.0,
+//         fadeOut = 2.5,
+//         duration = titleDur,
+//         offY = 120
+//      )
+//      val title2  = TitleLayer( this,
+//         startTime = title1.startTime + 2.5,
+//         title = "(Empties)",
+//         fontSize = 54,
+//         fadeIn = 2.0,
+//         fadeOut = 2.5,
+//         duration = titleDur - 2.5,
+//         offY = 180
+//      )
+//
+//      val raspad  = RaspadLayer( this, title2.stopTime + 1.0 )
 
       val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 ) :+ 2116800
       val sonoRegions   = dataFolder.listFiles( new FileFilter {
@@ -189,7 +195,7 @@ class Video extends PApplet {
       val sonoMoveDur = 0.5
       val sonoCombiDir = sonoCropDur + sonoMoveDur
 //      val sonoAppDur  = 1.0
-      val sonoDissDur = 1.0
+//      val sonoDissDur = 1.0
 
       val sonoRec = {
          val rec = SonogramLayer.Recorder()
@@ -290,12 +296,15 @@ class Video extends PApplet {
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1
 
    private var _now           = 0.0
-   def now = _now + renderStart
+   def now = _now + mode.start
 
    override def setup() {
-//      noLoop()
-//      frameRate( 1 )
-      frameRate( if( realtime ) videoFPS else 100 )
+      mode match {
+         case Offline         => noLoop()
+         case Realtime( _ )   => frameRate( videoFPS )
+         case Write( _ )      => frameRate( 1000 )
+      }
+
       size( videoWidth, videoHeight )
       background( 0 )
       colorMode( RGB, 1.0f )
@@ -308,13 +317,15 @@ class Video extends PApplet {
       layers.foreach( _.draw() )
 
       if( framesWritten < totalNumFrames ) {
-         if( writeOutput ) {
-            val outFile = new File( outputFolder, "frame" + (framesWritten + 10000).toString.substring( 1 ) + ".png" )
-            save( outFile.getPath )
+         mode match {
+            case Write( _ ) =>
+               val outFile = new File( outputFolder, "frame" + (framesWritten + 10000).toString.substring( 1 ) + ".png" )
+               save( outFile.getPath )
+            case _ =>
          }
 
          framesWritten += 1
-         ggProgress.setValue( framesWritten )
+         ggProgress.foreach( _.setValue( framesWritten ))
          val secs = now.toInt
          ggSecs.setText( (100 + (secs / 60)).toString.substring( 1 ) + ":" + ((secs % 60) + 100).toString.substring( 1 ))
 
