@@ -42,10 +42,13 @@ object SonogramLayer {
          val m = imageID.indexOf( "_trk" ) + 4
          val p = imageID.indexOf( '_', m )
          val trackIdx = imageID.substring( m, p ).toInt - 1
-         new Region( imageID, page, trackIdx, spanStart, spanStop )
+         val q0 = imageID.indexOf( "_foff" )
+         val q = q0 + 5
+         val foff = if( q0 >= 0 ) imageID.substring( q, imageID.indexOf( '_', q )).toLong else 0L
+         new Region( imageID, page, trackIdx, spanStart, spanStop, foff )
       }
    }
-   case class Region( imageID: String, page: Int, trackIdx: Int, spanStart: Long, spanStop: Long ) {
+   case class Region( imageID: String, page: Int, trackIdx: Int, spanStart: Long, spanStop: Long, fileOffset: Long ) {
       var pred = Option.empty[ Region ]
       var succ = IndexedSeq.empty[ Region ]
 //      var trackIdx = if( page == 0 ) 1 else 0  // XXX

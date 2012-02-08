@@ -250,19 +250,21 @@ class Video extends PApplet {
                      val tStart = sonoPageFlips( r.page ) / sr
                      val tDur = tStop - tStart
                      advance( tStart )
-                     if( pred.page == 0 ) { // XXX hardcoded
-                        val i = r.imageID.indexOf( "_foff" ) + 5
-                        val j = r.imageID.indexOf( '_', i )
-                        val foff = r.imageID.substring( i, j ).toLong
-                        val trkStartP = foff / sr
-                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStartP,
+//                     if( pred.page == 0 ) { // XXX hardcoded
+//                        val i = r.imageID.indexOf( "_foff" ) + 5
+//                        val j = r.imageID.indexOf( '_', i )
+//                        val foff = r.imageID.substring( i, j ).toLong
+//                        val trkStartP = foff / sr
+                        val predTrkStart = pred.spanStart - sonoPageFlips( pred.page )
+                        val cropTrackStart = (predTrkStart + r.fileOffset - pred.fileOffset) / sr
+                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = cropTrackStart,
                                 spanStart = spStart, spanStop = spStop, fadeIn = sonoCropDur )
                         animate( transitDur = sonoMoveDur, deltaTrackIdx = r.trackIdx - pred.trackIdx,
-                           deltaTrackStart = trkStart - trkStartP )
-                     } else {
-                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStart,
-                                spanStart = spStart, spanStop = spStop, fadeIn = sonoCombiDir )
-                     }
+                           deltaTrackStart = trkStart - cropTrackStart )
+//                     } else {
+//                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStart,
+//                                spanStart = spStart, spanStop = spStop, fadeIn = sonoCombiDir )
+//                     }
                      val pd = tDur - sonoCombiDir
                      if( pd > 0.0 ) prolong( pd )
 
