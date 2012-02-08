@@ -195,28 +195,33 @@ class Video extends PApplet {
       var idMap = Map.empty[ Int, SonogramLayer.Region ]
       sonoRegions.foreach { r =>
          val n = r.imageID
-         val i = n.indexOf( '_' ) + 1
-         val j = n.indexOf( '_', i )
-         val id = n.substring( i, j )
-         if( id.startsWith( "id" ) && id.charAt( 2 ) != '<' ) {
-            val id1 = id.substring( 2 )
-            val k = id1.indexOf( '<' )
-            val idi = (if( k >= 0 ) id1.substring( 0, k ) else id1).toInt
-            idMap += idi -> r
+         val i0 = n.indexOf( "_id" )
+         if( i0 >= 3 ) {
+            val i = i0 + 3
+            val j = n.indexOf( '_', i )
+            val id = n.substring( i, j )
+            val k = id.indexOf( '<' )
+            if( k != 0 ) {
+               val idi = (if( k >= 0 ) id.substring( 0, k ) else id).toInt
+               idMap += idi -> r
+            }
          }
       }
       sonoRegions.foreach { r =>
          val n = r.imageID
-         val i = n.indexOf( '_' ) + 1
-         val j = n.indexOf( '_', i )
-         val id = n.substring( i, j )
-         val k = id.indexOf( '<' )
-         if( id.startsWith( "id" ) && k >= 0 ) {
-//            val idi = id.substring( 0, k ).toInt
-            val idFrom = id.substring( k + 1 ).toInt
-            val from = idMap( idFrom )
-            from.succ :+= r
-            r.pred = Some( from )
+         val i0 = n.indexOf( "_id" )
+         if( i0 >= 0 ) {
+            val i = i0 + 3
+            val j = n.indexOf( '_', i )
+            val id = n.substring( i, j )
+            val k = id.indexOf( '<' )
+            if( k >= 0 ) {
+   //            val idi = id.substring( 0, k ).toInt
+               val idFrom = id.substring( k + 1 ).toInt
+               val from = idMap( idFrom )
+               from.succ :+= r
+               r.pred = Some( from )
+            }
          }
       }
 
