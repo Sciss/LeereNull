@@ -239,14 +239,17 @@ class Video extends PApplet {
             val trkStart   = (r.spanStart - sonoPageFlips( r.page )) / sr
             val spStart    = 0.0
             val spStop     = (r.spanStop - r.spanStart) / sr
-            val tStart     = r.spanStart / sr
+//            val tStart     = r.spanStart / sr
 //            val tDur       = (sonoPageFlips( r.page + 1 ) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCombiDir)) - tStart
-            val tDur       = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCombiDir)) - tStart
+//            val tDur       = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCombiDir)) - tStart
+            val tStop      = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCropDur))
 
             branch {
-               advance( tStart )
                r.pred match {
                   case Some( pred ) =>
+                     val tStart = sonoPageFlips( r.page ) / sr
+                     val tDur = tStop - tStart
+                     advance( tStart )
                      if( pred.page == 0 ) { // XXX hardcoded
                         val i = r.imageID.indexOf( "_foff" ) + 5
                         val j = r.imageID.indexOf( '_', i )
@@ -264,10 +267,14 @@ class Video extends PApplet {
                      if( pd > 0.0 ) prolong( pd )
 
                   case _ =>
+                     val tStart = r.spanStart / sr
+//                     val tDur = tStop - tStart
+                     advance( tStart )
                      unroll( imageID = r.imageID, gain = 1, trackIdx = r.trackIdx, trackStart = trkStart,
                              spanStart = spStart, spanStop = spStop )
-                     if( tDur > 0.0 ) prolong( tDur )
-
+                     val pd = (tStop - tStart) - (spStop - spStart)
+//                     if( tDur > 0.0 ) prolong( tDur )
+                     if( pd > 0.0 ) prolong( pd )
                }
                dissolve( if( r.succ.isEmpty ) sonoCombiDir else sonoCropDur )
             }

@@ -73,16 +73,18 @@ object SonogramLayer {
          var stack = List.empty[ Instruction ]
 
          def appear( _imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double, _fadeIn: Double ) {
-            make1( _imageID, gain, trackIdx, trackStart, spanStart, spanStop, spanStop, _fadeIn )
+            val dur = _fadeIn
+            make1( _imageID, gain, trackIdx, trackStart, spanStart, spanStop, spanStop, _fadeIn, dur )
          }
 
          def unroll( _imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double ) {
-            make1( _imageID, gain, trackIdx, trackStart, spanStart, spanStart, spanStop, 0.0 )
+            val dur = spanStop - spanStart
+            make1( _imageID, gain, trackIdx, trackStart, spanStart, spanStart, spanStop, 0.0, dur )
          }
 
          private def make1( _imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double,
-                            _startSpanStop: Double, _stopSpanStop: Double, _fadeIn: Double ) {
-            val dur = _stopSpanStop - spanStart
+                            _startSpanStop: Double, _stopSpanStop: Double, _fadeIn: Double, dur: Double ) {
+//            val dur = _stopSpanStop - spanStart
             require( dur > 0.0 )
             val in = Instruction(
                imageID        = _imageID,
