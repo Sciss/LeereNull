@@ -45,7 +45,7 @@ object SonogramLayer {
    case class Region( imageID: String, page: Int, spanStart: Long, spanStop: Long ) {
       var pred = Option.empty[ Region ]
       var succ = IndexedSeq.empty[ Region ]
-      var trackIdx = 1  // XXX
+      var trackIdx = if( page == 0 ) 1 else 0  // XXX
 
 //      def isSlice = pred.isDefined
    }

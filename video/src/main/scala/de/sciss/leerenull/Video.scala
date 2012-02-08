@@ -33,9 +33,9 @@ import java.awt.{Color, Font, Dimension, BorderLayout, EventQueue}
 import java.io.{FileFilter, PrintStream, File}
 
 object Video extends App {
-   val writeOutput   = true
+   val writeOutput   = false
    val renderStart   = 0.0
-   val realtime      = false
+   val realtime      = true
 
    EventQueue.invokeLater( new Runnable { def run() {
       val log = new LogPane
@@ -148,7 +148,7 @@ class Video extends PApplet {
 
       val raspad  = RaspadLayer( this, title2.stopTime + 1.0 )
 
-      val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 )
+      val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 ) :+ 2116800
       val sonoRegions   = dataFolder.listFiles( new FileFilter {
          def accept( f: File ) = {
             val n = f.getName
@@ -163,8 +163,9 @@ class Video extends PApplet {
          val j = n.indexOf( '_', i )
          val id = n.substring( i, j )
          if( id.startsWith( "id" ) && id.charAt( 2 ) != '<' ) {
-            val k = id.indexOf( '<' )
-            val idi = (if( k >= 0 ) id.substring( 0, k ) else id).toInt
+            val id1 = id.substring( 2 )
+            val k = id1.indexOf( '<' )
+            val idi = (if( k >= 0 ) id1.substring( 0, k ) else id1).toInt
             idMap += idi -> r
          }
       }
@@ -186,6 +187,7 @@ class Video extends PApplet {
       val sr = 44100.0
       val sonoCropDur = 0.5
       val sonoMoveDur = 0.5
+      val sonoCombiDir = sonoCropDur + sonoMoveDur
 //      val sonoAppDur  = 1.0
       val sonoDissDur = 1.0
 
@@ -197,72 +199,92 @@ class Video extends PApplet {
             val spStart    = 0.0
             val spStop     = (r.spanStop - r.spanStart) / sr
             val tStart     = r.spanStart / sr
+//            val tDur       = (sonoPageFlips( r.page + 1 ) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCombiDir)) - tStart
+            val tDur       = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCombiDir)) - tStart
 
             branch {
                advance( tStart )
                r.pred match {
                   case Some( pred ) =>
-                     appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStart,
-                             spanStart = spStart, spanStop = spStop, fadeIn = sonoCropDur )
+                     if( pred.page == 0 ) { // XXX hardcoded
+                        val i = r.imageID.indexOf( "_foff" ) + 5
+                        val j = r.imageID.indexOf( '_', i )
+                        val foff = r.imageID.substring( i, j ).toLong
+                        val trkStartP = foff / sr
+                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStartP,
+                                spanStart = spStart, spanStop = spStop, fadeIn = sonoCropDur )
+                        animate( transitDur = sonoMoveDur, deltaTrackIdx = r.trackIdx - pred.trackIdx,
+                           deltaTrackStart = trkStart - trkStartP )
+                     } else {
+                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStart,
+                                spanStart = spStart, spanStop = spStop, fadeIn = sonoCombiDir )
+                     }
+                     val pd = tDur - sonoCombiDir
+                     if( pd > 0.0 ) prolong( pd )
+
                   case _ =>
                      unroll( imageID = r.imageID, gain = 1, trackIdx = r.trackIdx, trackStart = trkStart,
                              spanStart = spStart, spanStop = spStop )
+                     if( tDur > 0.0 ) prolong( tDur )
+
                }
+               dissolve( if( r.succ.isEmpty ) sonoCombiDir else sonoCropDur )
             }
          }
          rec
       }
 
-      val sonoRecX = {
-         val r = SonogramLayer.Recorder()
-         import r._
-         unroll( imageID = "raspad", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = 0.0, spanStart = 0.0, spanStop = 14.837 /* 15.011 */)
-         val loop1Stop = 14.837
-         val loop2Stop = 22.610
-         branch {
-            val spanStart = 5.622
-            val spanStop  = 7.947
-            val timeDelta = -spanStart
-            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
-            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
-            prolong( loop2Stop - loop1Stop )
-            dissolve( sonoDissDur )
-         }
-         branch {
-            val spanStart = 7.947
-            val spanStop  = 11.072
-            val timeDelta = 19.691 - loop1Stop - spanStart
-            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
-            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
-            prolong( loop2Stop - loop1Stop )
-            dissolve( sonoDissDur )
-         }
-         val pedalSpanStart = 16.011
-         advance( pedalSpanStart - loop1Stop )
-         unroll( imageID = "pedale", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = pedalSpanStart - loop1Stop, spanStart = 0.0, spanStop = 6.262 )
-prolong( 4.0 )
-         dissolve( 1.0 )
-
-//         prolong( 4.0 )
+//      val sonoRecX = {
+//         val r = SonogramLayer.Recorder()
+//         import r._
+//         unroll( imageID = "raspad", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = 0.0, spanStart = 0.0, spanStop = 14.837 /* 15.011 */)
+//         val loop1Stop = 14.837
+//         val loop2Stop = 22.610
 //         branch {
-//            crop( 4.0, spanStart = 0.0, spanStop = 4.0 )
-//            prolong( 4.0 )
-//            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = 0.0 )
-//            dissolve( 4.0 )
+//            val spanStart = 5.622
+//            val spanStop  = 7.947
+//            val timeDelta = -spanStart
+//            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
+//            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+//            prolong( loop2Stop - loop1Stop )
+//            dissolve( sonoDissDur )
 //         }
 //         branch {
-//            crop( 4.0, spanStart = 8.0, spanStop = 15.0 )
-//            prolong( 4.0 )
-//            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = -4.0 )
-//            dissolve( 4.0 )
+//            val spanStart = 7.947
+//            val spanStop  = 11.072
+//            val timeDelta = 19.691 - loop1Stop - spanStart
+//            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
+//            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+//            prolong( loop2Stop - loop1Stop )
+//            dissolve( sonoDissDur )
 //         }
-//         advance( 8.0 )
-//         dissolve( 8.0 )
-         r
-      }
+//         val pedalSpanStart = 16.011
+//         advance( pedalSpanStart - loop1Stop )
+//         unroll( imageID = "pedale", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = pedalSpanStart - loop1Stop, spanStart = 0.0, spanStop = 6.262 )
+//prolong( 4.0 )
+//         dissolve( 1.0 )
+//
+////         prolong( 4.0 )
+////         branch {
+////            crop( 4.0, spanStart = 0.0, spanStop = 4.0 )
+////            prolong( 4.0 )
+////            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = 0.0 )
+////            dissolve( 4.0 )
+////         }
+////         branch {
+////            crop( 4.0, spanStart = 8.0, spanStop = 15.0 )
+////            prolong( 4.0 )
+////            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = -4.0 )
+////            dissolve( 4.0 )
+////         }
+////         advance( 8.0 )
+////         dissolve( 8.0 )
+//         r
+//      }
       // ...
-      val sono    = SonogramLayer( this, sonoRec.build, raspad.stopTime + 1.0 )
-      List( title1, title2, raspad, sono )
+
+      val sono    = SonogramLayer( this, sonoRec.build, 0.0 ) // raspad.stopTime + 1.0 )
+      List( /* title1, title2, raspad, */ sono )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1
