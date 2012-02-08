@@ -1,7 +1,6 @@
 package de.sciss.leerenull
 
 import java.io.File
-import collection.immutable.IntMap
 import collection.immutable.{IndexedSeq => IIdxSeq}
 import processing.core.{PConstants, PImage}
 

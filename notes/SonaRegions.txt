@@ -20,5 +20,66 @@ val shift = r2start - r1stop + sr // 36388
 
 ::::::::::::::::::
 
+pixelsPerSecond  = 50
+with margin 100 px --> 16.48 s
+
 Raspad
 full at 0'00"
+
+iter 1 at 0'15.662"
+
+longest span thereafter 37.304" ... 45.892", e.g. c. 9 s
+giving a window margin tolerance of max 7 seconds to each side
+(or more if reducing the margin of 100 px)
+
+till 45.738":
+
+sliced objects:
+  Raspad_30'58_den
+  _SaitenMitPaperT
+  _FlageoMitKnopfT
+  _LeereTastenVorneT
+
+singular matched objects
+  _Pedale
+  _FlageoMitSchraubenT_12397056_12397056_Rsmp304
+  LangeNachtKling-L
+  
+synthetic objects
+  11081'97132Con117262_felix
+  Gesture1ConGesture2
+  Gesture2ConGesture3bWhite
+  Gesture2ConGesture3
+  Gesture3BackConGesture4bWhite
+
+::::::::::::
+
+raspad cut 1 is extended to the left! at 34.533" it has a file offset of 3.214",
+compared to a file offset of 05.622" for the first appearance (at 15.662")
+
+; however it occupies a space which was previously used for the cut 2
+; that is, Session9 is a more visible version of what the original process was
+
+it seems that from Session9, quasi one iteration 34.355" ... 41.341" has been skipped...
+
+max stops:
+Gesture1ConGesture2 : 26.546" with 1st raspad at 15.662" = 11 secs
+
+::::::::::::
+
+if we title 'part 2', we also should add another 'part 1' title, which is nice, because it can have a subtitle as well.
+
+Part 1
+ expand / contract
+forward / backward
+
+(or merely expand -> contract, where contract is horizonally mirrored)
+
+- the 'part 1' can sit between the video and the first sonogram, better freeing the mind from being too stuck with the video image.
+
+Part 2
+ imitation -> ecology
+
+// should we have nouns for part 1, too (expansion -> contraction) ? not necessarily...
+// ; the difference in a way reflects the aesthetic diffence between the more formalist
+// 'programme' (time!) and the more reclined observation (space!)
