@@ -242,12 +242,21 @@ class Video extends PApplet {
 //            val tStart     = r.spanStart / sr
 //            val tDur       = (sonoPageFlips( r.page + 1 ) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCombiDir)) - tStart
 //            val tDur       = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCombiDir)) - tStart
-            val tStop      = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCropDur))
+
+//            val tStop      = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCropDur))
+
+            def calcStop( reg: SonogramLayer.Region ) : Double = {
+               math.max( reg.spanStop / sr, sonoPageFlips( reg.page + 1 ) / sr - (if( reg.succ.isEmpty ) 0.0 else sonoCombiDir) )
+            }
+
+            val tStop      = calcStop( r )
 
             branch {
                r.pred match {
                   case Some( pred ) =>
-                     val tStart = sonoPageFlips( r.page ) / sr
+//                     val predTStop  = (math.max( pred.spanStop, sonoPageFlips( pred.page + 1 )) / sr - sonoCropDur)
+                     val predTStop = calcStop( pred )
+                     val tStart = predTStop // sonoPageFlips( r.page ) / sr
                      val tDur = tStop - tStart
                      advance( tStart )
 //                     if( pred.page == 0 ) { // XXX hardcoded
