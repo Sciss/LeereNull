@@ -36,7 +36,7 @@ till 45.738":
 
 sliced objects:
   Raspad_30'58_den
-  _SaitenMitPaperT
+  _SaitenMitPaperT	// no, they are two independent findings!
   _FlageoMitKnopfT
   _LeereTastenVorneT
 
@@ -87,31 +87,49 @@ Part 2
 ::::::::::::
 
 ::: i1 @ 0 :::
-i1_Raspad_30'58_0_662029.png
-::: i1 @ ? :::
-i2_Gesture1ConGesture2_890606_1170681.png
-i2_Raspad_30'58_690705_793208.png
-i2_Raspad_30'58_904800_1042642.png
-i2__Pedale_p_743008_1018689.png
-::: i3 @ ? :::
-i3_11081'97132Con117262_felix_1032693_1159265.png
-i3_Gesture2ConGesture3_1214952_1443337.png
-i3_Gesture2ConGesture3bWhite_1179628_1408013.png
-i3_Raspad_30'58_1033520_1151364.png
-i3_Raspad_30'58_1198347_1321542.png
-i3__SaitenMitPapierT_p_1101579_1325621.png
-::: i4 @ ? :::
-i4_Raspad_30'58_1311923_1422835.png
-i4__FlageoMitKnopfT_punch_1381098_1567022.png
-i4__LeereTastenVorneT_1429207_1589531.png
-::: i5 @ ? :::
-i5_Gesture3BackConGesture4bWhite_1577835_1733997.png
-i5_LangeNachtKling-L_punch_1745236_1852824.png
-i5_Raspad_30'58_1522922_1751326.png
-i5_Raspad_30'58_1830993_1962615.png
-i5__FlageoMitKnopfT_punch_1709589_1829144.png
-i5__FlageoMitKnopfT_punch_1808724_1875093.png
-i5__FlgMtSchrbnT_123970_punch_1714225_1824618.png
-i5__LeereTastenVorneT_1757698_1829144.png
-i5__LeereTastenVorneT_1808724_1897602.png
-i5__SaitenMitPapierT_punch_1868168_2059212.png
+(†1)	i1_Raspad_30'58_0_662029.png
+::: i2 @ 566933 :::
+(*1,†2)	i2_Raspad_30'58_690705_793208.png ; foff = 247970
+		skip frames: 247970 - 124198 = 123772
+		hence left track start = 690705 - 123772 = 566933
+	i2__Pedale_p_743008_1018689.png
+	i2_Gesture1ConGesture2_890606_1170681.png
+(*1,†3)	i2_Raspad_30'58_904800_1042642.png ; foff = 350473
+		hence track length = 1042642 - 566933 = 475709
+		   (or 11 s; covering roughly 50% of the width...)
+::: i3 @ 911318 :::
+	i3_11081'97132Con117262_felix_1032693_1159265.png
+	i3__SaitenMitPapierT_p_1101579_1325621.png
+(*2,†4)	i3_Raspad_30'58_1033520_1151364.png ; foff = 246400 (<<)
+		skip frames: 246400 - 124198 = 122202
+		hence left track start = 1033520 - 122202 = 911318
+	i3_Gesture2ConGesture3bWhite_1179628_1408013.png
+	i3_Gesture2ConGesture3_1214952_1443337.png
+		hence track length = 1443337 - 911318 = 532019
+		   (or 12 s)
+(*3,†5)	i3_Raspad_30'58_1198347_1321542.png ; foff = 362868 (>>)
+::: i4 @ 1194431 :::
+(*4,†6)	i4_Raspad_30'58_1311923_1422835.png ; foff = 241690 (<<)
+		skip frames: 241690 - 124198 = 117492
+		hence left track start = 1311923 - 117492 = 1194431
+(†7)	i4__FlageoMitKnopfT_punch_1381098_1567022.png
+(†8)	i4__LeereTastenVorneT_1429207_1589531.png
+		hence track length = 1589531 - 1194431 = 395100
+		   (or 9 s)
+::: i5 @ 1522922 :::
+(fade out #5!)
+(*6)	i5_Raspad_30'58_1522922_1751326.png ; foff = 246400 - 122202 = 124198 (<<)
+		no skip frames
+		hence left track start = 1522922
+	i5_Gesture3BackConGesture4bWhite_1577835_1733997.png
+(*7)	i5__FlageoMitKnopfT_punch_1709589_1829144.png
+	i5__FlgMtSchrbnT_123970_punch_1714225_1824618.png
+	i5_LangeNachtKling-L_punch_1745236_1852824.png
+(*8)	i5__LeereTastenVorneT_1757698_1829144.png
+(*7)	i5__FlageoMitKnopfT_punch_1808724_1875093.png
+(*8)	i5__LeereTastenVorneT_1808724_1897602.png
+(fade in #5, then:)
+(*5)	i5_Raspad_30'58_1830993_1962615.png
+	i5__SaitenMitPapierT_punch_1868168_2059212.png
+		hence track length = 2059212 - 1522922 = 536290
+		   (or 12 s)
