@@ -1,7 +1,6 @@
 package de.sciss.leerenull
 
 import java.io.File
-import de.sciss.kontur.session.AudioRegion
 import de.sciss.strugatzki.aux.{Processor, ProcessorCompanion}
 import actors.Actor
 import de.sciss.synth.io.{SampleFormat, AudioFileType, AudioFileSpec, AudioFile}
@@ -9,64 +8,127 @@ import javax.imageio.ImageIO
 import de.sciss.sonogram.{SonogramPaintController, OverviewComplete, SimpleSonogramOverviewManager}
 import java.awt.image.{ImageObserver, BufferedImage}
 import java.awt.{Color, Component}
-import de.sciss.kontur.gui.SonogramFadePaint
+import de.sciss.io.Span
+import de.sciss.kontur.session.{FadeSpec, AudioRegion}
 
 object SonogramOutput extends ProcessorCompanion {
    lazy val mgr = new SimpleSonogramOverviewManager()
 
    type PayLoad = Unit
 
-   def apply( ar: AudioRegion, output: File, gainOffset: Float = 1.0e-6f, gainFactor: Float = 15f, pixelsPerSecond: Int = 50, height: Int = 160 )
+   def apply( ars: IndexedSeq[ AudioRegion ], output: File, gainOffset: Float = 1.0e-6f, gainFactor: Float = 15f, pixelsPerSecond: Int = 50, height: Int = 160 )
             ( observer: Observer ) : SonogramOutput = {
-      new SonogramOutput( observer, ar, output, gainOffset, gainFactor, pixelsPerSecond, height )
+      new SonogramOutput( observer, ars, output, gainOffset, gainFactor, pixelsPerSecond, height )
    }
 }
 class SonogramOutput( protected val observer: SonogramOutput.Observer,
-                      ar: AudioRegion, output: File, gainOffset: Float, gainFactor: Float, pixelsPerSecond: Int = 50, height: Int = 160 )
+                      ars: IndexedSeq[ AudioRegion ], output: File, gainOffset: Float, gainFactor: Float, pixelsPerSecond: Int = 50, height: Int = 160 )
 extends Processor {
    import SonogramOutput._
+
+   require( ars.size > 0 )
 
    protected val companion = SonogramOutput
 
    protected def body() : Result = {
-      val afIn          = AudioFile.openRead( ar.audioFile.path )
-      val numChannels   = afIn.numChannels
-      val sampleRate    = afIn.sampleRate
-      val numFrames     = ar.span.getLength // afIn.numFrames
+      val afIns         = ars.map( ar => AudioFile.openRead( ar.audioFile.path ))
+//      val numChannels   = afIn.numChannels
+      val maxNumCh      = afIns.map( _.numChannels ).max
+      val sampleRate    = afIns.head.sampleRate
+      val tlStart       = ars.map( _.span.start ).min
+      val tlStop        = ars.map( _.span.stop  ).min
+      val numFrames     = tlStop - tlStart // ar.span.getLength // afIn.numFrames
       val tmpF          = File.createTempFile( "sono", ".aif" )
+      val zipped        = afIns.zip( ars )
+      val bufSize       = 8192
+
+      def withEachChannel( buf: Array[ Array[ Float ]])( fun: Array[ Float ] => Unit ) {
+         var ch = 0; while( ch < buf.length ) {
+            fun( buf( ch ))
+         ch += 1 }
+      }
+
+      def clear( buf: Array[ Float ]) {
+         var i = 0; while( i < buf.length ) {
+            buf( i ) = 0f
+         i += 1 }
+      }
+
+      def mix( srcOff: Int, dst: Array[ Float ], dstOff: Int, len: Int )( src: Array[ Float ]) {
+         var i = 0; while( i < len ) {
+            dst( i + dstOff ) += src( i + srcOff )
+         i += 1 }
+      }
+
+      def mulAdd( mul: Float, add: Float )( buf: Array[ Float ]) {
+         var i = 0; while( i < buf.length ) {
+            buf( i ) = buf( i ) * mul + add
+         i += 1 }
+      }
+
+      def fadeIn( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]) {
+         var i = 0; while( i < len ) {
+            val f = ((pos + i) / fd.numFrames).toFloat
+            if( f < 1f ) {
+               buf( i ) *= fd.shape.levelAt( math.max( 0f, f ), 0f, 1f )
+            }
+         i += 1 }
+      }
+
+      def fadeOut( fd: FadeSpec, pos: Long, numFrames: Long, len: Int )( buf: Array[ Float ]) {
+         var i = 0; while( i < len ) {
+            val f = ((pos + i - (numFrames - fd.numFrames)) / fd.numFrames).toFloat
+            if( f > 0f ) {
+               buf( i ) *= fd.shape.levelAt( math.min( 1f, f ), 1f, 0f )
+            }
+         i += 1 }
+      }
 
       try {
          val afOut   = AudioFile.openWrite( tmpF, AudioFileSpec( AudioFileType.AIFF, SampleFormat.Float, 1, sampleRate ))
          try {
-            val buf           = afIn.buffer( 8192 )
-            afIn.seek( ar.offset )
-            var read          = 0L
-            val buf0          = buf( 0 )
-            val gain          = (ar.gain / math.sqrt( numChannels )).toFloat
-            while( (read < numFrames) && !checkAborted ) {
-               val chunkLen = math.min( 8192, numFrames - read ).toInt
-               afIn.read( buf, 0, chunkLen )
-               var ch = 1; while( ch < numChannels ) {
-                  val buf1 = buf( ch )
-                  var i = 0; while( i < chunkLen ) {
-                     buf0( i ) += buf1( i )
-                  i += 1 }
-               ch += 1 }
-               var i = 0; while( i < chunkLen ) {
-                  buf0( i ) *= gain
-               i += 1 }
+//            val buf           = afIn.buffer( 8192 )
+            val bufIn         = AudioFile.buffer( maxNumCh, bufSize )
+            val bufOut        = afOut.buffer( bufSize )
+//            afIn.seek( ar.offset )
+            var tlPos         = tlStart // 0L
+            val bufOut0       = bufOut( 0 )
+//            val gain          = (ar.gain / math.sqrt( numChannels )).toFloat
+            while( (tlPos < tlStop) && !checkAborted ) {
+               val chunkLen   = math.min( bufSize, tlStop - tlPos ).toInt
+               val chunkSpan  = new Span( tlPos, tlPos + chunkLen )
+               clear( bufOut0 )
+               zipped.foreach { case (af, ar) =>
+                  val iSpan      = ar.span.intersection( chunkSpan )
+                  val iSpanLen   = iSpan.getLength.toInt
+                  if( iSpanLen > 0 ) {
+                     val delta = iSpan.start - ar.span.start
+                     val afPos = delta + ar.offset
+                     if( af.position != afPos ) af.seek( afPos )
+                     af.read( bufIn, 0, iSpanLen )
+                     ar.fadeIn.foreach { fd =>
+                        withEachChannel( bufIn )( fadeIn( fd, delta, iSpanLen ))
+                     }
+                     ar.fadeOut.foreach { fd =>
+                        withEachChannel( bufIn )( fadeOut( fd, delta, ar.span.getLength, iSpanLen ))
+                     }
+                     val mul = (ar.gain * gainFactor / math.sqrt( af.numChannels )).toFloat
+                     withEachChannel( bufIn )( mulAdd( mul, gainOffset ))
+                     withEachChannel( bufIn )( mix( 0, bufOut0, (iSpan.start - chunkSpan.start).toInt, iSpanLen ))
+                  }
+               }
 
-               afOut.write( buf, 0, chunkLen )
+               afOut.write( bufOut, 0, chunkLen )
 
-               read += chunkLen
-               progress( ((read.toDouble / numFrames) * 0.5).toFloat )
+               tlPos += chunkLen
+               progress( (((tlPos - tlStart).toDouble / numFrames) * 0.5).toFloat )
             }
             if( checkAborted ) return Aborted
          } finally {
             afOut.cleanUp()
          }
       } finally {
-         afIn.cleanUp()
+         afIns.foreach( _.cleanUp() )
       }
 
       val imgW = (numFrames * pixelsPerSecond / sampleRate + 0.5).toInt
@@ -98,9 +160,9 @@ extends Processor {
          val obs  = new Component {}
 
 //         val rnd = new util.Random()
-         val fadePaint = SonogramFadePaint( obs, ar, gainFactor )
+//         val fadePaint = SonogramFadePaint( obs, ar, gainFactor )
          val ctrl = new SonogramPaintController {
-            def adjustGain( amp: Float, pos: Double ) : Float = amp * fadePaint.sonogramGain( pos ) + gainOffset
+            def adjustGain( amp: Float, pos: Double ) : Float = amp // * fadePaint.sonogramGain( pos / ar.span.getLength ) + gainOffset
             def imageObserver : ImageObserver = obs
          }
 
