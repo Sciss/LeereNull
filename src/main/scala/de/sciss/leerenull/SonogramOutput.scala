@@ -16,13 +16,13 @@ object SonogramOutput extends ProcessorCompanion {
 
    type PayLoad = Unit
 
-   def apply( ars: IndexedSeq[ AudioRegion ], output: File, gainOffset: Float = 1.0e-6f, gainFactor: Float = 15f, pixelsPerSecond: Int = 50, height: Int = 160 )
+   def apply( ars: IndexedSeq[ AudioRegion ], output: File, gainOffset: Float = 1.0e-6f, gainFactor: Float = 15f, pixelsPerSecond: Int = 59, height: Int = 144 )
             ( observer: Observer ) : SonogramOutput = {
       new SonogramOutput( observer, ars, output, gainOffset, gainFactor, pixelsPerSecond, height )
    }
 }
 class SonogramOutput( protected val observer: SonogramOutput.Observer,
-                      ars: IndexedSeq[ AudioRegion ], output: File, gainOffset: Float, gainFactor: Float, pixelsPerSecond: Int = 50, height: Int = 160 )
+                      ars: IndexedSeq[ AudioRegion ], output: File, gainOffset: Float, gainFactor: Float, pixelsPerSecond: Int = 59, height: Int = 144 )
 extends Processor {
    import SonogramOutput._
 

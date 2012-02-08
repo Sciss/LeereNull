@@ -5,10 +5,10 @@ import collection.immutable.{IndexedSeq => IIdxSeq}
 import processing.core.{PConstants, PImage}
 
 object SonogramLayer {
-   val pixelsPerSecond  = 50
-   val trackHeight      = 160 // 180
-   val trackYOff        = 0 // 200
-   val trackXOff        = 100
+   val pixelsPerSecond  = 59 // 50
+   val trackHeight      = 144 // 160 // 180
+   val trackYOff        = (Video.videoHeight - (trackHeight * 5)) / 2 // 0 // 200
+   val trackXOff        = 72 // 100
 
    def apply( video: Video, instr: IIdxSeq[ Instruction ], startTime: Double = 0.0 ) : SonogramLayer =
       new SonogramLayer( video, instr, startTime )
