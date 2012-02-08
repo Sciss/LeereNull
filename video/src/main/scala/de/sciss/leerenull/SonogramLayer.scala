@@ -6,8 +6,8 @@ import processing.core.{PConstants, PImage}
 
 object SonogramLayer {
    val pixelsPerSecond  = 50
-   val trackHeight      = 180
-   val trackYOff        = 200
+   val trackHeight      = 160 // 180
+   val trackYOff        = 0 // 200
    val trackXOff        = 100
 
    def apply( video: Video, instr: IIdxSeq[ Instruction ], startTime: Double = 0.0 ) : SonogramLayer =
@@ -39,13 +39,16 @@ object SonogramLayer {
          val j = imageID.lastIndexOf( '_', k - 1 )
          val spanStart = imageID.substring( j + 1, k ).toLong
          val spanStop  = imageID.substring( k + 1 ).toLong
-         new Region( imageID, page, spanStart, spanStop )
+         val m = imageID.indexOf( "_trk" ) + 4
+         val p = imageID.indexOf( '_', m )
+         val trackIdx = imageID.substring( m, p ).toInt - 1
+         new Region( imageID, page, trackIdx, spanStart, spanStop )
       }
    }
-   case class Region( imageID: String, page: Int, spanStart: Long, spanStop: Long ) {
+   case class Region( imageID: String, page: Int, trackIdx: Int, spanStart: Long, spanStop: Long ) {
       var pred = Option.empty[ Region ]
       var succ = IndexedSeq.empty[ Region ]
-      var trackIdx = if( page == 0 ) 1 else 0  // XXX
+//      var trackIdx = if( page == 0 ) 1 else 0  // XXX
 
 //      def isSlice = pred.isDefined
    }

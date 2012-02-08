@@ -27,10 +27,11 @@ package de.sciss.leerenull
 
 import processing.core
 import core.PApplet
-import de.sciss.gui.j.LCDPanel
-import javax.swing.{BorderFactory, Box, JLabel, JProgressBar, WindowConstants, JFrame}
 import java.awt.{Font, Dimension, BorderLayout, EventQueue}
 import java.io.{FileFilter, PrintStream, File}
+import javax.swing.{SwingConstants, BorderFactory, Box, JLabel, JProgressBar, WindowConstants, JFrame}
+import de.sciss.gui.j.{Axis, LCDPanel}
+import java.awt.event.{MouseEvent, MouseAdapter}
 
 object Video extends App {
    sealed trait Mode { def start: Double }
@@ -38,7 +39,11 @@ object Video extends App {
    final case class Realtime( start: Double = 0.0 ) extends Mode
    case object Offline extends Mode { val start = 0.0 }
 
-   val mode: Mode = Offline
+   val mode: Mode = args.headOption match {
+      case Some( "--write" )     => Write(    args.tail.headOption.map( _.toDouble ).getOrElse( 0.0 ))
+      case Some( "--realtime" )  => Realtime( args.tail.headOption.map( _.toDouble ).getOrElse( 0.0 ))
+      case _ => Offline
+   }
 
    EventQueue.invokeLater( new Runnable { def run() {
       val log = new LogPane
@@ -76,9 +81,15 @@ class Video extends PApplet {
       res.getRootPane.putClientProperty( "apple.awt.brushMetalLook", java.lang.Boolean.TRUE )
       res
    }
-   private val ggProgress = mode match {
-      case Offline   => None
-      case _         => Some( new JProgressBar( 0, totalNumFrames ))
+   private val (ggProgress, ggAxis) = mode match {
+      case Offline   =>
+         val axis = new Axis( SwingConstants.HORIZONTAL )
+         axis.format    = Axis.Format.Time( false, true )
+         axis.minimum   = 0.0
+         axis.maximum   = totalDuration
+         (None, Some( axis ))
+      case _         =>
+         (Some( new JProgressBar( 0, totalNumFrames )), None)
    }
    private val pSecs      = new LCDPanel
    private val ggSecs     = {
@@ -97,9 +108,10 @@ class Video extends PApplet {
 // has no effect...
 //      res.setBackground( Color.black )
       ggProgress.foreach( res.add )
+      ggAxis.foreach( res.add )
       res.add( Box.createHorizontalStrut( 8 ))
       res.add( pSecs )
-      res.add( Box.createHorizontalGlue() )
+      if( ggAxis.isEmpty ) res.add( Box.createHorizontalGlue() )
       res
    }
 
@@ -110,6 +122,24 @@ class Video extends PApplet {
       val cp = f.getContentPane
       cp.add( this, BorderLayout.CENTER )
       cp.add( pTop, BorderLayout.NORTH )
+
+      ggAxis.foreach { a =>
+         val ma = new MouseAdapter {
+            def process( e: MouseEvent ) {
+//               _now = (e.getX.toDouble / e.getComponent.getWidth - 1) * totalDuration
+               framesWritten = (math.max( 0.0, math.min( 1.0, e.getX.toDouble / (e.getComponent.getWidth - 1))) * totalNumFrames).toInt
+//println( framesWritten + " / " + totalNumFrames )
+               redraw()
+            }
+
+            override def mousePressed( e: MouseEvent ) { process( e )}
+            override def mouseDragged( e: MouseEvent ) { process( e )}
+         }
+
+         a.addMouseListener( ma )
+         a.addMouseMotionListener( ma )
+      }
+
       init()
       f.pack()
       f.setLocationRelativeTo( null )
@@ -324,8 +354,10 @@ class Video extends PApplet {
             case _ =>
          }
 
-         framesWritten += 1
-         ggProgress.foreach( _.setValue( framesWritten ))
+         ggProgress.foreach { p =>
+            framesWritten += 1
+            p.setValue( framesWritten )
+         }
          val secs = now.toInt
          ggSecs.setText( (100 + (secs / 60)).toString.substring( 1 ) + ":" + ((secs % 60) + 100).toString.substring( 1 ))
 
