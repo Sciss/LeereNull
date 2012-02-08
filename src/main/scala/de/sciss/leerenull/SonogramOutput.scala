@@ -9,6 +9,7 @@ import javax.imageio.ImageIO
 import de.sciss.sonogram.{SonogramPaintController, OverviewComplete, SimpleSonogramOverviewManager}
 import java.awt.image.{ImageObserver, BufferedImage}
 import java.awt.{Color, Component}
+import de.sciss.kontur.gui.SonogramFadePaint
 
 object SonogramOutput extends ProcessorCompanion {
    lazy val mgr = new SimpleSonogramOverviewManager()
@@ -97,8 +98,9 @@ extends Processor {
          val obs  = new Component {}
 
 //         val rnd = new util.Random()
+         val fadePaint = SonogramFadePaint( obs, ar, gainFactor )
          val ctrl = new SonogramPaintController {
-            def adjustGain( amp: Float, pos: Double ) : Float = amp * gainFactor + gainOffset
+            def adjustGain( amp: Float, pos: Double ) : Float = amp * fadePaint.sonogramGain( pos ) + gainOffset
             def imageObserver : ImageObserver = obs
          }
 

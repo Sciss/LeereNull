@@ -1,0 +1,24 @@
+
+object Support extends de.sciss.leerenull.KonturGoodies with de.sciss.leerenull.NullGoodies
+import Support._
+
+implicit def _doc = doc
+
+def selected = withTimeline( (t, v, l) => selectedAudioRegions( t, v, l )).getOrElse( IndexedSeq.empty )
+
+def pos = withTimeline( (_, v, _) => v.cursor.position ).getOrElse( 0L )
+
+def span = withTimeline( (_, v, _) => v.selection.span ).getOrElse( new de.sciss.io.Span() )
+
+def sr = withTimeline( (t, _, _) => t.rate.toInt ).getOrElse( sys.error( "No timeline" ))
+
+val x = selected
+
+val r1stop = pos // 662029
+val r2start = pos // 654317
+val shift = r2start - r1stop + sr // 36388
+
+::::::::::::::::::
+
+Raspad
+full at 0'00"

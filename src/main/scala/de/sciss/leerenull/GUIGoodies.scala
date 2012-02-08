@@ -99,7 +99,7 @@ trait GUIGoodies {
       } else null
 
       val dlg = new FileDialog( f, title, mode )
-      if( init.isFile ) {
+      if( init.isFile || mode == FileDialog.SAVE ) {
          dlg.setDirectory( init.getParent )
          dlg.setFile( init.getName )
       } else {

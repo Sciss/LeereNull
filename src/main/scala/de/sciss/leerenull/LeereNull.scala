@@ -443,7 +443,12 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                implicit val _tlv = tlv
                implicit val _trl = trl
                selectedAudioRegions.headOption.foreach { ar =>
-                  saveFileDialog( "Save Sonogram", new File( ueberzeichnungFolder, "out.png" )).foreach { file =>
+                  val defaultName = {
+                     val n = ar.name
+                     val i  = n.lastIndexOf( '.' )
+                     if( i >= 0 ) n.substring( 0, i ) else n
+                  } + "_" + ar.span.start + "_" + ar.span.stop + ".png"
+                  saveFileDialog( "Save Sonogram", new File( ueberzeichnungFolder, defaultName )).foreach { file =>
                      val dlg  = progressDialog( "Creating Sonogram" )
                      val proc = SonogramOutput( ar, file ) {
                         case SonogramOutput.Success( _ ) =>

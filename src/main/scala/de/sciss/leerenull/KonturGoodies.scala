@@ -32,8 +32,8 @@ import collection.{breakOut, JavaConversions}
 import de.sciss.app.{Application => SApp, AbstractApplication, AbstractCompoundEdit}
 import de.sciss.strugatzki.{Span => SSpan}
 import java.io.File
-import de.sciss.kontur.gui.{TrailView, TimelineFrame, BasicTimelineView, TimelineView, BasicTrackList}
-import de.sciss.kontur.session.{Diffusion, ResizableStake, AudioFileElement, SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
+import de.sciss.kontur.gui.{TimelineFrame, BasicTimelineView, TimelineView, BasicTrackList}
+import de.sciss.kontur.session.{Diffusion, AudioFileElement, SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
 import annotation.switch
 
 trait KonturGoodies {
@@ -143,8 +143,8 @@ trait KonturGoodies {
          case _ => None
       }
 
-   def withTimeline( fun: (BasicTimeline, BasicTimelineView, BasicTrackList) => Unit )( implicit doc: Session ) {
-      findTimelineWithFrame.foreach { case (tl, tlf) =>
+   def withTimeline[ A ]( fun: (BasicTimeline, BasicTimelineView, BasicTrackList) => A )( implicit doc: Session ) : Option[ A ] = {
+      findTimelineWithFrame.map { case (tl, tlf) =>
          fun( tl, tlf.timelineView, tlf.tracksPanel )
       }
    }
@@ -234,7 +234,7 @@ trait KonturGoodies {
                   ( implicit doc: Session, tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) : AudioTrack = {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
          val d = provideStereoDiffusion( ar.audioFile.numChannels, 2, diffPrefix,
-            more.map( _._1.diffusion ).collect({ case Some( d ) => d })( breakOut ))
+            more.map( _._1.diffusion ).collect({ case Some( d1 ) => d1 })( breakOut ))
          placeWithDiff( d, ar, more, trackPrefix )
       }
    }
@@ -245,7 +245,7 @@ trait KonturGoodies {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
          val numCh = ar.audioFile.numChannels
          val d = provideLeftDiffusion( diffPrefix,
-            more.map( _._1.diffusion ).collect({ case Some( d ) => d })( breakOut ))( numCh )
+            more.map( _._1.diffusion ).collect({ case Some( d1 ) => d1 })( breakOut ))( numCh )
          placeWithDiff( d, ar, more, trackPrefix )
       }
    }
@@ -265,7 +265,7 @@ trait KonturGoodies {
       doc.diffusions.joinEdit( "Place audio region" ) { implicit ce =>
          val numCh = ar.audioFile.numChannels
          val d = provideRightDiffusion( diffPrefix,
-            more.map( _._1.diffusion ).collect({ case Some( d ) => d })( breakOut ))( numCh )
+            more.map( _._1.diffusion ).collect({ case Some( d1 ) => d1 })( breakOut ))( numCh )
          placeWithDiff( d, ar, more, trackPrefix )
       }
    }
