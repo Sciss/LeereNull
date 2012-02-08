@@ -36,7 +36,7 @@ extends Processor {
       val maxNumCh      = afIns.map( _.numChannels ).max
       val sampleRate    = afIns.head.sampleRate
       val tlStart       = ars.map( _.span.start ).min
-      val tlStop        = ars.map( _.span.stop  ).min
+      val tlStop        = ars.map( _.span.stop  ).max
       val numFrames     = tlStop - tlStart // ar.span.getLength // afIn.numFrames
       val tmpF          = File.createTempFile( "sono", ".aif" )
       val zipped        = afIns.zip( ars )
@@ -68,7 +68,7 @@ extends Processor {
 
       def fadeIn( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]) {
          var i = 0; while( i < len ) {
-            val f = ((pos + i) / fd.numFrames).toFloat
+            val f = ((pos + i).toDouble / fd.numFrames).toFloat
             if( f < 1f ) {
                buf( i ) *= fd.shape.levelAt( math.max( 0f, f ), 0f, 1f )
             }
@@ -77,7 +77,7 @@ extends Processor {
 
       def fadeOut( fd: FadeSpec, pos: Long, numFrames: Long, len: Int )( buf: Array[ Float ]) {
          var i = 0; while( i < len ) {
-            val f = ((pos + i - (numFrames - fd.numFrames)) / fd.numFrames).toFloat
+            val f = ((pos + i - (numFrames - fd.numFrames)).toDouble / fd.numFrames).toFloat
             if( f > 0f ) {
                buf( i ) *= fd.shape.levelAt( math.min( 1f, f ), 1f, 0f )
             }
