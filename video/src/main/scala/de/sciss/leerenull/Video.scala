@@ -235,8 +235,37 @@ class Video extends PApplet {
       val sonoRec = {
          val rec = SonogramLayer.Recorder()
          import rec._
+
+         def calcCropTrackStart( reg: SonogramLayer.Region ) : Double = {
+            val pred = reg.pred.get
+            val predTrkStart = pred.spanStart - sonoPageFlips( pred.page )
+            (predTrkStart + reg.fileOffset - pred.fileOffset) / sr
+         }
+
+         def calcTrackStart( reg: SonogramLayer.Region ) : Double = {
+            (reg.spanStart - sonoPageFlips( reg.page )) / sr
+         }
+
+         def calcTrackMove( reg: SonogramLayer.Region ) : Double = {
+            val cropTrackStart = calcCropTrackStart( reg )
+            val trkStart   = calcTrackStart( reg )
+            trkStart - cropTrackStart
+         }
+
+         def calcStop( reg: SonogramLayer.Region ) : Double = {
+//               val a = math.max( reg.spanStop / sr, sonoPageFlips( reg.page + 1 ) / sr - (if( reg.succ.isEmpty ) 0.0 else sonoCombiDir) )
+            val a = math.max( reg.spanStop, sonoPageFlips( reg.page + 1 )) / sr
+            if( reg.succ.isEmpty ) a else {
+               val thisPage = sonoPageFlips( reg.page )
+               val gugu = reg.succ.map { r2 =>
+                  val trackMoves = (r2.trackIdx != reg.trackIdx) || (calcTrackMove( r2 ) != 0.0)
+                  r2.spanStart - thisPage - (if( trackMoves ) sonoMoveDur else 0.0)
+               }
+               math.min( a, gugu.min )
+            }
+         }
+
          sonoRegions.foreach { r =>
-            val trkStart   = (r.spanStart - sonoPageFlips( r.page )) / sr
             val spStart    = 0.0
             val spStop     = (r.spanStop - r.spanStart) / sr
 //            val tStart     = r.spanStart / sr
@@ -245,10 +274,7 @@ class Video extends PApplet {
 
 //            val tStop      = (math.max( r.spanStop, sonoPageFlips( r.page + 1 )) / sr - (if( r.succ.isEmpty ) 0.0 else sonoCropDur))
 
-            def calcStop( reg: SonogramLayer.Region ) : Double = {
-               math.max( reg.spanStop / sr, sonoPageFlips( reg.page + 1 ) / sr - (if( reg.succ.isEmpty ) 0.0 else sonoCombiDir) )
-            }
-
+            val trkStart   = calcTrackStart( r )
             val tStop      = calcStop( r )
 
             branch {
@@ -259,22 +285,16 @@ class Video extends PApplet {
                      val tStart = predTStop // sonoPageFlips( r.page ) / sr
                      val tDur = tStop - tStart
                      advance( tStart )
-//                     if( pred.page == 0 ) { // XXX hardcoded
-//                        val i = r.imageID.indexOf( "_foff" ) + 5
-//                        val j = r.imageID.indexOf( '_', i )
-//                        val foff = r.imageID.substring( i, j ).toLong
-//                        val trkStartP = foff / sr
-                        val predTrkStart = pred.spanStart - sonoPageFlips( pred.page )
-                        val cropTrackStart = (predTrkStart + r.fileOffset - pred.fileOffset) / sr
-                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = cropTrackStart,
-                                spanStart = spStart, spanStop = spStop, fadeIn = sonoCropDur )
+                     val cropTrackStart = calcCropTrackStart( r )
+                     val trackMove = calcTrackMove( r )
+                     val trackMoves = (r.trackIdx != pred.trackIdx) || (trackMove != 0.0)
+                     appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = cropTrackStart,
+                             spanStart = spStart, spanStop = spStop, fadeIn = sonoCropDur )
+                     if( trackMoves ) {
                         animate( transitDur = sonoMoveDur, deltaTrackIdx = r.trackIdx - pred.trackIdx,
-                           deltaTrackStart = trkStart - cropTrackStart )
-//                     } else {
-//                        appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStart,
-//                                spanStart = spStart, spanStop = spStop, fadeIn = sonoCombiDir )
-//                     }
-                     val pd = tDur - sonoCombiDir
+                           deltaTrackStart = trackMove )
+                     }
+                     val pd = tDur - (if( trackMoves ) sonoCombiDir else sonoCropDur )
                      if( pd > 0.0 ) prolong( pd )
 
                   case _ =>
