@@ -27,10 +27,10 @@ package de.sciss.leerenull
 
 import processing.core
 import core.{PConstants, PApplet}
-import java.io.{PrintStream, File}
 import de.sciss.gui.j.LCDPanel
 import javax.swing.{BorderFactory, Box, JLabel, JProgressBar, WindowConstants, JFrame}
 import java.awt.{Color, Font, Dimension, BorderLayout, EventQueue}
+import java.io.{FileFilter, PrintStream, File}
 
 object Video extends App {
    val writeOutput   = true
@@ -148,12 +148,74 @@ class Video extends PApplet {
 
       val raspad  = RaspadLayer( this, title2.stopTime + 1.0 )
 
+      val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 )
+      val sonoRegions   = dataFolder.listFiles( new FileFilter {
+         def accept( f: File ) = {
+            val n = f.getName
+            n.startsWith( "i" ) && n.endsWith( ".png" )
+         }
+      }).map( SonogramLayer.Region( _ ))
+
+      var idMap = Map.empty[ Int, SonogramLayer.Region ]
+      sonoRegions.foreach { r =>
+         val n = r.imageID
+         val i = n.indexOf( '_' ) + 1
+         val j = n.indexOf( '_', i )
+         val id = n.substring( i, j )
+         if( id.startsWith( "id" ) && id.charAt( 2 ) != '<' ) {
+            val k = id.indexOf( '<' )
+            val idi = (if( k >= 0 ) id.substring( 0, k ) else id).toInt
+            idMap += idi -> r
+         }
+      }
+      sonoRegions.foreach { r =>
+         val n = r.imageID
+         val i = n.indexOf( '_' ) + 1
+         val j = n.indexOf( '_', i )
+         val id = n.substring( i, j )
+         val k = id.indexOf( '<' )
+         if( id.startsWith( "id" ) && k >= 0 ) {
+//            val idi = id.substring( 0, k ).toInt
+            val idFrom = id.substring( k + 1 ).toInt
+            val from = idMap( idFrom )
+            from.succ :+= r
+            r.pred = Some( from )
+         }
+      }
+
+      val sr = 44100.0
+      val sonoCropDur = 0.5
+      val sonoMoveDur = 0.5
+//      val sonoAppDur  = 1.0
+      val sonoDissDur = 1.0
+
       val sonoRec = {
+         val rec = SonogramLayer.Recorder()
+         import rec._
+         sonoRegions.foreach { r =>
+            val trkStart   = (r.spanStart - sonoPageFlips( r.page )) / sr
+            val spStart    = 0.0
+            val spStop     = (r.spanStop - r.spanStart) / sr
+            val tStart     = r.spanStart / sr
+
+            branch {
+               advance( tStart )
+               r.pred match {
+                  case Some( pred ) =>
+                     appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = trkStart,
+                             spanStart = spStart, spanStop = spStop, fadeIn = sonoCropDur )
+                  case _ =>
+                     unroll( imageID = r.imageID, gain = 1, trackIdx = r.trackIdx, trackStart = trkStart,
+                             spanStart = spStart, spanStop = spStop )
+               }
+            }
+         }
+         rec
+      }
+
+      val sonoRecX = {
          val r = SonogramLayer.Recorder()
          import r._
-         val cropDur = 0.5
-         val moveDur = 0.5
-         val dissolveDur = 1.0
          unroll( imageID = "raspad", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = 0.0, spanStart = 0.0, spanStop = 14.837 /* 15.011 */)
          val loop1Stop = 14.837
          val loop2Stop = 22.610
@@ -161,19 +223,19 @@ class Video extends PApplet {
             val spanStart = 5.622
             val spanStop  = 7.947
             val timeDelta = -spanStart
-            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
-            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
+            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
             prolong( loop2Stop - loop1Stop )
-            dissolve( dissolveDur )
+            dissolve( sonoDissDur )
          }
          branch {
             val spanStart = 7.947
             val spanStop  = 11.072
             val timeDelta = 19.691 - loop1Stop - spanStart
-            crop( transitDur = cropDur, spanStart = spanStart, spanStop = spanStop )
-            animate( transitDur = moveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
+            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
+            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
             prolong( loop2Stop - loop1Stop )
-            dissolve( dissolveDur )
+            dissolve( sonoDissDur )
          }
          val pedalSpanStart = 16.011
          advance( pedalSpanStart - loop1Stop )

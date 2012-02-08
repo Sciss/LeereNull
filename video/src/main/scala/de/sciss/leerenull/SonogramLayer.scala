@@ -28,6 +28,28 @@ object SonogramLayer {
 //   case class Instr( imageID: Int, trackIdx: Int, spanStart: Double, spanStop: Double, trackStart: Double,
 //                     presentationDuration: Double, presentationFadeIn: Double, presentationFadeOut: Double )
 
+   object Region {
+      def apply( imageFile: File ) : Region = {
+         val n = imageFile.getName
+         require( n.startsWith( "i" ) && n.endsWith( ".png" ))
+         val imageID = n.dropRight( 4 )
+         val i = imageID.indexOf( '_' )
+         val page = imageID.substring( 1, i ).toInt - 1
+         val k = imageID.lastIndexOf( '_' )
+         val j = imageID.lastIndexOf( '_', k - 1 )
+         val spanStart = imageID.substring( j + 1, k ).toLong
+         val spanStop  = imageID.substring( k + 1 ).toLong
+         new Region( imageID, page, spanStart, spanStop )
+      }
+   }
+   case class Region( imageID: String, page: Int, spanStart: Long, spanStop: Long ) {
+      var pred = Option.empty[ Region ]
+      var succ = IndexedSeq.empty[ Region ]
+      var trackIdx = 1  // XXX
+
+//      def isSlice = pred.isDefined
+   }
+
    case class Instruction( imageID: String, startTime: Double, stopTime: Double, startTrackIdx: Int, stopTrackIdx: Int,
                            startSpanStart: Double, stopSpanStart: Double, startSpanStop: Double, stopSpanStop: Double,
                            fadeIn: Double, fadeOut: Double, startGain: Double, stopGain: Double,
@@ -47,8 +69,17 @@ object SonogramLayer {
          var timeOffset: Double = 0.0
          var stack = List.empty[ Instruction ]
 
+         def appear( _imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double, _fadeIn: Double ) {
+            make1( _imageID, gain, trackIdx, trackStart, spanStart, spanStop, spanStop, _fadeIn )
+         }
+
          def unroll( _imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double ) {
-            val dur = spanStop - spanStart
+            make1( _imageID, gain, trackIdx, trackStart, spanStart, spanStart, spanStop, 0.0 )
+         }
+
+         private def make1( _imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double,
+                            _startSpanStop: Double, _stopSpanStop: Double, _fadeIn: Double ) {
+            val dur = _stopSpanStop - spanStart
             require( dur > 0.0 )
             val in = Instruction(
                imageID        = _imageID,
@@ -58,9 +89,9 @@ object SonogramLayer {
                stopTrackIdx   = trackIdx,
                startSpanStart = spanStart,
                stopSpanStart  = spanStart,
-               startSpanStop  = spanStart, // spanStop,
-               stopSpanStop   = spanStop,
-               fadeIn         = 0.0,
+               startSpanStop  = _startSpanStop,
+               stopSpanStop   = _stopSpanStop,
+               fadeIn         = _fadeIn,
                fadeOut        = 0.0,
                startGain      = gain,
                stopGain       = gain,
@@ -183,6 +214,7 @@ object SonogramLayer {
    }
 
    trait Recorder {
+      def appear( imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double, fadeIn: Double )
       def unroll( imageID: String, gain: Double, trackIdx: Int, trackStart: Double, spanStart: Double, spanStop: Double )
       def branch( body: => Unit ) : Double
       def crop( transitDur: Double, spanStart: Double, spanStop: Double )
@@ -206,7 +238,7 @@ object SonogramLayer {
       imageMap.get( id ) match {
          case Some( img ) => img
          case _ =>
-            val img = video.loadImage( new File( Video.dataFolder, "Sono_" + id + ".png" ).getPath )
+            val img = video.loadImage( new File( Video.dataFolder, /* "Sono_" + */ id + ".png" ).getPath )
             imageMap += id -> img
             img
       }
