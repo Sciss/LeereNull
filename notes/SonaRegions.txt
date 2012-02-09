@@ -139,3 +139,14 @@ Part 2
 full1:
 [OK]	part2title : 750 ms later
 [OK]	raspad: audio should be 14 frames later (or 583 ms @ 24 FPS)
+
+::::::::::::
+
+now: raspad audio should be earlier (like 30 frames -- so what happened??)
+part II title: another 750 ms later (but now move part II audio as well)
+; infact, it should be longer as well (adding to the delay between main and sub title)
+part I : 1 or 2 dB less
+
+::::::::::::
+
+try again -500ms for raspad audio. add another second black in front, add another second duration for part 1 title. and most importantly, add enough black in the end so that the QT controls don't show up.

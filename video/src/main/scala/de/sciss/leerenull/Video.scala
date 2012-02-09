@@ -165,12 +165,13 @@ class Video extends PApplet {
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
 
-      val introBlack    = 4.0
+      val introBlack    = 5.0 // 4.0
 
       val titleMainY    = 220
       val titleMainFnt  = 72
       val titleDur      = 7.0
-      val partDur       = 5.0
+      val part1Dur      = 6.0 // 5.0
+      val part2Dur      = 6.0
       val titleFadeIn   = 2.0
       val titleFadeOut  = 2.5
       val titleSubY     = titleMainY + 80
@@ -210,7 +211,7 @@ class Video extends PApplet {
          fontSize = partMainFnt,
          fadeIn = partFadeIn,
          fadeOut = partFadeOut,
-         duration = partDur,
+         duration = part1Dur,
          offY = partMainY
       )
 
@@ -220,7 +221,7 @@ class Video extends PApplet {
          fontSize = partSubFnt,
          fadeIn = partFadeIn,
          fadeOut = partFadeOut,
-         duration = partDur - 1.0,
+         duration = part1Dur - 1.0,
          offY = partSubY,
          flipHoriz = false
       )
@@ -237,22 +238,22 @@ class Video extends PApplet {
       )
 
       lazy val part2Title = TitleLayer( this,
-         startTime = sono.startTime + 301.75, // 5'01"
+         startTime = sono.startTime + 302.75, // 5'01"
          title = "Part II",
          fontSize = partMainFnt,
          fadeIn = partFadeIn,
          fadeOut = partFadeOut,
-         duration = partDur,
+         duration = part2Dur,
          offY = partMainY
       )
 
       lazy val part2TitleSub = TitleLayer( this,
-         startTime = part2Title.startTime + 1.0,
+         startTime = part2Title.startTime + 1.5,
          title = "Imitation → Ecology",
          fontSize = partSubFnt,
          fadeIn = partFadeIn,
          fadeOut = partFadeOut,
-         duration = partDur - 1.0,
+         duration = part2Dur - 1.5,
          offY = partSubY
       )
 
