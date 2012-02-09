@@ -3,10 +3,10 @@
 // or current line.
 
 val numChannels = 4
-val latency = 0.03 // ?
+val latency = 0.06
 
 val sd = SynthDef( "Master" ) {
-   val in      = In.ar( NumOutputBuses.ir, numChannels )
+   val inGain  = -3.0.dbamp
    val below   = 1.0
    val thresh1 = -3.0.dbamp
    val above1  = 1.0/1.5
@@ -15,7 +15,9 @@ val sd = SynthDef( "Master" ) {
    val attack  = 0.03
    val release = 0.1
    val ceil    = -0.2.dbamp
-   val win     = latency
+   val win     = latency / 2
+
+   val in      = In.ar( NumOutputBuses.ir, numChannels ) * inGain
    val cmp1    = Compander.ar( in,   in,   thresh1, below, above1, attack, release )
    val cmp2    = Compander.ar( cmp1, cmp1, thresh2, below, above2, attack, release )
    val lim     = Limiter.ar( cmp2, ceil, win )
