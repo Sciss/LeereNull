@@ -214,18 +214,30 @@ class Video extends PApplet {
          offY = partMainY
       )
 
-      lazy val part1TitleSub = TitleLayer( this,
+      lazy val part1TitleSubA = TitleLayer( this,
          startTime = part1Title.startTime + 1.0,
-         title = "Expand → Contract",
+         title = "Expand →                ",
          fontSize = partSubFnt,
          fadeIn = partFadeIn,
          fadeOut = partFadeOut,
          duration = partDur - 1.0,
-         offY = partSubY
+         offY = partSubY,
+         flipHoriz = false
+      )
+
+      lazy val part1TitleSubB = TitleLayer( this,
+         startTime = part1TitleSubA.startTime,
+         title = "Contract                   ",
+         fontSize = part1TitleSubA.fontSize,
+         fadeIn = part1TitleSubA.fadeIn,
+         fadeOut = part1TitleSubA.fadeOut,
+         duration = part1TitleSubA.duration,
+         offY = part1TitleSubA.offY,
+         flipHoriz = true
       )
 
       lazy val part2Title = TitleLayer( this,
-         startTime = sono.startTime + 301.0, // 5'01"
+         startTime = sono.startTime + 301.75, // 5'01"
          title = "Part II",
          fontSize = partMainFnt,
          fadeIn = partFadeIn,
@@ -383,8 +395,8 @@ class Video extends PApplet {
 
       lazy val sono = SonogramLayer( this, sonoRec.build, part1Title.stopTime + 1.0 ) // raspad.stopTime + 1.0 )
 
-      lazy val sonoFade1   = FadeLayer.out(   this, sono.stopTime - (3 + sonoCombiDir), 2 )
-      lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 2 )
+      lazy val sonoFade1   = FadeLayer.out(   this, sono.stopTime - (4 + sonoCombiDir), 1 )
+      lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 4 )
 //      lazy val endMarker   = FadeLayer.black( this, part2Title.startTime + 490
 
       println( "raspad  starts " + raspad.startTime )
@@ -392,7 +404,7 @@ class Video extends PApplet {
       println( "part II starts " + (part2Title.stopTime + 1.0) )
       List( mainTitle, mainTitleSub,
             raspad,
-            part1Title, part1TitleSub,
+            part1Title, part1TitleSubA, part1TitleSubB,
             sono,
             sonoFade1, sonoFade2,
             part2Title, part2TitleSub

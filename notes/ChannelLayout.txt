@@ -1,0 +1,8 @@
+To better match with the defaults of OS X both Audio MIDI Setup and QuickTime Player 7 configuration naming (Quad), the channel layout is slightly unorthodox:
+
+Channel 1 = Front Left
+Channel 2 = Front Right
+Channel 3 = Rear Left (!)
+Channel 4 = Rear Right (!)
+
+So 'X-shaped' instead of clockwise circle.

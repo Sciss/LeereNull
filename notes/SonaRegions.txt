@@ -137,5 +137,5 @@ Part 2
 ::::::::::::
 
 full1:
-part2title : 750 ms later
-raspad: audio should be 14 frames later
+[OK]	part2title : 750 ms later
+[OK]	raspad: audio should be 14 frames later (or 583 ms @ 24 FPS)

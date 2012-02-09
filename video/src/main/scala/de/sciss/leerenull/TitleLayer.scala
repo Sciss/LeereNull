@@ -38,11 +38,11 @@ object TitleLayer {
 //   val offY       = 120
 
    def apply( video: Video, startTime: Double = 0.0, duration: Double = 7.0, title: String,
-              fontSize: Int = 72, offY: Int = 120, fadeIn: Double = 2.0, fadeOut: Double = 2.5 ) : TitleLayer =
-      new TitleLayer( video, startTime, duration, title, fontSize, offY, fadeIn, fadeOut )
+              fontSize: Int = 72, offY: Int = 120, fadeIn: Double = 2.0, fadeOut: Double = 2.5, flipHoriz: Boolean = false ) : TitleLayer =
+      new TitleLayer( video, startTime, duration, title, fontSize, offY, fadeIn, fadeOut, flipHoriz )
 }
-class TitleLayer( protected val video: Video, val startTime: Double, val duration: Double, title: String, fontSize: Int,
-                  offY: Int, fadeIn: Double, fadeOut: Double )
+class TitleLayer( protected val video: Video, val startTime: Double, val duration: Double, val title: String, val fontSize: Int,
+                  val offY: Int, val fadeIn: Double, val fadeOut: Double, val flipHoriz: Boolean )
 extends VideoLayer {
    import Video._
    import TitleLayer._
@@ -68,6 +68,13 @@ extends VideoLayer {
       textAlign( CENTER )
       fill( 1.0f, alpha.toFloat )
       textFont( titleFont )
+
+      pushMatrix()
+      if( flipHoriz ) {
+         translate( width, 0 )
+         scale( -1, 1 )
+      }
       text( title, videoWidth / 2, offY )
+      popMatrix()
    }
 }
