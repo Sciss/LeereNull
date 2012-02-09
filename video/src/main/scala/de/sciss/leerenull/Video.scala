@@ -165,6 +165,8 @@ class Video extends PApplet {
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
 
+      val introBlack    = 4.0
+
       val titleMainY    = 220
       val titleMainFnt  = 72
       val titleDur      = 7.0
@@ -175,7 +177,7 @@ class Video extends PApplet {
       val titleSubFnt   = 54
 
       lazy val mainTitle  = TitleLayer( this,
-         startTime = 0.0,
+         startTime = introBlack,
          title = "Leere Null 2",
          fontSize = titleMainFnt,
          fadeIn = titleFadeIn,
@@ -385,6 +387,9 @@ class Video extends PApplet {
       lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 2 )
 //      lazy val endMarker   = FadeLayer.black( this, part2Title.startTime + 490
 
+      println( "raspad  starts " + raspad.startTime )
+      println( "part I  starts " + sono.startTime )
+      println( "part II starts " + (part2Title.stopTime + 1.0) )
       List( mainTitle, mainTitleSub,
             raspad,
             part1Title, part1TitleSub,
@@ -404,7 +409,7 @@ class Video extends PApplet {
       mode match {
          case Offline         => noLoop()
          case Realtime( _ )   => frameRate( videoFPS )
-         case Write( _ )      => frameRate( 1000 )
+         case Write( _ )      => frameRate( 120 )
       }
 
       size( videoWidth, videoHeight )
@@ -418,20 +423,24 @@ class Video extends PApplet {
 
       layers.foreach( _.draw() )
 
-      if( framesWritten < totalNumFrames ) {
-         mode match {
-            case Write( _ ) =>
-               val outFile = new File( outputFolder, "frame" + (framesWritten + 10000).toString.substring( 1 ) + ".png" )
-               save( outFile.getPath )
-            case _ =>
-         }
-
+      val f = framesWritten
+      if( f < totalNumFrames ) {
          ggProgress.foreach { p =>
             framesWritten += 1
             p.setValue( framesWritten )
          }
          val secs = now.toInt
          ggSecs.setText( (100 + (secs / 60)).toString.substring( 1 ) + ":" + ((secs % 60) + 100).toString.substring( 1 ))
+
+         mode match {
+            case Write( _ ) =>
+               val outFile = new File( outputFolder, "frame" + (f + 10000).toString.substring( 1 ) + ".png" )
+               save( outFile.getPath )
+//               println( "AQUI" )
+//               noLoop()
+//               redraw()
+            case _ =>
+         }
 
       } else {
          noLoop()

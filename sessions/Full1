@@ -1,0 +1,1540 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<konturSession>
+    <audioFiles>
+  <coll>
+  <audioFile id="0">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay1Ed_@0'10&quot;.aif</path>
+  <numFrames>15435087</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="1">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay2Ed_@0'10&quot;.aif</path>
+  <numFrames>10143058</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="2">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay3Ed_@0'50&quot;.aif</path>
+  <numFrames>9702055</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="3">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay4Ed_@0'50&quot;.aif</path>
+  <numFrames>13671078</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="4">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay5Ed_@0'50&quot;.aif</path>
+  <numFrames>12789073</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="5">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberLay6Ed_@3'40&quot;.aif</path>
+  <numFrames>3528020</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="6">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay1Ed_@1'30&quot;.aif</path>
+  <numFrames>14994085</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="7">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay2Ed_@1'30&quot;.aif</path>
+  <numFrames>17640100</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="8">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay3Ed_@1'30&quot;.aif</path>
+  <numFrames>17640100</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="9">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay4Ed_@1'30&quot;.aif</path>
+  <numFrames>17640100</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="10">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay5Ed_@2'10&quot;.aif</path>
+  <numFrames>12348070</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="11">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberNImitLay6Ed_@3'40&quot;.aif</path>
+  <numFrames>11907068</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="12">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberEco1Ed_@3'00&quot;.aif</path>
+  <numFrames>11907068</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="13">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberEco2Ed_@3'30&quot;.aif</path>
+  <numFrames>9702055</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="14">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberEco3Ed_@3'00&quot;.aif</path>
+  <numFrames>10143058</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="15">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberEco4Ed_@3'50&quot;.aif</path>
+  <numFrames>7938045</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="16">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberEco5Ed_@3'40&quot;.aif</path>
+  <numFrames>9261053</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="17">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/UeberEco6Ed_@3'40&quot;.aif</path>
+  <numFrames>8379048</numFrames>
+  <numChannels>4</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="18">
+  <path>/Users/hhrutz/Desktop/new_projects/Utopia/audio_work/Raspad_30'58_den.aif</path>
+  <numFrames>662029</numFrames>
+  <numChannels>1</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile><audioFile id="19">
+  <path>/Users/hhrutz/Documents/devel/LeereNull/bounce/Part1Video.aif</path>
+  <numFrames>13274175</numFrames>
+  <numChannels>2</numChannels>
+  <sampleRate>44100.0</sampleRate>
+</audioFile>
+</coll>
+</audioFiles>
+    <diffusions>
+  <coll>
+  <diffusion class="matrix" id="20">
+          <name>Quad-X-Rot</name>
+          <numInputChannels>4</numInputChannels>
+          <numOutputChannels>4</numOutputChannels>
+          <matrix><row>0.0 0.0 0.0 1.0</row><row>0.0 0.0 1.0 0.0</row><row>0.0 1.0 0.0 0.0</row><row>1.0 0.0 0.0 0.0</row></matrix>
+       </diffusion><diffusion class="matrix" id="21">
+          <name>Mono-Front</name>
+          <numInputChannels>1</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>0.70794576 0.70794576</row></matrix>
+       </diffusion><diffusion class="matrix" id="22">
+          <name>Stereo-Front</name>
+          <numInputChannels>2</numInputChannels>
+          <numOutputChannels>2</numOutputChannels>
+          <matrix><row>1.0 0.0</row><row>0.0 1.0</row></matrix>
+       </diffusion>
+</coll>
+</diffusions>
+    <timelines>
+       <coll>
+  <timeline id="23">
+   <name>Timeline</name>
+   <span stop="36294300" start="0"></span>
+   <rate>44100.0</rate>
+   <tracks id="24">
+      <coll>
+  <audioTrack id="25">
+      <name>Imit 1</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="29836517" start="25582746"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>10676946</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="25591923" start="23680173"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>8774373</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  <shape curve="13.400001" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="23678338" start="23114728"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>8208928</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="30340887" start="29836517"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>14930717</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>16518</numFrames>
+  <shape curve="-2.7" num="5"></shape>
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="16596261" start="16311371"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>1405571</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="17263320" start="16849882"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>1944082</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="21740230" start="21456807"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>6551007</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="21456807" start="20534343"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>5628543</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="18048172" start="17263320"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>2357520</offset>
+      <gain>1.4125376</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="20552696" start="18048172"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>3142372</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>14682</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="23140423" start="21740230"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>6834430</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>5506</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>60566</numFrames>
+  <shape curve="-3.6000001" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="16855388" start="16590755"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>1684955</offset>
+      <gain>1.7782795</gain>
+      <fadeIn><fade>
+  <numFrames>5506</numFrames>
+  <shape curve="-13.6" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>23859</numFrames>
+  <shape curve="2.6000001" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay1Ed_@0'10&quot;.aif</name>
+      <span stop="16349913" start="14905800"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>0</offset>
+      <gain>1.4125376</gain>
+      
+      <fadeOut><fade>
+  <numFrames>9177</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="26">
+      <name>Imit 2</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay2Ed_@0'10&quot;.aif</name>
+      <span stop="20908676" start="16177612"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>1271812</offset>
+      <gain>1.4125376</gain>
+      <fadeIn><fade>
+  <numFrames>9176</numFrames>
+  <shape curve="5.4" num="5"></shape>
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberLay2Ed_@0'10&quot;.aif</name>
+      <span stop="15758110" start="15484496"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>578696</offset>
+      <gain>1.4125376</gain>
+      <fadeIn><fade>
+  <numFrames>9177</numFrames>
+  <shape curve="10.6" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>7342</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay2Ed_@0'10&quot;.aif</name>
+      <span stop="25048858" start="21627931"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>6722131</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberLay2Ed_@0'10&quot;.aif</name>
+      <span stop="21637108" start="20908676"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>6002876</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>433157</numFrames>
+  <shape curve="5.2000003" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay2Ed_@0'10&quot;.aif</name>
+      <span stop="16177612" start="15741592"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>835792</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay2Ed_@0'10&quot;.aif</name>
+      <span stop="15484496" start="14905800"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="27">
+      <name>Imit 3</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay3Ed_@0'50&quot;.aif</name>
+      <span stop="18030374" start="16669800"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>0</offset>
+      <gain>1.4125376</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay3Ed_@0'50&quot;.aif</name>
+      <span stop="20312417" start="18030374"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>1360574</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay3Ed_@0'50&quot;.aif</name>
+      <span stop="20930067" start="20312417"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>3642617</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay3Ed_@0'50&quot;.aif</name>
+      <span stop="26371855" start="21419374"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>4749574</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay3Ed_@0'50&quot;.aif</name>
+      <span stop="21419374" start="20930067"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>4260267</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="28">
+      <name>Imit 4</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay4Ed_@0'50&quot;.aif</name>
+      <span stop="30340878" start="29880736"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>13210936</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>9177</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberLay4Ed_@0'50&quot;.aif</name>
+      <span stop="26015836" start="20526322"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>3856522</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>40377</numFrames>
+  <shape curve="5.7000003" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>25695</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay4Ed_@0'50&quot;.aif</name>
+      <span stop="19857870" start="17792458"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>1122658</offset>
+      <gain>1.4125376</gain>
+      <fadeIn><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberLay4Ed_@0'50&quot;.aif</name>
+      <span stop="29889912" start="26015836"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>9346036</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay4Ed_@0'50&quot;.aif</name>
+      <span stop="17805305" start="16669800"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberLay4Ed_@0'50&quot;.aif</name>
+      <span stop="20526322" start="19857870"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>3188070</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="29">
+      <name>Imit 5</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="29458873" start="27754127"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>11084327</offset>
+      <gain>0.25118867</gain>
+      <fadeIn><fade>
+  <numFrames>12847</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="27763304" start="25612410"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>8942610</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>20189</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="25612410" start="25464091"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>8794291</offset>
+      <gain>0.7943282</gain>
+      <fadeIn><fade>
+  <numFrames>1835</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="25467761" start="21210817"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>4541017</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>7341</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="17360599" start="16669800"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>0</offset>
+      <gain>0.70794576</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="20571777" start="17360599"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>690799</offset>
+      <gain>1.4125376</gain>
+      
+      
+      
+   </stake><stake>
+      <name>UeberLay5Ed_@0'50&quot;.aif</name>
+      <span stop="21210817" start="20571777"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>3901977</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="30">
+      <name>Imit 6</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberLay6Ed_@3'40&quot;.aif</name>
+      <span stop="25540790" start="24166800"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>9177</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberLay6Ed_@3'40&quot;.aif</name>
+      <span stop="27694820" start="25535284"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>1368484</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="31">
+      <name>N-Imit 1</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay1Ed_@1'30&quot;.aif</name>
+      <span stop="33427885" start="20153554"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>1719754</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberNImitLay1Ed_@1'30&quot;.aif</name>
+      <span stop="20011274" start="18962144"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>528344</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>18353</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay1Ed_@1'30&quot;.aif</name>
+      <span stop="18962144" start="18433800"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay1Ed_@1'30&quot;.aif</name>
+      <span stop="20192096" start="20007603"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>1573803</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="32">
+      <name>N-Imit 2</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="36073900" start="33644073"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>15210273</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>3671</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="33649579" start="33254982"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>14821182</offset>
+      <gain>0.7943282</gain>
+      <fadeIn><fade>
+  <numFrames>5506</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="32109731" start="31324207"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>12890407</offset>
+      <gain>0.35481337</gain>
+      <fadeIn><fade>
+  <numFrames>9177</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>77084</numFrames>
+  <shape curve="1.8000001" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="31331548" start="29071195"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>10637395</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="25554491" start="18433800"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>16518</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="33254982" start="32109731"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>13675931</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="29071195" start="27232047"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>8798247</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay2Ed_@1'30&quot;.aif</name>
+      <span stop="27232047" start="25547150"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>7113350</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="33">
+      <name>N-Imit 3</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay3Ed_@1'30&quot;.aif</name>
+      <span stop="36073900" start="32484140"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>14050340</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>7342</numFrames>
+  <shape curve="-2.7" num="5"></shape>
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberNImitLay3Ed_@1'30&quot;.aif</name>
+      <span stop="31768359" start="29338168"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>10904368</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay3Ed_@1'30&quot;.aif</name>
+      <span stop="27303239" start="18852518"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>418718</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>27530</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay3Ed_@1'30&quot;.aif</name>
+      <span stop="32484140" start="31768359"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>13334559</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay3Ed_@1'30&quot;.aif</name>
+      <span stop="29338168" start="27303239"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>8869439</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay3Ed_@1'30&quot;.aif</name>
+      <span stop="18852518" start="18433800"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="34">
+      <name>N-Imit 4</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="36073900" start="33812924"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>15379124</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>5506</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="33820265" start="32796147"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>14362347</offset>
+      <gain>0.63095737</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>9176</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="32107895" start="28789112"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>10355312</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>34871</numFrames>
+  <shape curve="-2.4" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>12847</numFrames>
+  <shape curve="-4.8" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="27362567" start="21304400"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>2870600</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>60567</numFrames>
+  <shape curve="-4.1" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="20809904" start="18433800"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>22024</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="32796147" start="32098719"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>13664919</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="28798289" start="27362567"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>8928767</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay4Ed_@1'30&quot;.aif</name>
+      <span stop="21304400" start="20804398"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>2370598</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="35">
+      <name>N-Imit 5</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay5Ed_@2'10&quot;.aif</name>
+      <span stop="32545870" start="27765993"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>7568193</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>23859</numFrames>
+  <shape curve="-1.9" num="5"></shape>
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberNImitLay5Ed_@2'10&quot;.aif</name>
+      <span stop="25992105" start="21202795"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>1004995</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay5Ed_@2'10&quot;.aif</name>
+      <span stop="27765993" start="25992105"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>5794305</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay5Ed_@2'10&quot;.aif</name>
+      <span stop="21202795" start="20197800"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="36">
+      <name>N-Imit 6</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberNImitLay6Ed_@3'40&quot;.aif</name>
+      <span stop="36073868" start="33519270"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>9352470</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>3671</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberNImitLay6Ed_@3'40&quot;.aif</name>
+      <span stop="33522940" start="33071448"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>8904648</offset>
+      <gain>0.63095737</gain>
+      <fadeIn><fade>
+  <numFrames>1835</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>9176</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay6Ed_@3'40&quot;.aif</name>
+      <span stop="32403385" start="28947887"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>4781087</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>29366</numFrames>
+  <shape curve="-1.0" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>27530</numFrames>
+  <shape curve="-2.8" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay6Ed_@3'40&quot;.aif</name>
+      <span stop="25600544" start="24166800"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>16518</numFrames>
+  <shape curve="4.0" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberNImitLay6Ed_@3'40&quot;.aif</name>
+      <span stop="33071448" start="32403385"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>8236585</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberNImitLay6Ed_@3'40&quot;.aif</name>
+      <span stop="28964405" start="25600544"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>1433744</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="37">
+      <name>Eco 1</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="34309868" start="32120743"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>9717943</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="31573813" start="27487154"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>5084354</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>3671</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>40377</numFrames>
+  <shape curve="-6.5" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="26435224" start="25606477"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>3203677</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>14683</numFrames>
+  <shape curve="-7.2" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="25611983" start="25303908"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>2901108</offset>
+      <gain>0.70794576</gain>
+      <fadeIn><fade>
+  <numFrames>3671</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>14683</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="25307579" start="23767329"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>1364529</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="23776506" start="22402800"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>0</offset>
+      <gain>0.39810714</gain>
+      
+      <fadeOut><fade>
+  <numFrames>14682</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="32120743" start="31577484"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>9174684</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberEco1Ed_@3'00&quot;.aif</name>
+      <span stop="27487154" start="26437060"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>4034260</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="38">
+      <name>Eco 2</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberEco2Ed_@3'30&quot;.aif</name>
+      <span stop="33427855" start="32697039"></span>
+      <audioFile idref="13"></audioFile>
+      <offset>8971239</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberEco2Ed_@3'30&quot;.aif</name>
+      <span stop="32067519" start="30574865"></span>
+      <audioFile idref="13"></audioFile>
+      <offset>6849065</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  <shape curve="-1.0" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>14683</numFrames>
+  <shape curve="-2.6000001" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco2Ed_@3'30&quot;.aif</name>
+      <span stop="25600544" start="23725800"></span>
+      <audioFile idref="13"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco2Ed_@3'30&quot;.aif</name>
+      <span stop="32697039" start="32054671"></span>
+      <audioFile idref="13"></audioFile>
+      <offset>8328871</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberEco2Ed_@3'30&quot;.aif</name>
+      <span stop="30584042" start="25600544"></span>
+      <audioFile idref="13"></audioFile>
+      <offset>1874744</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="39">
+      <name>Eco 3</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberEco3Ed_3'00&quot;.aif</name>
+      <span stop="32545858" start="31129854"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>8727054</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberEco3Ed_3'00&quot;.aif</name>
+      <span stop="31137196" start="31058661"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>8655861</offset>
+      <gain>0.63095737</gain>
+      <fadeIn><fade>
+  <numFrames>7341</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco3Ed_3'00&quot;.aif</name>
+      <span stop="31066002" start="27653271"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>5250471</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>16519</numFrames>
+  <shape curve="20.0" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco3Ed_3'00&quot;.aif</name>
+      <span stop="25606477" start="22402800"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>7341</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco3Ed_3'00&quot;.aif</name>
+      <span stop="27653271" start="25606477"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>3203677</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="40">
+      <name>Eco 4</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberEco4Ed_@3'50&quot;.aif</name>
+      <span stop="32396044" start="30080613"></span>
+      <audioFile idref="15"></audioFile>
+      <offset>5472813</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>12848</numFrames>
+  <shape curve="-4.5" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco4Ed_@3'50&quot;.aif</name>
+      <span stop="25831921" start="24607800"></span>
+      <audioFile idref="15"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>7341</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco4Ed_@3'50&quot;.aif</name>
+      <span stop="32545845" start="32396044"></span>
+      <audioFile idref="15"></audioFile>
+      <offset>7788244</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake><stake>
+      <name>UeberEco4Ed_@3'50&quot;.aif</name>
+      <span stop="30091625" start="25831921"></span>
+      <audioFile idref="15"></audioFile>
+      <offset>1224121</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="41">
+      <name>Eco 5</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberEco5Ed_@3'40&quot;.aif</name>
+      <span stop="33427853" start="31926198"></span>
+      <audioFile idref="16"></audioFile>
+      <offset>7759398</offset>
+      <gain>0.6309573</gain>
+      <fadeIn><fade>
+  <numFrames>9177</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberEco5Ed_@3'40&quot;.aif</name>
+      <span stop="31931704" start="27599876"></span>
+      <audioFile idref="16"></audioFile>
+      <offset>3433076</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>31201</numFrames>
+  <shape curve="-2.3" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>9177</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco5Ed_@3'40&quot;.aif</name>
+      <span stop="26116692" start="24166800"></span>
+      <audioFile idref="16"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>3671</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco5Ed_@3'40&quot;.aif</name>
+      <span stop="27599876" start="26116692"></span>
+      <audioFile idref="16"></audioFile>
+      <offset>1949892</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="42">
+      <name>Eco 6</name>
+      <diffusion idref="20"></diffusion>
+      <trail>
+  <stake>
+      <name>UeberEco6Ed_@3'40&quot;.aif</name>
+      <span stop="32545848" start="29498352"></span>
+      <audioFile idref="17"></audioFile>
+      <offset>5331552</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>36707</numFrames>
+  <shape curve="8.9" num="5"></shape>
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>UeberEco6Ed_@3'40&quot;.aif</name>
+      <span stop="26092961" start="24166800"></span>
+      <audioFile idref="17"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>7341</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>UeberEco6Ed_@3'40&quot;.aif</name>
+      <span stop="29498352" start="26092961"></span>
+      <audioFile idref="17"></audioFile>
+      <offset>1926161</offset>
+      <gain>1.0</gain>
+      
+      
+      <muted></muted>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="43">
+      <name>Raspad</name>
+      <diffusion idref="21"></diffusion>
+      <trail>
+  <stake>
+      <name>Raspad_30'58_den.aif</name>
+      <span stop="1191229" start="529200"></span>
+      <audioFile idref="18"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="44">
+      <name>Part 1</name>
+      <diffusion idref="22"></diffusion>
+      <trail>
+  <stake>
+      <name>Part1Video.aif</name>
+      <span stop="14817675" start="1543500"></span>
+      <audioFile idref="19"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      
+      
+   </stake>
+</trail>
+      </audioTrack>
+</coll>
+      </tracks>
+</timeline>
+</coll>
+    </timelines>
+</konturSession>
