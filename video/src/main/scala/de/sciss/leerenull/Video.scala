@@ -162,27 +162,63 @@ class Video extends PApplet {
 
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
-//      lazy val titleDur = 7.0
-//      val title1  = TitleLayer( this,
-//         startTime = 0.0,
-//         title = "Leere Null 2",
-//         fontSize = 72,
-//         fadeIn = 2.0,
-//         fadeOut = 2.5,
-//         duration = titleDur,
-//         offY = 120
-//      )
-//      val title2  = TitleLayer( this,
-//         startTime = title1.startTime + 2.5,
-//         title = "(Empties)",
-//         fontSize = 54,
-//         fadeIn = 2.0,
-//         fadeOut = 2.5,
-//         duration = titleDur - 2.5,
-//         offY = 180
-//      )
-//
-//      val raspad  = RaspadLayer( this, title2.stopTime + 1.0 )
+
+      val titleMainY    = 220
+      val titleMainFnt  = 72
+      val titleDur      = 7.0
+      val partDur       = 5.0
+      val titleFadeIn   = 2.0
+      val titleFadeOut  = 2.5
+      val titleSubY     = titleMainY + 80
+      val titleSubFnt   = 54
+
+      lazy val mainTitle  = TitleLayer( this,
+         startTime = 0.0,
+         title = "Leere Null 2",
+         fontSize = titleMainFnt,
+         fadeIn = titleFadeIn,
+         fadeOut = titleFadeOut,
+         duration = titleDur,
+         offY = titleMainY
+      )
+      lazy val mainTitleSub  = TitleLayer( this,
+         startTime = mainTitle.startTime + 2.5,
+         title = "(Empties)",
+         fontSize = titleSubFnt,
+         fadeIn = titleFadeIn,
+         fadeOut = titleFadeOut,
+         duration = titleDur - 2.5,
+         offY = titleSubY
+      )
+
+      lazy val raspad  = RaspadLayer( this, mainTitle.stopTime + 1.0 )
+
+      val partMainY     = titleMainY // 180
+      val partSubY      = titleSubY  // 240
+      val partMainFnt   = 54
+      val partSubFnt    = 48
+      val partFadeIn    = 1.5
+      val partFadeOut   = 2.0
+
+      lazy val part1Title = TitleLayer( this,
+         startTime = raspad.stopTime + 1.0,
+         title = "Part I",
+         fontSize = partMainFnt,
+         fadeIn = partFadeIn,
+         fadeOut = partFadeOut,
+         duration = partDur,
+         offY = partMainY
+      )
+
+      lazy val part1TitleSub = TitleLayer( this,
+         startTime = part1Title.startTime + 1.0,
+         title = "Expand -> Contract",
+         fontSize = partSubFnt,
+         fadeIn = partFadeIn,
+         fadeOut = partFadeOut,
+         duration = partDur - 1.0,
+         offY = partSubY
+      )
 
 //      val sonoPageFlips = IndexedSeq( 0, 611033, 955418, 1238531, 1567022 ) :+ 2160900
       val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 ) :+ 2116800
@@ -318,57 +354,8 @@ class Video extends PApplet {
          rec
       }
 
-//      val sonoRecX = {
-//         val r = SonogramLayer.Recorder()
-//         import r._
-//         unroll( imageID = "raspad", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = 0.0, spanStart = 0.0, spanStop = 14.837 /* 15.011 */)
-//         val loop1Stop = 14.837
-//         val loop2Stop = 22.610
-//         branch {
-//            val spanStart = 5.622
-//            val spanStop  = 7.947
-//            val timeDelta = -spanStart
-//            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
-//            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
-//            prolong( loop2Stop - loop1Stop )
-//            dissolve( sonoDissDur )
-//         }
-//         branch {
-//            val spanStart = 7.947
-//            val spanStop  = 11.072
-//            val timeDelta = 19.691 - loop1Stop - spanStart
-//            crop( transitDur = sonoCropDur, spanStart = spanStart, spanStop = spanStop )
-//            animate( transitDur = sonoMoveDur, deltaTrackIdx = -1, deltaTrackStart = timeDelta )
-//            prolong( loop2Stop - loop1Stop )
-//            dissolve( sonoDissDur )
-//         }
-//         val pedalSpanStart = 16.011
-//         advance( pedalSpanStart - loop1Stop )
-//         unroll( imageID = "pedale", gain = dbToAmp( 0.0 ), trackIdx = 1, trackStart = pedalSpanStart - loop1Stop, spanStart = 0.0, spanStop = 6.262 )
-//prolong( 4.0 )
-//         dissolve( 1.0 )
-//
-////         prolong( 4.0 )
-////         branch {
-////            crop( 4.0, spanStart = 0.0, spanStop = 4.0 )
-////            prolong( 4.0 )
-////            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = 0.0 )
-////            dissolve( 4.0 )
-////         }
-////         branch {
-////            crop( 4.0, spanStart = 8.0, spanStop = 15.0 )
-////            prolong( 4.0 )
-////            animate( 4.0, deltaTrackIdx = -1, deltaTrackStart = -4.0 )
-////            dissolve( 4.0 )
-////         }
-////         advance( 8.0 )
-////         dissolve( 8.0 )
-//         r
-//      }
-      // ...
-
-      val sono    = SonogramLayer( this, sonoRec.build, 0.0 ) // raspad.stopTime + 1.0 )
-      List( /* title1, title2, raspad, */ sono )
+      val sono    = SonogramLayer( this, sonoRec.build, part1Title.stopTime + 1.0 ) // raspad.stopTime + 1.0 )
+      List( mainTitle, mainTitleSub, raspad, part1Title, part1TitleSub, sono )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1

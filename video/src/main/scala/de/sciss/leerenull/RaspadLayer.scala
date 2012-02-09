@@ -33,9 +33,10 @@ object RaspadLayer {
    val raspadFPS  = 24
 //   val startTime  = 0.0
 //   val startTime  = TitleLayer.startTime + TitleLayer.duration + 1.0
-   val raspadHeight  = 480
-   val offX       = 0
-   val offY       = (Video.videoHeight - raspadHeight) / 2
+   val raspadWidth = 640
+   val raspadHeight = 480
+   val offX       = (Video.videoWidth - raspadWidth) / 2 // 0
+   val offY       = (Video.videoHeight - raspadHeight) / 3 // / 2
    val fadeIn     = 2.0
    val fadeOut    = 2.0
 
