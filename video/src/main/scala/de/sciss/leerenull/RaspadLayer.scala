@@ -28,8 +28,8 @@ package de.sciss.leerenull
 import java.io.File
 
 object RaspadLayer {
-   val startIdx   = 169
-   val stopIdx    = 553 // 999
+   val startIdx   = 1 // 169
+   val stopIdx    = 385 // 553 // 999
    val raspadFPS  = 24
 //   val startTime  = 0.0
 //   val startTime  = TitleLayer.startTime + TitleLayer.duration + 1.0
@@ -62,7 +62,7 @@ class RaspadLayer( protected val video: Video, val startTime: Double ) extends V
       val raspadIdx = ((now - startTime) * raspadFPS + 0.5).toInt
 //      if( raspadIdx < (raspadStopIdx - raspadStartIdx) ) {
 //         println( "AYA " + raspadIdx )
-         val img = loadImage( new File( dataFolder, "RaspadExtr " + (raspadIdx + startIdx + 10000).toString.substring( 1 ) + ".png" ).getPath )
+         val img = loadImage( new File( dataFolder, "RaspadExtr " + (raspadIdx + startIdx + 1000).toString.substring( 1 ) + ".png" ).getPath )
          if( alpha < 1.0 ) tint( 1.0f, alpha.toFloat )
          image( img, offX, offY )
          noTint()

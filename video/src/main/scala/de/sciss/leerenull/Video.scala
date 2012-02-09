@@ -216,12 +216,12 @@ class Video extends PApplet {
       )
 
       lazy val part1TitleSubA = TitleLayer( this,
-         startTime = part1Title.startTime + 1.0,
+         startTime = part1Title.startTime + 1.5,
          title = "Expand →                ",
          fontSize = partSubFnt,
          fadeIn = partFadeIn,
          fadeOut = partFadeOut,
-         duration = part1Dur - 1.0,
+         duration = part1Dur - 1.5,
          offY = partSubY,
          flipHoriz = false
       )
