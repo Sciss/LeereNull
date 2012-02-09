@@ -283,19 +283,23 @@ class Video extends PApplet {
                   case Some( pred ) =>
 //                     val predTStop  = (math.max( pred.spanStop, sonoPageFlips( pred.page + 1 )) / sr - sonoCropDur)
                      val predTStop = calcStop( pred )
-                     val tStart = predTStop // sonoPageFlips( r.page ) / sr
+//                     val tStart = predTStop // sonoPageFlips( r.page ) / sr
+                     val trackMove = calcTrackMove( r )
+                     val trackMoves = (r.trackIdx != pred.trackIdx) || (trackMove != 0.0)
+                     val actualFadeDur = if( trackMoves ) sonoCombiDir else sonoCropDur
+                     val tStart = if( pred.page + 1 == r.page ) predTStop else {
+                        (r.spanStart / sr) - actualFadeDur
+                     }
                      val tDur = tStop - tStart
                      advance( tStart )
                      val cropTrackStart = calcCropTrackStart( r )
-                     val trackMove = calcTrackMove( r )
-                     val trackMoves = (r.trackIdx != pred.trackIdx) || (trackMove != 0.0)
                      appear( imageID = r.imageID, gain = 1, trackIdx = pred.trackIdx, trackStart = cropTrackStart,
                              spanStart = spStart, spanStop = spStop, fadeIn = sonoCropDur )
                      if( trackMoves ) {
                         animate( transitDur = sonoMoveDur, deltaTrackIdx = r.trackIdx - pred.trackIdx,
                            deltaTrackStart = trackMove )
                      }
-                     val pd = tDur - (if( trackMoves ) sonoCombiDir else sonoCropDur )
+                     val pd = tDur - actualFadeDur
                      if( pd > 0.0 ) prolong( pd )
 
                   case _ =>
