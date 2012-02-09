@@ -160,6 +160,8 @@ class Video extends PApplet {
 
    def dbToAmp( db: Double ) = 20 * math.log10( db )
 
+   lazy val sr = 44100.0
+
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
 
@@ -212,7 +214,27 @@ class Video extends PApplet {
 
       lazy val part1TitleSub = TitleLayer( this,
          startTime = part1Title.startTime + 1.0,
-         title = "Expand -> Contract",
+         title = "Expand → Contract",
+         fontSize = partSubFnt,
+         fadeIn = partFadeIn,
+         fadeOut = partFadeOut,
+         duration = partDur - 1.0,
+         offY = partSubY
+      )
+
+      lazy val part2Title = TitleLayer( this,
+         startTime = sono.startTime + 301.0, // 5'01"
+         title = "Part II",
+         fontSize = partMainFnt,
+         fadeIn = partFadeIn,
+         fadeOut = partFadeOut,
+         duration = partDur,
+         offY = partMainY
+      )
+
+      lazy val part2TitleSub = TitleLayer( this,
+         startTime = part2Title.startTime + 1.0,
+         title = "Imitation → Ecology",
          fontSize = partSubFnt,
          fadeIn = partFadeIn,
          fadeOut = partFadeOut,
@@ -221,55 +243,58 @@ class Video extends PApplet {
       )
 
 //      val sonoPageFlips = IndexedSeq( 0, 611033, 955418, 1238531, 1567022 ) :+ 2160900
-      val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 ) :+ 2116800
-      val sonoRegions   = dataFolder.listFiles( new FileFilter {
-         def accept( f: File ) = {
-            val n = f.getName
-            n.startsWith( "i" ) && n.endsWith( ".png" )
-         }
-      }).map( SonogramLayer.Region( _ ))
+      lazy val sonoPageFlips = IndexedSeq( 0, 566933, 911318, 1194431, 1522922 ) :+ (2072700 + (sr * 4).toInt)
+      lazy val sonoRegions   = {
+         val rs = dataFolder.listFiles( new FileFilter {
+            def accept( f: File ) = {
+               val n = f.getName
+               n.startsWith( "i" ) && n.endsWith( ".png" )
+            }
+         }).map( SonogramLayer.Region( _ ))
 
-      var idMap = Map.empty[ Int, SonogramLayer.Region ]
-      sonoRegions.foreach { r =>
-         val n = r.imageID
-         val i0 = n.indexOf( "_id" )
-         if( i0 >= 3 ) {
-            val i = i0 + 3
-            val j = n.indexOf( '_', i )
-            val id = n.substring( i, j )
-            val k = id.indexOf( '<' )
-            if( k != 0 ) {
-               val idi = (if( k >= 0 ) id.substring( 0, k ) else id).toInt
-               idMap += idi -> r
+         var idMap = Map.empty[ Int, SonogramLayer.Region ]
+         rs.foreach { r =>
+            val n = r.imageID
+            val i0 = n.indexOf( "_id" )
+            if( i0 >= 3 ) {
+               val i = i0 + 3
+               val j = n.indexOf( '_', i )
+               val id = n.substring( i, j )
+               val k = id.indexOf( '<' )
+               if( k != 0 ) {
+                  val idi = (if( k >= 0 ) id.substring( 0, k ) else id).toInt
+                  idMap += idi -> r
+               }
             }
          }
-      }
-      sonoRegions.foreach { r =>
-         val n = r.imageID
-         val i0 = n.indexOf( "_id" )
-         if( i0 >= 0 ) {
-            val i = i0 + 3
-            val j = n.indexOf( '_', i )
-            val id = n.substring( i, j )
-            val k = id.indexOf( '<' )
-            if( k >= 0 ) {
-   //            val idi = id.substring( 0, k ).toInt
-               val idFrom = id.substring( k + 1 ).toInt
-               val from = idMap( idFrom )
-               from.succ :+= r
-               r.pred = Some( from )
+         rs.foreach { r =>
+            val n = r.imageID
+            val i0 = n.indexOf( "_id" )
+            if( i0 >= 0 ) {
+               val i = i0 + 3
+               val j = n.indexOf( '_', i )
+               val id = n.substring( i, j )
+               val k = id.indexOf( '<' )
+               if( k >= 0 ) {
+      //            val idi = id.substring( 0, k ).toInt
+                  val idFrom = id.substring( k + 1 ).toInt
+                  val from = idMap( idFrom )
+                  from.succ :+= r
+                  r.pred = Some( from )
+               }
             }
          }
+
+         rs
       }
 
-      val sr = 44100.0
-      val sonoCropDur = 0.5
-      val sonoMoveDur = 0.5
-      val sonoCombiDir = sonoCropDur + sonoMoveDur
+      lazy val sonoCropDur = 0.5
+      lazy val sonoMoveDur = 0.5
+      lazy val sonoCombiDir = sonoCropDur + sonoMoveDur
 //      val sonoAppDur  = 1.0
 //      val sonoDissDur = 1.0
 
-      val sonoRec = {
+      lazy val sonoRec = {
          val rec = SonogramLayer.Recorder()
          import rec._
 
@@ -354,8 +379,20 @@ class Video extends PApplet {
          rec
       }
 
-      val sono    = SonogramLayer( this, sonoRec.build, part1Title.stopTime + 1.0 ) // raspad.stopTime + 1.0 )
-      List( mainTitle, mainTitleSub, raspad, part1Title, part1TitleSub, sono )
+      lazy val sono = SonogramLayer( this, sonoRec.build, part1Title.stopTime + 1.0 ) // raspad.stopTime + 1.0 )
+
+      lazy val sonoFade1   = FadeLayer.out(   this, sono.stopTime - (3 + sonoCombiDir), 2 )
+      lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 2 )
+//      lazy val endMarker   = FadeLayer.black( this, part2Title.startTime + 490
+
+      List( mainTitle, mainTitleSub,
+            raspad,
+            part1Title, part1TitleSub,
+            sono,
+            sonoFade1, sonoFade2,
+            part2Title, part2TitleSub
+//            endMarker
+      )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1

@@ -47,8 +47,9 @@ object RaspadLayer {
 }
 class RaspadLayer( protected val video: Video, val startTime: Double ) extends VideoLayer {
    import Video._
-   import RaspadLayer._
+   import RaspadLayer.{duration => gDur, _}
 
+   def duration = gDur
    def stopTime = startTime + duration
 
    def draw() {

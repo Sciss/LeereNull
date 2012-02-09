@@ -41,7 +41,7 @@ object TitleLayer {
               fontSize: Int = 72, offY: Int = 120, fadeIn: Double = 2.0, fadeOut: Double = 2.5 ) : TitleLayer =
       new TitleLayer( video, startTime, duration, title, fontSize, offY, fadeIn, fadeOut )
 }
-class TitleLayer( protected val video: Video, val startTime: Double, duration: Double, title: String, fontSize: Int,
+class TitleLayer( protected val video: Video, val startTime: Double, val duration: Double, title: String, fontSize: Int,
                   offY: Int, fadeIn: Double, fadeOut: Double )
 extends VideoLayer {
    import Video._
