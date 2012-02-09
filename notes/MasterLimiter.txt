@@ -1,0 +1,70 @@
+// Type Scala code here.
+// Press '⇧ + ⏎' to execute selected text
+// or current line.
+
+val numChannels = 4
+val latency = 0.03 // ?
+
+val sd = SynthDef( "Master" ) {
+   val in      = In.ar( NumOutputBuses.ir, numChannels )
+   val below   = 1.0
+   val thresh1 = -3.0.dbamp
+   val above1  = 1.0/1.5
+   val thresh2 = -1.0.dbamp
+   val above2  = 1.0/3.0
+   val attack  = 0.03
+   val release = 0.1
+   val ceil    = -0.2.dbamp
+   val win     = latency
+   val cmp1    = Compander.ar( in,   in,   thresh1, below, above1, attack, release )
+   val cmp2    = Compander.ar( cmp1, cmp1, thresh2, below, above2, attack, release )
+   val lim     = Limiter.ar( cmp2, ceil, win )
+   Out.ar( 0, lim )
+}
+
+val oscF    = java.io.File.createTempFile( "tmp", ".osc" )
+val inPath  = "/Users/hhrutz/Documents/devel/LeereNull/bounce/Full2.aif"
+val outPath = "/Users/hhrutz/Documents/devel/LeereNull/bounce/LeereNull(2)_24b.aif"
+val spec    = io.AudioFile.readSpec( inPath )
+
+val cfg = Server.Config()
+cfg.inputBusChannels  = numChannels
+cfg.outputBusChannels = numChannels
+cfg.nrtCommandPath    = oscF.getAbsolutePath
+cfg.nrtInputPath      = Some( inPath )
+cfg.nrtOutputPath     = outPath
+cfg.nrtHeaderFormat   = io.AudioFileType.AIFF
+cfg.nrtSampleFormat   = io.SampleFormat.Int24
+cfg.sampleRate        = spec.sampleRate.toInt
+
+val nrts = Server.dummy( "NRT", cfg )
+val synth = Synth( nrts )
+
+val dur  = spec.numFrames / spec.sampleRate
+val oscRAF = new java.io.RandomAccessFile( oscF, "rw" )
+val bndl1 = osc.Bundle.secs( 0.0, sd.recvMsg( synth.newMsg( sd.name, nrts.rootNode )))
+val bndl2 = osc.Bundle.secs( dur + latency, synth.freeMsg )
+val bb = java.nio.ByteBuffer.allocate( 32768 )
+val codec = osc.PacketCodec().scsynth().build
+bb.clear()
+bndl1.encode( codec, bb )
+bb.flip()
+val oscCh = oscRAF.getChannel
+oscRAF.writeInt( bb.limit )
+oscCh.write( bb )
+bb.clear()
+bndl2.encode( codec, bb )
+bb.flip()
+oscRAF.writeInt( bb.limit )
+oscCh.write( bb )
+oscRAF.close()
+
+cfg.toNonRealtimeArgs.mkString(" ")
+
+import sys.process._
+val pb = Process( cfg.toNonRealtimeArgs, Some( new java.io.File( cfg.programPath ).getParentFile ))
+val log = ProcessLogger( println, println )
+val p = pb.run( log )
+p.exitValue
+
+
