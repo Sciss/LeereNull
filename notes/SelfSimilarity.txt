@@ -1,0 +1,3 @@
+run -x -d /Users/hhrutz/Documents/devel/LeereNull/feature /Users/hhrutz/Documents/devel/LeereNull/feature/LeereNull(2)_24b_feat.xml -m 32 --color-ceil 0.8 --span-start 37 --span-stop 817 /Users/hhrutz/Documents/devel/LeereNull/video/data_out/LeereNull_selfC.png 
+
+> run -x -d /Users/hhrutz/Documents/devel/LeereNull/feature /Users/hhrutz/Documents/devel/LeereNull/feature/LeereNull(2)_24b_feat.xml -m 32 --color-ceil 0.8 --length 0.5 --span-start 37 --span-stop 817 /Users/hhrutz/Documents/devel/LeereNull/video/data_out/LeereNull_selfD.png     
