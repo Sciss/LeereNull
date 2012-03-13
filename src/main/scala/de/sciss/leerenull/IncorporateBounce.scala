@@ -36,11 +36,13 @@ import collection.JavaConversions
 import de.sciss.kontur.gui.TimelineFrame
 import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
 import actors.Actor
-import de.sciss.kontur.session.{AudioTrack, AudioRegion, AudioFileElement, BasicTimeline, Session}
 import de.sciss.strugatzki.Span
 import swing.{Swing, BorderPanel, ListView}
+import annotation.tailrec
+import de.sciss.synth.io.{AudioFileType, SampleFormat, AudioFile}
+import de.sciss.kontur.session.{FadeSpec, AudioTrack, AudioRegion, AudioFileElement, BasicTimeline, Session}
 
-object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies {
+object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies with NullGoodies {
    type PayLoad = (IIdxSeq[ AudioFileElement ], IIdxSeq[ (AudioTrack, AudioRegion) ])
 
    var VERBOSE = false
@@ -289,6 +291,43 @@ extends Processor {
 
    protected val companion = IncorporateBounce
 
+   private implicit def richSpan[ S <% Span ]( span: S ) : RichSpan = new RichSpan( span )
+
+   // bug in sciss lib intersection for non-overlapping spans
+   private final class RichSpan( a: Span ) {
+      def ø( b: Span ) : Span = {
+         if( a overlaps b ) {
+            Span( math.max( a.start, b.start ), math.min( a.stop, b.stop ))
+         } else Span( a.start, a.start )
+      }
+
+      def notSame( b: Span ) : Boolean = (!a.isEmpty || !b.isEmpty) && ((a.start != b.start) || (a.stop != b.stop))
+   }
+
+   private def withEachChannel( buf: Array[ Array[ Float ]])( fun: Array[ Float ] => Unit ) {
+      var ch = 0; while( ch < buf.length ) {
+         fun( buf( ch ))
+      ch += 1 }
+   }
+
+   private def fadeIn( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]) {
+      var i = 0; while( i < len ) {
+         val f = ((pos + i).toDouble / fd.numFrames).toFloat
+         if( f < 1f ) {
+            buf( i ) *= fd.shape.levelAt( math.max( 0f, f ), 0f, 1f )
+         }
+      i += 1 }
+   }
+
+   private def fadeOut( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]) {
+      var i = 0; while( i < len ) {
+         val f = ((pos + i).toDouble / fd.numFrames).toFloat
+         if( f > 0f ) {
+            buf( i ) *= fd.shape.levelAt( math.min( 1f, f ), 1f, 0f )
+         }
+      i += 1 }
+   }
+
    protected def body() : Result = {
       // first, select only those regions which are somehow covered and not muted
       val numIn = preARs.size
@@ -300,7 +339,7 @@ extends Processor {
             val res = overs.map { over =>
                val ar1        = if( over.gain == 1 ) ar else ar.copy( gain = ar.gain * over.gain )
                // see if pre region's fades are affected by the cut
-               val postSpan   = over.span.intersection( preSpan )
+               val postSpan   = over.span ø preSpan
                assert( !postSpan.isEmpty )
                val preFadeIn  = {
                   val len = ar1.fadeIn.map( _.numFrames ).getOrElse( 0L )
@@ -310,11 +349,11 @@ extends Processor {
                   val len = ar1.fadeOut.map( _.numFrames ).getOrElse( 0L )
                   Span( preSpan.stop - len, preSpan.stop )
                }
-               val postFadeIn    = preFadeIn.intersection( postSpan )
-               val postFadeOut   = preFadeOut.intersection( postSpan )
+               val postFadeIn    = preFadeIn ø postSpan
+               val postFadeOut   = preFadeOut ø postSpan
                // whether we need to bounce because the pre bounce fades are cut
-               val needsBounce1  = (!postFadeIn.isEmpty && postFadeIn != preFadeIn) ||
-                                   (!postFadeOut.isEmpty && postFadeOut != preFadeOut)
+               val needsBounce1  = (!postFadeIn.isEmpty  && (postFadeIn notSame preFadeIn)) ||
+                                   (!postFadeOut.isEmpty && (postFadeOut notSame preFadeOut))
 
                val bncPreFadeIn  = {
                   val len = over.fadeIn.map( _.numFrames ).getOrElse( 0L )
@@ -324,11 +363,11 @@ extends Processor {
                   val len = over.fadeOut.map( _.numFrames ).getOrElse( 0L )
                   Span( over.span.stop - len, over.span.stop )
                }
-               val bncPostFadeIn    = bncPreFadeIn.intersection( postSpan )
-               val bncPostFadeOut   = bncPreFadeOut.intersection( postSpan )
+               val bncPostFadeIn    = bncPreFadeIn ø postSpan
+               val bncPostFadeOut   = bncPreFadeOut ø postSpan
                // whether we need to bounce because the post bounce fades are cut
-               val needsBounce2     = (!bncPostFadeIn.isEmpty && bncPostFadeIn != bncPreFadeIn) ||
-                                      (!bncPostFadeOut.isEmpty && bncPostFadeOut != bncPreFadeOut)
+               val needsBounce2     = (!bncPostFadeIn.isEmpty  && (bncPostFadeIn notSame bncPreFadeIn)) ||
+                                      (!bncPostFadeOut.isEmpty && (bncPostFadeOut notSame bncPreFadeOut))
 
                // whether we need to bounce because of concurrent pre and post bounce fades
                val needsBounce3  = postFadeIn.overlaps(  bncPostFadeIn ) ||
@@ -338,12 +377,69 @@ extends Processor {
 
                val arOut = if( !(needsBounce1 || needsBounce2 || needsBounce3) ) {  // lucky
                   val ar2 = ar1.copy( span = postSpan )
-                  val ar3 = if( bncPostFadeIn.isEmpty )  ar2 else ar2.copy( fadeIn  = over.fadeIn.map(  _.copy( numFrames = bncPostFadeIn.length )))
-                  val ar4 = if( bncPostFadeOut.isEmpty ) ar3 else ar3.copy( fadeOut = over.fadeOut.map( _.copy( numFrames = bncPostFadeOut.length )))
+                  val ar3 = if( bncPostFadeIn.isEmpty )  ar2 else {
+                     ar2.copy( fadeIn  = over.fadeIn.map(  _.copy( numFrames = bncPostFadeIn.length )))
+                  }
+                  val ar4 = if( bncPostFadeOut.isEmpty ) ar3 else {
+                     ar3.copy( fadeOut = over.fadeOut.map( _.copy( numFrames = bncPostFadeOut.length )))
+                  }
                   ar4
 
                } else {
-                  ar1.copy( span = postSpan )   // XXX todo
+
+                  if( VERBOSE ) {
+                     println( "ar " + needsBounce1 + "/" + needsBounce2 + "/" + needsBounce3 + " -> old = " + ar1.span + " -> new = " + postSpan )
+                     println( " ; _preIn  = " + preFadeIn + " (" + ar1.fadeIn + ") -> postIn  = " + postFadeIn )
+                     println( " ; _preOut = " + preFadeOut + " (" + ar1.fadeOut + ") -> postOut = " + postFadeOut )
+                     println( " ; BpreIn  = " + bncPreFadeIn + " (" + over.fadeIn + ") -> postIn  = " + bncPostFadeIn )
+                     println( " ; BpreOut = " + bncPreFadeOut + " (" + over.fadeOut + ") -> postOut = " + bncPostFadeOut )
+                  }
+
+                  @tailrec def newFileName( prefix: String, cnt: Int, suffix: String ) : File = {
+                     val test = new File( bncDir, prefix + cnt + suffix )
+                     if( !test.exists() ) test else newFileName( prefix, cnt + 1, suffix )
+                  }
+                  val inF     = ar.audioFile.path
+                  val outF    = newFileName( plainName( inF ) + "Fd", 1, ".aif" )
+                  val afIn    = AudioFile.openRead( inF )
+                  try {
+                     val afOut   = AudioFile.openWrite( outF,
+                        afIn.spec.copy( fileType = AudioFileType.AIFF, sampleFormat = SampleFormat.Float, byteOrder = None ))
+                     val afOff   = ar1.offset + (postSpan.start - ar1.span.start)
+                     afIn.seek( afOff )
+                     val bufSz   = 8192
+                     val buf     = afIn.buffer( bufSz )
+                     var pos     = postSpan.start
+                     val stop    = postSpan.stop
+                     while( pos < postSpan.stop ) {
+                        val chunk = math.min( stop - pos, bufSz ).toInt
+                        afIn.read( buf, 0, chunk )
+                        if( !preFadeIn.isEmpty ) ar1.fadeIn.foreach { fd =>
+                           withEachChannel( buf )( fadeIn( fd, pos - preFadeIn.start, chunk ))
+                        }
+                        if( !bncPreFadeIn.isEmpty ) over.fadeIn.foreach { fd =>
+                           withEachChannel( buf )( fadeIn( fd, pos - bncPreFadeIn.start, chunk ))
+                        }
+                        if( !preFadeOut.isEmpty ) ar1.fadeOut.foreach { fd =>
+                           withEachChannel( buf )( fadeOut( fd, pos - preFadeOut.start, chunk ))
+                        }
+                        if( !bncPreFadeOut.isEmpty ) over.fadeOut.foreach { fd =>
+                           withEachChannel( buf )( fadeOut( fd, pos - bncPreFadeOut.start, chunk ))
+                        }
+                        afOut.write( buf, 0, chunk )
+                        pos += chunk
+                     }
+
+                     try {
+                        val afeNew  = AudioFileElement( outF, afOut.numFrames, afOut.numChannels, afOut.sampleRate )
+                        newFiles :+= afeNew
+                        ar1.copy( span = postSpan, fadeIn = None, fadeOut = None, audioFile = afeNew, offset = 0L )
+                     } finally {
+                        afOut.cleanUp()
+                     }
+                  } finally {
+                     afIn.cleanUp()
+                  }
                }
                (at, arOut)
             }
