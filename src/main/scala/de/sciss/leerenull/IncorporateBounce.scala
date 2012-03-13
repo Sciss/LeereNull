@@ -43,6 +43,8 @@ import swing.{Swing, BorderPanel, ListView}
 object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies {
    type PayLoad = (IIdxSeq[ AudioFileElement ], IIdxSeq[ (AudioTrack, AudioRegion) ])
 
+   var VERBOSE = false
+
    def showGUI() {
       val app  = AbstractApplication.getApplication
       val dh   = app.getDocumentHandler
@@ -200,33 +202,55 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       if( newFiles.nonEmpty ) {
          val afs = doc.audioFiles
          val ce = afs.editBegin( "Insert audio files" )
+         var ceOk = false
          try {
             val off = afs.size
             newFiles.zipWithIndex.foreach {
                case (afe, idx) => afs.editInsert( ce, idx + off, afe )
             }
+            ceOk = true
          } finally {
-            ce.end()
+            if( ceOk ) afs.editEnd( ce ) else afs.editCancel( ce )
+         }
+      }
+
+      if( VERBOSE ) {
+         println( ":::: REMOVE ::::" )
+         removeMap.foreach { case (at, ars) =>
+            println( at.name )
+            ars.foreach { ar => println( "  " + ar.name )}
          }
       }
 
       // remove old regions
       removeMap.foreach { case (at, ars) =>
          val ce = at.editBegin( "Remove old regions in track " + at.name )
+         var ceOk = false
          try {
             at.trail.editRemove( ce, ars: _* )
+            ceOk = true
          } finally {
-            ce.end()
+            if( ceOk ) at.editEnd( ce ) else at.editCancel( ce )
+         }
+      }
+
+      if( VERBOSE ) {
+         println( ":::: INSERT ::::" )
+         insertMap.foreach { case (at, ars) =>
+            println( at.name )
+            ars.foreach { ar => println( "  " + ar.name )}
          }
       }
 
       // insert new regions
       insertMap.foreach { case (at, ars) =>
          val ce = at.editBegin( "Insert new regions in track " + at.name )
+         var ceOk = false
          try {
             at.trail.editAdd( ce, ars: _* )
+            ceOk = true
          } finally {
-            ce.end()
+            if( ceOk ) at.editEnd( ce ) else at.editCancel( ce )
          }
       }
    }
@@ -313,7 +337,11 @@ extends Processor {
                                    postFadeOut.overlaps( bncPostFadeOut )
 
                val arOut = if( !(needsBounce1 || needsBounce2 || needsBounce3) ) {  // lucky
-                  ar1.copy( span = postSpan )
+                  val ar2 = ar1.copy( span = postSpan )
+                  val ar3 = if( bncPostFadeIn.isEmpty )  ar2 else ar2.copy( fadeIn  = over.fadeIn.map(  _.copy( numFrames = bncPostFadeIn.length )))
+                  val ar4 = if( bncPostFadeOut.isEmpty ) ar3 else ar3.copy( fadeOut = over.fadeOut.map( _.copy( numFrames = bncPostFadeOut.length )))
+                  ar4
+
                } else {
                   ar1.copy( span = postSpan )   // XXX todo
                }
