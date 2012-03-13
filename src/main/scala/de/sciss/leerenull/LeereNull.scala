@@ -34,6 +34,8 @@ import collection.breakOut
 import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, AudioTrack, AudioRegion}
 import swing.{ButtonGroup, Dialog, Swing}
 import de.sciss.kontur.gui.{DefaultTrackComponent, TrailViewEditor}
+import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGoodies {
    lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder, ueberzeichnungFolder) = {
@@ -391,7 +393,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       val miExportPDF = new MenuItem( "leerenull.exportpdf", action( "Export Timeline as PDF..." ) {
          currentDoc.foreach { implicit doc =>
             findTimelineFrame.foreach { tlf =>
-               saveFileDialog( "Export Timeline as PDF" ).foreach { file =>
+               val defaultName = tlf.timelineView.timeline.name + ".pdf"
+               saveFileDialog( "Export Timeline as PDF", new File( sys.props( "user.home" ), defaultName )).foreach { file =>
                   val view = tlf.tracksPanel.getViewport.getView
 //                  val view = PDF.wrapTimeline( tlf, 1024, 64 )
 //                  view.span = tlf.tracksPanel.timelineView.span
@@ -406,6 +409,37 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                   } finally {
                      DefaultTrackComponent.forceFullPaint = old
 //                     SonagramOverview.verbose = oldVerbose
+                  }
+               }
+            }
+         }
+      })
+      val miExportPNG = new MenuItem( "leerenull.exportpng", action( "Export Timeline as PNG..." ) {
+         currentDoc.foreach { implicit doc =>
+            findTimelineFrame.foreach { tlf =>
+               val defaultName = tlf.timelineView.timeline.name + ".png"
+               saveFileDialog( "Export Timeline as PNG", new File( sys.props( "user.home" ), defaultName )).foreach { file =>
+                  val view = tlf.tracksPanel.getViewport.getView
+                  val old  = DefaultTrackComponent.forceFullPaint
+                  DefaultTrackComponent.forceFullPaint = true
+                  try {
+                     println( "Exporting..." )
+                     val bImg = new BufferedImage( view.getWidth, view.getHeight, BufferedImage.TYPE_INT_ARGB )
+//println( "width = " + bImg.getWidth + ", height = " + bImg.getHeight )
+                     try {
+                        val bg = bImg.createGraphics()
+                        try {
+                           view.paint( bg )
+                        } finally {
+                           bg.dispose()
+                        }
+                        ImageIO.write( bImg, "png", file )
+                     } finally {
+                        bImg.flush()
+                     }
+                     println( "Done." )
+                  } finally {
+                     DefaultTrackComponent.forceFullPaint = old
                   }
                }
             }
@@ -491,6 +525,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       mg.add( miOptimizeFanatically )
       mg.addSeparator()
       mg.add( miExportPDF )
+      mg.add( miExportPNG )
       mg.add( miCreateSonogram )
 
       mg.addSeparator()
