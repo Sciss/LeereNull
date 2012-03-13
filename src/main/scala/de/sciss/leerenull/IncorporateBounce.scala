@@ -28,7 +28,6 @@ package de.sciss.leerenull
 import de.sciss.app.AbstractApplication
 import collection.immutable.{IndexedSeq => IIdxSeq}
 import javax.swing.JOptionPane
-import swing.{BorderPanel, ListView}
 import java.io.File
 import eu.flierl.grouppanel.GroupPanel
 import de.sciss.common.BasicWindowHandler
@@ -39,6 +38,7 @@ import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
 import actors.Actor
 import de.sciss.kontur.session.{AudioTrack, AudioRegion, AudioFileElement, BasicTimeline, Session}
 import de.sciss.strugatzki.Span
+import swing.{Swing, BorderPanel, ListView}
 
 object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies {
    type PayLoad = (IIdxSeq[ AudioFileElement ], IIdxSeq[ (AudioTrack, AudioRegion) ])
@@ -97,10 +97,10 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
                   afs match {
                      case Seq( bnc ) =>
                         bncAFE = Some( bnc )
-                        val over = bncARs.sliding( 2, 1 ).collect {
-                           case Seq( a, b ) if( a.span overlaps b.span ) => (a, b)
-                        }
-                        if( over.isEmpty ) {
+//                        val over = bncARs.sliding( 2, 1 ).collect {
+//                           case Seq( a, b ) if( a.span overlaps b.span ) => (a, b)
+//                        }
+//                        if( over.isEmpty ) {
                            val RegOff = """.+\@(\d{1,2})\'(\d{2})".+""".r
                            bnc.name match {
                               case RegOff( mins, secs ) =>
@@ -110,13 +110,13 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
                            ok = true
                            println( "Selection ok." )
 
-                        } else {
-                           println( "Regions in bounce cannot overlap. Found the following overlaps:" )
-                           over.take( 10 ).foreach {
-                              case (a, b) => println( a.name + " : " + a.span + " -- " + b.name + " : " + b.span )
-                           }
-                           if( over.size > 10 ) println( "..." )
-                        }
+//                        } else {
+//                           println( "Regions in bounce cannot overlap. Found the following overlaps:" )
+//                           over.take( 10 ).foreach {
+//                              case (a, b) => println( a.name + " : " + a.span + " -- " + b.name + " : " + b.span )
+//                           }
+//                           if( over.size > 10 ) println( "..." )
+//                        }
 
                      case _ =>
                         println( "Selection in post timeline must come from exactly one audio file (the bounce)" )
@@ -181,7 +181,7 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
                val bncStart   = bncAR1.span.start - bncAR1.offset
                val delta      = off - bncStart
                val bncARsOff  = if( delta != 0 ) bncARs.map( _.move( delta )) else bncARs
-               render( bncARsOff.toIndexedSeq, bncDir, preTL._2 )
+               render( bncARsOff.toIndexedSeq, bncDir, preTL._1, preTL._2 )
             } else {
                println( "Wooop. Settings wrong. Try again." )
             }
@@ -189,12 +189,49 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       }
    }
 
-   def pasteResult( remove: IIdxSeq[ (AudioTrack, AudioRegion) ], insert: IIdxSeq[ (AudioTrack, AudioRegion )],
+   def pasteResult( doc: Session, tl: BasicTimeline, remove: IIdxSeq[ (AudioTrack, AudioRegion) ],
+                    insert: IIdxSeq[ (AudioTrack, AudioRegion )],
                     newFiles: IIdxSeq[ AudioFileElement ]) {
 
+      val removeMap: Map[ AudioTrack, IIdxSeq[ AudioRegion ]] = remove.groupBy( _._1 ).mapValues( _.map( _._2 ))
+      val insertMap: Map[ AudioTrack, IIdxSeq[ AudioRegion ]] = insert.groupBy( _._1 ).mapValues( _.map( _._2 ))
+
+      // add new audio files
+      if( newFiles.nonEmpty ) {
+         val afs = doc.audioFiles
+         val ce = afs.editBegin( "Insert audio files" )
+         try {
+            val off = afs.size
+            newFiles.zipWithIndex.foreach {
+               case (afe, idx) => afs.editInsert( ce, idx + off, afe )
+            }
+         } finally {
+            ce.end()
+         }
+      }
+
+      // remove old regions
+      removeMap.foreach { case (at, ars) =>
+         val ce = at.editBegin( "Remove old regions in track " + at.name )
+         try {
+            at.trail.editRemove( ce, ars: _* )
+         } finally {
+            ce.end()
+         }
+      }
+
+      // insert new regions
+      insertMap.foreach { case (at, ars) =>
+         val ce = at.editBegin( "Insert new regions in track " + at.name )
+         try {
+            at.trail.editAdd( ce, ars: _* )
+         } finally {
+            ce.end()
+         }
+      }
    }
 
-   def render( bncARs: IIdxSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline ) {
+   def render( bncARs: IIdxSeq[ AudioRegion ], bncDir: File, preDoc: Session, preTL: BasicTimeline ) {
       // don't filter the muted ones at this point, because the process will do it,
       // and then they will be automatically removed after the render finishes.
       val preARs = collectAudioRegions({ case x => x })( preTL ).sortBy( _._2.span.start ).toIndexedSeq
@@ -203,7 +240,7 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       val proc = IncorporateBounce( bncARs, bncDir, preTL, preARs ) {
          case IncorporateBounce.Success( (newFiles, newRegions) ) =>
             dlg.stop()
-            pasteResult( preARs, newRegions, newFiles )
+            Swing.onEDT( pasteResult( preDoc, preTL, preARs, newRegions, newFiles ))
 
          case IncorporateBounce.Failure( e ) =>
             dlg.stop()
