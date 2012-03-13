@@ -53,7 +53,7 @@ object ConvertToMono extends ProcessorCompanion with KonturGoodies with GUIGoodi
       val arsRemove  = arsIn0.filter( _._2.audioFile.numChannels > 1 )
       val arsIn      = arsIn0.groupBy( _._1 ).mapValues( _.map( _._2 )).toIndexedSeq
 
-      val dlg  = progressDialog( "Incorporate Bounce" )
+      val dlg  = progressDialog( "Convert to Mono" )
       val proc = ConvertToMono( dir, arsIn ) {
          case ConvertToMono.Success( (newFiles, newRegions) ) =>
             dlg.stop()
