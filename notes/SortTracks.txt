@@ -14,13 +14,41 @@ def edit( e: de.sciss.kontur.edit.Editor, name: String = "Edit" )( fun: de.sciss
    }
 }
 
+def naturalCompare( a: String, b: String ) : Int = {
+   val asz = a.length()
+   val bsz = b.length()
+   var sz  = math.min( asz, bsz )
+   var ai  = 0
+   var bi  = 0
+   while( ai < asz && bi < bsz ) {
+      val ac = a.charAt( ai ).toUpperCase
+      val bc = b.charAt( bi ).toUpperCase
+      if( ac.isDigit && bc.isDigit ) {
+         val aj = ai
+         while( ai < asz && a.charAt( ai ).isDigit ) { ai += 1 }
+         val an = a.substring( aj, ai ).toInt
+         val bj = bi
+         while( bi < bsz && b.charAt( bi ).isDigit ) { bi += 1 }
+         val bn = b.substring( bj, bi ).toInt
+         if( an < bn ) return -1 else if( an > bn ) return 1
+      } else {
+         if( ac < bc ) return -1 else if( ac > bc ) return 1
+         ai += 1; bi += 1
+      }
+   }
+   val ar = asz - ai
+   val br = bsz - bi
+   if( ar < br ) return -1 else if( ar > br ) return 1
+   0 // equal
+}
+
 def sortTracks( t: Timeline = doc.timelines.toList.head ) {
    val tracks   = t.tracks
    val ts       = tracks.toList
    tracks.editor.foreach { e =>
       edit( e, "Arrange tracks" ) { ce =>
          ts.foreach( e.editRemove( ce, _ ))
-         ts.sortBy( _.name.toUpperCase ).zipWithIndex.foreach {
+         ts.sortWith( (a, b) => naturalCompare( a.name, b.name ) < 0 ).zipWithIndex.foreach {
             case (t, i) => e.editInsert( ce, i, t )
          }
       }

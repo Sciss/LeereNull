@@ -328,28 +328,28 @@
       <diffusion idref="52"></diffusion>
       <trail>
   <stake>
-      <name>Angst_070903St@4783616</name>
-      <span stop="16645386" start="16416307"></span>
-      <audioFile idref="27"></audioFile>
-      <offset>4783616</offset>
-      <gain>70.36705</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ExNihilo@25951744</name>
-      <span stop="16906291" start="16778803"></span>
+      <name>ExNihilo@11128832</name>
+      <span stop="9474623" start="9339443"></span>
       <audioFile idref="6"></audioFile>
-      <offset>25951744</offset>
-      <gain>0.19425532</gain>
+      <offset>11128832</offset>
+      <gain>0.94201034</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>134298</numFrames>
+  <shape curve="-3.0" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Bnce020414FTWTFTAmp@2706432</name>
+      <span stop="9935411" start="9828915"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>2706432</offset>
+      <gain>0.14512376</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -362,28 +362,45 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>dBArchaeo-13@160256</name>
-      <span stop="17039923" start="16967731"></span>
-      <audioFile idref="34"></audioFile>
-      <offset>160256</offset>
-      <gain>0.7862465</gain>
+      <name>BallonsGross@14702592</name>
+      <span stop="10814134" start="10710067"></span>
+      <audioFile idref="28"></audioFile>
+      <offset>14702592</offset>
+      <gain>4.817675</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>882</numFrames>
+  <numFrames>15781</numFrames>
   
   
 </fade></fadeOut>
       
    </stake><stake>
-      <name>Aff02'CpyWTConSoftHP@352256</name>
-      <span stop="17210931" start="17071667"></span>
-      <audioFile idref="19"></audioFile>
-      <offset>352256</offset>
-      <gain>0.7055196</gain>
+      <name>080228_104415_CaracasPatioCage1AT@93983744</name>
+      <span stop="11135744" start="11006515"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>93983744</offset>
+      <gain>0.99162</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ExNihilo@24125440</name>
+      <span stop="18484787" start="18361395"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>24125440</offset>
+      <gain>0.6744647</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -413,11 +430,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>ExNihilo@24125440</name>
-      <span stop="18484787" start="18361395"></span>
-      <audioFile idref="6"></audioFile>
-      <offset>24125440</offset>
-      <gain>0.6744647</gain>
+      <name>Aff02'CpyWTConSoftHP@352256</name>
+      <span stop="17210931" start="17071667"></span>
+      <audioFile idref="19"></audioFile>
+      <offset>352256</offset>
+      <gain>0.7055196</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -430,11 +447,85 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>080228_104415_CaracasPatioCage1AT@93983744</name>
-      <span stop="11135744" start="11006515"></span>
-      <audioFile idref="11"></audioFile>
-      <offset>93983744</offset>
-      <gain>0.99162</gain>
+      <name>dBArchaeo-13@160256</name>
+      <span stop="17039923" start="16967731"></span>
+      <audioFile idref="34"></audioFile>
+      <offset>160256</offset>
+      <gain>0.7862465</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ExNihilo@25951744</name>
+      <span stop="16906291" start="16778803"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>25951744</offset>
+      <gain>0.19425532</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Angst_070903St@4783616</name>
+      <span stop="16645386" start="16416307"></span>
+      <audioFile idref="27"></audioFile>
+      <offset>4783616</offset>
+      <gain>70.36705</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="64">
+      <name>Ch-1 2</name>
+      <diffusion idref="56"></diffusion>
+      <trail>
+  <stake>
+      <name>Atem@7549952</name>
+      <span stop="10642995" start="10568755"></span>
+      <audioFile idref="3"></audioFile>
+      <offset>7549952</offset>
+      <gain>1.2032727</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>B21h08m31s08feb2011_withoutFScape@4841984</name>
+      <span stop="11135744" start="10783182"></span>
+      <audioFile idref="25"></audioFile>
+      <offset>4812187</offset>
+      <gain>0.51381075</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -447,136 +538,20 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>BallonsGross@14702592</name>
-      <span stop="10814134" start="10710067"></span>
-      <audioFile idref="28"></audioFile>
-      <offset>14702592</offset>
-      <gain>4.817675</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>15781</numFrames>
-  
-  
-</fade></fadeOut>
+      <name>080228_104415_CaracasPatioCage1AT@81264128</name>
+      <span stop="16118835" start="16110065"></span>
+      <audioFile idref="46"></audioFile>
+      <offset>0</offset>
+      <gain>1.3795444</gain>
+      
+      
       
    </stake><stake>
-      <name>Bnce020414FTWTFTAmp@2706432</name>
-      <span stop="9935411" start="9828915"></span>
-      <audioFile idref="14"></audioFile>
-      <offset>2706432</offset>
-      <gain>0.14512376</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ExNihilo@11128832</name>
-      <span stop="9474623" start="9339443"></span>
-      <audioFile idref="6"></audioFile>
-      <offset>11128832</offset>
-      <gain>0.94201034</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>134298</numFrames>
-  <shape curve="-3.0" num="5"></shape>
-  
-</fade></fadeOut>
-      
-   </stake>
-</trail>
-      </audioTrack><audioTrack id="64">
-      <name>Ch-1 2</name>
-      <diffusion idref="56"></diffusion>
-      <trail>
-  <stake>
-      <name>GefrorenerSeePre@750592</name>
-      <span stop="18827827" start="18702899"></span>
+      <name>GefrorenerSeePre@19834368</name>
+      <span stop="16433203" start="16286771"></span>
       <audioFile idref="10"></audioFile>
-      <offset>750592</offset>
-      <gain>14.188808</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>GefrorenerSeePre@251392</name>
-      <span stop="18674739" start="18573363"></span>
-      <audioFile idref="10"></audioFile>
-      <offset>251392</offset>
-      <gain>28.157423</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>B12h32m16s11apr2006y@42505728</name>
-      <span stop="17552435" start="17466931"></span>
-      <audioFile idref="44"></audioFile>
-      <offset>42505728</offset>
-      <gain>0.062247634</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>BigStone4@44901888</name>
-      <span stop="17099315" start="17039923"></span>
-      <audioFile idref="9"></audioFile>
-      <offset>44901888</offset>
-      <gain>2.30556</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ExNihilo@27731968</name>
-      <span stop="16817203" start="16761395"></span>
-      <audioFile idref="6"></audioFile>
-      <offset>27731968</offset>
-      <gain>0.4999011</gain>
+      <offset>19834368</offset>
+      <gain>15.450587</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -606,11 +581,62 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>GefrorenerSeePre@19834368</name>
-      <span stop="16433203" start="16286771"></span>
+      <name>ExNihilo@27731968</name>
+      <span stop="16817203" start="16761395"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>27731968</offset>
+      <gain>0.4999011</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BigStone4@44901888</name>
+      <span stop="17099315" start="17039923"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>44901888</offset>
+      <gain>2.30556</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>B12h32m16s11apr2006y@42505728</name>
+      <span stop="17552435" start="17466931"></span>
+      <audioFile idref="44"></audioFile>
+      <offset>42505728</offset>
+      <gain>0.062247634</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>GefrorenerSeePre@251392</name>
+      <span stop="18674739" start="18573363"></span>
       <audioFile idref="10"></audioFile>
-      <offset>19834368</offset>
-      <gain>15.450587</gain>
+      <offset>251392</offset>
+      <gain>28.157423</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -623,37 +649,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>080228_104415_CaracasPatioCage1AT@81264128</name>
-      <span stop="16118835" start="16110065"></span>
-      <audioFile idref="46"></audioFile>
-      <offset>0</offset>
-      <gain>1.3795444</gain>
-      
-      
-      
-   </stake><stake>
-      <name>B21h08m31s08feb2011_withoutFScape@4841984</name>
-      <span stop="11135744" start="10783182"></span>
-      <audioFile idref="25"></audioFile>
-      <offset>4812187</offset>
-      <gain>0.51381075</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>11012</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Atem@7549952</name>
-      <span stop="10642995" start="10568755"></span>
-      <audioFile idref="3"></audioFile>
-      <offset>7549952</offset>
-      <gain>1.2032727</gain>
+      <name>GefrorenerSeePre@750592</name>
+      <span stop="18827827" start="18702899"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>750592</offset>
+      <gain>14.188808</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -672,11 +672,20 @@
       <diffusion idref="52"></diffusion>
       <trail>
   <stake>
-      <name>GefrorenerSeePre@19867136</name>
-      <span stop="18530355" start="18447923"></span>
-      <audioFile idref="10"></audioFile>
-      <offset>19867136</offset>
-      <gain>17.982721</gain>
+      <name>Aff02'CpyWTConSoftHP@987136</name>
+      <span stop="16425979" start="16110065"></span>
+      <audioFile idref="47"></audioFile>
+      <offset>0</offset>
+      <gain>0.28940615</gain>
+      
+      
+      
+   </stake><stake>
+      <name>BigStone4@43055616</name>
+      <span stop="9517860" start="9364531"></span>
+      <audioFile idref="9"></audioFile>
+      <offset>43055616</offset>
+      <gain>0.5815432</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -689,20 +698,37 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>BibliothekTransport080930@38552064</name>
-      <span stop="17602719" start="17399347"></span>
-      <audioFile idref="48"></audioFile>
+      <name>CmpFltExc@6328320</name>
+      <span stop="10031155" start="9906739"></span>
+      <audioFile idref="18"></audioFile>
+      <offset>6328320</offset>
+      <gain>0.12380005</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>dBArchaeo-13@103424</name>
+      <span stop="11135744" start="11135539"></span>
+      <audioFile idref="45"></audioFile>
       <offset>0</offset>
-      <gain>15.033593</gain>
+      <gain>1.1522084</gain>
       
       
       
    </stake><stake>
-      <name>_2007113hmss_1st_1EditBin@21611008</name>
-      <span stop="17323059" start="17194547"></span>
-      <audioFile idref="4"></audioFile>
-      <offset>21611008</offset>
-      <gain>22.328281</gain>
+      <name>GefrorenerSeePre@840192</name>
+      <span stop="16676915" start="16497715"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>840192</offset>
+      <gain>4.3960824</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -732,11 +758,37 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>GefrorenerSeePre@840192</name>
-      <span stop="16676915" start="16497715"></span>
+      <name>_2007113hmss_1st_1EditBin@21611008</name>
+      <span stop="17323059" start="17194547"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>21611008</offset>
+      <gain>22.328281</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BibliothekTransport080930@38552064</name>
+      <span stop="17602719" start="17399347"></span>
+      <audioFile idref="48"></audioFile>
+      <offset>0</offset>
+      <gain>15.033593</gain>
+      
+      
+      
+   </stake><stake>
+      <name>GefrorenerSeePre@19867136</name>
+      <span stop="18530355" start="18447923"></span>
       <audioFile idref="10"></audioFile>
-      <offset>840192</offset>
-      <gain>4.3960824</gain>
+      <offset>19867136</offset>
+      <gain>17.982721</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -747,58 +799,6 @@
   
   
 </fade></fadeOut>
-      
-   </stake><stake>
-      <name>dBArchaeo-13@103424</name>
-      <span stop="11135744" start="11135539"></span>
-      <audioFile idref="45"></audioFile>
-      <offset>0</offset>
-      <gain>1.1522084</gain>
-      
-      
-      
-   </stake><stake>
-      <name>CmpFltExc@6328320</name>
-      <span stop="10031155" start="9906739"></span>
-      <audioFile idref="18"></audioFile>
-      <offset>6328320</offset>
-      <gain>0.12380005</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>BigStone4@43055616</name>
-      <span stop="9517860" start="9364531"></span>
-      <audioFile idref="9"></audioFile>
-      <offset>43055616</offset>
-      <gain>0.5815432</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Aff02'CpyWTConSoftHP@987136</name>
-      <span stop="16425979" start="16110065"></span>
-      <audioFile idref="47"></audioFile>
-      <offset>0</offset>
-      <gain>0.28940615</gain>
-      
-      
       
    </stake>
 </trail>
@@ -807,11 +807,11 @@
       <diffusion idref="56"></diffusion>
       <trail>
   <stake>
-      <name>BetonPoch@6883840</name>
-      <span stop="16805427" start="16718387"></span>
-      <audioFile idref="43"></audioFile>
-      <offset>6883840</offset>
-      <gain>0.05316807</gain>
+      <name>Angst_070903St@11029504</name>
+      <span stop="10759219" start="10611251"></span>
+      <audioFile idref="27"></audioFile>
+      <offset>11029504</offset>
+      <gain>1.0730575</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -824,11 +824,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>Angst_070903St@11029504</name>
-      <span stop="10759219" start="10611251"></span>
-      <audioFile idref="27"></audioFile>
-      <offset>11029504</offset>
-      <gain>1.0730575</gain>
+      <name>BetonPoch@6883840</name>
+      <span stop="16805427" start="16718387"></span>
+      <audioFile idref="43"></audioFile>
+      <offset>6883840</offset>
+      <gain>0.05316807</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -847,18 +847,18 @@
       <diffusion idref="60"></diffusion>
       <trail>
   <stake>
-      <name>Draht@402944</name>
-      <span stop="18457336" start="18232239"></span>
-      <audioFile idref="36"></audioFile>
-      <offset>402944</offset>
-      <gain>3.3351657</gain>
+      <name>Folie-2@75215872</name>
+      <span stop="10286643" start="10222131"></span>
+      <audioFile idref="21"></audioFile>
+      <offset>75215872</offset>
+      <gain>2.935551</gain>
       <fadeIn><fade>
-  <numFrames>1836</numFrames>
+  <numFrames>882</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>49834</numFrames>
+  <numFrames>882</numFrames>
   
   
 </fade></fadeOut>
@@ -881,18 +881,18 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>Folie-2@75215872</name>
-      <span stop="10286643" start="10222131"></span>
-      <audioFile idref="21"></audioFile>
-      <offset>75215872</offset>
-      <gain>2.935551</gain>
+      <name>Draht@402944</name>
+      <span stop="18457336" start="18232239"></span>
+      <audioFile idref="36"></audioFile>
+      <offset>402944</offset>
+      <gain>3.3351657</gain>
       <fadeIn><fade>
-  <numFrames>882</numFrames>
+  <numFrames>1836</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>882</numFrames>
+  <numFrames>49834</numFrames>
   
   
 </fade></fadeOut>
@@ -927,62 +927,11 @@
       <diffusion idref="51"></diffusion>
       <trail>
   <stake>
-      <name>Ens_CoilJazz_Sciss@13879296</name>
-      <span stop="17602719" start="17570355"></span>
-      <audioFile idref="39"></audioFile>
-      <offset>13879296</offset>
-      <gain>0.3018926</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>14683</numFrames>
-  <shape curve="-2.6000001" num="5"></shape>
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>AgnDm'mpHlbOpAgnDm'mpHlb@1296384</name>
-      <span stop="17280051" start="17205811"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>1296384</offset>
-      <gain>0.32577127</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Elex#03 Ring@17204224</name>
-      <span stop="16118835" start="16110065"></span>
-      <audioFile idref="40"></audioFile>
-      <offset>17204224</offset>
-      <gain>0.7469323</gain>
-      <fadeIn><fade>
-  <numFrames>1836</numFrames>
-  <shape curve="-1.0" num="5"></shape>
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Heizung1Cut@235008</name>
-      <span stop="11003955" start="10959923"></span>
-      <audioFile idref="31"></audioFile>
-      <offset>235008</offset>
-      <gain>3.7402787</gain>
+      <name>Heizung4Ed@6472192</name>
+      <span stop="9364458" start="9325619"></span>
+      <audioFile idref="5"></audioFile>
+      <offset>6472192</offset>
+      <gain>30.24522</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1012,11 +961,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>Heizung4Ed@6472192</name>
-      <span stop="9364458" start="9325619"></span>
-      <audioFile idref="5"></audioFile>
-      <offset>6472192</offset>
-      <gain>30.24522</gain>
+      <name>Heizung1Cut@235008</name>
+      <span stop="11003955" start="10959923"></span>
+      <audioFile idref="31"></audioFile>
+      <offset>235008</offset>
+      <gain>3.7402787</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1025,6 +974,57 @@
       <fadeOut><fade>
   <numFrames>882</numFrames>
   
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Elex#03 Ring@17204224</name>
+      <span stop="16118835" start="16110065"></span>
+      <audioFile idref="40"></audioFile>
+      <offset>17204224</offset>
+      <gain>0.7469323</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  <shape curve="-1.0" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>AgnDm'mpHlbOpAgnDm'mpHlb@1296384</name>
+      <span stop="17280051" start="17205811"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>1296384</offset>
+      <gain>0.32577127</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Ens_CoilJazz_Sciss@13879296</name>
+      <span stop="17602719" start="17570355"></span>
+      <audioFile idref="39"></audioFile>
+      <offset>13879296</offset>
+      <gain>0.3018926</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>14683</numFrames>
+  <shape curve="-2.6000001" num="5"></shape>
   
 </fade></fadeOut>
       
@@ -1035,57 +1035,6 @@
       <diffusion idref="55"></diffusion>
       <trail>
   <stake>
-      <name>GPan1@8948736</name>
-      <span stop="10635285" start="10568755"></span>
-      <audioFile idref="0"></audioFile>
-      <offset>8948736</offset>
-      <gain>98.0347</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Bnc031018MndCtrlBack-7@19985920</name>
-      <span stop="10553907" start="10484787"></span>
-      <audioFile idref="13"></audioFile>
-      <offset>19985920</offset>
-      <gain>0.9500168</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ichneumon-5@1407488</name>
-      <span stop="17517107" start="17395763"></span>
-      <audioFile idref="32"></audioFile>
-      <offset>1407488</offset>
-      <gain>1.5706729</gain>
-      <fadeIn><fade>
-  <numFrames>41321</numFrames>
-  <shape curve="4.3" num="5"></shape>
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
       <name>Bnce031027-1@10134016</name>
       <span stop="16163379" start="16110065"></span>
       <audioFile idref="42"></audioFile>
@@ -1171,6 +1120,23 @@
 </fade></fadeOut>
       
    </stake><stake>
+      <name>FeldD-1@19128832</name>
+      <span stop="18262951" start="18232239"></span>
+      <audioFile idref="37"></audioFile>
+      <offset>19128832</offset>
+      <gain>0.36515352</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
       <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@24515584</name>
       <span stop="18601455" start="18450733"></span>
       <audioFile idref="8"></audioFile>
@@ -1188,30 +1154,30 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>GPan1@3999232</name>
-      <span stop="9686650" start="9495603"></span>
+      <name>GPan1@4252672</name>
+      <span stop="9933363" start="9828915"></span>
       <audioFile idref="0"></audioFile>
-      <offset>3999232</offset>
-      <gain>1.8755121</gain>
+      <offset>4252672</offset>
+      <gain>2.9440932</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
+  <numFrames>24294</numFrames>
+  <shape curve="-2.1000001" num="5"></shape>
   
 </fade></fadeOut>
       
    </stake><stake>
-      <name>FeldD-1@19128832</name>
-      <span stop="18262951" start="18232239"></span>
-      <audioFile idref="37"></audioFile>
-      <offset>19128832</offset>
-      <gain>0.36515352</gain>
+      <name>GPan1@3473408</name>
+      <span stop="10437171" start="10242099"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>3473408</offset>
+      <gain>16.063519</gain>
       <fadeIn><fade>
-  <numFrames>1836</numFrames>
+  <numFrames>60476</numFrames>
   
   
 </fade></fadeIn>
@@ -1239,13 +1205,30 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>GPan1@3473408</name>
-      <span stop="10437171" start="10242099"></span>
-      <audioFile idref="0"></audioFile>
-      <offset>3473408</offset>
-      <gain>16.063519</gain>
+      <name>ichneumon-5@1407488</name>
+      <span stop="17517107" start="17395763"></span>
+      <audioFile idref="32"></audioFile>
+      <offset>1407488</offset>
+      <gain>1.5706729</gain>
       <fadeIn><fade>
-  <numFrames>60476</numFrames>
+  <numFrames>41321</numFrames>
+  <shape curve="4.3" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Bnc031018MndCtrlBack-7@19985920</name>
+      <span stop="10553907" start="10484787"></span>
+      <audioFile idref="13"></audioFile>
+      <offset>19985920</offset>
+      <gain>0.9500168</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
   
   
 </fade></fadeIn>
@@ -1256,19 +1239,36 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>GPan1@4252672</name>
-      <span stop="9933363" start="9828915"></span>
+      <name>GPan1@8948736</name>
+      <span stop="10635285" start="10568755"></span>
       <audioFile idref="0"></audioFile>
-      <offset>4252672</offset>
-      <gain>2.9440932</gain>
+      <offset>8948736</offset>
+      <gain>98.0347</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>24294</numFrames>
-  <shape curve="-2.1000001" num="5"></shape>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>GPan1@3999232</name>
+      <span stop="9686650" start="9495603"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>3999232</offset>
+      <gain>1.8755121</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
   
 </fade></fadeOut>
       
@@ -1472,96 +1472,11 @@
       <diffusion idref="55"></diffusion>
       <trail>
   <stake>
-      <name>GPan1@6168064</name>
-      <span stop="18341427" start="18232239"></span>
-      <audioFile idref="0"></audioFile>
-      <offset>6168064</offset>
-      <gain>2.0293722</gain>
-      <fadeIn><fade>
-  <numFrames>1836</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ichneumon-5@5683200</name>
-      <span stop="17558579" start="17490483"></span>
-      <audioFile idref="32"></audioFile>
-      <offset>5683200</offset>
-      <gain>0.0016491354</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>GPan1@1477632</name>
-      <span stop="16786483" start="16675379"></span>
-      <audioFile idref="0"></audioFile>
-      <offset>1477632</offset>
-      <gain>1.6983943</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@48867328</name>
-      <span stop="16531507" start="16395315"></span>
-      <audioFile idref="8"></audioFile>
-      <offset>48867328</offset>
-      <gain>0.749806</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Imitation3-2@4542976</name>
-      <span stop="16327731" start="16130099"></span>
+      <name>Imitation3-2@5493760</name>
+      <span stop="10228787" start="10161715"></span>
       <audioFile idref="20"></audioFile>
-      <offset>4542976</offset>
-      <gain>5.411355</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>CFTimeBase-T4L@2909184</name>
-      <span stop="10737875" start="10611251"></span>
-      <audioFile idref="7"></audioFile>
-      <offset>2909184</offset>
-      <gain>5.1152287</gain>
+      <offset>5493760</offset>
+      <gain>10.858083</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1591,13 +1506,98 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>Imitation3-2@5493760</name>
-      <span stop="10228787" start="10161715"></span>
-      <audioFile idref="20"></audioFile>
-      <offset>5493760</offset>
-      <gain>10.858083</gain>
+      <name>CFTimeBase-T4L@2909184</name>
+      <span stop="10737875" start="10611251"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>2909184</offset>
+      <gain>5.1152287</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Imitation3-2@4542976</name>
+      <span stop="16327731" start="16130099"></span>
+      <audioFile idref="20"></audioFile>
+      <offset>4542976</offset>
+      <gain>5.411355</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@48867328</name>
+      <span stop="16531507" start="16395315"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>48867328</offset>
+      <gain>0.749806</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>GPan1@1477632</name>
+      <span stop="16786483" start="16675379"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>1477632</offset>
+      <gain>1.6983943</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ichneumon-5@5683200</name>
+      <span stop="17558579" start="17490483"></span>
+      <audioFile idref="32"></audioFile>
+      <offset>5683200</offset>
+      <gain>0.0016491354</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>GPan1@6168064</name>
+      <span stop="18341427" start="18232239"></span>
+      <audioFile idref="0"></audioFile>
+      <offset>6168064</offset>
+      <gain>2.0293722</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
   
   
 </fade></fadeIn>
@@ -1645,15 +1645,115 @@
   
 </trail>
       </audioTrack><audioTrack id="76">
+      <name>Ch-2 8</name>
+      <diffusion idref="55"></diffusion>
+      <trail>
+  <stake>
+      <name>CFTimeBase-T4L@434176</name>
+      <span stop="18456115" start="18317363"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>434176</offset>
+      <gain>0.7001662</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="77">
       <name>Ch-3 1</name>
       <diffusion idref="50"></diffusion>
       <trail>
   <stake>
-      <name>B12h32m16s11apr2006y@2395136</name>
-      <span stop="17583667" start="17457203"></span>
-      <audioFile idref="44"></audioFile>
-      <offset>2395136</offset>
-      <gain>0.26004928</gain>
+      <name>DuckedVerb#04@5097984</name>
+      <span stop="9702963" start="9594419"></span>
+      <audioFile idref="12"></audioFile>
+      <offset>5097984</offset>
+      <gain>7.413935</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_2007113hmss_1st_1EditBin@4617728</name>
+      <span stop="9955078" start="9814067"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>4617728</offset>
+      <gain>0.1436353</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>060226JustScissStereoCt1@62098432</name>
+      <span stop="10099155" start="10031155"></span>
+      <audioFile idref="16"></audioFile>
+      <offset>62098432</offset>
+      <gain>8.63334</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      
+      
+   </stake><stake>
+      <name>060226JustScissStereoCt1@62098432</name>
+      <span stop="10279409" start="10099155"></span>
+      <audioFile idref="16"></audioFile>
+      <offset>62191973</offset>
+      <gain>8.63334</gain>
+      
+      <fadeOut><fade>
+  <numFrames>13653</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Aff02'CpyWTConSoftHP@5265920</name>
+      <span stop="16146483" start="16121627"></span>
+      <audioFile idref="19"></audioFile>
+      <offset>5312744</offset>
+      <gain>0.45876056</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Ens_CoilJazz_Sciss@12087808</name>
+      <span stop="16565823" start="16380979"></span>
+      <audioFile idref="39"></audioFile>
+      <offset>12087808</offset>
+      <gain>0.2592979</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1683,88 +1783,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>Ens_CoilJazz_Sciss@12087808</name>
-      <span stop="16565823" start="16380979"></span>
-      <audioFile idref="39"></audioFile>
-      <offset>12087808</offset>
-      <gain>0.2592979</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Aff02'CpyWTConSoftHP@5265920</name>
-      <span stop="16146483" start="16121627"></span>
-      <audioFile idref="19"></audioFile>
-      <offset>5312744</offset>
-      <gain>0.45876056</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>060226JustScissStereoCt1@62098432</name>
-      <span stop="10279409" start="10099155"></span>
-      <audioFile idref="16"></audioFile>
-      <offset>62191973</offset>
-      <gain>8.63334</gain>
-      
-      <fadeOut><fade>
-  <numFrames>13653</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>060226JustScissStereoCt1@62098432</name>
-      <span stop="10099155" start="10031155"></span>
-      <audioFile idref="16"></audioFile>
-      <offset>62098432</offset>
-      <gain>8.63334</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      
-      
-   </stake><stake>
-      <name>_2007113hmss_1st_1EditBin@4617728</name>
-      <span stop="9955078" start="9814067"></span>
-      <audioFile idref="4"></audioFile>
-      <offset>4617728</offset>
-      <gain>0.1436353</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>DuckedVerb#04@5097984</name>
-      <span stop="9702963" start="9594419"></span>
-      <audioFile idref="12"></audioFile>
-      <offset>5097984</offset>
-      <gain>7.413935</gain>
+      <name>B12h32m16s11apr2006y@2395136</name>
+      <span stop="17583667" start="17457203"></span>
+      <audioFile idref="44"></audioFile>
+      <offset>2395136</offset>
+      <gain>0.26004928</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1778,84 +1801,33 @@
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="77">
+      </audioTrack><audioTrack id="78">
       <name>Ch-3 2</name>
       <diffusion idref="54"></diffusion>
       <trail>
   <stake>
-      <name>ExNihilo@2359808</name>
-      <span stop="17465927" start="17238126"></span>
-      <audioFile idref="6"></audioFile>
-      <offset>2334267</offset>
-      <gain>0.3160569</gain>
+      <name>080228_104415_CaracasPatioCage1AT@22901248</name>
+      <span stop="10676573" start="10266675"></span>
+      <audioFile idref="11"></audioFile>
+      <offset>22901248</offset>
+      <gain>1.8627486</gain>
       <fadeIn><fade>
-  <numFrames>47707</numFrames>
-  <shape curve="10.0" num="5"></shape>
+  <numFrames>7268</numFrames>
+  
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>15780</numFrames>
+  <numFrames>322267</numFrames>
   
   
 </fade></fadeOut>
       
    </stake><stake>
-      <name>_2007113hmss_1st_1EditBin@3975168</name>
-      <span stop="17196083" start="17105971"></span>
+      <name>_2007113hmss_1st_1EditBin@3595776</name>
+      <span stop="9386035" start="9339443"></span>
       <audioFile idref="4"></audioFile>
-      <offset>3975168</offset>
-      <gain>1.8981118</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>GefrorenerSeePre@6694912</name>
-      <span stop="16453171" start="16285235"></span>
-      <audioFile idref="10"></audioFile>
-      <offset>6694912</offset>
-      <gain>2.2859066</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>GefrorenerSeePre@9202176</name>
-      <span stop="10893325" start="10753075"></span>
-      <audioFile idref="10"></audioFile>
-      <offset>9202176</offset>
-      <gain>1.9841177</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>BigStone8@29006848</name>
-      <span stop="9863731" start="9647667"></span>
-      <audioFile idref="15"></audioFile>
-      <offset>29006848</offset>
-      <gain>2.3510425</gain>
+      <offset>3595776</offset>
+      <gain>0.42940015</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1885,11 +1857,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>_2007113hmss_1st_1EditBin@3595776</name>
-      <span stop="9386035" start="9339443"></span>
-      <audioFile idref="4"></audioFile>
-      <offset>3595776</offset>
-      <gain>0.42940015</gain>
+      <name>BigStone8@29006848</name>
+      <span stop="9863731" start="9647667"></span>
+      <audioFile idref="15"></audioFile>
+      <offset>29006848</offset>
+      <gain>2.3510425</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -1902,42 +1874,93 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>080228_104415_CaracasPatioCage1AT@22901248</name>
-      <span stop="10676573" start="10266675"></span>
-      <audioFile idref="11"></audioFile>
-      <offset>22901248</offset>
-      <gain>1.8627486</gain>
-      <fadeIn><fade>
-  <numFrames>7268</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>322267</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake>
-</trail>
-      </audioTrack><audioTrack id="78">
-      <name>Ch-3 3</name>
-      <diffusion idref="57"></diffusion>
-      <trail>
-  <stake>
-      <name>ichneumon-5@11854336</name>
-      <span stop="17602719" start="17545267"></span>
-      <audioFile idref="32"></audioFile>
-      <offset>11854336</offset>
-      <gain>1.1844157</gain>
+      <name>GefrorenerSeePre@9202176</name>
+      <span stop="10893325" start="10753075"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>9202176</offset>
+      <gain>1.9841177</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>14683</numFrames>
-  <shape curve="-2.6000001" num="5"></shape>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>GefrorenerSeePre@6694912</name>
+      <span stop="16453171" start="16285235"></span>
+      <audioFile idref="10"></audioFile>
+      <offset>6694912</offset>
+      <gain>2.2859066</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_2007113hmss_1st_1EditBin@3975168</name>
+      <span stop="17196083" start="17105971"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>3975168</offset>
+      <gain>1.8981118</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ExNihilo@2359808</name>
+      <span stop="17465927" start="17238126"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>2334267</offset>
+      <gain>0.3160569</gain>
+      <fadeIn><fade>
+  <numFrames>47707</numFrames>
+  <shape curve="10.0" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>15780</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="79">
+      <name>Ch-3 3</name>
+      <diffusion idref="57"></diffusion>
+      <trail>
+  <stake>
+      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@52362240</name>
+      <span stop="9517619" start="9353779"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>52362240</offset>
+      <gain>4.3006787</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
   
 </fade></fadeOut>
       
@@ -1959,25 +1982,25 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@52362240</name>
-      <span stop="9517619" start="9353779"></span>
-      <audioFile idref="8"></audioFile>
-      <offset>52362240</offset>
-      <gain>4.3006787</gain>
+      <name>ichneumon-5@11854336</name>
+      <span stop="17602719" start="17545267"></span>
+      <audioFile idref="32"></audioFile>
+      <offset>11854336</offset>
+      <gain>1.1844157</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
+  <numFrames>14683</numFrames>
+  <shape curve="-2.6000001" num="5"></shape>
   
 </fade></fadeOut>
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="79">
+      </audioTrack><audioTrack id="80">
       <name>Ch-3 4</name>
       <diffusion idref="50"></diffusion>
       <trail>
@@ -2000,33 +2023,16 @@
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="80">
+      </audioTrack><audioTrack id="81">
       <name>Ch-3 5</name>
       <diffusion idref="54"></diffusion>
       <trail>
   <stake>
-      <name>BigStone1Mix16V8@15171072</name>
-      <span stop="16304691" start="16115763"></span>
-      <audioFile idref="41"></audioFile>
-      <offset>15171072</offset>
-      <gain>0.38831964</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>B10h06m38s01aug2008GainEd@9694720</name>
-      <span stop="10965555" start="10809907"></span>
-      <audioFile idref="29"></audioFile>
-      <offset>9694720</offset>
-      <gain>0.25868127</gain>
+      <name>ExNihilo@1686016</name>
+      <span stop="10763768" start="10648115"></span>
+      <audioFile idref="6"></audioFile>
+      <offset>1686016</offset>
+      <gain>0.26612857</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2056,11 +2062,28 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>ExNihilo@1686016</name>
-      <span stop="10763768" start="10648115"></span>
-      <audioFile idref="6"></audioFile>
-      <offset>1686016</offset>
-      <gain>0.26612857</gain>
+      <name>B10h06m38s01aug2008GainEd@9694720</name>
+      <span stop="10965555" start="10809907"></span>
+      <audioFile idref="29"></audioFile>
+      <offset>9694720</offset>
+      <gain>0.25868127</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BigStone1Mix16V8@15171072</name>
+      <span stop="16304691" start="16115763"></span>
+      <audioFile idref="41"></audioFile>
+      <offset>15171072</offset>
+      <gain>0.38831964</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2074,7 +2097,7 @@
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="81">
+      </audioTrack><audioTrack id="82">
       <name>Ch-3 6</name>
       <diffusion idref="57"></diffusion>
       <trail>
@@ -2097,118 +2120,16 @@
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="82">
+      </audioTrack><audioTrack id="83">
       <name>Ch-4 1</name>
       <diffusion idref="49"></diffusion>
       <trail>
   <stake>
-      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@535552</name>
-      <span stop="17602719" start="17583667"></span>
-      <audioFile idref="8"></audioFile>
-      <offset>535552</offset>
-      <gain>3.022173</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>14683</numFrames>
-  <shape curve="-2.6000001" num="5"></shape>
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Gehirne1T32c@546304</name>
-      <span stop="16879155" start="16764878"></span>
-      <audioFile idref="24"></audioFile>
-      <offset>516507</offset>
-      <gain>0.533187</gain>
-      <fadeIn><fade>
-  <numFrames>43449</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@601600</name>
-      <span stop="16703539" start="16622643"></span>
-      <audioFile idref="8"></audioFile>
-      <offset>601600</offset>
-      <gain>3.2304728</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@12828672</name>
-      <span stop="16506419" start="16423475"></span>
-      <audioFile idref="8"></audioFile>
-      <offset>12828672</offset>
-      <gain>0.6715996</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>ichneumon-5@185344</name>
-      <span stop="11135744" start="11004979"></span>
-      <audioFile idref="32"></audioFile>
-      <offset>185344</offset>
-      <gain>7.712486</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>11012</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>CFTimeBase-T4L@502272</name>
-      <span stop="10977843" start="10784819"></span>
+      <name>CFTimeBase-T4L@6511104</name>
+      <span stop="10002144" start="9821235"></span>
       <audioFile idref="7"></audioFile>
-      <offset>502272</offset>
-      <gain>0.16459274</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Gehirne1T32c@817664</name>
-      <span stop="10548275" start="10460211"></span>
-      <audioFile idref="24"></audioFile>
-      <offset>817664</offset>
-      <gain>2.3052313</gain>
+      <offset>6511104</offset>
+      <gain>0.47021374</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2238,11 +2159,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>CFTimeBase-T4L@6511104</name>
-      <span stop="10002144" start="9821235"></span>
-      <audioFile idref="7"></audioFile>
-      <offset>6511104</offset>
-      <gain>0.47021374</gain>
+      <name>Gehirne1T32c@817664</name>
+      <span stop="10548275" start="10460211"></span>
+      <audioFile idref="24"></audioFile>
+      <offset>817664</offset>
+      <gain>2.3052313</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2251,140 +2172,123 @@
       <fadeOut><fade>
   <numFrames>882</numFrames>
   
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>CFTimeBase-T4L@502272</name>
+      <span stop="10977843" start="10784819"></span>
+      <audioFile idref="7"></audioFile>
+      <offset>502272</offset>
+      <gain>0.16459274</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>ichneumon-5@185344</name>
+      <span stop="11135744" start="11004979"></span>
+      <audioFile idref="32"></audioFile>
+      <offset>185344</offset>
+      <gain>7.712486</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>11012</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@12828672</name>
+      <span stop="16506419" start="16423475"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>12828672</offset>
+      <gain>0.6715996</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@601600</name>
+      <span stop="16703539" start="16622643"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>601600</offset>
+      <gain>3.2304728</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Gehirne1T32c@546304</name>
+      <span stop="16879155" start="16764878"></span>
+      <audioFile idref="24"></audioFile>
+      <offset>516507</offset>
+      <gain>0.533187</gain>
+      <fadeIn><fade>
+  <numFrames>43449</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>BgStn4'CCHPFOpBgStn8'lbLPFMix@535552</name>
+      <span stop="17602719" start="17583667"></span>
+      <audioFile idref="8"></audioFile>
+      <offset>535552</offset>
+      <gain>3.022173</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>14683</numFrames>
+  <shape curve="-2.6000001" num="5"></shape>
   
 </fade></fadeOut>
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="83">
+      </audioTrack><audioTrack id="84">
       <name>Ch-4 2</name>
       <diffusion idref="53"></diffusion>
       <trail>
   <stake>
-      <name>_2007113hmss_1st_1EditBin@109568</name>
-      <span stop="17107507" start="17046067"></span>
-      <audioFile idref="4"></audioFile>
-      <offset>109568</offset>
-      <gain>0.06407089</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Ghrn12T1SnaRMoszs@11276288</name>
-      <span stop="17018931" start="16863795"></span>
-      <audioFile idref="33"></audioFile>
-      <offset>11276288</offset>
-      <gain>19.518085</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>17909</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Haendereiben@112640</name>
-      <span stop="16324659" start="16135731"></span>
-      <audioFile idref="22"></audioFile>
-      <offset>112640</offset>
-      <gain>5.154942</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Elex#03 Ring@17532416</name>
-      <span stop="16118835" start="16110065"></span>
-      <audioFile idref="40"></audioFile>
-      <offset>17532416</offset>
-      <gain>1.3152349</gain>
-      <fadeIn><fade>
-  <numFrames>1836</numFrames>
-  <shape curve="-1.0" num="5"></shape>
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Amplifikation090914_SchoepsMK2S_EdHPF@5559296</name>
-      <span stop="10733619" start="10536707"></span>
-      <audioFile idref="26"></audioFile>
-      <offset>5469904</offset>
-      <gain>0.32702345</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Haendereiben@5770752</name>
-      <span stop="10481203" start="10377779"></span>
-      <audioFile idref="22"></audioFile>
-      <offset>5770752</offset>
-      <gain>4.0805697</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>AlphaSoixante@1037312</name>
-      <span stop="10103859" start="9987123"></span>
-      <audioFile idref="2"></audioFile>
-      <offset>1037312</offset>
-      <gain>8.517782</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Bnce020414FTWTFTAmp@115200</name>
-      <span stop="9843763" start="9691699"></span>
-      <audioFile idref="14"></audioFile>
-      <offset>115200</offset>
-      <gain>0.5321622</gain>
+      <name>AgnDm'mpHlbOpAgnDm'mpHlb@13215744</name>
+      <span stop="9394549" start="9339443"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13215744</offset>
+      <gain>0.50360745</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2414,11 +2318,130 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>AgnDm'mpHlbOpAgnDm'mpHlb@13215744</name>
-      <span stop="9394549" start="9339443"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>13215744</offset>
-      <gain>0.50360745</gain>
+      <name>Bnce020414FTWTFTAmp@115200</name>
+      <span stop="9843763" start="9691699"></span>
+      <audioFile idref="14"></audioFile>
+      <offset>115200</offset>
+      <gain>0.5321622</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>AlphaSoixante@1037312</name>
+      <span stop="10103859" start="9987123"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>1037312</offset>
+      <gain>8.517782</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Haendereiben@5770752</name>
+      <span stop="10481203" start="10377779"></span>
+      <audioFile idref="22"></audioFile>
+      <offset>5770752</offset>
+      <gain>4.0805697</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Amplifikation090914_SchoepsMK2S_EdHPF@5559296</name>
+      <span stop="10733619" start="10536707"></span>
+      <audioFile idref="26"></audioFile>
+      <offset>5469904</offset>
+      <gain>0.32702345</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Elex#03 Ring@17532416</name>
+      <span stop="16118835" start="16110065"></span>
+      <audioFile idref="40"></audioFile>
+      <offset>17532416</offset>
+      <gain>1.3152349</gain>
+      <fadeIn><fade>
+  <numFrames>1836</numFrames>
+  <shape curve="-1.0" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Haendereiben@112640</name>
+      <span stop="16324659" start="16135731"></span>
+      <audioFile idref="22"></audioFile>
+      <offset>112640</offset>
+      <gain>5.154942</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Ghrn12T1SnaRMoszs@11276288</name>
+      <span stop="17018931" start="16863795"></span>
+      <audioFile idref="33"></audioFile>
+      <offset>11276288</offset>
+      <gain>19.518085</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>17909</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>_2007113hmss_1st_1EditBin@109568</name>
+      <span stop="17107507" start="17046067"></span>
+      <audioFile idref="4"></audioFile>
+      <offset>109568</offset>
+      <gain>0.06407089</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2432,7 +2455,7 @@
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="84">
+      </audioTrack><audioTrack id="85">
       <name>Ch-4 3</name>
       <diffusion idref="49"></diffusion>
       <trail>
@@ -2455,50 +2478,16 @@
       
    </stake>
 </trail>
-      </audioTrack><audioTrack id="85">
+      </audioTrack><audioTrack id="86">
       <name>Ch-4 4</name>
       <diffusion idref="59"></diffusion>
       <trail>
   <stake>
-      <name>Ens_CoilJazz_Sciss@14264320</name>
-      <span stop="17025024" start="16958003"></span>
-      <audioFile idref="39"></audioFile>
-      <offset>14264320</offset>
-      <gain>0.6991028</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>15780</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>AgnDm'mpHlbOpAgnDm'mpHlb@3911680</name>
-      <span stop="16797747" start="16683571"></span>
+      <name>AgnDm'mpHlbOpAgnDm'mpHlb@29038080</name>
+      <span stop="10224179" start="10134579"></span>
       <audioFile idref="1"></audioFile>
-      <offset>3911680</offset>
-      <gain>0.118517384</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>Einseifen@9434624</name>
-      <span stop="10837555" start="10720307"></span>
-      <audioFile idref="17"></audioFile>
-      <offset>9434624</offset>
-      <gain>0.1594743</gain>
+      <offset>29038080</offset>
+      <gain>1.1560873</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2528,34 +2517,11 @@
 </fade></fadeOut>
       
    </stake><stake>
-      <name>AgnDm'mpHlbOpAgnDm'mpHlb@29038080</name>
-      <span stop="10224179" start="10134579"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>29038080</offset>
-      <gain>1.1560873</gain>
-      <fadeIn><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>882</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake>
-</trail>
-      </audioTrack><audioTrack id="86">
-      <name>Ch-4 5</name>
-      <diffusion idref="59"></diffusion>
-      <trail>
-  <stake>
-      <name>AgnDm'mpHlbOpAgnDm'mpHlb@3951104</name>
-      <span stop="16805427" start="16756787"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>3951104</offset>
-      <gain>0.021754786</gain>
+      <name>Einseifen@9434624</name>
+      <span stop="10837555" start="10720307"></span>
+      <audioFile idref="17"></audioFile>
+      <offset>9434624</offset>
+      <gain>0.1594743</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2568,6 +2534,46 @@
 </fade></fadeOut>
       
    </stake><stake>
+      <name>AgnDm'mpHlbOpAgnDm'mpHlb@3911680</name>
+      <span stop="16797747" start="16683571"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>3911680</offset>
+      <gain>0.118517384</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>Ens_CoilJazz_Sciss@14264320</name>
+      <span stop="17025024" start="16958003"></span>
+      <audioFile idref="39"></audioFile>
+      <offset>14264320</offset>
+      <gain>0.6991028</gain>
+      <fadeIn><fade>
+  <numFrames>882</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>15780</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="87">
+      <name>Ch-4 5</name>
+      <diffusion idref="59"></diffusion>
+      <trail>
+  <stake>
       <name>Einseifen@6684160</name>
       <span stop="10284595" start="10223155"></span>
       <audioFile idref="17"></audioFile>
@@ -2584,18 +2590,12 @@
   
 </fade></fadeOut>
       
-   </stake>
-</trail>
-      </audioTrack><audioTrack id="87">
-      <name>Ch-4 6</name>
-      <diffusion idref="53"></diffusion>
-      <trail>
-  <stake>
-      <name>AgnDm'mpHlbOpAgnDm'mpHlb@1346560</name>
-      <span stop="17184307" start="17067059"></span>
+   </stake><stake>
+      <name>AgnDm'mpHlbOpAgnDm'mpHlb@3951104</name>
+      <span stop="16805427" start="16756787"></span>
       <audioFile idref="1"></audioFile>
-      <offset>1346560</offset>
-      <gain>0.17508277</gain>
+      <offset>3951104</offset>
+      <gain>0.021754786</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
@@ -2607,7 +2607,13 @@
   
 </fade></fadeOut>
       
-   </stake><stake>
+   </stake>
+</trail>
+      </audioTrack><audioTrack id="88">
+      <name>Ch-4 6</name>
+      <diffusion idref="53"></diffusion>
+      <trail>
+  <stake>
       <name>_2007113hmss_1st_1EditBin@8421376</name>
       <span stop="16175155" start="16110065"></span>
       <audioFile idref="4"></audioFile>
@@ -2624,18 +2630,12 @@
   
 </fade></fadeOut>
       
-   </stake>
-</trail>
-      </audioTrack><audioTrack id="88">
-      <name>Ch-2 8</name>
-      <diffusion idref="55"></diffusion>
-      <trail>
-  <stake>
-      <name>CFTimeBase-T4L@434176</name>
-      <span stop="18456115" start="18317363"></span>
-      <audioFile idref="7"></audioFile>
-      <offset>434176</offset>
-      <gain>0.7001662</gain>
+   </stake><stake>
+      <name>AgnDm'mpHlbOpAgnDm'mpHlb@1346560</name>
+      <span stop="17184307" start="17067059"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>1346560</offset>
+      <gain>0.17508277</gain>
       <fadeIn><fade>
   <numFrames>882</numFrames>
   
