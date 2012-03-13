@@ -86,25 +86,35 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
       listPre.selectIndices(  0 )
       listPost.selectIndices( 1 )
 
-      val lbSrcPrefix   = label( "Source track name prefix:" )
-      val lbSrcSuffix   = label( "Source track name suffix:" )
-      val lbTgtPrefix   = label( "Target track name prefix:" )
-      val lbTgtSuffix   = label( "Target track name suffix:" )
-      val ggSrcPrefix   = textField( "", 8 )()
-      val ggSrcSuffix   = textField( "", 8 )()
-      val ggTgtPrefix   = textField( "", 8 )()
-      val ggTgtSuffix   = textField( "", 8 )()
+      val lbSrcTrkPre   = label( "Source track name prefix:" )
+      val lbSrcTrkSuff  = label( "Source track name suffix:" )
+      val lbTgtTrkPre   = label( "Target track name prefix:" )
+      val lbTgtTrkSuff  = label( "Target track name suffix:" )
+      val ggSrcTrkPre   = textField( "", 8 )()
+      val ggSrcTrkSuff  = textField( "", 8 )()
+      val ggTgtTrkPre   = textField( "", 8 )()
+      val ggTgtTrkSuff  = textField( "", 8 )()
+      val lbSrcRegPre   = label( "Source region name prefix:" )
+      val lbSrcRegSuff  = label( "Source region name suffix:" )
+      val lbTgtRegPre   = label( "Target region name prefix:" )
+      val lbTgtRegSuff  = label( "Target region name suffix:" )
+      val ggSrcRegPre   = textField( "", 8 )()
+      val ggSrcRegSuff  = textField( "", 8 )()
+      val ggTgtRegPre   = textField( "", 8 )()
+      val ggTgtRegSuff  = textField( "", 8 )()
 
       lazy val pane2 = new GroupPanel {
          theHorizontalLayout is Sequential(
-            Parallel( lbSrcPrefix, lbSrcSuffix ),
-            Parallel( ggSrcPrefix, ggSrcSuffix ),
-            Parallel( lbTgtPrefix, lbTgtSuffix ),
-            Parallel( ggTgtPrefix, ggTgtSuffix )
+            Parallel( lbSrcTrkPre, lbSrcTrkSuff, lbSrcRegPre, lbSrcRegSuff ),
+            Parallel( ggSrcTrkPre, ggSrcTrkSuff, ggSrcRegPre, ggSrcRegSuff ),
+            Parallel( lbTgtTrkPre, lbTgtTrkSuff, lbTgtRegPre, lbTgtRegSuff ),
+            Parallel( ggTgtTrkPre, ggTgtTrkSuff, ggTgtRegPre, ggTgtRegSuff )
          )
          theVerticalLayout is Sequential(
-            Parallel( Baseline )( lbSrcPrefix, ggSrcPrefix, lbTgtPrefix, ggTgtPrefix ),
-            Parallel( Baseline )( lbSrcSuffix, ggSrcSuffix, lbTgtSuffix, ggTgtSuffix )
+            Parallel( Baseline )( lbSrcTrkPre,  ggSrcTrkPre,  lbTgtTrkPre,  ggTgtTrkPre  ),
+            Parallel( Baseline )( lbSrcTrkSuff, ggSrcTrkSuff, lbTgtTrkSuff, ggTgtTrkSuff ),
+            Parallel( Baseline )( lbSrcRegPre,  ggSrcRegPre,  lbTgtRegPre,  ggTgtRegPre  ),
+            Parallel( Baseline )( lbSrcRegSuff, ggSrcRegSuff, lbTgtRegSuff, ggTgtRegSuff )
          )
       }
 
@@ -115,11 +125,12 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
       }
 
       val op = new JOptionPane( pane.peer, JOptionPane.INFORMATION_MESSAGE, JOptionPane.OK_CANCEL_OPTION )
-      BasicWindowHandler.showDialog( op, null, "Incorporate Bounce" ) match {
+      BasicWindowHandler.showDialog( op, null, "Merge timelines" ) match {
          case JOptionPane.OK_OPTION =>
             if( ok ) {
                perform( srcTL._1, srcTL._2, tgtTL._1, tgtTL._2,
-                  ggSrcPrefix.text, ggSrcSuffix.text, ggTgtPrefix.text, ggTgtSuffix.text )
+                  ggSrcTrkPre.text, ggSrcTrkSuff.text, ggTgtTrkPre.text, ggTgtTrkSuff.text,
+                  ggSrcRegPre.text, ggSrcRegSuff.text, ggTgtRegPre.text, ggTgtRegSuff.text )
             } else {
                println( "Wooop. Settings wrong. Try again." )
             }
@@ -128,7 +139,8 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
    }
 
    def perform( srcDoc: Session, srcTL: BasicTimeline, tgtDoc: Session, tgtTL: BasicTimeline,
-                srcPre: String, srcSuff: String, tgtPre: String, tgtSuff: String ) {
+                srcTrkPre: String, srcTrkSuff: String, tgtTrkPre: String, tgtTrkSuff: String,
+                srcRegPre: String, srcRegSuff: String, tgtRegPre: String, tgtRegSuff: String ) {
       require( srcTL != tgtTL )
 
       val srcTLLen = srcTL.span.length
@@ -146,11 +158,23 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
          var newFiles = IIdxSeq.empty[ AudioFileElement ]
          val trackOff = tgtTL.tracks.size
 
-         if( tgtPre != "" || tgtSuff != "" ) {
+         if( tgtTrkPre != "" || tgtTrkSuff != "" ) {
             tgtTL.tracks.foreach { t =>
                t.editor.foreach { ed =>
-                  ed.editRename( ce, tgtPre + t.name + tgtSuff )
+                  ed.editRename( ce, tgtTrkPre + t.name + tgtTrkSuff )
                }
+            }
+         }
+
+         if( tgtRegPre != "" || tgtRegSuff != "" ) {
+            tgtTL.tracks.foreach {
+               case at: AudioTrack =>
+                  val ars = at.trail.getAll()
+                  at.trail.editRemove( ce, ars: _* )
+                  val arsRen = ars.map( ar => ar.copy( name = tgtRegPre + ar.name + tgtRegSuff ))
+                  at.trail.editAdd( ce, arsRen: _* )
+
+               case _ =>
             }
          }
 
@@ -172,10 +196,13 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
                   val prov = provideAudioFile( f, newFiles )
                   newFiles :+= prov
                }
-               arsIn.map( ar => ar.copy( audioFile = provideAudioFile( ar.audioFile.path, newFiles )))
+               arsIn.map( ar => ar.copy(
+                  audioFile = provideAudioFile( ar.audioFile.path, newFiles ),
+                  name = srcRegPre + ar.name + srcRegSuff
+               ))
             }
             atTgt.trail.add( arsOut: _* )
-            atTgt.name = srcPre + atSrc.name + srcSuff
+            atTgt.name = srcTrkPre + atSrc.name + srcTrkSuff
             tgtTL.tracks.editInsert( ce, trackOff + idx, atTgt )
          }
 

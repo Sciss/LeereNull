@@ -1,0 +1,15 @@
+object Supp extends de.sciss.leerenull.KonturGoodies with de.sciss.leerenull.NullGoodies
+import Supp._
+
+val f = findTimelineFrame( doc ).get
+val tlv = f.timelineView
+val trl = f.tracksPanel
+
+val elems = (0 until trl.numElements).map( trl.getElementAt )
+
+def selChan( ch: Int ) {
+   val flt = elems.filter( _.track.name.contains( "Ch-" + ch + " " ))
+   trl.select( flt: _* )
+}
+
+selChan( 1 )
