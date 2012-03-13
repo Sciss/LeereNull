@@ -42,7 +42,7 @@ import annotation.tailrec
 import de.sciss.synth.io.{AudioFileType, SampleFormat, AudioFile}
 import de.sciss.kontur.session.{FadeSpec, AudioTrack, AudioRegion, AudioFileElement, BasicTimeline, Session}
 
-object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies with NullGoodies {
+object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies with NullGoodies with PasteCompanion {
    type PayLoad = (IIdxSeq[ AudioFileElement ], IIdxSeq[ (AudioTrack, AudioRegion) ])
 
    var VERBOSE = false
@@ -190,70 +190,6 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
                println( "Wooop. Settings wrong. Try again." )
             }
          case _ =>
-      }
-   }
-
-   def pasteResult( doc: Session, tl: BasicTimeline, remove: IIdxSeq[ (AudioTrack, AudioRegion) ],
-                    insert: IIdxSeq[ (AudioTrack, AudioRegion )],
-                    newFiles: IIdxSeq[ AudioFileElement ]) {
-
-      val removeMap: Map[ AudioTrack, IIdxSeq[ AudioRegion ]] = remove.groupBy( _._1 ).mapValues( _.map( _._2 ))
-      val insertMap: Map[ AudioTrack, IIdxSeq[ AudioRegion ]] = insert.groupBy( _._1 ).mapValues( _.map( _._2 ))
-
-      // add new audio files
-      if( newFiles.nonEmpty ) {
-         val afs = doc.audioFiles
-         val ce = afs.editBegin( "Insert audio files" )
-         var ceOk = false
-         try {
-            val off = afs.size
-            newFiles.zipWithIndex.foreach {
-               case (afe, idx) => afs.editInsert( ce, idx + off, afe )
-            }
-            ceOk = true
-         } finally {
-            if( ceOk ) afs.editEnd( ce ) else afs.editCancel( ce )
-         }
-      }
-
-      if( VERBOSE ) {
-         println( ":::: REMOVE ::::" )
-         removeMap.foreach { case (at, ars) =>
-            println( at.name )
-            ars.foreach { ar => println( "  " + ar.name )}
-         }
-      }
-
-      // remove old regions
-      removeMap.foreach { case (at, ars) =>
-         val ce = at.editBegin( "Remove old regions in track " + at.name )
-         var ceOk = false
-         try {
-            at.trail.editRemove( ce, ars: _* )
-            ceOk = true
-         } finally {
-            if( ceOk ) at.editEnd( ce ) else at.editCancel( ce )
-         }
-      }
-
-      if( VERBOSE ) {
-         println( ":::: INSERT ::::" )
-         insertMap.foreach { case (at, ars) =>
-            println( at.name )
-            ars.foreach { ar => println( "  " + ar.name )}
-         }
-      }
-
-      // insert new regions
-      insertMap.foreach { case (at, ars) =>
-         val ce = at.editBegin( "Insert new regions in track " + at.name )
-         var ceOk = false
-         try {
-            at.trail.editAdd( ce, ars: _* )
-            ceOk = true
-         } finally {
-            if( ceOk ) at.editEnd( ce ) else at.editCancel( ce )
-         }
       }
    }
 
@@ -445,6 +381,7 @@ extends Processor {
             }
 
             progress( (idx + 1).toFloat / numIn )
+            if( checkAborted ) return Aborted
             res
          }
       }

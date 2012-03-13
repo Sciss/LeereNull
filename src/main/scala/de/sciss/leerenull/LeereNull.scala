@@ -512,6 +512,13 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       val miIncorporateBounce = new MenuItem( "leerenull.incbounce", action( "Incorporate Bounce..." ) {
          IncorporateBounce.showGUI()
       })
+      val miConvertToMono = new MenuItem( "leerenull.converttomono", action( "Convert all tracks to mono..." ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               ConvertToMono.perform( doc, tl, trl )
+            }
+         }
+      })
 
       mg.add( miExtractor )
       mg.add( miLoadSearch )
@@ -534,6 +541,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
 
       mg.addSeparator()
       mg.add( miIncorporateBounce )
+      mg.add( miConvertToMono )
 
       mf.add( mg )
    }
