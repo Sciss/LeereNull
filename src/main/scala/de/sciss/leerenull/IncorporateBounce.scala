@@ -35,9 +35,9 @@ import de.sciss.common.BasicWindowHandler
 import swing.event.SelectionChanged
 import collection.JavaConversions
 import de.sciss.kontur.gui.TimelineFrame
-import de.sciss.kontur.session.{AudioRegion, AudioFileElement, BasicTimeline, Session}
 import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
 import actors.Actor
+import de.sciss.kontur.session.{AudioTrack, AudioRegion, AudioFileElement, BasicTimeline, Session}
 
 object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies {
    type PayLoad = Unit
@@ -175,7 +175,12 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
          case JOptionPane.OK_OPTION =>
             if( ok ) {
                println( "Preparing rendering..." )
-               render( bncARs, bncDir, preTL._2 )
+               val off        = (ggOff.decimal * bncAFE.map( _.sampleRate ).getOrElse( 44100.0 ) + 0.5).toLong
+               val bncAR1     = bncARs.head
+               val bncStart   = bncAR1.span.start - bncAR1.offset
+               val delta      = off - bncStart
+               val bncARsOff  = if( delta != 0 ) bncARs.map( _.move( delta )) else bncARs
+               render( bncARsOff, bncDir, preTL._2 )
             } else {
                println( "Wooop. Settings wrong. Try again." )
             }
@@ -184,8 +189,12 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
    }
 
    def render( bncARs: IndexedSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline ) {
+      // don't filter the muted ones at this point, because the process will do it,
+      // and then they will be automatically removed after the render finishes.
+      val preARs = collectAudioRegions({ case x => x })( preTL ).sortBy( _._2.span.start )
+
       val dlg  = progressDialog( "Incorporate Bounce" )
-      val proc = IncorporateBounce( bncARs, bncDir, preTL ) {
+      val proc = IncorporateBounce( bncARs, bncDir, preTL, preARs ) {
          case IncorporateBounce.Success( _ ) =>
             dlg.stop()
 
@@ -201,18 +210,27 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       dlg.start( proc )
    }
 
-   def apply( bncARs: IndexedSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline )( observer: Observer ) : IncorporateBounce =
-      new IncorporateBounce( observer, bncARs, bncDir, preTL )
+   def apply( bncARs: IndexedSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline, preARs: IndexedSeq[ (AudioTrack, AudioRegion) ])
+            ( observer: Observer ) : IncorporateBounce =
+      new IncorporateBounce( observer, bncARs, bncDir, preTL, preARs )
 }
-class IncorporateBounce( protected val observer: IncorporateBounce.Observer,
-                         bncARs: IndexedSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline )
+class IncorporateBounce( protected val observer: IncorporateBounce.Observer, bncARs: IndexedSeq[ AudioRegion ],
+                         bncDir: File, preTL: BasicTimeline, preARs: IndexedSeq[ (AudioTrack, AudioRegion) ])
 extends Processor {
    import IncorporateBounce._
 
    protected val companion = IncorporateBounce
 
    protected def body() : Result = {
-      Thread.sleep( 3000 )
+      // first, select only those regions which are somehow covered and not muted
+      val out = preARs.flatMap { case (at, ar) =>
+         if( ar.muted ) IIdxSeq.empty else {
+            val inSpan = ar.span
+            val over = bncARs.filter( _.span.overlaps( inSpan ))
+            IIdxSeq( (at, ar) )
+         }
+      }
+
       Success( () )
    }
 
