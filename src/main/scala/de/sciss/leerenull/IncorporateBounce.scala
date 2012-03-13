@@ -38,9 +38,10 @@ import de.sciss.kontur.gui.TimelineFrame
 import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
 import actors.Actor
 import de.sciss.kontur.session.{AudioTrack, AudioRegion, AudioFileElement, BasicTimeline, Session}
+import de.sciss.strugatzki.Span
 
 object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies {
-   type PayLoad = Unit
+   type PayLoad = (IIdxSeq[ AudioFileElement ], IIdxSeq[ (AudioTrack, AudioRegion) ])
 
    def showGUI() {
       val app  = AbstractApplication.getApplication
@@ -180,7 +181,7 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
                val bncStart   = bncAR1.span.start - bncAR1.offset
                val delta      = off - bncStart
                val bncARsOff  = if( delta != 0 ) bncARs.map( _.move( delta )) else bncARs
-               render( bncARsOff, bncDir, preTL._2 )
+               render( bncARsOff.toIndexedSeq, bncDir, preTL._2 )
             } else {
                println( "Wooop. Settings wrong. Try again." )
             }
@@ -188,15 +189,21 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       }
    }
 
-   def render( bncARs: IndexedSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline ) {
+   def pasteResult( remove: IIdxSeq[ (AudioTrack, AudioRegion) ], insert: IIdxSeq[ (AudioTrack, AudioRegion )],
+                    newFiles: IIdxSeq[ AudioFileElement ]) {
+
+   }
+
+   def render( bncARs: IIdxSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline ) {
       // don't filter the muted ones at this point, because the process will do it,
       // and then they will be automatically removed after the render finishes.
-      val preARs = collectAudioRegions({ case x => x })( preTL ).sortBy( _._2.span.start )
+      val preARs = collectAudioRegions({ case x => x })( preTL ).sortBy( _._2.span.start ).toIndexedSeq
 
       val dlg  = progressDialog( "Incorporate Bounce" )
       val proc = IncorporateBounce( bncARs, bncDir, preTL, preARs ) {
-         case IncorporateBounce.Success( _ ) =>
+         case IncorporateBounce.Success( (newFiles, newRegions) ) =>
             dlg.stop()
+            pasteResult( preARs, newRegions, newFiles )
 
          case IncorporateBounce.Failure( e ) =>
             dlg.stop()
@@ -210,12 +217,12 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       dlg.start( proc )
    }
 
-   def apply( bncARs: IndexedSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline, preARs: IndexedSeq[ (AudioTrack, AudioRegion) ])
+   def apply( bncARs: IIdxSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline, preARs: IIdxSeq[ (AudioTrack, AudioRegion) ])
             ( observer: Observer ) : IncorporateBounce =
       new IncorporateBounce( observer, bncARs, bncDir, preTL, preARs )
 }
-class IncorporateBounce( protected val observer: IncorporateBounce.Observer, bncARs: IndexedSeq[ AudioRegion ],
-                         bncDir: File, preTL: BasicTimeline, preARs: IndexedSeq[ (AudioTrack, AudioRegion) ])
+class IncorporateBounce( protected val observer: IncorporateBounce.Observer, bncARs: IIdxSeq[ AudioRegion ],
+                         bncDir: File, preTL: BasicTimeline, preARs: IIdxSeq[ (AudioTrack, AudioRegion) ])
 extends Processor {
    import IncorporateBounce._
 
@@ -223,15 +230,65 @@ extends Processor {
 
    protected def body() : Result = {
       // first, select only those regions which are somehow covered and not muted
-      val out = preARs.flatMap { case (at, ar) =>
+      val numIn = preARs.size
+      var newFiles = IIdxSeq.empty[ AudioFileElement ]
+      val out = preARs.zipWithIndex.flatMap { case ((at, ar), idx) =>
          if( ar.muted ) IIdxSeq.empty else {
-            val inSpan = ar.span
-            val over = bncARs.filter( _.span.overlaps( inSpan ))
-            IIdxSeq( (at, ar) )
+            val preSpan = ar.span
+            val overs = bncARs.filter( _.span.overlaps( preSpan ))
+            val res = overs.map { over =>
+               val ar1        = if( over.gain == 1 ) ar else ar.copy( gain = ar.gain * over.gain )
+               // see if pre region's fades are affected by the cut
+               val postSpan   = over.span.intersection( preSpan )
+               assert( !postSpan.isEmpty )
+               val preFadeIn  = {
+                  val len = ar1.fadeIn.map( _.numFrames ).getOrElse( 0L )
+                  Span( preSpan.start, preSpan.start + len )
+               }
+               val preFadeOut  = {
+                  val len = ar1.fadeOut.map( _.numFrames ).getOrElse( 0L )
+                  Span( preSpan.stop - len, preSpan.stop )
+               }
+               val postFadeIn    = preFadeIn.intersection( postSpan )
+               val postFadeOut   = preFadeOut.intersection( postSpan )
+               // whether we need to bounce because the pre bounce fades are cut
+               val needsBounce1  = (!postFadeIn.isEmpty && postFadeIn != preFadeIn) ||
+                                   (!postFadeOut.isEmpty && postFadeOut != preFadeOut)
+
+               val bncPreFadeIn  = {
+                  val len = over.fadeIn.map( _.numFrames ).getOrElse( 0L )
+                  Span( over.span.start, over.span.start + len )
+               }
+               val bncPreFadeOut = {
+                  val len = over.fadeOut.map( _.numFrames ).getOrElse( 0L )
+                  Span( over.span.stop - len, over.span.stop )
+               }
+               val bncPostFadeIn    = bncPreFadeIn.intersection( postSpan )
+               val bncPostFadeOut   = bncPreFadeOut.intersection( postSpan )
+               // whether we need to bounce because the post bounce fades are cut
+               val needsBounce2     = (!bncPostFadeIn.isEmpty && bncPostFadeIn != bncPreFadeIn) ||
+                                      (!bncPostFadeOut.isEmpty && bncPostFadeOut != bncPreFadeOut)
+
+               // whether we need to bounce because of concurrent pre and post bounce fades
+               val needsBounce3  = postFadeIn.overlaps(  bncPostFadeIn ) ||
+                                   postFadeIn.overlaps(  bncPostFadeOut ) ||
+                                   postFadeOut.overlaps( bncPostFadeIn ) ||
+                                   postFadeOut.overlaps( bncPostFadeOut )
+
+               val arOut = if( !(needsBounce1 || needsBounce2 || needsBounce3) ) {  // lucky
+                  ar1.copy( span = postSpan )
+               } else {
+                  ar1.copy( span = postSpan )   // XXX todo
+               }
+               (at, arOut)
+            }
+
+            progress( (idx + 1).toFloat / numIn )
+            res
          }
       }
 
-      Success( () )
+      Success( (newFiles, out) )
    }
 
    protected val Act = new Actor {
