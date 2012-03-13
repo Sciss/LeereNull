@@ -96,17 +96,19 @@ extends Processor {
       i += 1 }
    }
 
+   private type Key = (Seq[ Float ], File, Long, Long)
+
    protected def body() : Result = {
 //      var map = Map.empty[ (Seq[ Float ], File), AudioFileElement ]
 
-      val inMap: Map[ (AudioTrack, AudioRegion), (Seq[ Float ], File) ] = in.flatMap({
+      val inMap: Map[ (AudioTrack, AudioRegion), Key ] = in.flatMap({
          case (at, ars) =>
             at.diffusion match {
                case Some( m: MatrixDiffusion ) if m.numInputChannels > 1 =>
                   val mat = m.matrix.toSeq.map( _.sum )   // Matrix2D equals currently missing
                   val arsF = ars.filter( _.audioFile.numChannels > 1 )
                   arsF.map { ar =>
-                     ((at, ar), (mat, ar.audioFile.path))
+                     ((at, ar), (mat, ar.audioFile.path, ar.offset, ar.offset + ar.span.length))
                   }
                case _ => IIdxSeq.empty
             }
@@ -114,13 +116,13 @@ extends Processor {
 
       val keys = inMap.values.toSet
       val num = keys.size
-      val outMap: Map[ (Seq[ Float ], File), AudioFileElement ] = keys.zipWithIndex.map({
-         case (key @ (chanGains, inF), idx) =>
+      val outMap: Map[ Key, AudioFileElement ] = keys.zipWithIndex.map({
+         case (key @ (chanGains, inF, fileStart, fileStop), idx) =>
             @tailrec def newFileName( prefix: String, cnt: Int, suffix: String ) : File = {
-               val test = new File( bncDir, prefix + (if( cnt > 0 ) cnt.toString else "") + suffix )
+               val test = new File( bncDir, prefix + cnt+ suffix )
                if( !test.exists() ) test else newFileName( prefix, cnt + 1, suffix )
             }
-            val outF = newFileName( plainName( inF ) + "-M", 0, ".aif" )
+            val outF = newFileName( plainName( inF ) + "-M", 1, ".aif" )
             assert( !outF.exists() )
             val afIn = AudioFile.openRead( inF )
             try {
@@ -132,7 +134,8 @@ extends Processor {
                   val inBufRem   = inBuf.drop( 1 )
                   val inBuf0     = inBuf( 0 )
                   val outBuf     = Array( inBuf0 )
-                  var rem        = afIn.numFrames
+                  var rem        = fileStop - fileStart
+                  afIn.seek( fileStart )
                   while( rem > 0 ) {
                      val chunk = math.min( rem, bufSz ).toInt
                      afIn.read( inBuf, 0, chunk )
