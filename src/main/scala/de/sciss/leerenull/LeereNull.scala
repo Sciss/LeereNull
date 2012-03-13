@@ -296,26 +296,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
          action( "Fanatically Optimize Track Capacities" ) {
          currentDoc.foreach { implicit doc =>
             withTimeline { (tl, tlv, trl) =>
-               implicit val tl0  = tl
-               implicit val tlv0 = tlv
-               implicit val trl0 = trl
-               val allTracks = tl.tracks.toList.collect({ case at: AudioTrack => at }).toIndexedSeq // .sortBy( _.name )
-               allTracks.zipWithIndex.foreach { case (at, idx) =>
-                  val ars  = at.trail.getAll()
-//                     val coll = (withDiffs -- taken - tup).filter { case (at2, matO2) =>
-//                        (matO2 == matO) && ars.forall( ar => at2.trail.getRange( ar.span ).isEmpty )
-//                     }
-//                     val at2O = coll.toSeq.sortBy( _._1.name ).headOption
-                  ars.foreach { ar =>
-                     val at2O = allTracks.take( idx - 1 ).find( _.trail.getRange( ar.span ).isEmpty )
-                     at2O.foreach { at2 =>
-                        tl.joinEdit( "Optimize Tracks Capacities" ) { implicit ce =>
-                           at.trail.editRemove( ce, ar )
-                           at2.trail.editAdd( ce, ar )
-                        }
-                     }
-                  }
-               }
+               FanaticallyOptimize.perform( doc, tl, tlv, trl )
             }
          }
       })

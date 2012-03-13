@@ -26,8 +26,7 @@
 package de.sciss.leerenull
 
 import de.sciss.kontur.gui.{BasicTrackList, TimelineView, TrailViewEditor}
-import de.sciss.kontur.session.{Session, BasicTimeline, MatrixDiffusion, AudioRegion, AudioTrack}
-import collection.immutable.{IndexedSeq => IIdxSeq}
+import de.sciss.kontur.session.{Session, BasicTimeline, MatrixDiffusion, AudioRegion}
 
 object MoveOverlappingRegions extends KonturGoodies with NullGoodies {
    def perform( doc: Session, tl: BasicTimeline, tlv: TimelineView, trl: BasicTrackList ) {
@@ -35,7 +34,6 @@ object MoveOverlappingRegions extends KonturGoodies with NullGoodies {
       implicit val tl0  = tl
       implicit val tlv0 = tlv
       implicit val trl0 = trl
-      val span = selSpan
 
       val selARs  = selectedAudioRegions.toSet
       val selMap  = collectAudioRegions { case (at, ar) if !ar.muted && selARs.contains( ar ) => (at, ar) }
@@ -104,74 +102,5 @@ object MoveOverlappingRegions extends KonturGoodies with NullGoodies {
       } finally {
          if( ce1Ok ) tl.editEnd( ce1 ) else tl.editCancel( ce1 )
       }
-
-//      tl.joinEdit( "Clean Up Overlaps" ) { implicit ce =>
-//         var trackMap      = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
-////                  var moreTracks = Set.empty[ AudioTrack ]
-//         var moreDiffs  = Set.empty[ MatrixDiffusion ]
-//         val withDiffs  = selTracks.map( at => (at, at.diffusion) ).collect {
-//            case (at, Some( m: MatrixDiffusion )) => (at, Some( m.matrix.toSeq ))
-//            case (at, None) => (at, Option.empty[ Seq[ Seq[ Float ]]])
-//         }
-//         withDiffs.foreach { case (at, matO) =>
-//            val hasFirst   = matO match {
-//               case Some( seq ) => seq.forall( _.last == 0f )
-//               case None => false
-//            }
-//            val hasLast    = matO match {
-//               case Some( seq ) => seq.forall( _.head == 0f )
-//               case None => false
-//            }
-//            val trackPrefix = if( hasFirst ) "T-L" else if( hasLast ) "T-R" else "T"
-//
-//            var ars = at.trail.getRange( span )
-//            var over = IndexedSeq.empty[ AudioRegion ]
-//            var foundOverlap = true
-//            while( foundOverlap && ars.nonEmpty ) {
-//               val ar1  = ars.last
-//               val dr   = ars.dropRight( 1 )
-//               foundOverlap = dr.exists( _.span.overlaps( ar1.span ))
-//               if( foundOverlap ) {
-//                  over +:= ar1
-//                  ars    = dr
-//               }
-//            }
-//            if( over.nonEmpty ) {
-//               val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
-//               tveO.foreach( _.editDeselect( ce, over: _* ))
-//               at.trail.editRemove( ce, over: _* )
-//               val moveMap = over.map( ar => {
-//                  val t2 = provideAudioTrackSpace( ar.span, { at =>
-//                     /* inTxn.get( at ).map( !_.exists( _.span.overlaps( ar.span ))).getOrElse( true ) && */
-//                     (at.diffusion match {
-//                        case Some( m: MatrixDiffusion ) => Some( m.matrix.toSeq ) == matO
-//                        case None => matO.isEmpty
-//                     })
-//                  }, trackMap, trackPrefix )
-//                  if( t2.diffusion.isDefined != matO.isDefined ) {
-//                     assert( matO.isDefined )
-//                     val numInChans = ar.audioFile.numChannels
-//                     val d = if( hasFirst ) {
-//                        provideLeftDiffusion( more = moreDiffs.toIndexedSeq )( numInChans )
-//                     } else if( hasLast ) {
-//                        provideRightDiffusion( more = moreDiffs.toIndexedSeq )( numInChans )
-//                     } else {
-//                        provideStereoDiffusion( numInChans, 2, more = moreDiffs.toIndexedSeq )
-//                     }
-//                     moreDiffs += d
-//                     t2.editDiffusion( ce, Some( d ))
-//                  }
-////                           moreTracks += t2
-//                  trackMap += t2 -> (trackMap.getOrElse( t2, IndexedSeq.empty[ AudioRegion ]) :+ ar)
-//                  t2 -> ar
-//               }).groupBy( _._1 ).mapValues( _.map( _._2 ))
-//               moveMap.foreach { case (at1, ars1) =>
-//                  at1.trail.editAdd( ce, ars1: _* )
-//                  val tve2O = trl.getElement( at1 ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
-//                  tve2O.foreach( _.editSelect( ce, ars1: _* ))
-//               }
-//            }
-//         }
-//      }
    }
 }
