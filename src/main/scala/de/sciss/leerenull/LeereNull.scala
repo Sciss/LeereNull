@@ -293,7 +293,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
          }
       })
       val miOptimizeFanatically = new MenuItem( "leerenull.optimizefanatically",
-         action( "Fanatically Optimize Track Capacities" ) {
+         action( "Fanatically Optimize Track Capacities", "control shift P" ) {
          currentDoc.foreach { implicit doc =>
             withTimeline { (tl, tlv, trl) =>
                FanaticallyOptimize.perform( doc, tl, tlv, trl )
@@ -429,6 +429,13 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             }
          }
       })
+      val miSelectTracksWithSameDiffusion = new MenuItem( "leerenull.trackswithsamediff", action( "Select tracks with same diffusion", "control shift D" ) {
+         currentDoc.foreach { implicit doc =>
+            withTimeline { (tl, tlv, trl) =>
+               SelectTracksWithSameDiffusion.perform( trl )
+            }
+         }
+      })
 
       mg.add( miExtractor )
       mg.add( miLoadSearch )
@@ -440,6 +447,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       mg.add( miOptimizeTracksCapacities )
       mg.add( miSelectWrongChans )
       mg.add( miOptimizeFanatically )
+      mg.add( miSelectTracksWithSameDiffusion )
       mg.addSeparator()
       mg.add( miExportPDF )
       mg.add( miExportPNG )
