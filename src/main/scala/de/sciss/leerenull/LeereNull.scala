@@ -475,6 +475,9 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             }
          }
       })
+      val miIncorporateBounce = new MenuItem( "leerenull.incbounce", action( "Incorporate Bounce..." ) {
+         IncorporateBounce.showGUI()
+      })
 
       mg.add( miExtractor )
       mg.add( miLoadSearch )
@@ -493,6 +496,9 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       mg.addSeparator()
       mg.add( miLoadUeberzeichnung )
       mg.add( miNewUeberzeichnung )
+
+      mg.addSeparator()
+      mg.add( miIncorporateBounce )
 
       mf.add( mg )
    }
