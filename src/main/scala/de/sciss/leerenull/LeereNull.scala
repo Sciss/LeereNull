@@ -436,6 +436,9 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
             }
          }
       })
+      val miMergeTimelines = new MenuItem( "leerenull.mergetimelines", action( "Merge a timeline into another..." ) {
+         MergeTimelines.showGUI()
+      })
 
       mg.add( miExtractor )
       mg.add( miLoadSearch )
@@ -460,6 +463,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       mg.addSeparator()
       mg.add( miIncorporateBounce )
       mg.add( miConvertToMono )
+      mg.add( miMergeTimelines )
 
       mf.add( mg )
    }

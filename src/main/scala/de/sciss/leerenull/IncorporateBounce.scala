@@ -65,7 +65,7 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       }
 
       val names = tls.map {
-         case (doc, tl) => doc.name.getOrElse( "<untitled>" ) + " : " + tl.name
+         case (doc, tl) => doc.displayName + " : " + tl.name
       }
 
       var preTL      = tls( 0 )

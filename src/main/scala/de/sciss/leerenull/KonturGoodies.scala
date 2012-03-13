@@ -112,11 +112,13 @@ trait KonturGoodies {
       }
    }
 
-   def findAudioFile( file: File )( implicit doc: Session ) : Option[ AudioFileElement ] =
-      doc.audioFiles.find( _.path == file )
+   def findAudioFile( file: File, more: IndexedSeq[ AudioFileElement ] = IndexedSeq.empty )
+                    ( implicit doc: Session ) : Option[ AudioFileElement ] =
+      (doc.audioFiles.toList ++ more).find( _.path == file )
 
-   def provideAudioFile( file: File )( implicit doc: Session, ce: Maybe[ AbstractCompoundEdit ]) : AudioFileElement =
-      findAudioFile( file ).getOrElse {
+   def provideAudioFile( file: File, more: IndexedSeq[ AudioFileElement ] = IndexedSeq.empty )
+                       ( implicit doc: Session, ce: Maybe[ AbstractCompoundEdit ]) : AudioFileElement =
+      findAudioFile( file, more ).getOrElse {
          val afe = AudioFileElement.fromPath( doc, file )
          val afs = doc.audioFiles
          afs.joinEdit( "Add audio file" ) { implicit ce =>
