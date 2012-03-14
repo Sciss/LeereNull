@@ -397,20 +397,22 @@ class VideoComment extends VideoLike {
       println( "part I  starts " + sono.startTime )
       println( "part II starts " + (part2Title.stopTime + 1.0) )
 
-      import MovingImage.{LinearWarp, Pow, Combine, CosineWarp}
+      import MovingImage.{LinearWarp, Pow, Combine, CosineWarp, DelayStart, EarlyStop}
 
       val part2Sona1H = 1920
       val part2SonaW  = 12375
 
       lazy val part2Sona1 = MovingImage( this, "c_part2_ch1.png", 1.0, 10.0,
-         videoWidth, -(64 * 3), 1.0,
+         videoWidth, -(64 * 12), 1.0,
          0.0,        0.0,                        videoWidth / part2SonaW.toDouble,
-         LinearWarp, LinearWarp,                 Pow( 0.5) )
+         Pow( 0.5 ), DelayStart( 0.3 ) ~> EarlyStop( 0.4 ) ~> CosineWarp, DelayStart( 0.3 ) ~> EarlyStop( 0.4 ) ~> Pow( 0.75 ) ~> CosineWarp
+      )
 
       lazy val part2Sona2 = MovingImage( this, "c_part2_ch2.png", part2Sona1.startTime, part2Sona1.duration,
-         part2Sona1.startX, part2Sona1.startY + (64 * 3), part2Sona1.startZoom,
+         part2Sona1.startX, part2Sona1.startY + (64 * 4), part2Sona1.startZoom,
          part2Sona1.stopX,  part2Sona1H * part2Sona1.stopZoom, part2Sona1.stopZoom ,
-         part2Sona1.interpX, part2Sona1.interpY, part2Sona1.interpZoom )
+         part2Sona1.interpX, part2Sona1.interpY, part2Sona1.interpZoom
+      )
 
 //      List( mainTitle, mainTitleSub,
 ////            raspad,

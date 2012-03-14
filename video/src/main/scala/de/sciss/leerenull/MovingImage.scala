@@ -7,6 +7,7 @@ import java.awt.RenderingHints
 object MovingImage {
    trait Warp {
       def apply( w: Double ) : Double
+      def ~>( b: Warp ) : Warp = Combine( this, b )
    }
    case object LinearWarp extends Warp {
       def apply( w: Double ) : Double = w
@@ -20,6 +21,18 @@ object MovingImage {
    }
    final case class Pow( f: Double ) extends Warp {
       def apply( w: Double ) : Double = math.pow( w, f )
+   }
+
+   final case class DelayStart( amount: Double ) extends Warp {
+      require( amount >= 0 && amount < 1 )
+      private val factor = 1.0 / (1 - amount)
+      def apply( w: Double ) : Double = math.min( 1.0, math.max( 0.0, w - amount ) * factor )
+   }
+
+   final case class EarlyStop( amount: Double ) extends Warp {
+      require( amount >= 0 && amount < 1 )
+      private val factor = 1.0 / (1 - amount)
+      def apply( w: Double ) : Double = math.min( 1.0, w * factor )
    }
 
    def apply( video: VideoLike, fileName: String, startTime: Double, duration: Double,
