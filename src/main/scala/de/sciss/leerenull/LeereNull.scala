@@ -25,17 +25,18 @@
 
 package de.sciss.leerenull
 
-import de.sciss.kontur.Kontur
 import de.sciss.gui.{MenuItem, MenuGroup}
 import java.util.Properties
 import java.io.{File, FileInputStream}
 import eu.flierl.grouppanel.GroupPanel
 import collection.breakOut
-import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, AudioTrack, AudioRegion}
-import swing.{ButtonGroup, Dialog, Swing}
-import de.sciss.kontur.gui.{DefaultTrackComponent, TrailViewEditor}
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
+import de.sciss.kontur.io.SonagramOverview
+import de.sciss.kontur.gui.{TrailViewEditor, DefaultTrackComponent}
+import swing.{Swing, ButtonGroup, Dialog}
+import de.sciss.kontur.Kontur
+import de.sciss.kontur.session.{MatrixDiffusion, Diffusion, AudioTrack, AudioRegion}
 
 object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGoodies {
    lazy val (baseFolder, databaseFolder, extractorFolder, searchFolder, bounceFolder, ueberzeichnungFolder) = {
@@ -58,6 +59,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
    }
 
    def run() {
+      SonagramOverview.maxSize = 16384
+
       val app  = new Kontur( Array() )
       val mf   = app.getMenuFactory
       val mg   = new MenuGroup( "leerenull", "Leere Null" )

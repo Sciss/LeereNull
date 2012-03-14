@@ -1,5 +1,5 @@
 /*
- *  Video.scala
+ *  VideoComment.scala
  *  (LeereNull)
  *
  *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
@@ -32,16 +32,11 @@ import javax.swing.{SwingConstants, BorderFactory, Box, JLabel, JProgressBar, Wi
 import de.sciss.gui.j.{Axis, LCDPanel}
 import java.awt.event.{MouseEvent, MouseAdapter}
 
-object Video {
-   sealed trait Mode { def start: Double }
-   final case class Write( start: Double = 0.0 ) extends Mode
-   final case class Realtime( start: Double = 0.0 ) extends Mode
-   case object Offline extends Mode { val start = 0.0 }
-
-   var mode: Mode = _
+object VideoComment {
+   import Video.{Write, Realtime, Offline}
 
    def main( args: Array[ String ]) {
-      mode = args.headOption match {
+      Video.mode =  args.headOption match {
          case Some( "--write" )     => Write(    args.tail.headOption.map( _.toDouble ).getOrElse( 0.0 ))
          case Some( "--realtime" )  => Realtime( args.tail.headOption.map( _.toDouble ).getOrElse( 0.0 ))
          case _ => Offline
@@ -63,24 +58,19 @@ object Video {
          Console.setErr( log.outputStream )
          println( "Rendering..." )
    //      Console.err.println( "Hello world." )
-         new Video
+         new VideoComment
       }})
    }
 
-   val videoWidth       = 1024
-   val videoHeight      = 768
-   val videoFPS         = 24
-   val dataFolder       = new File( "data" )
-   val outputFolder     = new File( "data_out" )
-//   val totalDuration    = 30.0
-//   val totalNumFrames   = (totalDuration * videoFPS + 0.5).toInt
+   val outputFolder     = new File( "data_outc" )
 }
 
-class Video extends VideoLike {
-   import Video._
+class VideoComment extends VideoLike {
+   import VideoComment._
+   import Video.{mode, dataFolder, videoWidth, videoHeight, videoFPS, Offline, Realtime, Write}
 
    val f = {
-      val res = new JFrame( "Leere Null" )
+      val res = new JFrame( "Leere Null (Comment)" )
       res.getRootPane.putClientProperty( "apple.awt.brushMetalLook", java.lang.Boolean.TRUE )
       res
    }
@@ -168,7 +158,7 @@ class Video extends VideoLike {
 //   lazy val layers         = List( TitleLayer( this ), RaspadLayer( this ))
    lazy val layers         = {
 
-      val introBlack    = 5.0 // 4.0
+      val introBlack    = 3.0 // 5.0 // 4.0
 
       val titleMainY    = 220
       val titleMainFnt  = 72
@@ -199,7 +189,7 @@ class Video extends VideoLike {
          offY = titleSubY
       )
 
-      lazy val raspad  = RaspadLayer( this, mainTitle.stopTime + 1.0 )
+//      lazy val raspad  = RaspadLayer( this, mainTitle.stopTime + 1.0 )
 
       val partMainY     = titleMainY // 180
       val partSubY      = titleSubY  // 240
@@ -209,7 +199,7 @@ class Video extends VideoLike {
       val partFadeOut   = 2.0
 
       lazy val part1Title = TitleLayer( this,
-         startTime = raspad.stopTime + 1.0,
+         startTime = mainTitle.stopTime + 1.0, // raspad.stopTime + 1.0,
          title = "Part I",
          fontSize = partMainFnt,
          fadeIn = partFadeIn,
@@ -241,7 +231,7 @@ class Video extends VideoLike {
       )
 
       lazy val part2Title = TitleLayer( this,
-         startTime = sono.startTime + 302.75, // 5'01"
+         startTime = sono.startTime + 47.5, // 302.75, // 5'01"
          title = "Part II",
          fontSize = partMainFnt,
          fadeIn = partFadeIn,
@@ -399,15 +389,15 @@ class Video extends VideoLike {
 
       lazy val sono = SonogramLayer( this, sonoRec.build, part1Title.stopTime + 1.0 ) // raspad.stopTime + 1.0 )
 
-      lazy val sonoFade1   = FadeLayer.out(   this, sono.stopTime - (4 + sonoCombiDir), 1 )
-      lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 4 )
+      lazy val sonoFade1   = FadeLayer.out(   this, sono.stopTime - (7 + sonoCombiDir), 2 )
+      lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 7 )
 //      lazy val endMarker   = FadeLayer.black( this, part2Title.startTime + 490
 
-      println( "raspad  starts " + raspad.startTime )
+//      println( "raspad  starts " + raspad.startTime )
       println( "part I  starts " + sono.startTime )
       println( "part II starts " + (part2Title.stopTime + 1.0) )
       List( mainTitle, mainTitleSub,
-            raspad,
+//            raspad,
             part1Title, part1TitleSubA, part1TitleSubB,
             sono,
             sonoFade1, sonoFade2,

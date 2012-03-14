@@ -37,11 +37,11 @@ object TitleLayer {
 //   val title      = "Leere Null (2)"
 //   val offY       = 120
 
-   def apply( video: Video, startTime: Double = 0.0, duration: Double = 7.0, title: String,
+   def apply( video: VideoLike, startTime: Double = 0.0, duration: Double = 7.0, title: String,
               fontSize: Int = 72, offY: Int = 120, fadeIn: Double = 2.0, fadeOut: Double = 2.5, flipHoriz: Boolean = false ) : TitleLayer =
       new TitleLayer( video, startTime, duration, title, fontSize, offY, fadeIn, fadeOut, flipHoriz )
 }
-class TitleLayer( protected val video: Video, val startTime: Double, val duration: Double, val title: String, val fontSize: Int,
+class TitleLayer( protected val video: VideoLike, val startTime: Double, val duration: Double, val title: String, val fontSize: Int,
                   val offY: Int, val fadeIn: Double, val fadeOut: Double, val flipHoriz: Boolean )
 extends VideoLayer {
    import Video._

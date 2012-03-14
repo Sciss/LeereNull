@@ -26,11 +26,11 @@
 package de.sciss.leerenull
 
 object FadeLayer {
-   def in(    video: Video, startTime: Double, duration: Double ) = new FadeLayer( video, startTime, duration, 1f, 0f )
-   def out(   video: Video, startTime: Double, duration: Double ) = new FadeLayer( video, startTime, duration, 0f, 1f )
-   def black( video: Video, startTime: Double, duration: Double ) = new FadeLayer( video, startTime, duration, 1f, 1f )
+   def in(    video: VideoLike, startTime: Double, duration: Double ) = new FadeLayer( video, startTime, duration, 1f, 0f )
+   def out(   video: VideoLike, startTime: Double, duration: Double ) = new FadeLayer( video, startTime, duration, 0f, 1f )
+   def black( video: VideoLike, startTime: Double, duration: Double ) = new FadeLayer( video, startTime, duration, 1f, 1f )
 }
-class FadeLayer( protected val video: Video, val startTime: Double, val duration: Double, startAlpha: Float, stopAlpha: Float )
+class FadeLayer( protected val video: VideoLike, val startTime: Double, val duration: Double, startAlpha: Float, stopAlpha: Float )
 extends VideoLayer {
    def stopTime = startTime + duration
 

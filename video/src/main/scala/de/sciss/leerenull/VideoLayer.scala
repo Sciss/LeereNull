@@ -30,7 +30,7 @@ trait VideoLayer {
    def stopTime: Double
    def duration: Double
 
-   protected def video: Video
+   protected def video: VideoLike
 
    def draw() : Unit
 }

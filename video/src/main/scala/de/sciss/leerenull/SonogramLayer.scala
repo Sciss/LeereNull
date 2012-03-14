@@ -10,7 +10,7 @@ object SonogramLayer {
    val trackYOff        = (Video.videoHeight - (trackHeight * 5)) / 2 // 0 // 200
    val trackXOff        = 72 // 100
 
-   def apply( video: Video, instr: IIdxSeq[ Instruction ], startTime: Double = 0.0 ) : SonogramLayer =
+   def apply( video: VideoLike, instr: IIdxSeq[ Instruction ], startTime: Double = 0.0 ) : SonogramLayer =
       new SonogramLayer( video, instr, startTime )
 
 //   trait InstrLike {
@@ -242,7 +242,7 @@ object SonogramLayer {
 
    private var imageMap = Map.empty[ String, PImage ]
 
-   def cachedImage( video: Video, id: String ) : PImage = {
+   def cachedImage( video: VideoLike, id: String ) : PImage = {
       imageMap.get( id ) match {
          case Some( img ) => img
          case _ =>
@@ -253,11 +253,11 @@ object SonogramLayer {
    }
 }
 
-class SonogramLayer( protected val video: Video, instr: IIdxSeq[ SonogramLayer.Instruction ], val startTime: Double )
+class SonogramLayer( protected val video: VideoLike, instr: IIdxSeq[ SonogramLayer.Instruction ], val startTime: Double )
 extends VideoLayer {
    import SonogramLayer._
 
-//   lazy val img      = video.loadImage( new File( Video.dataFolder, name + ".png" ).getPath )
+//   lazy val img      = video.loadImage( new File( VideoLike.dataFolder, name + ".png" ).getPath )
    lazy val duration = instr.map( _.stopTime ).max // img.width.toDouble / pixelsPerSecond
 
    def stopTime = startTime + duration

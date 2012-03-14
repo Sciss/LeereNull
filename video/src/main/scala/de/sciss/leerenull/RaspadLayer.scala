@@ -43,9 +43,9 @@ object RaspadLayer {
    def numFrames  = stopIdx - startIdx
    def duration   = numFrames.toDouble / raspadFPS
 
-   def apply( video: Video, startTime: Double = 0.0 ) : RaspadLayer = new RaspadLayer( video, startTime )
+   def apply( video: VideoLike, startTime: Double = 0.0 ) : RaspadLayer = new RaspadLayer( video, startTime )
 }
-class RaspadLayer( protected val video: Video, val startTime: Double ) extends VideoLayer {
+class RaspadLayer( protected val video: VideoLike, val startTime: Double ) extends VideoLayer {
    import Video._
    import RaspadLayer.{duration => gDur, _}
 
