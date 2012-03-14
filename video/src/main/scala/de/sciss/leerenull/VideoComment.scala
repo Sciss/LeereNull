@@ -390,7 +390,7 @@ class VideoComment extends VideoLike {
       lazy val sono = SonogramLayer( this, sonoRec.build, part1Title.stopTime + 1.0 ) // raspad.stopTime + 1.0 )
 
       lazy val sonoFade1   = FadeLayer.out(   this, sono.stopTime - (7 + sonoCombiDir), 2 )
-      lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 10 )
+      lazy val sonoFade2   = FadeLayer.black( this, sonoFade1.stopTime, sonoCombiDir + 7 )
 //      lazy val endMarker   = FadeLayer.black( this, part2Title.startTime + 490
 
 //      println( "raspad  starts " + raspad.startTime )

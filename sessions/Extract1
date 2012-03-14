@@ -39,7 +39,7 @@
        <coll>
   <timeline id="5">
    <name>Timeline</name>
-   <span stop="9261000" start="0"></span>
+   <span stop="8820000" start="0"></span>
    <rate>44100.0</rate>
    <tracks id="6">
       <coll>
@@ -49,18 +49,18 @@
       <trail>
   <stake>
       <name>3Ed.aif</name>
-      <span stop="3917624" start="2825598"></span>
+      <span stop="2503188" start="733743"></span>
       <audioFile idref="0"></audioFile>
-      <offset>1769445</offset>
+      <offset>0</offset>
       <gain>1.4125376</gain>
       
       
       
    </stake><stake>
       <name>3Ed.aif</name>
-      <span stop="2503188" start="733743"></span>
+      <span stop="3917624" start="2825598"></span>
       <audioFile idref="0"></audioFile>
-      <offset>0</offset>
+      <offset>1769445</offset>
       <gain>1.4125376</gain>
       
       
@@ -73,17 +73,94 @@
       <trail>
   <stake>
       <name>LeereNullStereoMix.aif</name>
-      <span stop="4025889" start="3903510"></span>
+      <span stop="5140013" start="4008249"></span>
       <audioFile idref="1"></audioFile>
-      <offset>14566052</offset>
-      <gain>0.70794576</gain>
+      <offset>14670791</offset>
+      <gain>0.99999994</gain>
       <fadeIn><fade>
-  <numFrames>11576</numFrames>
+  <numFrames>22050</numFrames>
   
   
 </fade></fadeIn>
       <fadeOut><fade>
+  <numFrames>465255</numFrames>
+  <shape curve="-1.2" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LeereNullStereoMix.aif</name>
+      <span stop="3366594" start="3185784"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13848326</offset>
+      <gain>0.39810714</gain>
+      <fadeIn><fade>
+  <numFrames>17640</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>19845</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LeereNullStereoMix.aif</name>
+      <span stop="3196809" start="2948569"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>13611111</offset>
+      <gain>0.5011872</gain>
+      
+      <fadeOut><fade>
+  <numFrames>22050</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LeereNullStereoMix.aif</name>
+      <span stop="3763494" start="3355569"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14018111</offset>
+      <gain>0.2511886</gain>
+      <fadeIn><fade>
   <numFrames>13230</numFrames>
+  
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>28665</numFrames>
+  
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LeereNullStereoMix.aif</name>
+      <span stop="2868259" start="710010"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>0</offset>
+      <gain>1.0</gain>
+      
+      <fadeOut><fade>
+  <numFrames>262401</numFrames>
+  <shape curve="-3.0" num="5"></shape>
+  
+</fade></fadeOut>
+      
+   </stake><stake>
+      <name>LeereNullStereoMix.aif</name>
+      <span stop="8707214" start="7049054"></span>
+      <audioFile idref="2"></audioFile>
+      <offset>32508503</offset>
+      <gain>1.0</gain>
+      <fadeIn><fade>
+  <numFrames>1012095</numFrames>
+  <shape curve="3.1000001" num="5"></shape>
+  
+</fade></fadeIn>
+      <fadeOut><fade>
+  <numFrames>582120</numFrames>
   
   
 </fade></fadeOut>
@@ -107,95 +184,18 @@
       
    </stake><stake>
       <name>LeereNullStereoMix.aif</name>
-      <span stop="8707214" start="7049054"></span>
-      <audioFile idref="2"></audioFile>
-      <offset>32508503</offset>
-      <gain>1.0</gain>
+      <span stop="4025889" start="3903510"></span>
+      <audioFile idref="1"></audioFile>
+      <offset>14566052</offset>
+      <gain>0.70794576</gain>
       <fadeIn><fade>
-  <numFrames>1012095</numFrames>
-  <shape curve="3.1000001" num="5"></shape>
+  <numFrames>11576</numFrames>
+  
   
 </fade></fadeIn>
       <fadeOut><fade>
-  <numFrames>582120</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>LeereNullStereoMix.aif</name>
-      <span stop="2868259" start="710010"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>0</offset>
-      <gain>1.0</gain>
-      
-      <fadeOut><fade>
-  <numFrames>262401</numFrames>
-  <shape curve="-3.0" num="5"></shape>
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>LeereNullStereoMix.aif</name>
-      <span stop="3763494" start="3355569"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>14018111</offset>
-      <gain>0.2511886</gain>
-      <fadeIn><fade>
   <numFrames>13230</numFrames>
   
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>28665</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>LeereNullStereoMix.aif</name>
-      <span stop="3196809" start="2948569"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>13611111</offset>
-      <gain>0.5011872</gain>
-      
-      <fadeOut><fade>
-  <numFrames>22050</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>LeereNullStereoMix.aif</name>
-      <span stop="3366594" start="3185784"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>13848326</offset>
-      <gain>0.39810714</gain>
-      <fadeIn><fade>
-  <numFrames>17640</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>19845</numFrames>
-  
-  
-</fade></fadeOut>
-      
-   </stake><stake>
-      <name>LeereNullStereoMix.aif</name>
-      <span stop="5140013" start="4008249"></span>
-      <audioFile idref="1"></audioFile>
-      <offset>14670791</offset>
-      <gain>0.99999994</gain>
-      <fadeIn><fade>
-  <numFrames>22050</numFrames>
-  
-  
-</fade></fadeIn>
-      <fadeOut><fade>
-  <numFrames>465255</numFrames>
-  <shape curve="-1.2" num="5"></shape>
   
 </fade></fadeOut>
       
