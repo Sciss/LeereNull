@@ -33,6 +33,8 @@ import de.sciss.gui.j.{Axis, LCDPanel}
 import java.awt.event.{MouseEvent, MouseAdapter}
 
 object VideoComment {
+   val WITH_PART_II_SONA   = true
+
    import Video.{Write, Realtime, Offline}
 
    def main( args: Array[ String ]) {
@@ -400,30 +402,59 @@ class VideoComment extends VideoLike {
       import MovingImage.{LinearWarp, Pow, Combine, CosineWarp, DelayStart, EarlyStop}
 
       val part2Sona1H = 1920
+      val part2Sona2H = 2048
+      val part2Sona3H = 1856
+      val part2Sona4H = 1984
       val part2SonaW  = 12375
+      val part2SonaY  = 768
 
-      lazy val part2Sona1 = MovingImage( this, "c_part2_ch1.png", 1.0, 10.0,
-         videoWidth, -(64 * 12), 1.0,
-         0.0,        0.0,                        videoWidth / part2SonaW.toDouble,
-         Pow( 0.5 ), DelayStart( 0.3 ) ~> EarlyStop( 0.4 ) ~> CosineWarp, DelayStart( 0.3 ) ~> EarlyStop( 0.4 ) ~> Pow( 0.75 ) ~> CosineWarp
+      val stopZoom = videoWidth / part2SonaW.toDouble
+
+      lazy val part2Sona1 = MovingImage( this, "c_part2_ch1.png", part2Title.stopTime, 199.0 -part2Title.stopTime,
+         videoWidth, -(64 * 16.5), 1.0,
+         0.0,        part2SonaY * stopZoom,                        stopZoom,
+         Pow( 0.5 ), DelayStart( 0.3 ) ~> EarlyStop( 0.4 ) ~> Pow( 0.75 ) ~> CosineWarp, DelayStart( 0.3 ) ~> EarlyStop( 0.4 ) ~> Pow( 0.75 ) ~> CosineWarp
       )
+
+//      val part2SonaDeltaY = 64 * 4
 
       lazy val part2Sona2 = MovingImage( this, "c_part2_ch2.png", part2Sona1.startTime, part2Sona1.duration,
          part2Sona1.startX, part2Sona1.startY + (64 * 4), part2Sona1.startZoom,
-         part2Sona1.stopX,  part2Sona1H * part2Sona1.stopZoom, part2Sona1.stopZoom ,
+         part2Sona1.stopX,  (part2SonaY + part2Sona1H) * part2Sona1.stopZoom, part2Sona1.stopZoom ,
          part2Sona1.interpX, part2Sona1.interpY, part2Sona1.interpZoom
       )
 
-//      List( mainTitle, mainTitleSub,
-////            raspad,
-//            part1Title, part1TitleSubA, part1TitleSubB,
-//            sono,
-//            sonoFade1, sonoFade2,
-//            part2Title, part2TitleSub
-////            endMarker
-//      )
+      lazy val part2Sona3 = MovingImage( this, "c_part2_ch3.png", part2Sona1.startTime, part2Sona1.duration,
+         part2Sona1.startX, part2Sona2.startY + (64 * 6), part2Sona1.startZoom,
+         part2Sona1.stopX,  (part2SonaY + part2Sona1H + part2Sona2H) * part2Sona1.stopZoom, part2Sona1.stopZoom ,
+         part2Sona1.interpX, part2Sona1.interpY, part2Sona1.interpZoom
+      )
 
-      List( part2Sona1, part2Sona2 )
+      lazy val part2Sona4 = MovingImage( this, "c_part2_ch4.png", part2Sona1.startTime, part2Sona1.duration,
+         part2Sona1.startX, part2Sona3.startY + (64 * 4), part2Sona1.startZoom,
+         part2Sona1.stopX,  (part2SonaY + part2Sona1H + part2Sona2H + part2Sona3H) * part2Sona1.stopZoom, part2Sona1.stopZoom ,
+         part2Sona1.interpX, part2Sona1.interpY, part2Sona1.interpZoom
+      )
+
+      lazy val part2FadeIn    = FadeLayer.in(    this, part2Sona1.startTime, 10 )
+      lazy val part2FadeOut   = FadeLayer.out(   this, part2Sona1.stopTime - 20, 20 )
+      lazy val finalBlack     = FadeLayer.black( this, part2FadeOut.stopTime, 1 )
+
+      val li1 = List( mainTitle, mainTitleSub,
+//            raspad,
+            part1Title, part1TitleSubA, part1TitleSubB,
+            sono,
+            sonoFade1, sonoFade2,
+            part2Title, part2TitleSub
+      )
+
+      if( WITH_PART_II_SONA ) {
+         li1 ++ List( part2Sona1, part2Sona2, part2Sona3, part2Sona4, part2FadeIn, part2FadeOut, finalBlack )
+      } else {
+         li1
+      }
+
+//      List( part2Sona1, part2Sona2, part2Sona3, part2Sona4 )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1
