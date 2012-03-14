@@ -25,6 +25,8 @@
 
 package de.sciss.leerenull
 
+import java.awt.Graphics2D
+
 trait VideoLayer {
    def startTime: Double
    def stopTime: Double

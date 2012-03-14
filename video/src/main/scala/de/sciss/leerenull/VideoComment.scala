@@ -396,14 +396,32 @@ class VideoComment extends VideoLike {
 //      println( "raspad  starts " + raspad.startTime )
       println( "part I  starts " + sono.startTime )
       println( "part II starts " + (part2Title.stopTime + 1.0) )
-      List( mainTitle, mainTitleSub,
-//            raspad,
-            part1Title, part1TitleSubA, part1TitleSubB,
-            sono,
-            sonoFade1, sonoFade2,
-            part2Title, part2TitleSub
-//            endMarker
-      )
+
+      import MovingImage.{LinearWarp, Pow, Combine, CosineWarp}
+
+      val part2Sona1H = 1920
+      val part2SonaW  = 12375
+
+      lazy val part2Sona1 = MovingImage( this, "c_part2_ch1.png", 1.0, 10.0,
+         videoWidth, -(64 * 3), 1.0,
+         0.0,        0.0,                        videoWidth / part2SonaW.toDouble,
+         LinearWarp, LinearWarp,                 Pow( 0.5) )
+
+      lazy val part2Sona2 = MovingImage( this, "c_part2_ch2.png", part2Sona1.startTime, part2Sona1.duration,
+         part2Sona1.startX, part2Sona1.startY + (64 * 3), part2Sona1.startZoom,
+         part2Sona1.stopX,  part2Sona1H * part2Sona1.stopZoom, part2Sona1.stopZoom ,
+         part2Sona1.interpX, part2Sona1.interpY, part2Sona1.interpZoom )
+
+//      List( mainTitle, mainTitleSub,
+////            raspad,
+//            part1Title, part1TitleSubA, part1TitleSubB,
+//            sono,
+//            sonoFade1, sonoFade2,
+//            part2Title, part2TitleSub
+////            endMarker
+//      )
+
+      List( part2Sona1, part2Sona2 )
    }
    lazy val totalDuration  = layers.map( _.stopTime ).max
    lazy val totalNumFrames = (totalDuration * videoFPS + 0.5).toInt + 1
