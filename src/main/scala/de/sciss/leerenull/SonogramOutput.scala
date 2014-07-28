@@ -2,32 +2,21 @@
  *  SonogramOutput.scala
  *  (LeereNull)
  *
- *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2011-2014 Hanns Holger Rutz. All rights reserved.
  *
- *	This software is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License
- *	as published by the Free Software Foundation; either
- *	version 2, june 1991 of the License, or (at your option) any later version.
- *
- *	This software is distributed in the hope that it will be useful,
- *	but WITHOUT ANY WARRANTY; without even the implied warranty of
- *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- *	General Public License for more details.
- *
- *	You should have received a copy of the GNU General Public
- *	License (gpl.txt) along with this software; if not, write to the Free Software
- *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *	This software is published under the GNU General Public License v3+
  *
  *
- *	For further information, please contact Hanns Holger Rutz at
- *	contact@sciss.de
+ *  For further information, please contact Hanns Holger Rutz at
+ *  contact@sciss.de
  */
 
 package de.sciss.leerenull
 
 import java.io.File
-import de.sciss.processor.ProcessorFactory
+import de.sciss.processor.{Processor, ProcessorFactory}
 import de.sciss.processor.impl.ProcessorImpl
+import de.sciss.sonogram.{OverviewManager, PaintController}
 import de.sciss.span.Span
 
 import de.sciss.synth.io.{SampleFormat, AudioFileType, AudioFileSpec, AudioFile}
@@ -37,7 +26,7 @@ import java.awt.{Color, Component}
 import de.sciss.kontur.session.{FadeSpec, AudioRegion}
 
 object SonogramOutput extends ProcessorFactory {
-   lazy val mgr = new SimpleSonogramOverviewManager()
+   lazy val mgr: OverviewManager = OverviewManager()
 
    type Product = Unit
 
@@ -127,13 +116,13 @@ class SonogramOutput(ars: IndexedSeq[AudioRegion], output: File, gainOffset: Flo
 
             while (tlPos < tlStop) {
               checkAborted()
-              val chunkLen = math.min(bufSize, tlStop - tlPos).toInt
+              val chunkLen  = math.min(bufSize, tlStop - tlPos).toInt
               val chunkSpan = Span(tlPos, tlPos + chunkLen)
                clear( bufOut0 )
                zipped.foreach { case (af, ar) =>
-                  val iSpan      = ar.span.intersect(chunkSpan)
-                  val iSpanLen   = iSpan.length.toInt
-                  if( iSpanLen > 0 ) {
+                  ar.span.intersect(chunkSpan) match {
+                    case iSpan @ Span(_, _) =>
+                      val iSpanLen   = iSpan.length.toInt
                      val delta = iSpan.start - ar.span.start
                      val afPos = delta + ar.offset
                      if( af.position != afPos ) af.seek( afPos )
@@ -147,6 +136,8 @@ class SonogramOutput(ars: IndexedSeq[AudioRegion], output: File, gainOffset: Flo
                      val mul = (ar.gain * gainFactor / math.sqrt( af.numChannels )).toFloat
                      withEachChannel( bufIn )( mulAdd( mul, gainOffset ))
                      withEachChannel( bufIn )( mix( 0, bufOut0, (iSpan.start - chunkSpan.start).toInt, iSpanLen ))
+
+                    case _ =>
                   }
                }
 
@@ -166,12 +157,13 @@ class SonogramOutput(ars: IndexedSeq[AudioRegion], output: File, gainOffset: Flo
       val imgW = (numFrames * pixelsPerSecond / sampleRate + 0.5).toInt
       val imgH = height
 
-      val sono       = mgr.fromPath( tmpF )
+     val sonoJob = OverviewManager.Job(tmpF)
+      val sono = mgr.acquire(sonoJob)
       try {
          val monitor    = new AnyRef
          var complete   = false
          sono.addListener {
-            case OverviewComplete( _ ) =>
+            case Processor.Result(_, _) =>
                println( "Completed." )
                complete = true
                monitor.synchronized { monitor.notifyAll() }
@@ -193,7 +185,7 @@ class SonogramOutput(ars: IndexedSeq[AudioRegion], output: File, gainOffset: Flo
 
 //         val rnd = new util.Random()
 //         val fadePaint = SonogramFadePaint( obs, ar, gainFactor )
-         val ctrl = new SonogramPaintController {
+         val ctrl = new PaintController {
             def adjustGain( amp: Float, pos: Double ) : Float = amp // * fadePaint.sonogramGain( pos / ar.span.getLength ) + gainOffset
             def imageObserver : ImageObserver = obs
          }
@@ -211,10 +203,9 @@ class SonogramOutput(ars: IndexedSeq[AudioRegion], output: File, gainOffset: Flo
          }
 
       } finally {
-         sono.dispose()
+        mgr.release(sono)
+         // sono.dispose()
       }
-
-     ()
    }
 
   //   protected val Act = new Actor {

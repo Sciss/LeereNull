@@ -2,31 +2,22 @@
  *  FScape.scala
  *  (LeereNull)
  *
- *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2011-2014 Hanns Holger Rutz. All rights reserved.
  *
- *	This software is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License
- *	as published by the Free Software Foundation; either
- *	version 2, june 1991 of the License, or (at your option) any later version.
- *
- *	This software is distributed in the hope that it will be useful,
- *	but WITHOUT ANY WARRANTY; without even the implied warranty of
- *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- *	General Public License for more details.
- *
- *	You should have received a copy of the GNU General Public
- *	License (gpl.txt) along with this software; if not, write to the Free Software
- *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *	This software is published under the GNU General Public License v3+
  *
  *
- *	For further information, please contact Hanns Holger Rutz at
- *	contact@sciss.de
+ *  For further information, please contact Hanns Holger Rutz at
+ *  contact@sciss.de
  */
 
 package de.sciss.leerenull
 
 import de.sciss.fscape.FScapeJobs
 import java.io.File
+import de.sciss.processor.{GenericProcessor, Processor}
+import de.sciss.processor.impl.ProcessorImpl
+
 import swing.Swing
 
 object FScape extends GUIGoodies {
@@ -63,20 +54,26 @@ object FScape extends GUIGoodies {
 
    def process( title: String, doc: FScapeJobs.Doc )( fun: Boolean => Unit ): Unit = {
       val dlg = progressDialog( title )
-      val proc = new {
-         def start(): Unit = {
+      //      val proc = new {
+      //         def start(): Unit = {
+      //         }
+      //
+      //         def abort(): Unit = {
+      //            println( "Ooops. Abort not supported" )
+      //         }
+      //      }
+      val proc: ProcessorImpl[Unit, GenericProcessor[Unit]] =
+        new ProcessorImpl[Unit, GenericProcessor[Unit]] with GenericProcessor[Unit] {
+
+          protected def body(): Unit =
             jobs.process( title, doc, progress = (i: Int) => Swing.onEDT( dlg.progress = i )) { b =>
               Swing.onEDT {
-                 dlg.stop()
-                 fun( b )
+                dlg.stop()
+                fun( b )
               }
             }
-         }
+        }
 
-         def abort(): Unit = {
-            println( "Ooops. Abort not supported" )
-         }
-      }
-      dlg.start( proc )
+     dlg.start(proc)
    }
 }

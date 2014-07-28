@@ -2,30 +2,19 @@
  *  CorrelatorCore.scala
  *  (LeereNull)
  *
- *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2011-2014 Hanns Holger Rutz. All rights reserved.
  *
- *	This software is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License
- *	as published by the Free Software Foundation; either
- *	version 2, june 1991 of the License, or (at your option) any later version.
- *
- *	This software is distributed in the hope that it will be useful,
- *	but WITHOUT ANY WARRANTY; without even the implied warranty of
- *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- *	General Public License for more details.
- *
- *	You should have received a copy of the GNU General Public
- *	License (gpl.txt) along with this software; if not, write to the Free Software
- *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *	This software is published under the GNU General Public License v3+
  *
  *
- *	For further information, please contact Hanns Holger Rutz at
- *	contact@sciss.de
+ *  For further information, please contact Hanns Holger Rutz at
+ *  contact@sciss.de
  */
 
 package de.sciss.leerenull
 
 import de.sciss.leerenull.CorrelatorSelector.Search
+import de.sciss.processor.Processor
 import de.sciss.span.Span
 import de.sciss.swingplus.GroupPanel
 import de.sciss.strugatzki.{FeatureCorrelation, FeatureExtraction}
@@ -35,6 +24,7 @@ import de.sciss.app.AbstractCompoundEdit
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
 import java.io.File
 import de.sciss.synth.io.AudioFile
+import scala.util.{Failure, Success}
 import xml.{Node, NodeSeq}
 
 object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
@@ -120,14 +110,16 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                   val truncFile = File.createTempFile( "trunc", ".aif" )
                   truncFile.deleteOnExit()
                   val dlg = progressDialog( "Extracting span" )
-                  val cutter = AudioFileCutter( m.file, truncFile, truncSpan ) {
-                     case AudioFileCutter.Success =>
+                 val cutc = AudioFileCutter.Config(m.file, truncFile, truncSpan)
+                  val cutter = AudioFileCutter(cutc)
+                  cutter.addListener {
+                     case Processor.Result(_, Success(())) =>
                         dlg.stop()
                         runTrns( truncFile )
-                     case AudioFileCutter.Failure( e ) =>
+                     case Processor.Result(_, Failure( e )) =>
                         dlg.stop()
                         e.printStackTrace()
-                     case AudioFileCutter.Progress( i ) => dlg.progress = i
+                     case prog @ Processor.Progress(_, _) => dlg.progress = prog.toInt
                   }
                   dlg.start( cutter )
 
@@ -161,7 +153,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       def regionName( id: String, afe: AudioFileElement, pre: String = "$" ) = {
          val n1      = plainName( afe.path ) // .filter( _.isLetterOrDigit )
          var n2      = n1; while( n2.size > 20 ) {
-            val i = n2.indexWhere( vowels.contains( _ ))
+            val i = n2.indexWhere( vowels.contains)
             if( i >= 0 ) n2 = n2.substring( 0, i ) + n2.substring( i + 1 )
             else n2 = n2.take( 20 )
          }
@@ -228,7 +220,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
 //println( "ar3 : " + ar3 + " ; OFFSET = " + fOff3 + " ; m.punch = " + m.punch )
 
             set.punchOut match {
-               case Some( po ) if( split3 ) =>
+               case Some( po ) if split3 =>
                   val start4  = stop3 - fdt3
                   val fOff4   = fOff3 + start4 - start3
                   val len4    = math.min( afe2.numFrames - fOff4, mPunch.length - (start4 - start3) + frames( afe2, 1 ))
@@ -279,7 +271,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
 
       val butFlipChans = button( "Flip left/right" ) { b =>
          val (trL, trR) = tl.tracks.toList.collect({
-            case at: AudioTrack if( at.name.contains( "-L" ) || at.name.contains( "-R" )) => (at, at.diffusion)
+            case at: AudioTrack if at.name.contains("-L") || at.name.contains("-R") => (at, at.diffusion)
          }).collect({
             case (at, Some( m: MatrixDiffusion )) => (at, m)
          }).partition( _._1.name.contains( "-L" ))
@@ -295,10 +287,10 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
             }
 
             trL.foreach {
-               case (at, m) => gugu( at, m, "L", "R", provideRightDiffusion( diffPrefix = "$" ) _ )
+               case (at, m1) => gugu( at, m1, "L", "R", provideRightDiffusion(diffPrefix = "$") )
             }
             trR.foreach {
-               case (at, m) => gugu( at, m, "R", "L", provideLeftDiffusion( diffPrefix = "$" ) _ )
+               case (at, m1) => gugu( at, m1, "R", "L", provideLeftDiffusion(diffPrefix = "$") )
             }
          }
       }
@@ -309,7 +301,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
             // that is, collect all regions beginning with "$", remove this prefix,
             // apply offset, and paste them to the main timeline
             val arsMap = collectAudioRegions({
-               case (_, ar) if( ar.name.startsWith( "$" )) =>
+               case (_, ar) if ar.name.startsWith("$") =>
                   val i = ar.name.indexOf( '_' )
                   val diff  = ar.name.substring( 1, i )
                   val arNew = ar.copy( name = ar.name.substring( i + 1 ), span = ar.span.shift( incorpOff ))

@@ -2,35 +2,22 @@
  *  ConvertToMono.scala
  *  (LeereNull)
  *
- *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2011-2014 Hanns Holger Rutz. All rights reserved.
  *
- *	This software is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License
- *	as published by the Free Software Foundation; either
- *	version 2, june 1991 of the License, or (at your option) any later version.
- *
- *	This software is distributed in the hope that it will be useful,
- *	but WITHOUT ANY WARRANTY; without even the implied warranty of
- *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- *	General Public License for more details.
- *
- *	You should have received a copy of the GNU General Public
- *	License (gpl.txt) along with this software; if not, write to the Free Software
- *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *	This software is published under the GNU General Public License v3+
  *
  *
- *	For further information, please contact Hanns Holger Rutz at
- *	contact@sciss.de
+ *  For further information, please contact Hanns Holger Rutz at
+ *  contact@sciss.de
  */
 
 package de.sciss.leerenull
 
 import java.io.File
 import de.sciss.processor.impl.ProcessorImpl
-import de.sciss.processor.{GenericProcessor, Processor, ProcessorFactory}
+import de.sciss.processor.{Processor, ProcessorFactory}
 
 import collection.immutable.{IndexedSeq => Vec}
-import actors.Actor
 import de.sciss.kontur.gui.TrackList
 import de.sciss.kontur.session.{Session, BasicTimeline, MatrixDiffusion, AudioTrack, AudioRegion, AudioFileElement}
 import annotation.tailrec
@@ -57,7 +44,8 @@ object ConvertToMono extends ProcessorFactory with KonturGoodies with GUIGoodies
       val arsIn      = arsIn0.groupBy( _._1 ).mapValues( _.map( _._2 )).toIndexedSeq
 
       val dlg  = progressDialog( "Convert to Mono" )
-      val proc = ConvertToMono( dir, arsIn ) {
+      val proc = ConvertToMono(Config(dir, arsIn))
+      proc.addListener {
         case Processor.Result(_, Success((newFiles, newRegions))) =>
           dlg.stop()
           val reg1 = newRegions.flatMap {
@@ -77,11 +65,15 @@ object ConvertToMono extends ProcessorFactory with KonturGoodies with GUIGoodies
       dlg.start( proc )
    }
 
-  def apply(bncDir: File, in: Vec[(AudioTrack, Vec[AudioRegion])])(observer: ConvertToMono.Observer): ConvertToMono =
-    new ConvertToMono(observer, bncDir, in)
+  case class Config(bncDir: File, in: Vec[(AudioTrack, Vec[AudioRegion])])
+
+  type Repr = ConvertToMono
+
+  protected def prepare(config: Config): Prepared =
+    new ConvertToMono(config.bncDir, config.in)
 }
 
-class ConvertToMono(protected val observer: ConvertToMono.Observer, bncDir: File, in: Vec[(AudioTrack, Vec[AudioRegion])])
+class ConvertToMono(bncDir: File, in: Vec[(AudioTrack, Vec[AudioRegion])])
   extends ProcessorImpl[ConvertToMono.Product, ConvertToMono] {
 
   import ConvertToMono._
@@ -177,28 +169,28 @@ class ConvertToMono(protected val observer: ConvertToMono.Observer, bncDir: File
 
       val newFiles = outMap.values.toIndexedSeq
 
-      Success( (newFiles, map3) )
+      (newFiles, map3)
    }
 
-   protected val Act = new Actor {
-      def act(): Unit = {
-         ProcT.start()
-        var result: Product = null
-         loopWhile( result == null ) {
-            react {
-               case Abort =>
-                  ProcT.aborted = true
-                  aborted()
-               case res: Progress =>
-                  observer( res )
-               case res @ Aborted =>
-                  result = res
-               case res: Failure =>
-                  result = res
-               case res: Success =>
-                  result = res
-            }
-         } andThen { observer( result )}
-      }
-   }
+  //   protected val Act = new Actor {
+  //      def act(): Unit = {
+  //         ProcT.start()
+  //        var result: Product = null
+  //         loopWhile( result == null ) {
+  //            react {
+  //               case Abort =>
+  //                  ProcT.aborted = true
+  //                  aborted()
+  //               case res: Progress =>
+  //                  observer( res )
+  //               case res @ Aborted =>
+  //                  result = res
+  //               case res: Failure =>
+  //                  result = res
+  //               case res: Success =>
+  //                  result = res
+  //            }
+  //         } andThen { observer( result )}
+  //      }
+  //   }
 }

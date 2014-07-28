@@ -2,25 +2,13 @@
  *  KonturGoodies.scala
  *  (LeereNull)
  *
- *  Copyright (c) 2011-2012 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2011-2014 Hanns Holger Rutz. All rights reserved.
  *
- *	This software is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License
- *	as published by the Free Software Foundation; either
- *	version 2, june 1991 of the License, or (at your option) any later version.
- *
- *	This software is distributed in the hope that it will be useful,
- *	but WITHOUT ANY WARRANTY; without even the implied warranty of
- *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- *	General Public License for more details.
- *
- *	You should have received a copy of the GNU General Public
- *	License (gpl.txt) along with this software; if not, write to the Free Software
- *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *	This software is published under the GNU General Public License v3+
  *
  *
- *	For further information, please contact Hanns Holger Rutz at
- *	contact@sciss.de
+ *  For further information, please contact Hanns Holger Rutz at
+ *  contact@sciss.de
  */
 
 package de.sciss.leerenull
@@ -299,7 +287,7 @@ trait KonturGoodies {
 //      val affectedSpan = new Span( pos, tl.span.stop )
 
       tl.joinEdit[ Unit ]( "Insert timeline span" ) { implicit ce: AbstractCompoundEdit =>
-         if( delta > 0L ) tl.editSpan( ce, tl.span.replaceStop( tl.span.stop + delta ))
+        if (delta > 0L) tl.editSpan(ce, Span(tl.span.start, tl.span.stop + delta))
          val map = collectAudioRegions({ case (tr, ar) => (tr.trail, ar, decider( tr, ar ))}).groupBy( _._3 )
 
          map.getOrElse( InsertSpan.Move, IndexedSeq.empty ).groupBy( _._1 ).foreach {
