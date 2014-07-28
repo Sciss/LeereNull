@@ -25,12 +25,12 @@
 
 package de.sciss.leerenull
 
-import de.sciss.io.Span
 import de.sciss.kontur.edit.Editor
 import de.sciss.kontur.util.Matrix2D
+import de.sciss.span.Span
+import de.sciss.span.Span.SpanOrVoid
 import collection.{breakOut, JavaConversions}
 import de.sciss.app.{Application => SApp, AbstractApplication, AbstractCompoundEdit}
-import de.sciss.strugatzki.{Span => SSpan}
 import java.io.File
 import de.sciss.kontur.gui.{TimelineFrame, BasicTimelineView, TimelineView, BasicTrackList}
 import de.sciss.kontur.session.{Diffusion, AudioFileElement, SessionElement, SessionElementSeq, MatrixDiffusion, Session, AudioTrack, BasicTimeline, AudioRegion}
@@ -79,12 +79,16 @@ trait KonturGoodies {
 //   def framesToSecs( n: Long )( implicit tl: BasicTimeline ) = n / tl.rate
 
    def selectedAudioRegions( implicit tl: BasicTimeline, tlv: TimelineView, trl: BasicTrackList ) : IndexedSeq[ AudioRegion ] = {
-      val tr   = selTracks
-      val span = selSpan
-      val ars  = tr.flatMap { t =>
-         t.trail.getRange( span ).toIndexedSeq
-      }
-      ars.sortBy( _.span.start )
+     val tr = selTracks
+     selSpan match {
+       case span @ Span(_, _) =>
+         val ars = tr.flatMap { t =>
+           t.trail.getRange(span).toIndexedSeq
+         }
+         ars.sortBy(_.span.start)
+
+       case _ => Vector.empty
+     }
    }
 
    def collectAudioRegions[ A ]( fun: PartialFunction[ (AudioTrack, AudioRegion), A ])
@@ -98,19 +102,20 @@ trait KonturGoodies {
    }
 
    def nonSyntheticTimelines( implicit doc: Session ) : IndexedSeq[ BasicTimeline ] =
-      doc.timelines.toList.collect({ case tl: BasicTimeline if( !tl.name.startsWith( "$" )) => tl })( breakOut )
+      doc.timelines.toList.collect({ case tl: BasicTimeline if !tl.name.startsWith("$") => tl })( breakOut )
 
-   def selSpan( implicit tlv: TimelineView ) : Span = {
-      val res = tlv.selection.span
-      res
-   }
-   def selSpan_=( sp: Span )( implicit tlv: TimelineView, ce: Maybe[ AbstractCompoundEdit ]) {
-      tlv.editor.foreach { ed =>
-         ed.joinEdit( "Select span" ) { implicit ce =>
-            ed.editSelect( ce, sp )
-         }
+  def selSpan(implicit tlv: TimelineView): SpanOrVoid = {
+    val res = tlv.selection.span
+    res
+  }
+
+  def selSpan_=(sp: SpanOrVoid)(implicit tlv: TimelineView, ce: Maybe[AbstractCompoundEdit]): Unit = {
+    tlv.editor.foreach { ed =>
+      ed.joinEdit("Select span") { implicit ce =>
+        ed.editSelect(ce, sp)
       }
-   }
+    }
+  }
 
    def findAudioFile( file: File, more: IndexedSeq[ AudioFileElement ] = IndexedSeq.empty )
                     ( implicit doc: Session ) : Option[ AudioFileElement ] =
@@ -129,7 +134,7 @@ trait KonturGoodies {
 
    def selTracks( implicit tl: BasicTimeline, trl: BasicTrackList ) : IndexedSeq[ AudioTrack ] =
       tl.tracks.toList.collect({
-         case at: AudioTrack if( trl.getElement( at ).map( _.selected ).getOrElse( false )) => at
+         case at: AudioTrack if trl.getElement(at).exists(_.selected) => at
       })( breakOut )
 
    def currentDoc : Option[ Session ] = Option( app.getDocumentHandler.getActiveDocument.asInstanceOf[ Session ])
@@ -140,7 +145,7 @@ trait KonturGoodies {
       doc.timelines.toList.filterNot( _.name.startsWith( "$" )).headOption.flatMap {
          case tl: BasicTimeline =>
             JavaConversions.asScalaIterator( app.getWindowHandler.getWindows ).collect({
-               case tlf: TimelineFrame if( tlf.timelineView.timeline == tl ) => tlf
+               case tlf: TimelineFrame if tlf.timelineView.timeline == tl => tlf
             }).toList.headOption.map( tlf => (tl, tlf ))
          case _ => None
       }
@@ -151,8 +156,8 @@ trait KonturGoodies {
       }
    }
 
-   implicit def convertSpan1( sp:  Span ) : SSpan = SSpan( sp.start, sp.stop )
-   implicit def convertSpan2( sp: SSpan ) :  Span = new Span( sp.start, sp.stop )
+   // implicit def convertSpan1( sp:  Span ) : SSpan = SSpan( sp.start, sp.stop )
+   // implicit def convertSpan2( sp: SSpan ) :  Span = new Span( sp.start, sp.stop )
 
    def cutTheCheese( ars: IndexedSeq[ AudioRegion ], span: Span ) : IndexedSeq[ AudioRegion ] = {
       ars.flatMap { ar =>
@@ -172,7 +177,7 @@ trait KonturGoodies {
                             more: Map[ AudioTrack, IndexedSeq[ AudioRegion ]] = Map.empty )
                           ( implicit tl: BasicTimeline ) : Option[ AudioTrack ] = {
       (tl.tracks.toList ++ more.keys).collect({
-         case at: AudioTrack if( accept( at )) => at
+         case at: AudioTrack if accept(at) => at
       }).find { at =>
          at.trail.getRange( span ).isEmpty && !more.getOrElse( at, IndexedSeq.empty ).exists( _.span.overlaps( span ))
       }
@@ -221,7 +226,7 @@ trait KonturGoodies {
       val sq   = d.matrix.toSeq
       val at   = place( ar, { at =>
          at.diffusion match {
-            case Some( df: MatrixDiffusion ) if( df.matrix.toSeq == sq ) => true
+            case Some( df: MatrixDiffusion ) if df.matrix.toSeq == sq => true
             case _ => false
          }
       }, more, trackPrefix )
@@ -287,7 +292,7 @@ trait KonturGoodies {
                             else if( pos >= ar.span.stop ) InsertSpan.Move
                             else InsertSpan.Split
                          })
-                         ( implicit tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]) {
+                         ( implicit tl: BasicTimeline, ce: Maybe[ AbstractCompoundEdit ]): Unit = {
       require( (pos >= tl.span.start) && (pos <= tl.span.stop), pos.toString )
 //      require( delta >= 0, delta.toString )
 
@@ -333,7 +338,7 @@ trait KonturGoodies {
       val sq = Seq.tabulate( inChans ) { in =>
 //         val inw = if( inChans < 2 ) 1f else (in.toFloat / (inChans - 1))
          Seq.tabulate( outChans ) { out =>
-            val outw = if( outChans < 2 ) 1f else (out.toFloat / (outChans - 1))
+            val outw = if( outChans < 2 ) 1f else out.toFloat / (outChans - 1)
             val w    = outw * (inChans - 1) // (if( inChans < 2 ) 1 else (inChans - 1))
             math.sqrt( 1f - math.min( 1f, math.abs( w - in ))).toFloat
          }
@@ -348,7 +353,7 @@ trait KonturGoodies {
       val bal1 = 1f - math.max( 0f, math.min( 1f, bal * 0.5f + 0.5f ))
       val sq = Seq.tabulate( inChans ) { in =>
          Seq.tabulate( outChans ) { out =>
-            val outw = if( outChans < 2 ) 1f else (out.toFloat / (outChans - 1))
+            val outw = if( outChans < 2 ) 1f else out.toFloat / (outChans - 1)
             val w0   = outw * (inChans - 1)
             val res0 = math.sqrt( 1f - math.min( 1f, math.abs( w0 - in ))).toFloat
             res0 * math.min( 0.5f, math.abs( outw - bal1 )) * 2
@@ -361,7 +366,7 @@ trait KonturGoodies {
                     ( implicit doc: Session ) : Option[ MatrixDiffusion ] = {
       val sq = matrix.toSeq
       (doc.diffusions.toList ++ more).collect({
-         case md: MatrixDiffusion if( md.matrix.toSeq == sq ) => md
+         case md: MatrixDiffusion if md.matrix.toSeq == sq => md
       }).headOption
    }
 

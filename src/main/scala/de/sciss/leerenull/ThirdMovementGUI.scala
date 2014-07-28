@@ -27,20 +27,23 @@ package de.sciss.leerenull
 
 import de.sciss.app.AbstractWindow
 import de.sciss.kontur.gui.{TimelineView, AppWindow}
-import eu.flierl.grouppanel.GroupPanel
 import java.awt.BorderLayout
+import de.sciss.processor.Processor
+import de.sciss.processor.Processor.Aborted
+import de.sciss.span.Span
+import de.sciss.swingplus.GroupPanel
 import de.sciss.synth.io.AudioFile
 import java.io.File
 import ThirdMovement.Strategy
+import scala.util.{Success, Failure}
 import xml.XML
 import de.sciss.strugatzki.FeatureCorrelation.Match
-import collection.immutable.{IndexedSeq => IIdxSeq}
-import de.sciss.strugatzki.Span
+import collection.immutable.{IndexedSeq => Vec}
 import de.sciss.kontur.util.Matrix2D
 import de.sciss.kontur.session.{FadeSpec, AudioTrack, Session, AudioRegion, BasicTimeline}
 
 object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
-   def makeWindow( tl: BasicTimeline, tlv: TimelineView, doc: Session, settings: ThirdMovement.Settings ) {
+   def makeWindow( tl: BasicTimeline, tlv: TimelineView, doc: Session, settings: ThirdMovement.Settings ): Unit = {
       val a = new AppWindow( AbstractWindow.REGULAR ) {
          setTitle( "Überzeichnung : " + tl.name )
          setResizable( false )
@@ -56,11 +59,12 @@ object ThirdMovementGUI extends GUIGoodies with KonturGoodies with NullGoodies {
 
       lazy val lbSpan      = label( timeString( sb.tlSpan, sr ))
       lazy val butToSpan   = button( "→ Span" ) { b =>
-         val sp = selSpan
-         if( !sp.isEmpty ) {
+         selSpan match {
+           case sp @ Span(_, _) =>
             sb.tlSpan      = sp
             lbSpan.text    = timeString( sp, sr )
 //            butSearch.enabled = true
+           case _ =>
          }
       }
 
@@ -157,34 +161,34 @@ ThirdMovement.verbose = true
 //         linkHorizontalSize( butToIn, butToOut, butFromIn, butFromOut )
 //         linkHorizontalSize( ggMinPunch, ggMaxPunch )
 //         linkHorizontalSize( ggNumMatches, ggNumPerFile )
-         theHorizontalLayout is Sequential(
-            Parallel( Sequential(
+         horizontal = Seq(
+            Par( Seq(
                butToSpan,
                lbSpan
-            ), Sequential(
-               Parallel( lbLayer, lbMaterial, lbStrategy, lbStartWeight, lbStopWeight, lbConnWeight, lbStratWeight, lbMaxOverlap ),
-               Parallel( txtLayer, txtMaterial, ggStrategy, ggStartWeight, ggStopWeight, ggConnWeight, ggStratWeight, ggMaxOverlap ),
-               Parallel( butLayer, butMaterial )
-            ), Sequential(
-               Parallel( ggStartMinDur, ggStopMinDur, ggLayerOff, ggNumChannels ),
-               Parallel( ggStartMaxDur, ggStopMaxDur )
-            ), Sequential( ggSearch, ggAutoSave ))
+            ), Seq(
+               Par( lbLayer, lbMaterial, lbStrategy, lbStartWeight, lbStopWeight, lbConnWeight, lbStratWeight, lbMaxOverlap ),
+               Par( txtLayer, txtMaterial, ggStrategy, ggStartWeight, ggStopWeight, ggConnWeight, ggStratWeight, ggMaxOverlap ),
+               Par( butLayer, butMaterial )
+            ), Seq(
+               Par( ggStartMinDur, ggStopMinDur, ggLayerOff, ggNumChannels ),
+               Par( ggStartMaxDur, ggStopMaxDur )
+            ), Seq( ggSearch, ggAutoSave ))
          )
-         theVerticalLayout is Sequential(
-            Parallel( Baseline )( butToSpan, lbSpan ),
-            Parallel( Baseline )( lbLayer, txtLayer, butLayer ),
-            Parallel( Baseline )( lbMaterial, txtMaterial, butMaterial ),
-            Parallel( Baseline )( lbStrategy, ggStrategy ),
-            Parallel( Baseline )( lbStartWeight, ggStartWeight ),
-            Parallel( Baseline )( lbStopWeight, ggStopWeight ),
-            Parallel( Baseline )( lbConnWeight, ggConnWeight ),
-            Parallel( Baseline )( lbStratWeight, ggStratWeight ),
-            Parallel( Baseline )( lbMaxOverlap, ggMaxOverlap ),
-            Parallel( Baseline )( ggStartMinDur, ggStartMaxDur ),
-            Parallel( Baseline )( ggStopMinDur, ggStopMaxDur ),
+         vertical = Seq(
+           Par( Baseline )( butToSpan, lbSpan ),
+           Par( Baseline )( lbLayer, txtLayer, butLayer ),
+           Par( Baseline )( lbMaterial, txtMaterial, butMaterial ),
+           Par( Baseline )( lbStrategy, ggStrategy ),
+           Par( Baseline )( lbStartWeight, ggStartWeight ),
+           Par( Baseline )( lbStopWeight, ggStopWeight ),
+           Par( Baseline )( lbConnWeight, ggConnWeight ),
+           Par( Baseline )( lbStratWeight, ggStratWeight ),
+           Par( Baseline )( lbMaxOverlap, ggMaxOverlap ),
+           Par( Baseline )( ggStartMinDur, ggStartMaxDur ),
+           Par( Baseline )( ggStopMinDur, ggStopMaxDur ),
             ggLayerOff,
             ggNumChannels,
-            Parallel( Baseline )( ggSearch, ggAutoSave )
+           Par( Baseline )( ggSearch, ggAutoSave )
          )
       }
 
@@ -196,7 +200,7 @@ ThirdMovement.verbose = true
       a.setVisible( true )
    }
 
-   def beginSearch( tl: BasicTimeline, doc: Session, settings: ThirdMovement.Settings, autoSave: Option[ File ]) {
+   def beginSearch( tl: BasicTimeline, doc: Session, settings: ThirdMovement.Settings, autoSave: Option[ File ]): Unit = {
 //      if( verbose ) println( settings )
 
       implicit val _doc = doc
@@ -209,7 +213,7 @@ ThirdMovement.verbose = true
 
       var lastSave   = System.currentTimeMillis()
 
-      def update( batch: IIdxSeq[ (Long, Match) ]) {
+      def update( batch: Vec[ (Long, Match) ]): Unit = {
          tl.tryEdit( "Add segments" ) { implicit ed =>
             var tracks = Map.empty[ AudioTrack, IndexedSeq[ AudioRegion ]]
 println( "\n::::::: Insertions :::::::\n" )
@@ -257,25 +261,26 @@ println( "  at " + pos + " file span " + fileSpan )
       }
 
       val dlg  = progressDialog( "Correlating with database" )
-      val proc = ThirdMovement( settings, update _ ) {
-         case ThirdMovement.Success( _ ) =>
+     val proc = ThirdMovement(ThirdMovement.Config(settings, update))
+     proc.addListener {
+         case Processor.Result(_, Success(_)) =>
             dlg.stop()
 
-         case ThirdMovement.Failure( e ) =>
+         case Processor.Result(_, Failure(Aborted())) =>
+           dlg.stop()
+
+         case Processor.Result(_, Failure(e)) =>
             dlg.stop()
             e.printStackTrace()
 
-         case ThirdMovement.Aborted =>
-            dlg.stop()
-
-         case ThirdMovement.Progress( i ) => dlg.progress = i
+         case prog @ Processor.Progress(_, _) => dlg.progress = prog.toInt
       }
       dlg.start( proc )
    }
 
-   def saveSettings( settings: ThirdMovement.Settings ) {
+   def saveSettings( settings: ThirdMovement.Settings ): Unit = {
       val id   = plainName( settings.layer ) + "@" + settings.layerOffset
       val f = stampedFile( LeereNull.ueberzeichnungFolder, id, ".xml" )
-      XML.save( f.getAbsolutePath, settings.toXML, "UTF-8", true, null )
+      XML.save( f.getAbsolutePath, settings.toXML, "UTF-8", xmlDecl = true)
    }
 }

@@ -25,20 +25,26 @@
 
 package de.sciss.leerenull
 
-import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
+import de.sciss.processor.Processor.Aborted
+import de.sciss.processor.{Processor, ProcessorFactory}
+import de.sciss.processor.impl.ProcessorImpl
+import de.sciss.span.Span
+import de.sciss.strugatzki.impl.MathUtil
 import actors.Actor
-import util.control.ControlThrowable
-import de.sciss.strugatzki.{Strugatzki, FeatureCorrelation, FeatureSegmentation, FeatureExtraction, Span, aux}
+import scala.util.{Failure, Success}
+import de.sciss.strugatzki.{Strugatzki, FeatureCorrelation, FeatureSegmentation, FeatureExtraction}
 import java.io.{FileInputStream, FileOutputStream, File}
 import de.sciss.synth.io.AudioFile
 import FeatureSegmentation.Break
 import FeatureCorrelation.Match
-import collection.immutable.{LongMap, IndexedSeq => IIdxSeq}
+import collection.immutable.{LongMap, IndexedSeq => Vec}
 import java.awt.EventQueue
 import xml.{XML, NodeSeq}
 
-object ThirdMovement extends ProcessorCompanion {
-   type PayLoad = Unit
+object ThirdMovement extends ProcessorFactory {
+   type Product = Unit
+
+  var verbose = false
 
    def folder        = new File( LeereNull.baseFolder, "third_move" )
    def featureFolder = new File( folder, "feature" )
@@ -133,7 +139,7 @@ object ThirdMovement extends ProcessorCompanion {
          startWeight, stopWeight, maxOverlap, connectionWeight, strategyWeight
       )
 
-      def read( settings: Settings ) {
+      def read( settings: Settings ): Unit = {
          tlSpan            = settings.tlSpan
          layer             = settings.layer
          layerOffset       = settings.layerOffset
@@ -195,26 +201,28 @@ object ThirdMovement extends ProcessorCompanion {
 </ueberzeichnung>
    }
 
-   private case object AbortException extends ControlThrowable
-
-   type Updater = IIdxSeq[ (Long, Match) ] => Unit
+  type Updater = Vec[(Long, Match)] => Unit
 
    /**
     * @param   settings the settings that control how the material generation is perfored
     * @param   updater  a function which is called _on the event dispatch thread_ each time a new
     *                   piece of material has been generated for each of the required channels
-    * @param   observer a partial function receiving notifications about the progress of the
-    *                   process (abortion, failure, success, progress percentage)
     *
     * @return  the generating process which must then be started using `start()`.
     */
-   def apply( settings: Settings, updater: Updater )( observer: Observer ) : ThirdMovement =
-      new ThirdMovement( settings, observer, updater )
+//   def apply(settings: Settings, updater: Updater)(observer: Observer): ThirdMovement with Processor.Prepared =
+//     new ThirdMovement(settings, observer, updater)
+
+  case class Config(settings: Settings, updater: Updater)
+
+  type Repr = ThirdMovement
+
+  protected def prepare(config: Config): Prepared = new ThirdMovement(config.settings, config.updater)
 }
 
-class ThirdMovement private( settings: ThirdMovement.Settings, protected val observer: ThirdMovement.Observer,
-                             updater: ThirdMovement.Updater )
-extends NullGoodies with Processor {
+class ThirdMovement private(settings: ThirdMovement.Settings,
+                            updater: ThirdMovement.Updater)
+  extends NullGoodies with ProcessorImpl[ThirdMovement.Product, ThirdMovement] {
    import ThirdMovement._
 
    protected val companion = ThirdMovement
@@ -225,29 +233,25 @@ extends NullGoodies with Processor {
 
    private val monitor = new AnyRef
 
-   private def handleProcessOption[ A ]( perc: Float, po: Option[ Processor ]) : Option[ A ] = {
-      po match {
-         case Some( p ) =>
-            Some( handleProcess[ A ]( perc, p ))
+  private def handleProcessOption[A](perc: Float, po: Option[Processor.Prepared]): Option[A] = {
+    po match {
+      case Some(p) =>
+        Some(handleProcess[A](perc, p))
 
-         case None =>
-            if( checkAborted ) throw AbortException
-            progress( perc )
-            None
-      }
-   }
+      case None =>
+        checkAborted()
+        progress = perc
+        None
+    }
+  }
 
-   private def handleAbortion() {
-      if( checkAborted ) throw AbortException
-   }
-
-   private def handleProcess[ A ]( perc: Float, p: Processor ) : A = {
+  private def handleProcess[A](perc: Float, p: Processor.Prepared): A = {
       failure        = None
       success        = None
       progressFactor = perc
       p.start()
       while( true ) {
-         if( checkAborted ) throw AbortException
+         checkAborted()
          failure.foreach( throw _ )
          success match {
             case Some( res ) =>
@@ -262,41 +266,31 @@ extends NullGoodies with Processor {
       sys.error( "Never gets here" )
    }
 
-   private def succeeded( res: AnyRef ) {
+   private def succeeded( res: AnyRef ): Unit = {
       success = Some( res )
       monitor.synchronized( monitor.notifyAll() )
    }
 
-   private def failed( t: Throwable ) {
+   private def failed( t: Throwable ): Unit = {
       failure = Some( t )
       monitor.synchronized( monitor.notifyAll() )
    }
 
-   private def progressed( i: Int ) {
-      val p = i.toFloat / 100 * progressFactor
-      progress( p )
-   }
+  private def progressed(i: Int): Unit = {
+    val p = i.toFloat / 100 * progressFactor
+    progress = p
+  }
 
-   protected def body() : Result = {
-      try {
-         process()
-         Success( () )
-      }
-      catch {
-         case AbortException => Aborted
-      }
-   }
-
-   private def process() {
-      val (metaFile, extrOption) = metaFileForLayer( settings.layer )
-      handleProcessOption[ Unit ]( 0.05f, extrOption )
+  protected def body(): Product = {
+    val (metaFile, extrOption) = metaFileForLayer(settings.layer)
+    handleProcessOption[Unit](0.05f, extrOption)
 
       val tlStart             = settings.tlSpan.start
       val spanLen             = settings.tlSpan.length
       val layStart            = settings.layerOffset
       val layStop             = layStart + spanLen
       val numChannels         = settings.numChannels
-      val extrIn              = FeatureExtraction.Settings.fromXMLFile( metaFile )
+      val extrIn              = FeatureExtraction.Config.fromXMLFile( metaFile )
       val stepSize            = extrIn.fftSize / extrIn.fftOverlap
       val numCoeffs           = extrIn.numCoeffs
       val imitativeStrategy   = settings.strategy.isImitative
@@ -309,25 +303,26 @@ extends NullGoodies with Processor {
       val connTempW           = 0.5f   // XXX could be configurable
       val stratTempW          = 0.25f  // XXX could be configurable
 
-      val segmCfg             = FeatureSegmentation.SettingsBuilder()
+      val segmCfg             = FeatureSegmentation.Config()
       segmCfg.corrLen         = 88200L // have one second on each side
       segmCfg.databaseFolder  = LeereNull.databaseFolder // hold the normalization data
       segmCfg.metaInput       = metaFile
       val minSpc              = math.min( settings.startDur._1, settings.stopDur._1 ) / 6
       segmCfg.minSpacing      = minSpc // 22050L // 44100L -- no, smaller because we want to use overlap eventually
       segmCfg.numBreaks       = (spanLen / segmCfg.minSpacing).toInt + 1
-      segmCfg.span            = Some( Span( layStart, layStop ))
+      segmCfg.span            = Span( layStart, layStop )
       segmCfg.temporalWeight  = 0.75f  // XXX could be configurable
       val segmCfgB            = segmCfg.build
 
       println( "\n:::::::::: Layer Segmentation ::::::::::\n" )
       println( segmCfgB.pretty )
 
-      val segmProc = FeatureSegmentation( segmCfgB ) {
-         case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
-         case FeatureSegmentation.Progress( i )    => progressed( i )
-         case FeatureSegmentation.Aborted          => Act ! Aborted
-         case FeatureSegmentation.Failure( e )     => failed( e )
+      val segmProc = FeatureSegmentation( segmCfgB )
+      segmProc.addListener {
+         case Processor.Result(_, Success(_segm)) => succeeded( _segm )
+         case prog @ Processor.Progress(_, _)     => progressed(prog.toInt)
+         case Processor.Result(_, Failure(Aborted())) => abort()
+         case Processor.Result(_, Failure( e ))   => failed( e )
       }
 
       val segms      = layStart +: handleProcess[ IndexedSeq[ Break ]]( 0.1f, segmProc ).map( _.pos ).sorted // XXX already sorted?
@@ -345,7 +340,7 @@ extends NullGoodies with Processor {
       var lastStopIdx   = 0
       val rnd           = new util.Random()
       // tracks the matches per channel
-      var lastMatch     = Option.empty[ IIdxSeq[ Match ]]
+      var lastMatch     = Option.empty[ Vec[ Match ]]
       val gagaDur       = (settings.startDur._1 + settings.startDur._2 + settings.stopDur._1 + settings.stopDur._2) / 4
       var sameStartIdx  = 0
       while( lastSpan.stop < layStop ) {
@@ -388,11 +383,11 @@ extends NullGoodies with Processor {
 //            val layerSpan  = Span( plainSpan.start + settings.layerOffset, plainSpan.stop + settings.layerOffset )
             val layerSpan  = Span( segms( startIdx ), segms( stopIdx ))
 
-            val corrCfg    = FeatureCorrelation.SettingsBuilder()
+            val corrCfg    = FeatureCorrelation.Config()
             corrCfg.databaseFolder = settings.materialFolder
-            val normFile   = new File( settings.materialFolder, Strugatzki.NORMALIZE_NAME )
+            val normFile   = new File( settings.materialFolder, Strugatzki.NormalizeName )
             if( !normFile.exists() ) {
-               val sourceFile = new File( LeereNull.databaseFolder, Strugatzki.NORMALIZE_NAME )
+               val sourceFile = new File( LeereNull.databaseFolder, Strugatzki.NormalizeName)
                copyFile( sourceFile, normFile )
             }
             corrCfg.maxBoost     = 20  // +26 dB
@@ -411,11 +406,12 @@ extends NullGoodies with Processor {
                println( corrCfgB.pretty )
             }
 
-            val corrProc = FeatureCorrelation( corrCfgB ) {
-               case FeatureCorrelation.Success( _segm )  => succeeded( _segm )
-               case FeatureCorrelation.Progress( i )     => progressed( i )
-               case FeatureCorrelation.Aborted           => Act ! Aborted
-               case FeatureCorrelation.Failure( e )      => failed( e )
+            val corrProc = FeatureCorrelation( corrCfgB )
+            corrProc.addListener {
+               case Processor.Result(_, Success( _segm ))  => succeeded( _segm )
+               case prog @ Processor.Progress(_, _)     => progressed(prog.toInt)
+               case Processor.Result(_, Failure(Aborted())) => abort()
+               case Processor.Result(_, Failure( e ))      => failed( e )
             }
 
             val perc    = (0.9 * w + 0.1).toFloat
@@ -429,12 +425,12 @@ extends NullGoodies with Processor {
 
             // account for connectivity
             val w1      = lastMatch match {
-               case Some( lms ) if( settings.connectionWeight > 0f ) =>
+               case Some( lms ) if settings.connectionWeight > 0f =>
                   corrs.map { nm =>
                      val nmFeat     = featureFile( plainName( nm.file ), featureFolder )
                      val nextAF     = AudioFile.openRead( nmFeat )
 
-                     val res = IIdxSeq.tabulate( numChannels ) { ch =>
+                     val res = Vec.tabulate( numChannels ) { ch =>
                         val lm         = lms( ch )
 
                         val connFull   = math.min( nm.punch.length, lm.punch.length )
@@ -461,19 +457,19 @@ extends NullGoodies with Processor {
                         // XXX to-do: apply boosts?
 
                         lastAF.close()
-                        val (lMeanT, lStdDevT) = aux.Math.stat( lBufT, 0, numF, 0, 1 )
-                        val (lMeanS, lStdDevS) = aux.Math.stat( lBufS, 0, numF, 0, numCoeffs )
-                        val (nMeanT, nStdDevT) = aux.Math.stat( nBufT, 0, numF, 0, 1 )
-                        val (nMeanS, nStdDevS) = aux.Math.stat( nBufS, 0, numF, 0, numCoeffs )
+                        val (lMeanT, lStdDevT) = MathUtil.stat( lBufT, 0, numF, 0, 1 )
+                        val (lMeanS, lStdDevS) = MathUtil.stat( lBufS, 0, numF, 0, numCoeffs )
+                        val (nMeanT, nStdDevT) = MathUtil.stat( nBufT, 0, numF, 0, 1 )
+                        val (nMeanS, nStdDevS) = MathUtil.stat( nBufS, 0, numF, 0, numCoeffs )
                                                 
                         var maxCorr = 0f
                         var off = 0; while( off < numF ) {
                            val tempCorr = if( connTempW > 0f ) {
-                              aux.Math.correlate( lBufT, lMeanT, lStdDevT, numF, 1, nBufT, nMeanT, nStdDevT, off, 0 )
+                              MathUtil.correlate( lBufT, lMeanT, lStdDevT, numF, 1, nBufT, nMeanT, nStdDevT, off, 0 )
                            } else 0f
 
                            val specCorr = if( connTempW < 1f ) {
-                              aux.Math.correlate( lBufS, lMeanS, lStdDevS, numF, numCoeffs, nBufS, nMeanS, nStdDevS, off, 0 )
+                             MathUtil.correlate( lBufS, lMeanS, lStdDevS, numF, numCoeffs, nBufS, nMeanS, nStdDevS, off, 0 )
                            } else 0f
 
                            val connCorr = (tempCorr * connTempW) + (specCorr * (1 - connTempW))
@@ -487,7 +483,7 @@ extends NullGoodies with Processor {
                      nextAF.close()
                      res
                   }
-               case _ => corrs.map { nm => IIdxSeq.fill( numChannels )( nm.sim )}
+               case _ => corrs.map { nm => Vec.fill( numChannels )( nm.sim )}
             }
 
             // account for strategy
@@ -514,10 +510,10 @@ extends NullGoodies with Processor {
 
             if( (settings.strategyWeight > 0f) && (numMatches > numChannels) ) {
                var bestCorr   = 0.0
-               var bestSeq    = IIdxSeq.empty[ Int ]
+               var bestSeq    = Vec.empty[ Int ]
                var xMap       = LongMap.empty[ Float ]
 
-               def weightFun( values: IIdxSeq[ Float ]) : Float = {
+               def weightFun( values: Vec[ Float ]) : Float = {
                   // we could change this to give extra penalty
                   // to particularly low values. for now, just
                   // the average will do.
@@ -553,15 +549,15 @@ extends NullGoodies with Processor {
 
                      // XXX to-do: apply boosts?
 
-                     val (aMeanT, aStdDevT) = aux.Math.stat( aBufT, 0, chunk, 0, 1 )
-                     val (aMeanS, aStdDevS) = aux.Math.stat( aBufS, 0, chunk, 0, numCoeffs )
-                     val (bMeanT, bStdDevT) = aux.Math.stat( bBufT, 0, chunk, 0, 1 )
-                     val (bMeanS, bStdDevS) = aux.Math.stat( bBufS, 0, chunk, 0, numCoeffs )
+                     val (aMeanT, aStdDevT) = MathUtil.stat(aBufT, 0, chunk, 0, 1 )
+                     val (aMeanS, aStdDevS) = MathUtil.stat( aBufS, 0, chunk, 0, numCoeffs )
+                     val (bMeanT, bStdDevT) = MathUtil.stat( bBufT, 0, chunk, 0, 1 )
+                     val (bMeanS, bStdDevS) = MathUtil.stat( bBufS, 0, chunk, 0, numCoeffs )
                      val tempCorr = if( stratTempW > 0f ) {
-                        aux.Math.correlate( aBufT, aMeanT, aStdDevT, chunk, 1, bBufT, bMeanT, bStdDevT, 0, 0 )
+                       MathUtil.correlate( aBufT, aMeanT, aStdDevT, chunk, 1, bBufT, bMeanT, bStdDevT, 0, 0 )
                      } else 0f
                      val specCorr = if( stratTempW < 1f ) {
-                        aux.Math.correlate( aBufS, aMeanS, aStdDevS, chunk, numCoeffs, bBufS, bMeanS, bStdDevS, 0, 0 )
+                       MathUtil.correlate( aBufS, aMeanS, aStdDevS, chunk, numCoeffs, bBufS, bMeanS, bStdDevS, 0, 0 )
                      } else 0f
                      val stratCorr0 = (tempCorr * stratTempW) + (specCorr * (1 - stratTempW))
                      val stratCorr  = if( imitativeStrategy ) stratCorr0 else 1f - stratCorr0
@@ -596,21 +592,21 @@ extends NullGoodies with Processor {
                   numChannels * (numChannels + 1) / 2
                }  // number of cross correlations between channels
 
-               def bestPrognosis( baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ]) : Float = {
+               def bestPrognosis( baseDone: Vec[ Float ], xDone: Vec[ Float ]) : Float = {
                   val chansMissing  = numChannels - baseDone.size
                   val xMissing      = xTotalNum - xDone.size
-                  val baseValues    = baseDone ++ IIdxSeq.fill( chansMissing )( 1f )
-                  val xValues       = xDone ++ IIdxSeq.fill( xMissing )( 1f )
+                  val baseValues    = baseDone ++ Vec.fill( chansMissing )( 1f )
+                  val xValues       = xDone ++ Vec.fill( xMissing )( 1f )
                   weightFun( baseValues ) * (1f - stratW) + weightFun( xValues ) * stratW
                }
 
                var progDone = 0
                val progDoneNum = numMatches * numChannels // numMatches
 
-               def recurse( taken: IIdxSeq[ Int ], baseDone: IIdxSeq[ Float ], xDone: IIdxSeq[ Float ], numDone: Int ) {
+               def recurse( taken: Vec[ Int ], baseDone: Vec[ Float ], xDone: Vec[ Float ], numDone: Int ): Unit = {
                   val chan          = taken.size
                   require( chan == baseDone.size )
-                  handleAbortion()
+                  checkAborted()
 
                   var i = 0; while( i < numMatches ) {
                      val numDone1 = numDone + (i + 1)
@@ -663,12 +659,12 @@ extends NullGoodies with Processor {
                   println( "\nFinding best combination... (out of " + numCombi + ")" )
                }
 
-               val xDone0 = IIdxSeq.empty
+               val xDone0 = Vec.empty
                var j = 0; while( j < numMatches ) {
                   val base = w1( j )( 0 )
-                  val baseDone0 = IIdxSeq( base )
+                  val baseDone0 = Vec( base )
                   if( bestPrognosis( baseDone0, xDone0 ) > bestCorr ) {
-                     recurse( IIdxSeq( j ), baseDone0, xDone0, j + 1 )
+                     recurse( Vec( j ), baseDone0, xDone0, j + 1 )
                   }
                j += 1 }
 
@@ -691,7 +687,7 @@ extends NullGoodies with Processor {
                val w4 = w3 map { m =>
    //               val mFeat               = featureFile( plainName( m.file ), folder )
                   val mMeta               = extrMetaFile( plainName( m.file ), featureFolder )
-                  val mSegCfg             = FeatureSegmentation.SettingsBuilder()
+                  val mSegCfg             = FeatureSegmentation.Config()
                   mSegCfg.corrLen         = 44100L // have 0.5 seconds on each side
                   mSegCfg.databaseFolder  = LeereNull.databaseFolder // hold the normalization data
                   mSegCfg.metaInput       = mMeta
@@ -700,12 +696,13 @@ extends NullGoodies with Processor {
                   mSegCfg.temporalWeight  = 0.75f  // XXX could be configurable
 
                   def findAdjust( span: Span ) : Option[ Long ] = {
-                     mSegCfg.span         = Some( span )
-                     val mSegProc         = FeatureSegmentation( mSegCfg ) {
-                        case FeatureSegmentation.Success( _segm ) => succeeded( _segm )
-                        case FeatureSegmentation.Progress( i )    => progressed( i )
-                        case FeatureSegmentation.Aborted          => Act ! Aborted
-                        case FeatureSegmentation.Failure( e )     => failed( e )
+                     mSegCfg.span         = span
+                     val mSegProc         = FeatureSegmentation( mSegCfg )
+                     mSegProc.addListener {
+                        case Processor.Result(_, Success( _segm )) => succeeded( _segm )
+                        case prog @ Processor.Progress(_, _)    => progressed(prog.toInt)
+                        case Processor.Result(_, Failure(Aborted())) => abort()
+                        case Processor.Result(_, Failure(e))     => failed( e )
                      }
                      handleProcess[ IndexedSeq[ Break ]]( perc, mSegProc ).map( _.pos ).headOption
                   }
@@ -747,24 +744,23 @@ extends NullGoodies with Processor {
       }
    }
 
-   private def defer( thunk: => Unit ) {
-      EventQueue.invokeLater( new Runnable { def run() { thunk }})
-   }
+   private def defer( thunk: => Unit ): Unit =
+      EventQueue.invokeLater( new Runnable { def run(): Unit = thunk })
 
-   private def copyFile( source: File, dest: File ) {
+   private def copyFile( source: File, dest: File ): Unit = {
       val sourceCh   = new FileInputStream( source ).getChannel
       val destCh     = new FileOutputStream( dest ).getChannel
       destCh.transferFrom( sourceCh, 0, sourceCh.size() )
    }
-   
-   private def metaFileForLayer( layer: File ) : (File, Option[ FeatureExtraction ]) = {
+
+  private def metaFileForLayer(layer: File): (File, Option[FeatureExtraction with Processor.Prepared]) = {
       val metaFile = extrMetaFile( plainName( layer ), featureFolder )
       if( metaFile.exists() ) {
          (metaFile, None)
       } else {
          val metaDir = metaFile.getParentFile
          if( !metaDir.exists() ) metaDir.mkdirs()
-         val extrCfg = FeatureExtraction.SettingsBuilder()
+         val extrCfg = FeatureExtraction.Config()
          extrCfg.audioInput     = layer
          val ff                  = featureFile( plainName( layer ), featureFolder )
          extrCfg.featureOutput  = ff
@@ -772,36 +768,39 @@ extends NullGoodies with Processor {
 //         settings.numCoeffs      = default
 //         settings.fftSize        = default
 //         settings.fftOverlap     = default
-         val proc = FeatureExtraction( extrCfg ) {
-            case FeatureExtraction.Success( _ )    => succeeded( ().asInstanceOf[ AnyRef ])
-            case FeatureExtraction.Progress( i )   => progressed( i )
-            case FeatureExtraction.Aborted         => Act ! Aborted  // indirection
-            case FeatureExtraction.Failure( e )    => failed( e )
+        val proc = FeatureExtraction(extrCfg)
+        proc.addListener {
+            case Processor.Result(_, Success(_))    => succeeded( ().asInstanceOf[ AnyRef ])
+            case prog @ Processor.Progress(_, _)   => progressed(prog.toInt)
+            case Processor.Result(_, Failure(Aborted())) => abort()
+            case Processor.Result(_, Failure( e ))    => failed( e )
          }
 //         proc.start()
          (metaFile, Some( proc ))
       }
    }
 
-   protected val Act = new Actor {
-      def act() {
-         ProcT.start()
-         var result : Result = null
-         loopWhile( result == null ) {
-            react {
-               case Abort =>
-                  ProcT.aborted = true
-                  aborted()
-               case res: Progress =>
-                  observer( res )
-               case res @ Aborted =>
-                  result = res
-               case res: Failure =>
-                  result = res
-               case res: Success =>
-                  result = res
-            }
-         } andThen { observer( result )}
-      }
-   }
+  //  protected val Act = new Actor {
+  //    def act(): Unit = {
+  //      ProcT.start()
+  //      var result: Result = null
+  //      loopWhile(result == null) {
+  //        react {
+  //          case Abort =>
+  //            ProcT.aborted = true
+  //            aborted()
+  //          case res: Progress =>
+  //            observer(res)
+  //          case res@Aborted =>
+  //            result = res
+  //          case res: Failure =>
+  //            result = res
+  //          case res: Success =>
+  //            result = res
+  //        }
+  //      } andThen {
+  //        observer(result)
+  //      }
+  //    }
+  //  }
 }

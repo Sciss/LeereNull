@@ -44,7 +44,7 @@ object FScape extends GUIGoodies {
       res
    }
 
-   def shift( freq: Double )( in: File, out: File )( fun: Boolean => Unit ) {
+   def shift( freq: Double )( in: File, out: File )( fun: Boolean => Unit ): Unit = {
       val spec = FScapeJobs.OutputSpec.aiffFloat
       val doc  = FScapeJobs.Hilbert( in.getAbsolutePath, out.getAbsolutePath, spec = spec,
                                      gain = FScapeJobs.Gain.immediate, freq = freq, antiAlias =  true )
@@ -53,7 +53,7 @@ object FScape extends GUIGoodies {
    }
 
    /** @param cents  the pitch factor, not time factor! (thus 1200 means octave up / double speed) */
-   def resample( cents: Double )( in: File, out: File )( fun: Boolean => Unit ) {
+   def resample( cents: Double )( in: File, out: File )( fun: Boolean => Unit ): Unit = {
       val spec = FScapeJobs.OutputSpec.aiffFloat
       val doc  = FScapeJobs.Resample( in.getAbsolutePath, out.getAbsolutePath, spec = spec,
                                       gain = FScapeJobs.Gain.immediate,
@@ -61,10 +61,10 @@ object FScape extends GUIGoodies {
       process( "Resample", doc )( fun )
    }
 
-   def process( title: String, doc: FScapeJobs.Doc )( fun: Boolean => Unit ) {
+   def process( title: String, doc: FScapeJobs.Doc )( fun: Boolean => Unit ): Unit = {
       val dlg = progressDialog( title )
       val proc = new {
-         def start() {
+         def start(): Unit = {
             jobs.process( title, doc, progress = (i: Int) => Swing.onEDT( dlg.progress = i )) { b =>
               Swing.onEDT {
                  dlg.stop()
@@ -73,7 +73,7 @@ object FScape extends GUIGoodies {
             }
          }
 
-         def abort() {
+         def abort(): Unit = {
             println( "Ooops. Abort not supported" )
          }
       }

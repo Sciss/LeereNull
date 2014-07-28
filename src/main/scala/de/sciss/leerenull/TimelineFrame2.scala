@@ -58,7 +58,7 @@ extends TimelineFrame( doc, tl ) {
    private var bottomPanelVar = Option.empty[ Component ]
 
    def bottomPanel : Option[ Component ] = bottomPanelVar
-   def bottomPanel_=( p: Option[ Component ]) {
+   def bottomPanel_=( p: Option[ Component ]): Unit = {
       bottomPanelVar.foreach { oldp =>
          getContentPane.remove( oldp.peer )
       }
@@ -68,14 +68,14 @@ extends TimelineFrame( doc, tl ) {
       }
    }
 
-   override protected def windowClosing() {
+   override protected def windowClosing(): Unit = {
 //      println( "DISPOSA!" )
       closeFun( frame )
 //      app.getMenuFactory.removeFromWindowMenu( actionShowWindow )
       super.windowClosing()
    }
 
-   def packAndSetMinimum() {
+   def packAndSetMinimum(): Unit = {
       pack()
       getWindow match {
          case f: JFrame => f.setMinimumSize( f.getSize )

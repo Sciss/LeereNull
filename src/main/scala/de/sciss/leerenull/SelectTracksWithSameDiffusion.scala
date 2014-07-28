@@ -29,7 +29,7 @@ import de.sciss.kontur.gui.BasicTrackList
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack}
 
 object SelectTracksWithSameDiffusion extends KonturGoodies {
-   def perform( trl: BasicTrackList ) {
+   def perform( trl: BasicTrackList ): Unit = {
       val num     = trl.numElements
       val tracks  = (0 until num).map( trl.getElementAt( _ ).track ).collect {
          case at: AudioTrack => at

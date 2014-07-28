@@ -26,37 +26,39 @@
 package de.sciss.leerenull
 
 import de.sciss.app.AbstractApplication
-import collection.immutable.{IndexedSeq => IIdxSeq}
+import de.sciss.processor.Processor.Aborted
+import de.sciss.processor.impl.ProcessorImpl
+import de.sciss.processor.{Processor, ProcessorFactory}
+import de.sciss.span.Span
+import de.sciss.swingplus.GroupPanel
+import collection.immutable.{IndexedSeq => Vec}
 import javax.swing.JOptionPane
 import java.io.File
-import eu.flierl.grouppanel.GroupPanel
 import de.sciss.common.BasicWindowHandler
+import scala.util.{Failure, Success}
 import swing.event.SelectionChanged
 import collection.JavaConversions
 import de.sciss.kontur.gui.TimelineFrame
-import de.sciss.strugatzki.aux.{ProcessorCompanion, Processor}
-import actors.Actor
-import de.sciss.strugatzki.Span
 import swing.{Swing, BorderPanel, ListView}
 import annotation.tailrec
 import de.sciss.synth.io.{AudioFileType, SampleFormat, AudioFile}
 import de.sciss.kontur.session.{FadeSpec, AudioTrack, AudioRegion, AudioFileElement, BasicTimeline, Session}
 
-object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturGoodies with NullGoodies with PasteCompanion {
-   type PayLoad = (IIdxSeq[ AudioFileElement ], IIdxSeq[ (AudioTrack, AudioRegion) ])
+object IncorporateBounce extends ProcessorFactory with GUIGoodies with KonturGoodies with NullGoodies with PasteCompanion {
+  type Product = (Vec[AudioFileElement], Vec[(AudioTrack, AudioRegion)])
 
    var VERBOSE = false
 
-   def showGUI() {
+   def showGUI(): Unit = {
       val app  = AbstractApplication.getApplication
       val dh   = app.getDocumentHandler
-      val tls  = IIdxSeq.tabulate( dh.getDocumentCount )( dh.getDocument ).flatMap {
+      val tls  = Vec.tabulate( dh.getDocumentCount )( dh.getDocument ).flatMap {
          case s: Session =>
             val tls1 = s.timelines.toList.toIndexedSeq
             tls1.collect {
                case btl: BasicTimeline => (s, btl)
             }
-         case _ => IIdxSeq.empty[ (Session, BasicTimeline) ]
+         case _ => Vec.empty[ (Session, BasicTimeline) ]
       }
 
       if( tls.size < 2 ) {
@@ -86,11 +88,11 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
          }
       }
 
-      def checkPostTimeline() {
+      def checkPostTimeline(): Unit = {
          ok = false
          val (_, tl) = postTL
          JavaConversions.asScalaIterator( app.getWindowHandler.getWindows ).collect({
-            case tlf: TimelineFrame if( tlf.timelineView.timeline == tl ) => tlf
+            case tlf: TimelineFrame if tlf.timelineView.timeline == tl => tlf
          }).toList.headOption match {
             case Some( tlf ) =>
                val tlv = tlf.timelineView
@@ -158,14 +160,14 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       listPost.selectIndices( 1 )
 
       lazy val pane2 = new GroupPanel {
-         theHorizontalLayout is Sequential(
-            Parallel( ggOff, Sequential(
+        horizontal = Seq(
+            Par( ggOff, Seq(
                lbFolder, ggFolder, ggSelectFolder )
             )
          )
-         theVerticalLayout is Sequential(
+         vertical = Seq(
             ggOff,
-            Parallel( Baseline )( lbFolder, ggFolder, ggSelectFolder )
+            Par( Baseline )( lbFolder, ggFolder, ggSelectFolder )
          )
       }
 
@@ -193,41 +195,48 @@ object IncorporateBounce extends ProcessorCompanion with GUIGoodies with KonturG
       }
    }
 
-   def render( bncARs: IIdxSeq[ AudioRegion ], bncDir: File, preDoc: Session, preTL: BasicTimeline ) {
+   def render( bncARs: Vec[ AudioRegion ], bncDir: File, preDoc: Session, preTL: BasicTimeline ): Unit = {
       // don't filter the muted ones at this point, because the process will do it,
       // and then they will be automatically removed after the render finishes.
       val preARs = collectAudioRegions({ case x => x })( preTL ).sortBy( _._2.span.start ).toIndexedSeq
 
-      val dlg  = progressDialog( "Incorporate Bounce" )
-      val proc = IncorporateBounce( bncARs, bncDir, preTL, preARs ) {
-         case IncorporateBounce.Success( (newFiles, newRegions) ) =>
+     val dlg = progressDialog("Incorporate Bounce")
+     val config = Config(bncARs, bncDir, preTL, preARs)
+     val proc = IncorporateBounce(config)
+      proc.addListener {
+         case Processor.Result(_, Success( (newFiles, newRegions))) =>
             dlg.stop()
             Swing.onEDT( pasteResult( preDoc, preTL, preARs, newRegions, newFiles ))
 
-         case IncorporateBounce.Failure( e ) =>
+         case Processor.Result(_, Failure(Aborted())) =>
+           dlg.stop()
+
+         case Processor.Result(_, Failure(e)) =>
             dlg.stop()
             e.printStackTrace()
 
-         case IncorporateBounce.Aborted =>
-            dlg.stop()
-
-         case IncorporateBounce.Progress( i ) => dlg.progress = i
+         case prog @ Processor.Progress(_, _) => dlg.progress = prog.toInt
       }
       dlg.start( proc )
    }
 
-   def apply( bncARs: IIdxSeq[ AudioRegion ], bncDir: File, preTL: BasicTimeline, preARs: IIdxSeq[ (AudioTrack, AudioRegion) ])
-            ( observer: Observer ) : IncorporateBounce =
-      new IncorporateBounce( observer, bncARs, bncDir, preTL, preARs )
+  protected def prepare(config: IncorporateBounce.Config): Prepared =
+    new IncorporateBounce(/* observer, */ config.bncARs, config.bncDir, config.preTL, config.preARs)
+
+  type Repr = IncorporateBounce
+
+  case class Config(bncARs: Vec[AudioRegion], bncDir: File, preTL: BasicTimeline,
+                    preARs: Vec[(AudioTrack, AudioRegion)])
 }
-class IncorporateBounce( protected val observer: IncorporateBounce.Observer, bncARs: IIdxSeq[ AudioRegion ],
-                         bncDir: File, preTL: BasicTimeline, preARs: IIdxSeq[ (AudioTrack, AudioRegion) ])
-extends Processor {
+
+class IncorporateBounce(/* protected val observer: IncorporateBounce.Observer, */ bncARs: Vec[AudioRegion],
+                        bncDir: File, preTL: BasicTimeline, preARs: Vec[(AudioTrack, AudioRegion)])
+extends ProcessorImpl[IncorporateBounce.Product, IncorporateBounce] {
    import IncorporateBounce._
 
    protected val companion = IncorporateBounce
 
-   private implicit def richSpan[ S <% Span ]( span: S ) : RichSpan = new RichSpan( span )
+   private implicit def richSpan[S]( span: S )(implicit view: S => Span) : RichSpan = new RichSpan( span )
 
    // bug in sciss lib intersection for non-overlapping spans
    private final class RichSpan( a: Span ) {
@@ -240,13 +249,13 @@ extends Processor {
       def notSame( b: Span ) : Boolean = (!a.isEmpty || !b.isEmpty) && ((a.start != b.start) || (a.stop != b.stop))
    }
 
-   private def withEachChannel( buf: Array[ Array[ Float ]])( fun: Array[ Float ] => Unit ) {
+   private def withEachChannel( buf: Array[ Array[ Float ]])( fun: Array[ Float ] => Unit ): Unit = {
       var ch = 0; while( ch < buf.length ) {
          fun( buf( ch ))
       ch += 1 }
    }
 
-   private def fadeIn( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]) {
+   private def fadeIn( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]): Unit = {
       var i = 0; while( i < len ) {
          val f = ((pos + i).toDouble / fd.numFrames).toFloat
          if( f < 1f ) {
@@ -255,7 +264,7 @@ extends Processor {
       i += 1 }
    }
 
-   private def fadeOut( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]) {
+   private def fadeOut( fd: FadeSpec, pos: Long, len: Int )( buf: Array[ Float ]): Unit = {
       var i = 0; while( i < len ) {
          val f = ((pos + i).toDouble / fd.numFrames).toFloat
          if( f > 0f ) {
@@ -264,12 +273,12 @@ extends Processor {
       i += 1 }
    }
 
-   protected def body() : Result = {
+  protected def body(): Product = {
       // first, select only those regions which are somehow covered and not muted
       val numIn = preARs.size
-      var newFiles = IIdxSeq.empty[ AudioFileElement ]
+      var newFiles = Vec.empty[ AudioFileElement ]
       val out = preARs.zipWithIndex.flatMap { case ((at, ar), idx) =>
-         if( ar.muted ) IIdxSeq.empty else {
+         if( ar.muted ) Vec.empty else {
             val preSpan = ar.span
             val overs = bncARs.filter( _.span.overlaps( preSpan ))
             val res = overs.map { over =>
@@ -380,34 +389,34 @@ extends Processor {
                (at, arOut)
             }
 
-            progress( (idx + 1).toFloat / numIn )
-            if( checkAborted ) return Aborted
+            progress = (idx + 1).toFloat / numIn
+            checkAborted()
             res
          }
       }
 
-      Success( (newFiles, out) )
+      (newFiles, out)
    }
 
-   protected val Act = new Actor {
-      def act() {
-         ProcT.start()
-         var result : Result = null
-         loopWhile( result == null ) {
-            react {
-               case Abort =>
-                  ProcT.aborted = true
-                  aborted()
-               case res: Progress =>
-                  observer( res )
-               case res @ Aborted =>
-                  result = res
-               case res: Failure =>
-                  result = res
-               case res: Success =>
-                  result = res
-            }
-         } andThen { observer( result )}
-      }
-   }
+  //   protected val Act = new Actor {
+  //      def act(): Unit = {
+  //         ProcT.start()
+  //         var result : Result = null
+  //         loopWhile( result == null ) {
+  //            react {
+  //               case Abort =>
+  //                  ProcT.aborted = true
+  //                  aborted()
+  //               case res: Progress =>
+  //                  observer( res )
+  //               case res @ Aborted =>
+  //                  result = res
+  //               case res: Failure =>
+  //                  result = res
+  //               case res: Success =>
+  //                  result = res
+  //            }
+  //         } andThen { observer( result )}
+  //      }
+  //   }
 }

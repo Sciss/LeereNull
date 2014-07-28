@@ -26,26 +26,26 @@
 package de.sciss.leerenull
 
 import de.sciss.app.AbstractApplication
-import collection.immutable.{IndexedSeq => IIdxSeq}
+import de.sciss.span.Span
+import de.sciss.swingplus.GroupPanel
+import collection.immutable.{IndexedSeq => Vec}
 import swing.event.SelectionChanged
 import javax.swing.JOptionPane
 import de.sciss.common.BasicWindowHandler
 import swing.{BorderPanel, ListView}
-import eu.flierl.grouppanel.GroupPanel
-import de.sciss.strugatzki.Span
-import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, AudioTrack, Session, BasicTimeline, AudioFileElement, AudioRegion}
+import de.sciss.kontur.session.{Diffusion, MatrixDiffusion, AudioTrack, Session, BasicTimeline, AudioFileElement}
 
 object MergeTimelines extends GUIGoodies with KonturGoodies {
-   def showGUI() {
+   def showGUI(): Unit = {
       val app  = AbstractApplication.getApplication
       val dh   = app.getDocumentHandler
-      val tls  = IIdxSeq.tabulate( dh.getDocumentCount )( dh.getDocument ).flatMap {
+      val tls  = Vec.tabulate( dh.getDocumentCount )( dh.getDocument ).flatMap {
          case s: Session =>
             val tls1 = s.timelines.toList.toIndexedSeq
             tls1.collect {
                case btl: BasicTimeline => (s, btl)
             }
-         case _ => IIdxSeq.empty[ (Session, BasicTimeline) ]
+         case _ => Vec.empty[ (Session, BasicTimeline) ]
       }
 
       if( tls.size < 2 ) {
@@ -61,7 +61,7 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
       var tgtTL   = tls( 1 )
       var ok      = false
 
-      def checkPostTimeline() {
+      def checkPostTimeline(): Unit = {
          ok = srcTL != tgtTL
       }
 
@@ -104,17 +104,17 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
       val ggTgtRegSuff  = textField( "", 8 )()
 
       lazy val pane2 = new GroupPanel {
-         theHorizontalLayout is Sequential(
-            Parallel( lbSrcTrkPre, lbSrcTrkSuff, lbSrcRegPre, lbSrcRegSuff ),
-            Parallel( ggSrcTrkPre, ggSrcTrkSuff, ggSrcRegPre, ggSrcRegSuff ),
-            Parallel( lbTgtTrkPre, lbTgtTrkSuff, lbTgtRegPre, lbTgtRegSuff ),
-            Parallel( ggTgtTrkPre, ggTgtTrkSuff, ggTgtRegPre, ggTgtRegSuff )
+         horizontal = Seq(
+           Par( lbSrcTrkPre, lbSrcTrkSuff, lbSrcRegPre, lbSrcRegSuff ),
+           Par( ggSrcTrkPre, ggSrcTrkSuff, ggSrcRegPre, ggSrcRegSuff ),
+           Par( lbTgtTrkPre, lbTgtTrkSuff, lbTgtRegPre, lbTgtRegSuff ),
+           Par( ggTgtTrkPre, ggTgtTrkSuff, ggTgtRegPre, ggTgtRegSuff )
          )
-         theVerticalLayout is Sequential(
-            Parallel( Baseline )( lbSrcTrkPre,  ggSrcTrkPre,  lbTgtTrkPre,  ggTgtTrkPre  ),
-            Parallel( Baseline )( lbSrcTrkSuff, ggSrcTrkSuff, lbTgtTrkSuff, ggTgtTrkSuff ),
-            Parallel( Baseline )( lbSrcRegPre,  ggSrcRegPre,  lbTgtRegPre,  ggTgtRegPre  ),
-            Parallel( Baseline )( lbSrcRegSuff, ggSrcRegSuff, lbTgtRegSuff, ggTgtRegSuff )
+         vertical = Seq(
+           Par( Baseline )( lbSrcTrkPre,  ggSrcTrkPre,  lbTgtTrkPre,  ggTgtTrkPre  ),
+           Par( Baseline )( lbSrcTrkSuff, ggSrcTrkSuff, lbTgtTrkSuff, ggTgtTrkSuff ),
+           Par( Baseline )( lbSrcRegPre,  ggSrcRegPre,  lbTgtRegPre,  ggTgtRegPre  ),
+           Par( Baseline )( lbSrcRegSuff, ggSrcRegSuff, lbTgtRegSuff, ggTgtRegSuff )
          )
       }
 
@@ -140,7 +140,7 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
 
    def perform( srcDoc: Session, srcTL: BasicTimeline, tgtDoc: Session, tgtTL: BasicTimeline,
                 srcTrkPre: String, srcTrkSuff: String, tgtTrkPre: String, tgtTrkSuff: String,
-                srcRegPre: String, srcRegSuff: String, tgtRegPre: String, tgtRegSuff: String ) {
+                srcRegPre: String, srcRegSuff: String, tgtRegPre: String, tgtRegSuff: String ): Unit = {
       require( srcTL != tgtTL )
 
       val srcTLLen = srcTL.span.length
@@ -154,8 +154,8 @@ object MergeTimelines extends GUIGoodies with KonturGoodies {
             tgtTL.editSpan( ce, Span( srcTL.span.start, srcTL.span.start + tgtTLLen ))
          }
          val srcTracks = srcTL.tracks.toList.collect { case at: AudioTrack => at }
-         var newDiffs = IIdxSeq.empty[ Diffusion ]
-         var newFiles = IIdxSeq.empty[ AudioFileElement ]
+         var newDiffs = Vec.empty[ Diffusion ]
+         var newFiles = Vec.empty[ AudioFileElement ]
          val trackOff = tgtTL.tracks.size
 
          if( tgtTrkPre != "" || tgtTrkSuff != "" ) {

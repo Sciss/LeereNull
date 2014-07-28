@@ -31,7 +31,7 @@ import com.itextpdf.text.{Document => IDocument, Rectangle => IRectangle}
 import java.awt.Component
 
 object PDF {
-   def create( file: File, view: Component, usePrefSize: Boolean = true, margin: Int = 0 ) {
+   def create( file: File, view: Component, usePrefSize: Boolean = true, margin: Int = 0 ): Unit = {
       val viewSz     = if( usePrefSize ) view.getPreferredSize else view.getSize
       val width      = viewSz.width + (margin << 1)
       val height     = viewSz.height + (margin << 1)

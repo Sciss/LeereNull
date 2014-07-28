@@ -25,11 +25,13 @@
 
 package de.sciss.leerenull
 
+import de.sciss.span.Span
 import de.sciss.synth
 import java.io.File
 import actors.Actor
-import de.sciss.strugatzki.Span
 import synth.io.{AudioFileType, AudioFile}
+
+import scala.util.control.NonFatal
 
 object AudioFileCutter {
    def apply( in: File, out: File, span: Span )( observer: PartialFunction[ ProgressOrResult, Unit ]) =
@@ -48,19 +50,19 @@ final class AudioFileCutter private ( val in: File, val out: File, val span: Spa
 
 //   Act.start()
 
-   def abort() { Act ! Abort }
-   def start() { Act.start() }
+   def abort(): Unit = { Act ! Abort }
+   def start(): Unit = { Act.start() }
 
    private object Abort
 
    private object ProcT extends Thread {
       var aborted: Boolean = false
 
-      override def run() {
+      override def run(): Unit = {
          Act ! (try {
             if( procBody() ) Success else Aborted
          } catch {
-            case e => Failure( e )
+            case NonFatal(e) => Failure( e )
          })
       }
 
@@ -92,7 +94,7 @@ final class AudioFileCutter private ( val in: File, val out: File, val span: Spa
    }
 
    private object Act extends Actor {
-      def act() {
+      def act(): Unit = {
          ProcT.start()
          var result : Result = null
          loopWhile( result == null ) {

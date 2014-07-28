@@ -2,31 +2,29 @@
 
 name           := "LeereNull"
 
-version        := "0.14-SNAPSHOT"
+version        := "0.15.0-SNAPSHOT"
 
 organization   := "de.sciss"
 
-scalaVersion   := "2.9.1"
+scalaVersion   := "2.11.2"
 
-description := "Materials and tools for an algorithmic tape music composition"
+description    := "Materials and tools for an algorithmic tape music composition"
 
-homepage := Some( url( "https://github.com/Sciss/LeereNull" ))
+homepage       := Some(url(s"https://github.com/Sciss/${name.value}"))
 
-licenses := Seq( "GPL v2+" -> url( "http://www.gnu.org/licenses/gpl-2.0.txt" ))
-
-resolvers += "Clojars Repository" at "http://clojars.org/repo"  // for jsyntaxpane
+licenses       := Seq("GPL v3+" -> url("http://www.gnu.org/licenses/gpl-3.0.txt"))
 
 libraryDependencies ++= Seq(
-   "de.sciss" %% "strugatzki" % "0.16",
-   "de.sciss" %% "kontur" % "0.18-SNAPSHOT",
-   "de.sciss" %% "fscapejobs" % "0.17",
-   "com.itextpdf" % "itextpdf" % "5.1.1",
-   "de.sciss" %% "sonogramoverview" % "0.17"
+   "de.sciss"     %% "strugatzki"       % "2.4.1",
+   "de.sciss"     %% "kontur"           % "1.3.0-SNAPSHOT",
+   "de.sciss"     %% "fscapejobs"       % "1.4.1",
+   "com.itextpdf" %  "itextpdf"         % "5.5.2"
+//   "de.sciss"     %% "sonogramoverview" % "0.17"
 )
 
-retrieveManaged := true
+// retrieveManaged := true
 
-scalacOptions ++= Seq( "-deprecation", "-unchecked" )
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-Xfuture")
 
 // ---- packaging ----
 
@@ -34,8 +32,8 @@ scalacOptions ++= Seq( "-deprecation", "-unchecked" )
 
 // test in assembly := {}
 
-seq( appbundle.settings: _* )
+seq(appbundle.settings: _*)
 
-appbundle.icon := Some( file( "src" ) / "main" / "resources" / "leere_null.png" )
+appbundle.icon := Some(file("src") / "main" / "resources" / "leere_null.png")
 
 appbundle.javaOptions += "-Xmx2048m"

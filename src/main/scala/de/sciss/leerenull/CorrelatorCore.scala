@@ -26,10 +26,11 @@
 package de.sciss.leerenull
 
 import de.sciss.leerenull.CorrelatorSelector.Search
-import eu.flierl.grouppanel.GroupPanel
-import de.sciss.strugatzki.{FeatureCorrelation, Span, FeatureExtraction}
-import FeatureCorrelation.{Match, SettingsBuilder => CSettingsBuilder}
-import FeatureExtraction.{Settings => ESettings}
+import de.sciss.span.Span
+import de.sciss.swingplus.GroupPanel
+import de.sciss.strugatzki.{FeatureCorrelation, FeatureExtraction}
+import FeatureCorrelation.{Match, ConfigBuilder => CSettingsBuilder}
+import FeatureExtraction.{Config => ESettings}
 import de.sciss.app.AbstractCompoundEdit
 import de.sciss.kontur.session.{MatrixDiffusion, AudioTrack, AudioFileElement, FadeSpec, AudioRegion, Session, BasicTimeline}
 import java.io.File
@@ -89,7 +90,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       protected def toInnerXML = <type>resample</type><amount>{amount}</amount>
    }
 
-   def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ) {
+   def makeMatchEditor( search: Search, idx: Int )( implicit doc: Session ): Unit = {
       search.transform.inverse.fscapeOption match {
          case Some( fsc ) =>
             val m          = search.matches( idx )
@@ -101,13 +102,13 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
                search.transform.fileID + ".aif"
             val fTrns      = new File( LeereNull.bounceFolder, fName )
 
-            def trnsDone() {
+            def trnsDone(): Unit = {
                val m2      = m.copy( file = fTrns, punch = m.punch.shift( -truncSpan.start ))
                val s2      = search.copy( matches = search.matches.patch( idx, IndexedSeq( m2 ), 1 ))
                makeMatchEditor2( s2, idx )
             }
 
-            def runTrns( f: File ) {
+            def runTrns( f: File ): Unit = {
 //               FScape.shift( f, fTrns, -freq ) { b =>
 //                  if( b ) trnsDone()
 //               }
@@ -137,7 +138,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       }
    }
 
-   private def makeMatchEditor2( search: Search, idx: Int )( implicit doc: Session ) {
+   private def makeMatchEditor2( search: Search, idx: Int )( implicit doc: Session ): Unit = {
       val tls     = doc.timelines
       val set     = search.settings
 //      val itrns   = search.transform.inverse
@@ -284,7 +285,7 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
          }).partition( _._1.name.contains( "-L" ))
 
          if( trL.nonEmpty || trR.nonEmpty ) tls.joinEdit( "Flip chans" ) { implicit ce =>
-            def gugu( at: AudioTrack, m: MatrixDiffusion, in: String, out: String, diff: Int => MatrixDiffusion ) {
+            def gugu( at: AudioTrack, m: MatrixDiffusion, in: String, out: String, diff: Int => MatrixDiffusion ): Unit = {
                val nameOld = at.name
                val i       = nameOld.indexOf( "-" + in )
                val nameNew = nameOld.substring( 0, i + 1 ) + out + nameOld.substring( i + 2 )
@@ -377,8 +378,8 @@ object CorrelatorCore extends GUIGoodies with KonturGoodies with NullGoodies {
       butSearchSplit.visible = search.master.isEmpty
 
       val panel = new GroupPanel {
-         theHorizontalLayout is Sequential( butIncorporate, lbIncorporate, butSearchSplit, butFlipChans )
-         theVerticalLayout is Parallel( Baseline )( butIncorporate, lbIncorporate, butSearchSplit, butFlipChans )
+         horizontal = Seq( butIncorporate, lbIncorporate, butSearchSplit, butFlipChans )
+         vertical = Par( Baseline )( butIncorporate, lbIncorporate, butSearchSplit, butFlipChans )
       }
 
 //      val bp = new BorderPanel {

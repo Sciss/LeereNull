@@ -33,7 +33,7 @@ trait PasteCompanion {
 
    def pasteResult( doc: Session, tl: BasicTimeline, remove: IIdxSeq[ (AudioTrack, AudioRegion) ],
                     insert: IIdxSeq[ (AudioTrack, AudioRegion )],
-                    newFiles: IIdxSeq[ AudioFileElement ]) {
+                    newFiles: IIdxSeq[ AudioFileElement ]): Unit = {
 
       val removeMap: Map[ AudioTrack, IIdxSeq[ AudioRegion ]] = remove.groupBy( _._1 ).mapValues( _.map( _._2 ))
       val insertMap: Map[ AudioTrack, IIdxSeq[ AudioRegion ]] = insert.groupBy( _._1 ).mapValues( _.map( _._2 ))

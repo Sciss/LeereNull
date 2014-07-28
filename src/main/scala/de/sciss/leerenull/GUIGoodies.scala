@@ -27,14 +27,16 @@ package de.sciss.leerenull
 
 import java.util.Locale
 import java.text.NumberFormat
+import de.sciss.processor.Processor
+import de.sciss.span.Span
 import de.sciss.util.NumberSpace
 import de.sciss.gui.{NumberEvent, NumberListener, NumberField, TimeFormat}
 import java.awt.event.{InputEvent, KeyEvent, ActionEvent}
-import de.sciss.strugatzki.Span
 import javax.swing.event.{AncestorEvent, AncestorListener}
 import javax.swing.{SwingUtilities, JPanel, JOptionPane, WindowConstants, JDialog, JComponent, AbstractAction, Action => JAction, KeyStroke}
 import java.awt.{FileDialog, Component => AWTComponent, Frame => AWTFrame}
 import java.io.{FilenameFilter, File}
+import scala.concurrent.ExecutionContext
 import swing.{TextField, RadioButton, CheckBox, ListView, ComboBox, Swing, ProgressBar, Action, FlowPanel, Slider, Label, Component, Button}
 import swing.event.{SelectionChanged, ValueChanged}
 
@@ -44,12 +46,12 @@ trait GUIGoodies {
          putValue( JAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke( ks ))
       }
 
-      def actionPerformed( e: ActionEvent ) {
+      def actionPerformed( e: ActionEvent ): Unit = {
          thunk
       }
    }
 
-   def message( text: String ) {
+   def message( text: String ): Unit = {
       JOptionPane.showMessageDialog( null, text )
    }
 
@@ -146,21 +148,20 @@ trait GUIGoodies {
    }
 
    def progressDialog( title: String ) = new ProgressDialog {
-      var process : Process = null
+      var process : Processor[_, _] with Processor.Prepared = null
+
+     import ExecutionContext.Implicits.global
 
       val pb = new ProgressBar {
          peer.addAncestorListener( new AncestorListener {
-            def ancestorAdded( e: AncestorEvent ) {
-               process.start()
-            }
-
-            def ancestorMoved( e: AncestorEvent ) {}
-            def ancestorRemoved( e: AncestorEvent ) {}
+           def ancestorAdded  (e: AncestorEvent): Unit = process.start()
+           def ancestorMoved  (e: AncestorEvent) = ()
+           def ancestorRemoved(e: AncestorEvent) = ()
          })
       }
 
       def progress = pb.value
-      def progress_=( i: Int ) { pb.value = i }
+      def progress_=( i: Int ): Unit = pb.value = i
 
       val progressPane = new FlowPanel {
          contents += label( "Processing..." )
@@ -178,14 +179,14 @@ trait GUIGoodies {
       dlg = op.createDialog( null, title )
       dlg.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE )
 
-      def start( p: Process ) {
+     def start(p: Processor[_, _] with Processor.Prepared): Unit = {
          Swing.onEDT {
             process = p
             dlg.setVisible( true )
          }
       }
 
-      def stop() {
+      def stop(): Unit = {
 //         Thread.sleep( 4000 )
          Swing.onEDT( dlg.dispose() )
       }
@@ -217,7 +218,7 @@ trait GUIGoodies {
       vGap = 0
 
       def inc( amount: Int ) = new AbstractAction {
-         def actionPerformed( e: ActionEvent ) {
+         def actionPerformed( e: ActionEvent ): Unit = {
             val value = j.getNumber.intValue + amount
             if( value >= min && value <= max ) {
                j.setNumber( value )
@@ -225,12 +226,12 @@ trait GUIGoodies {
          }
       }
 
-      override def enabled_=( b: Boolean ) {
+      override def enabled_=( b: Boolean ): Unit = {
          super.enabled = b
          j.setEnabled( b )
       }
 
-      override def requestFocus() { j.requestFocus() }
+      override def requestFocus(): Unit = j.requestFocus()
 
       amap.put( "leerenull.up", inc( 1 ))
       amap.put( "leerenull.dn", inc( -1 ))
@@ -239,7 +240,7 @@ trait GUIGoodies {
 
       j.putClientProperty( "JComponent.sizeVariant", "small" )
       val list = new NumberListener {
-         def numberChanged( e: NumberEvent ) {
+         def numberChanged( e: NumberEvent ): Unit = {
             if( !e.isAdjusting ) act( integer )
          }
       }
@@ -249,7 +250,7 @@ trait GUIGoodies {
       if( initial != min ) integer = initial
 
       def integer = j.getNumber.intValue
-      def integer_=( value: Int ) {
+      def integer_=( value: Int ): Unit = {
          j.removeListener( list )
          try {
             j.setNumber( value )
@@ -276,7 +277,7 @@ trait GUIGoodies {
       vGap = 0
 
       def inc( amount: Double ) = new AbstractAction {
-         def actionPerformed( e: ActionEvent ) {
+         def actionPerformed( e: ActionEvent ): Unit = {
             val value = math.max( min, math.min( max, j.getNumber.doubleValue + amount ))
 //            if( value >= min && value <= max ) {
                j.setNumber( value )
@@ -284,7 +285,7 @@ trait GUIGoodies {
          }
       }
 
-      def addAction( code: Int, modifiers: Int, amount: Double ) {
+      def addAction( code: Int, modifiers: Int, amount: Double ): Unit = {
          val id = "leerenull." + (code.toLong << 32) + modifiers
          amap.put( id, inc( amount ))
          imap.put( KeyStroke.getKeyStroke( code, modifiers ), id )
@@ -299,7 +300,7 @@ trait GUIGoodies {
 
       j.putClientProperty( "JComponent.sizeVariant", "small" )
       val list = new NumberListener {
-         def numberChanged( e: NumberEvent ) {
+         def numberChanged( e: NumberEvent ): Unit = {
             if( !e.isAdjusting ) act( decimal )
          }
       }
@@ -309,7 +310,7 @@ trait GUIGoodies {
       if( initial != min ) decimal = initial
 
       def decimal = j.getNumber.doubleValue
-      def decimal_=( d: Double ) {
+      def decimal_=( d: Double ): Unit = {
          j.removeListener( list )
          try {
             j.setNumber( d )
@@ -340,7 +341,7 @@ trait GUIGoodies {
       if( initial != 0.0 ) decimal = initial
 
       def decimal = slid.value.toDouble / steps
-      def decimal_=( value: Double ) {
+      def decimal_=( value: Double ): Unit = {
          val i = (value * steps + 0.5).toInt
          slid.deafTo( slid )
          try {
@@ -351,25 +352,25 @@ trait GUIGoodies {
       }
    }
 
-   def setPreferredWidth( c: Component, w: Int ) {
+   def setPreferredWidth( c: Component, w: Int ): Unit = {
       val d = c.preferredSize
       d.width = w
       c.preferredSize = d
    }
 
-   def setMinimumWidth( c: Component, w: Int ) {
+   def setMinimumWidth( c: Component, w: Int ): Unit = {
       val d = c.minimumSize
       d.width = w
       c.minimumSize = d
    }
 
-   def setMaximumWidth( c: Component, w: Int ) {
+   def setMaximumWidth( c: Component, w: Int ): Unit = {
       val d = c.maximumSize
       d.width = w
       c.maximumSize = d
    }
 
-   def constrainWidth( c: Component, w: Int ) {
+   def constrainWidth( c: Component, w: Int ): Unit = {
       setPreferredWidth( c, w )
       setMinimumWidth( c, w )
       setMaximumWidth( c, w )
@@ -383,9 +384,9 @@ trait GUIGoodies {
       timeFormat.formatTime( secs )
    }
 
-   def timeString( sp: Span, sr: Double )/*( implicit tl: BasicTimeline )*/ : String = {
-      timeString( sp.start, sr ) + " - " + timeString( sp.stop, sr )
-   }
+  def timeString(sp: Span, sr: Double) /*( implicit tl: BasicTimeline )*/ : String = {
+    timeString(sp.start, sr) + " - " + timeString(sp.stop, sr)
+  }
 
    def percentString( d: Double, numDecimals: Int = 1 ) : String = {
       val nf = NumberFormat.getPercentInstance( Locale.US )

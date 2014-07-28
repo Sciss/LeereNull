@@ -26,10 +26,13 @@
 package de.sciss.leerenull
 
 import de.sciss.kontur.session.Session
+import de.sciss.processor.Processor
+import de.sciss.processor.Processor.Aborted
+import de.sciss.swingplus.GroupPanel
 import collection.breakOut
 import javax.swing.table.DefaultTableModel
+import scala.util.{Failure, Success}
 import swing.{BorderPanel, ScrollPane, Table, Swing}
-import eu.flierl.grouppanel.GroupPanel
 import java.util.{Locale, Date}
 import java.io.File
 import xml.{NodeSeq, XML}
@@ -38,8 +41,8 @@ import de.sciss.app.AbstractWindow
 import de.sciss.kontur.gui.AppWindow
 import java.awt.BorderLayout
 import de.sciss.strugatzki.{FeatureExtraction, FeatureCorrelation}
-import FeatureCorrelation.{Settings => CSettings, Match}
-import FeatureExtraction.{Settings => ESettings}
+import FeatureCorrelation.{Config => CSettings, Match}
+import FeatureExtraction.{Config => ESettings}
 
 object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies {
    var verbose    = false
@@ -91,13 +94,14 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
     */
    def beginSearch( offset: Long, settings: CSettings, metas: IndexedSeq[ ESettings ],
                     master: Option[ Match ], transform: CorrelatorCore.Transform )
-                  ( implicit doc: Session ) {
+                  ( implicit doc: Session ): Unit = {
       if( verbose ) println( settings )
 
       val dlg  = progressDialog( "Correlating with database" )
       val tim  = new Date()
-      val fc   = FeatureCorrelation( settings ) {
-         case FeatureCorrelation.Success( res ) =>
+      val fc   = FeatureCorrelation( settings )
+      fc.addListener {
+         case Processor.Result(_, Success(res)) =>
             dlg.stop()
             if( verbose ) {
                println( "Done. " + res.size + " entries:" )
@@ -116,27 +120,27 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
             if( autosave ) saveSearch( search )
             Swing.onEDT( makeSelector( search ))
 
-         case FeatureCorrelation.Failure( e ) =>
+         case Processor.Result(_, Failure(Aborted())) =>
+           dlg.stop()
+
+         case Processor.Result(_, Failure(e)) =>
             dlg.stop()
             e.printStackTrace()
 
-         case FeatureCorrelation.Aborted =>
-            dlg.stop()
-
-         case FeatureCorrelation.Progress( i ) => dlg.progress = i
+         case prog @ Processor.Progress(_, _) => dlg.progress = prog.toInt
       }
       dlg.start( fc )
    }
 
-   def saveSearch( search: Search ) {
+   def saveSearch( search: Search ): Unit = {
       val id   = plainName( search.settings.metaInput ).filter( _.isLetterOrDigit ).take( 16 )
 //      val df   = new SimpleDateFormat( "yyMMdd'_'HHmmss'_" + id + ".xml'", Locale.US )
 //      val f    = new File( LeereNull.searchFolder, df.format( search.creation ))
       val f = stampedFile( LeereNull.searchFolder, id, ".xml", search.creation )
-      XML.save( f.getAbsolutePath, search.toXML, "UTF-8", true, null )
+      XML.save( f.getAbsolutePath, search.toXML, "UTF-8", xmlDecl = true)
    }
 
-   def makeSelector( search: Search )( implicit doc: Session ) {
+   def makeSelector( search: Search )( implicit doc: Session ): Unit = {
 //      val tls  = doc.timelines
 //      implicit val tl = tls.tryEdit( "Add Correlator Timeline" ) { implicit ce =>
 //         implicit val tl = BasicTimeline.newEmpty( doc )
@@ -201,8 +205,8 @@ object CorrelatorSelector extends GUIGoodies with KonturGoodies with NullGoodies
       }
 
       val panel = new GroupPanel {
-         theHorizontalLayout is Sequential( lbInfo, butSelectMatch )
-         theVerticalLayout is Parallel( Baseline )( lbInfo, butSelectMatch )
+         horizontal = Seq( lbInfo, butSelectMatch )
+         vertical = Par( Baseline )( lbInfo, butSelectMatch )
       }
 
       val bp = new BorderPanel {

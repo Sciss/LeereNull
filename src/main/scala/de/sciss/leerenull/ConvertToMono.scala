@@ -26,27 +26,30 @@
 package de.sciss.leerenull
 
 import java.io.File
-import de.sciss.strugatzki.aux.{Processor, ProcessorCompanion}
-import collection.immutable.{IndexedSeq => IIdxSeq}
+import de.sciss.processor.impl.ProcessorImpl
+import de.sciss.processor.{GenericProcessor, Processor, ProcessorFactory}
+
+import collection.immutable.{IndexedSeq => Vec}
 import actors.Actor
 import de.sciss.kontur.gui.TrackList
 import de.sciss.kontur.session.{Session, BasicTimeline, MatrixDiffusion, AudioTrack, AudioRegion, AudioFileElement}
 import annotation.tailrec
 import de.sciss.synth.io.{AudioFileType, SampleFormat, AudioFileSpec, AudioFile}
+import scala.util.{Failure, Success}
 import swing.Swing
 
-object ConvertToMono extends ProcessorCompanion with KonturGoodies with GUIGoodies with NullGoodies with PasteCompanion {
-   type PayLoad = (IIdxSeq[ AudioFileElement ], IIdxSeq[ (AudioTrack, IIdxSeq[ AudioRegion ])])
+object ConvertToMono extends ProcessorFactory with KonturGoodies with GUIGoodies with NullGoodies with PasteCompanion {
+  type Product = (Vec[AudioFileElement], Vec[(AudioTrack, Vec[AudioRegion])])
 
    var VERBOSE = false
 
-   def perform( doc: Session, tl: BasicTimeline, trl: TrackList ) {
+   def perform( doc: Session, tl: BasicTimeline, trl: TrackList ): Unit = {
       openFileDialog( "Convert to Mono: Render folder", new File( LeereNull.bounceFolder, "mono" )) foreach { f =>
          render( doc, tl, trl, f.getParentFile )
       }
    }
 
-   def render( doc: Session, tl: BasicTimeline, trl: TrackList, dir: File ) {
+   def render( doc: Session, tl: BasicTimeline, trl: TrackList, dir: File ): Unit = {
       // don't filter the muted ones at this point, because the process will do it,
       // and then they will be automatically removed after the render finishes.
       val arsIn0     = collectAudioRegions({ case x => x })( tl ).sortBy( _._2.span.start ).toIndexedSeq
@@ -55,41 +58,43 @@ object ConvertToMono extends ProcessorCompanion with KonturGoodies with GUIGoodi
 
       val dlg  = progressDialog( "Convert to Mono" )
       val proc = ConvertToMono( dir, arsIn ) {
-         case ConvertToMono.Success( (newFiles, newRegions) ) =>
-            dlg.stop()
-            val reg1 = newRegions.flatMap {
-               case (at, ars) => ars.map( ar => (at, ar))
-            }
-            Swing.onEDT( pasteResult( doc, tl, arsRemove, reg1, newFiles ))
+        case Processor.Result(_, Success((newFiles, newRegions))) =>
+          dlg.stop()
+          val reg1 = newRegions.flatMap {
+            case (at, ars) => ars.map(ar => (at, ar))
+          }
+          Swing.onEDT(pasteResult(doc, tl, arsRemove, reg1, newFiles))
 
-         case ConvertToMono.Failure( e ) =>
+        case Processor.Result(_, Failure(Processor.Aborted())) =>
+          dlg.stop()
+
+        case Processor.Result(_, Failure(e)) =>
             dlg.stop()
             e.printStackTrace()
 
-         case ConvertToMono.Aborted =>
-            dlg.stop()
-
-         case ConvertToMono.Progress( i ) => dlg.progress = i
+         case prog @ Processor.Progress(_, _) => dlg.progress = prog.toInt
       }
       dlg.start( proc )
    }
 
-   def apply( bncDir: File, in: IIdxSeq[ (AudioTrack, IIdxSeq[ AudioRegion ])])( observer: ConvertToMono.Observer ) : ConvertToMono =
-      new ConvertToMono( observer, bncDir, in )
+  def apply(bncDir: File, in: Vec[(AudioTrack, Vec[AudioRegion])])(observer: ConvertToMono.Observer): ConvertToMono =
+    new ConvertToMono(observer, bncDir, in)
 }
-class ConvertToMono( protected val observer: ConvertToMono.Observer, bncDir: File, in: IIdxSeq[ (AudioTrack, IIdxSeq[ AudioRegion ])])
-extends Processor {
-   import ConvertToMono._
+
+class ConvertToMono(protected val observer: ConvertToMono.Observer, bncDir: File, in: Vec[(AudioTrack, Vec[AudioRegion])])
+  extends ProcessorImpl[ConvertToMono.Product, ConvertToMono] {
+
+  import ConvertToMono._
 
    protected val companion = ConvertToMono
 
-   private def mix( srcOff: Int, dst: Array[ Float ], dstOff: Int, len: Int )( src: Array[ Float ]) {
+   private def mix( srcOff: Int, dst: Array[ Float ], dstOff: Int, len: Int )( src: Array[ Float ]): Unit = {
       var i = 0; while( i < len ) {
          dst( i + dstOff ) += src( i + srcOff )
       i += 1 }
    }
 
-   private def mul( mul: Float )( buf: Array[ Float ]) {
+   private def mul( mul: Float )( buf: Array[ Float ]): Unit = {
       if( mul == 1 ) return
       var i = 0; while( i < buf.length ) {
          buf( i ) = buf( i ) * mul
@@ -98,8 +103,8 @@ extends Processor {
 
    private type Key = (Seq[ Float ], File, Long, Long)
 
-   protected def body() : Result = {
-//      var map = Map.empty[ (Seq[ Float ], File), AudioFileElement ]
+  protected def body(): Product = {
+    //      var map = Map.empty[ (Seq[ Float ], File), AudioFileElement ]
 
       val inMap: Map[ (AudioTrack, AudioRegion), Key ] = in.flatMap({
          case (at, ars) =>
@@ -110,7 +115,7 @@ extends Processor {
                   arsF.map { ar =>
                      ((at, ar), (mat, ar.audioFile.path, ar.offset, ar.offset + ar.span.length))
                   }
-               case _ => IIdxSeq.empty
+               case _ => Vec.empty
             }
       })( collection.breakOut )
 
@@ -155,13 +160,13 @@ extends Processor {
 
             val afe = AudioFileElement( outF, afIn.numFrames, 1, afIn.sampleRate )
 
-            progress( (idx + 1).toFloat / num )
-            if( checkAborted ) return Aborted
+            progress = (idx + 1).toFloat / num
+            checkAborted()
 
             (key, afe)
       })( collection.breakOut )
 
-      val map2: IIdxSeq[ (AudioTrack, AudioRegion) ] = inMap.map({
+      val map2: Vec[ (AudioTrack, AudioRegion) ] = inMap.map({
          case (keyIn @ (at, arIn), keyOut) =>
             val afe = outMap( keyOut )
             val arOut = arIn.copy( audioFile = afe, offset = 0L )
@@ -176,9 +181,9 @@ extends Processor {
    }
 
    protected val Act = new Actor {
-      def act() {
+      def act(): Unit = {
          ProcT.start()
-         var result : Result = null
+        var result: Product = null
          loopWhile( result == null ) {
             react {
                case Abort =>

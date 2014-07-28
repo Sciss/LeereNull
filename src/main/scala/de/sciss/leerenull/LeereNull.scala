@@ -28,12 +28,17 @@ package de.sciss.leerenull
 import de.sciss.gui.{MenuItem, MenuGroup}
 import java.util.Properties
 import java.io.{File, FileInputStream}
-import eu.flierl.grouppanel.GroupPanel
+import de.sciss.processor.Processor
+import de.sciss.processor.Processor.Aborted
+import de.sciss.span.Span
+import de.sciss.swingplus.GroupPanel
+
 import collection.breakOut
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
 import de.sciss.kontur.io.SonagramOverview
 import de.sciss.kontur.gui.{TrailViewEditor, DefaultTrackComponent}
+import scala.util.{Success, Failure}
 import swing.{Swing, ButtonGroup, Dialog}
 import de.sciss.kontur.Kontur
 import de.sciss.kontur.session.{MatrixDiffusion, Diffusion, AudioTrack, AudioRegion}
@@ -54,11 +59,11 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
       (base, database, extractor, search, bounce, ueberzeichnung)
    }
 
-   def main( args: Array[ String ]) {
+   def main( args: Array[ String ]): Unit = {
       Swing.onEDT( run() )
    }
 
-   def run() {
+   def run(): Unit = {
       SonagramOverview.maxSize = 16384
 
       val app  = new Kontur( Array() )
@@ -71,19 +76,20 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                implicit val tlv0 = tlv
                implicit val trl0 = trl
 
-               val span = selSpan
-// DISABLE THIS SHORTCUT, AS WE CANNOT SPECIFY SHIFT OR RESAMPLE
-//               cutTheCheese( selectedAudioRegions, span ) match {
-//                  case IndexedSeq( ar ) => CorrelatorSetup.prepareCorrelator( ar )
-//                  case _ =>
-////                     val message = "<html>Multiple regions are selected. To proceed,<br>" +
-////                        "an intermediate bounced representation is needed.<br>" +
-////                        "<B>Go ahead and bounce?</B></html>"
+               selSpan match {
+                 case span @ Span(_, _) =>
+                    // DISABLE THIS SHORTCUT, AS WE CANNOT SPECIFY SHIFT OR RESAMPLE
+                    //               cutTheCheese( selectedAudioRegions, span ) match {
+                    //                  case IndexedSeq( ar ) => CorrelatorSetup.prepareCorrelator( ar )
+                    //                  case _ =>
+                    ////                     val message = "<html>Multiple regions are selected. To proceed,<br>" +
+                    ////                        "an intermediate bounced representation is needed.<br>" +
+                    ////                        "<B>Go ahead and bounce?</B></html>"
                      val lbInfo = label( "<html>Feature Extraction: To proceed,<br>" +
                                "an intermediate bounced representation is needed.<br>" +
                                "<B>Go ahead and bounce?</B></html>"
                      )
-                     def actionBut() {
+                     def actionBut(): Unit = {
                         ggShiftAmount.enabled      = bg.selected == Some( radShift )
                         ggResampleAmount.enabled   = bg.selected == Some( radResample )
                         bg.selected match {
@@ -105,11 +111,11 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                         linkVerticalSize( radNoTrans, radShift, radResample, ggShiftAmount, ggResampleAmount )
                         linkHorizontalSize( radNoTrans, radShift, radResample )
                         linkHorizontalSize( ggShiftAmount, ggResampleAmount )
-                        theHorizontalLayout is Parallel( lbInfo, radNoTrans,
-                           Sequential( radShift, ggShiftAmount ), Sequential( radResample, ggResampleAmount ))
-                        theVerticalLayout is Sequential( lbInfo, radNoTrans,
-                           Parallel( Baseline )( radShift, ggShiftAmount ),
-                           Parallel( Baseline )( radResample, ggResampleAmount ))
+                        horizontal = Par( lbInfo, radNoTrans,
+                           Seq( radShift, ggShiftAmount ), Seq( radResample, ggResampleAmount ))
+                        vertical = Seq( lbInfo, radNoTrans,
+                           Par( Baseline )( radShift, ggShiftAmount ),
+                          Par( Baseline )( radResample, ggResampleAmount ))
                      }
                      val res = Dialog.showConfirmation( null, p.peer, "Extract", Dialog.Options.OkCancel, Dialog.Message.Question )
                      if( res == Dialog.Result.Ok ) {
@@ -122,7 +128,10 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                         }
                         CorrelatorSetup.bounceAndExtract( tracks, span, transform )
                      }
-//               }
+
+
+                 case _ =>
+               }
             }
          }
       })
@@ -140,15 +149,18 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                implicit val tl0  = tl
                implicit val tlv0 = tlv
                implicit val trl0 = trl
-               val span = selSpan
-               selectedAudioRegions.headOption.foreach { ar =>
-                  val pos = ar.span.stop
-                  if( span.contains( pos )) {
-//println( "span = " + span + " ; ar.span = " + ar.span )
-                     tlv.joinEdit( "Set span" ) { implicit ce =>
-                        tlv.editSelect( ce, span.replaceStart( pos ))
+               selSpan match {
+                 case span @ Span(_, _) =>
+                   selectedAudioRegions.headOption.foreach { ar =>
+                     val pos = ar.span.stop
+                     if( span.contains( pos )) {
+                       //println( "span = " + span + " ; ar.span = " + ar.span )
+                       tlv.joinEdit( "Set span" ) { implicit ce =>
+                         tlv.editSelect( ce, Span(pos, span.stop))
+                       }
                      }
-                  }
+                   }
+                 case _ =>
                }
             }
          }
@@ -167,32 +179,35 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                implicit val tl0  = tl
                implicit val tlv0 = tlv
                implicit val trl0 = trl
-               val span = selSpan
-               tl.joinEdit( "Optimize Tracks Capacities" ) { implicit ce =>
-                  type Gaga      = (AudioTrack, Option[ Seq[ Seq[ Float ]]])
-                  var taken      = Set.empty[ Gaga ]
-                  val withDiffs: Set[ Gaga ] =
-                     selTracks.map( at => (at, at.diffusion) ).collect({
-                        case (at, Some( m: MatrixDiffusion )) => (at, Some( m.matrix.toSeq ))
-                        case (at, None) => (at, Option.empty[ Seq[ Seq[ Float ]]])
-                     })( breakOut )
-                  withDiffs.foreach { case tup @ (at, matO) =>
-                     val ars  = at.trail.getRange( span )
-                     val coll = (withDiffs -- taken - tup).filter { case (at2, matO2) =>
-                        (matO2 == matO) && ars.forall( (ar: AudioRegion) => at2.trail.getRange( ar.span ).isEmpty )
+               selSpan match {
+                 case span @ Span(_, _) =>
+                   tl.joinEdit( "Optimize Tracks Capacities" ) { implicit ce =>
+                     type Gaga      = (AudioTrack, Option[ Seq[ Seq[ Float ]]])
+                     var taken      = Set.empty[ Gaga ]
+                     val withDiffs: Set[ Gaga ] =
+                       selTracks.map( at => (at, at.diffusion) ).collect({
+                         case (at, Some( m: MatrixDiffusion )) => (at, Some( m.matrix.toSeq ))
+                         case (at, None) => (at, Option.empty[ Seq[ Seq[ Float ]]])
+                       })( breakOut )
+                     withDiffs.foreach { case tup @ (at, matO) =>
+                       val ars  = at.trail.getRange( span )
+                       val coll = (withDiffs -- taken - tup).filter { case (at2, matO2) =>
+                         (matO2 == matO) && ars.forall( (ar: AudioRegion) => at2.trail.getRange( ar.span ).isEmpty )
+                       }
+                       val at2O = coll.toSeq.sortBy( _._1.name ).headOption
+                       at2O.foreach { case tup2 @ (at2, _) =>
+                         taken += tup
+                         taken += tup2   // we only do that because the trail view isn't updating during the edit!
+                       val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                         tveO.foreach( _.editDeselect( ce, ars: _* ))
+                         at.trail.editRemove( ce, ars: _* )
+                         at2.trail.editAdd( ce, ars: _* )
+                         val tve2O = trl.getElement( at2 ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
+                         tve2O.foreach( _.editSelect( ce, ars: _* ))
+                       }
                      }
-                     val at2O = coll.toSeq.sortBy( _._1.name ).headOption
-                     at2O.foreach { case tup2 @ (at2, _) =>
-                        taken += tup
-                        taken += tup2   // we only do that because the trail view isn't updating during the edit!
-                        val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
-                        tveO.foreach( _.editDeselect( ce, ars: _* ))
-                        at.trail.editRemove( ce, ars: _* )
-                        at2.trail.editAdd( ce, ars: _* )
-                        val tve2O = trl.getElement( at2 ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
-                        tve2O.foreach( _.editSelect( ce, ars: _* ))
-                     }
-                  }
+                   }
+                 case _ =>
                }
             }
          }
@@ -211,8 +226,8 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                   lbBal.text = percentString( d * 2 - 1 )
                }
                val p = new GroupPanel {
-                  theHorizontalLayout is Parallel( ggNumChannels, Sequential( slidBal, lbBal ))
-                  theVerticalLayout is Sequential( ggNumChannels, Parallel( Baseline )( slidBal, lbBal ))
+                  horizontal = Par( ggNumChannels, Seq( slidBal, lbBal ))
+                  vertical = Seq( ggNumChannels, Par( Baseline )( slidBal, lbBal ))
                }
                val res = Dialog.showConfirmation( null, p.peer, "Extract", Dialog.Options.OkCancel, Dialog.Message.Question )
                if( res == Dialog.Result.Ok ) {
@@ -226,7 +241,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                      val tracks     = selTracks.toSet
                      val span       = selSpan
                      val arsMap     = collectAudioRegions({
-                        case tup @ (at, ar) if( ar.span.overlaps( span ) && tracks.contains( at )) => tup
+                        case tup @ (at, ar) if ar.span.overlaps(span) && tracks.contains(at) => tup
                      }).groupBy( _._1 ).mapValues( _.map( _._2 ))
                      arsMap.foreach { case (at, ars) =>
                         val tveO = trl.getElement( at ).flatMap[ TrailViewEditor[ AudioRegion ]]( _.trailView.editor.asInstanceOf[ Option[ TrailViewEditor[ AudioRegion ]]])
@@ -242,7 +257,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                         moreDiffs  += diff
                         val track   = provideAudioTrackSpace( ar.span, { at =>
                            /* val ok1 = */ at.diffusion match {
-                              case Some( m: MatrixDiffusion ) if( m.matrix.toSeq == diffSeq ) => true
+                              case Some( m: MatrixDiffusion ) if m.matrix.toSeq == diffSeq => true
                               case None => true
                               case _ => false
                            }
@@ -317,7 +332,7 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
 //                  SonagramOverview.verbose = true
                   try {
                      println( "Exporting...")
-                     PDF.create( file, view, true, 0 )
+                     PDF.create( file, view, usePrefSize = true)
                      println( "Done." )
                   } finally {
                      DefaultTrackComponent.forceFullPaint = old
@@ -403,18 +418,19 @@ object LeereNull extends Runnable with GUIGoodies with KonturGoodies with NullGo
                   } + "_" + start + "_" + stop + ".png"
                   saveFileDialog( "Save Sonogram", new File( ueberzeichnungFolder, defaultName )).foreach { file =>
                      val dlg  = progressDialog( "Creating Sonogram" )
-                     val proc = SonogramOutput( ars, file ) {
-                        case SonogramOutput.Success( _ ) =>
+                     val proc = SonogramOutput(SonogramOutput.Config(ars, file))
+                     proc.addListener {
+                        case Processor.Result(_, Success(_)) =>
                            dlg.stop()
 
-                        case SonogramOutput.Failure( e ) =>
+                        case Processor.Result(_, Failure(Aborted())) =>
+                          dlg.stop()
+
+                        case Processor.Result(_, Failure(e)) =>
                            dlg.stop()
                            e.printStackTrace()
 
-                        case SonogramOutput.Aborted =>
-                           dlg.stop()
-
-                        case SonogramOutput.Progress( i ) => dlg.progress = i
+                        case prog @ Processor.Progress(_, _) => dlg.progress = prog.toInt
                      }
                      dlg.start( proc )
                   }

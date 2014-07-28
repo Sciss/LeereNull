@@ -29,7 +29,7 @@ import de.sciss.kontur.gui.{BasicTrackList, TimelineView, TrailViewEditor}
 import de.sciss.kontur.session.{Session, BasicTimeline, MatrixDiffusion, AudioRegion}
 
 object MoveOverlappingRegions extends KonturGoodies with NullGoodies {
-   def perform( doc: Session, tl: BasicTimeline, tlv: TimelineView, trl: BasicTrackList ) {
+   def perform( doc: Session, tl: BasicTimeline, tlv: TimelineView, trl: BasicTrackList ): Unit = {
       implicit val doc0 = doc
       implicit val tl0  = tl
       implicit val tlv0 = tlv
